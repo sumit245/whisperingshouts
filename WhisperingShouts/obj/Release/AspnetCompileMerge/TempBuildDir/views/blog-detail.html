@@ -1,0 +1,72 @@
+﻿<!-- header top begin -->
+<div ng-include="'views/_header.html'">
+</div>
+<!-- header top end -->
+<!-- banner top begin -->
+<style>
+    .page-dashboard .container {
+        max-width: 1100px;
+    }
+    .header-section {
+        display: block !important;
+    }
+
+    .logo-section {
+        display: block !important;
+    }
+
+    .bodynew {
+        background: #fff;
+    }
+
+    img {
+        max-width: 90%;
+    }
+
+    strong {
+        color: #fff !important;
+    }
+</style>
+<link href="/assets/css/blog.css" rel="stylesheet">
+<section class="blog-block" ng-if="portalType=='poker'">
+    <div class="container" style="background-color:#2E3237 !important;">
+
+
+        <div class="row">
+
+            <div class="col-md-12 col-md-12 col-lg-12">
+
+                <div class="row">
+                    <div class="col-12 card" style="background-color:#2E3237 !important; border:none;">
+                        <div class="row">
+                            <div class="col-md-12" style="padding:15px;">
+                                <img ng-src="/images/blog/{{image_file_name}}" alt="..." class="img-fluid image-css" style="max-height:600px;">
+                            </div>
+
+                        </div>
+                        <div class="row" style="border-bottom: 1px solid #ccc;">
+                            <div class="col-md-12">
+                                <h3 class="h4" style="color:#fff !important;">{{title}}</h3>
+                            </div>
+                        </div>
+                        <span id="BlogDescription" style="padding-top:10px;"></span>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+</section>
+
+<br />
+<br />
+<br />
+<div ng-include="'views/_footer.html'">
+</div>

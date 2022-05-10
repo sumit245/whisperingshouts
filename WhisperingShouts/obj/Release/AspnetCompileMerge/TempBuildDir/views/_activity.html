@@ -1,0 +1,76 @@
+﻿<style>
+    .wrapword {
+        white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+        white-space: -pre-wrap; /* Opera 4-6 */
+        white-space: -o-pre-wrap; /* Opera 7 */
+        white-space: pre-wrap; /* css-3 */
+        word-wrap: break-word; /* Internet Explorer 5.5+ */
+        white-space: -webkit-pre-wrap; /* Newer versions of Chrome/Safari*/
+        word-break: break-all;
+        white-space: normal;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var _portal = localStorage.getItem("portal");
+        if (_portal.toLowerCase() == 'rummy') {
+            replaceColor('#2ecdf3', '#BB001B');
+            replaceColor('#2ECDF3', '#BB001B');
+            replaceColor('#2cc7f8', '#BB001B');
+            replaceColor('#2db2d3', '#BB001B');
+            replaceColor('rgb(46, 205, 243)', '#BB001B');
+        }
+    });
+</script>
+    <div class="sidebar-promotion" ng-controller="MenuController">
+        <h5 class="color-primary text-uppercase text-center">Activity</h5>
+        <ul>
+            <li>Promotions</li>
+            <li>Contests</li>
+        </ul>
+
+        <div class="content card--shadow" style="overflow:auto;">
+            <div ng-repeat="n in notificationList" style="background-color: #2E3237; color: #2db2d3; box-shadow: 2px 2px 3px #1b2062; border-radius: 5px; margin-right: 4px; margin-left: 4px;">
+
+                <!--<a class="dropdown-item preview-item" ng-if="$index==0">
+                    <div class="preview-item-content">
+                        <h6 class="preview-subject" style="margin-bottom: 1.5rem; margin-top: 12px; font-family:Jost, sans-serif;">
+                            Notification with image test
+                            <span class="badge badge-success">Promotion</span>
+                        </h6>
+                        <span class="font-weight-light small-text wrapword" style="color:#fff; font-family:Jost, sans-serif">
+                            <img ng-src="/Album/ProfilePic/{{DashboardData.image_path}}" onerror="this.src='assets/images/user-img.png'" style="width:100%; height:180px;" class="avatar img-circle" alt="avatar">
+                            test message
+                        </span>
+                        <br />
+                        <p class="font-weight-light small-text">{{n.created_at | date:'medium'}} </p>
+                    </div>
+                </a>
+                <div class="dropdown-divider"></div>-->
+                <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                        <div class="preview-icon bg-success">
+                            <i class="mdi mdi-alert-circle-outline mx-0"></i>
+                        </div>
+                    </div>
+                    <div class="preview-item-content" ng-click="ReadNotification(n.id)">
+                        <!--<span ng-show="n.read==false" style="position: relative; font-size: 35px; margin-top: -14px; margin-left: -15px; color: #74D6FB;">&bull;</span>-->
+                        <h6 class="preview-subject" style="margin-bottom: 1.5rem; margin-top: 12px; font-family:Jost, sans-serif;">
+                            {{n.title}}
+                            <span class="badge badge-success" ng-show="n.notification_type=='Rakeback'">{{n.notification_type}}</span>
+                            <span class="badge badge-secondary" ng-show="n.notification_type!='Rakeback'">{{n.notification_type}}</span>
+                        </h6>
+                        <span class="font-weight-light small-text wrapword" style="color:#fff; font-family:Jost, sans-serif">{{n.content}}</span>
+                        <p class="font-weight-light small-text">{{n.enter_date}} </p>
+                    </div>
+                </a>
+                <div class="dropdown-divider"></div>
+            </div>
+        </div>
+    </div>
+<style>
+
+    .dropdown-item:hover {
+        background-color: #323230 !important;
+    }
+</style>

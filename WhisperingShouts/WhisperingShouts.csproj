@@ -1,0 +1,792 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D6D59A9B-2EEB-410C-A29D-CDE2AD230A11}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WhisperingShouts</RootNamespace>
+    <AssemblyName>WhisperingShouts</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging, Version=3.4.10262.3295, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Net20, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Newtonsoft.Json.Net20.dll</HintPath>
+    </Reference>
+    <Reference Include="PaytmChecksum, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\PaytmChecksum.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Admin\angular\app\app.js" />
+    <Content Include="Admin\angular\controller\BlogController.js" />
+    <Content Include="Admin\angular\controller\ContestsController.js" />
+    <Content Include="Admin\angular\controller\DashboardController.js" />
+    <Content Include="Admin\angular\controller\HomeController.js" />
+    <Content Include="Admin\angular\controller\IdentitiesController.js" />
+    <Content Include="Admin\angular\controller\KYCController.js" />
+    <Content Include="Admin\angular\controller\LeaderboardController.js" />
+    <Content Include="Admin\angular\controller\LoginController.js" />
+    <Content Include="Admin\angular\controller\LogoutController.js" />
+    <Content Include="Admin\angular\controller\MarketingController.js" />
+    <Content Include="Admin\angular\controller\MenuController.js" />
+    <Content Include="Admin\angular\controller\NotificationController.js" />
+    <Content Include="Admin\angular\controller\PartnersController.js" />
+    <Content Include="Admin\angular\controller\PartnerUserNameController.js" />
+    <Content Include="Admin\angular\controller\PassbookController.js" />
+    <Content Include="Admin\angular\controller\RakebackController.js" />
+    <Content Include="Admin\angular\controller\RegistrationController.js" />
+    <Content Include="Admin\angular\controller\RewardsController.js" />
+    <Content Include="Admin\angular\controller\ThankYouController.js" />
+    <Content Include="Admin\angular\controller\UsersController.js" />
+    <Content Include="Admin\angular\controller\WithdrawRequestController.js" />
+    <Content Include="Admin\angular\css\StyleSheet1.css" />
+    <Content Include="Admin\angular\css\sweetalert.css" />
+    <Content Include="Admin\angular\js\sweetalert.min.js" />
+    <Content Include="Admin\angular\loader\ajax-loader.gif" />
+    <Content Include="Admin\angular\loader\loader.js" />
+    <Content Include="Admin\angular\services\service.js" />
+    <Content Include="Admin\assets\css\black-dashboard.css" />
+    <Content Include="Admin\assets\css\black-dashboard.min.css" />
+    <Content Include="Admin\assets\css\nucleo-icons.css" />
+    <Content Include="Admin\assets\demo\demo.css" />
+    <Content Include="Admin\assets\demo\demo.js" />
+    <Content Include="Admin\assets\demo\docs.css" />
+    <Content Include="Admin\assets\demo\docs.min.css" />
+    <Content Include="Admin\assets\demo\docs.min.js" />
+    <Content Include="Admin\assets\demo\jquery.sharrre.js" />
+    <Content Include="Admin\assets\demo\src\application.js" />
+    <Content Include="Admin\assets\demo\vendor\anchor.min.js" />
+    <Content Include="Admin\assets\demo\vendor\clipboard.min.js" />
+    <Content Include="Admin\assets\demo\vendor\holder.min.js" />
+    <Content Include="Admin\assets\demo\vendor\split.min.js" />
+    <Content Include="Admin\assets\img\apple-icon.png" />
+    <Content Include="Admin\assets\img\asc.gif" />
+    <Content Include="Admin\assets\img\AU.png" />
+    <Content Include="Admin\assets\img\bg.gif" />
+    <Content Include="Admin\assets\img\bg1.jpg" />
+    <Content Include="Admin\assets\img\bg13.jpg" />
+    <Content Include="Admin\assets\img\bg14.jpg" />
+    <Content Include="Admin\assets\img\bg15.jpg" />
+    <Content Include="Admin\assets\img\bg16.jpg" />
+    <Content Include="Admin\assets\img\bg3.jpg" />
+    <Content Include="Admin\assets\img\bg5.jpg" />
+    <Content Include="Admin\assets\img\BR.png" />
+    <Content Include="Admin\assets\img\card-danger.png" />
+    <Content Include="Admin\assets\img\card-info.png" />
+    <Content Include="Admin\assets\img\card-primary.png" />
+    <Content Include="Admin\assets\img\card-success.png" />
+    <Content Include="Admin\assets\img\card-warning.png" />
+    <Content Include="Admin\assets\img\DE.png" />
+    <Content Include="Admin\assets\img\default-avatar.png" />
+    <Content Include="Admin\assets\img\desc.gif" />
+    <Content Include="Admin\assets\img\emilyz.jpg" />
+    <Content Include="Admin\assets\img\favicon.png" />
+    <Content Include="Admin\assets\img\GB.png" />
+    <Content Include="Admin\assets\img\gucci.png" />
+    <Content Include="Admin\assets\img\header.jpg" />
+    <Content Include="Admin\assets\img\image_placeholder.jpg" />
+    <Content Include="Admin\assets\img\img_3115.jpg" />
+    <Content Include="Admin\assets\img\jacket.png" />
+    <Content Include="Admin\assets\img\james.jpg" />
+    <Content Include="Admin\assets\img\jana.jpg" />
+    <Content Include="Admin\assets\img\lora.jpg" />
+    <Content Include="Admin\assets\img\mike.jpg" />
+    <Content Include="Admin\assets\img\placeholder.jpg" />
+    <Content Include="Admin\assets\img\RO.png" />
+    <Content Include="Admin\assets\img\robi.jpg" />
+    <Content Include="Admin\assets\img\saint-laurent.jpg" />
+    <Content Include="Admin\assets\img\t-shirt.png" />
+    <Content Include="Admin\assets\img\tania.jpg" />
+    <Content Include="Admin\assets\img\US.png" />
+    <Content Include="Admin\assets\js\black-dashboard.js" />
+    <Content Include="Admin\assets\js\black-dashboard.min.js" />
+    <Content Include="Admin\assets\js\core\bootstrap.min.js" />
+    <Content Include="Admin\assets\js\core\jquery.min.js" />
+    <Content Include="Admin\assets\js\core\popper.min.js" />
+    <Content Include="Admin\assets\js\plugins\bootstrap-datetimepicker.js" />
+    <Content Include="Admin\assets\js\plugins\bootstrap-notify.js" />
+    <Content Include="Admin\assets\js\plugins\bootstrap-selectpicker.js" />
+    <Content Include="Admin\assets\js\plugins\bootstrap-switch.js" />
+    <Content Include="Admin\assets\js\plugins\bootstrap-tagsinput.js" />
+    <Content Include="Admin\assets\js\plugins\chartjs.min.js" />
+    <Content Include="Admin\assets\js\plugins\fullcalendar.min.js" />
+    <Content Include="Admin\assets\js\plugins\jasny-bootstrap.min.js" />
+    <Content Include="Admin\assets\js\plugins\jquery-jvectormap.js" />
+    <Content Include="Admin\assets\js\plugins\jquery.bootstrap-wizard.js" />
+    <Content Include="Admin\assets\js\plugins\jquery.dataTables.min.js" />
+    <Content Include="Admin\assets\js\plugins\jquery.tablesorter.js" />
+    <Content Include="Admin\assets\js\plugins\jquery.validate.min.js" />
+    <Content Include="Admin\assets\js\plugins\moment.min.js" />
+    <Content Include="Admin\assets\js\plugins\nouislider.min.js" />
+    <Content Include="Admin\assets\js\plugins\perfect-scrollbar.jquery.min.js" />
+    <Content Include="Admin\assets\js\plugins\sweetalert2.min.js" />
+    <Content Include="Admin\default.html" />
+    <Content Include="Admin\images\notification.png" />
+    <Content Include="Admin\views\announcements.html" />
+    <Content Include="Admin\views\blog.html" />
+    <Content Include="Admin\views\contests.html" />
+    <Content Include="Admin\views\dashboard.html" />
+    <Content Include="Admin\views\identities.html" />
+    <Content Include="Admin\views\kyc-request.html" />
+    <Content Include="Admin\views\leaderboard.html" />
+    <Content Include="Admin\views\login.html" />
+    <Content Include="Admin\views\logout.html" />
+    <Content Include="Admin\views\notification.html" />
+    <Content Include="Admin\views\passbooks.html" />
+    <Content Include="Admin\views\rakeback-stats.html" />
+    <Content Include="Admin\views\rewards.html" />
+    <Content Include="Admin\views\users - Copy.html" />
+    <Content Include="Admin\views\users.html" />
+    <Content Include="Admin\views\withdraw-request.html" />
+    <Content Include="Admin\views\_footer.html" />
+    <Content Include="Admin\views\_navbar.html" />
+    <Content Include="Admin\views\_sidebar.html" />
+    <Content Include="Album\ProfilePic\1_PROFILE_PIC_2019_10_02_02_57_00.png" />
+    <Content Include="angular\app\app.js" />
+    <Content Include="angular\controller\BlogController.js" />
+    <Content Include="angular\controller\ContestsController.js" />
+    <Content Include="angular\controller\CommonController.js" />
+    <Content Include="angular\controller\ContactUsController.js" />
+    <Content Include="angular\controller\DashboardController.js" />
+    <Content Include="angular\controller\DealsController.js" />
+    <Content Include="angular\controller\FeedCtrl.js" />
+    <Content Include="angular\controller\FooterController.js" />
+    <Content Include="angular\controller\EmailVerificationController.js" />
+    <Content Include="angular\controller\MetaController.js" />
+    <Content Include="angular\controller\NewsFeedController.js" />
+    <Content Include="angular\controller\NotificationController.js" />
+    <Content Include="angular\controller\HomeController.js" />
+    <Content Include="angular\controller\LoginController.js" />
+    <Content Include="angular\controller\LogoutController.js" />
+    <Content Include="angular\controller\MenuController.js" />
+    <Content Include="angular\controller\PassbookController.js" />
+    <Content Include="angular\controller\RakebackController.js" />
+    <Content Include="angular\controller\RegistrationController.js" />
+    <Content Include="angular\controller\RewardsController.js" />
+    <Content Include="angular\controller\RummyController.js" />
+    <Content Include="angular\controller\ThankYouController.js" />
+    <Content Include="angular\css\StyleSheet1.css" />
+    <Content Include="angular\css\sweetalert.css" />
+    <Content Include="angular\js\sweetalert.min.js" />
+    <Content Include="angular\loader\ajax-loader.gif" />
+    <Content Include="angular\loader\loader.js" />
+    <Content Include="angular\services\service.js" />
+    <Content Include="assets\css2\style.css" />
+    <Content Include="assets\css\blog.css" />
+    <Content Include="assets\css\pages\index.css" />
+    <Content Include="assets\css\refer - Copy.css" />
+    <Content Include="assets\css\refer.css" />
+    <Content Include="assets\css\theme.css" />
+    <Content Include="assets\fonts\lato-black-webfont.svg" />
+    <Content Include="assets\fonts\lato-italic-webfont.svg" />
+    <Content Include="assets\fonts\lato-light-webfont.svg" />
+    <Content Include="assets\fonts\lato-regular-webfont.svg" />
+    <Content Include="assets\images\arrow-rt.svg" />
+    <Content Include="assets\images\banner\1.jpg" />
+    <Content Include="assets\images\banner\1.png" />
+    <Content Include="assets\images\banner\2.jpg" />
+    <Content Include="assets\images\banner\2.png" />
+    <Content Include="assets\images\banner\3.png" />
+    <Content Include="assets\images\button-active.png" />
+    <Content Include="assets\images\button.png" />
+    <Content Include="assets\images\card-bg.png" />
+    <Content Include="assets\images\copy-link.png" />
+    <Content Include="assets\images\favicon.ico" />
+    <Content Include="assets\images\home\main-banner.jpg" />
+    <Content Include="assets\images\icon\cash.png" />
+    <Content Include="assets\images\icon\contest.svg" />
+    <Content Include="assets\images\icon\edit.svg" />
+    <Content Include="assets\images\icon\leaderboard-2.png" />
+    <Content Include="assets\images\icon\leaderboard.png" />
+    <Content Include="assets\images\icon\leaderboard.svg" />
+    <Content Include="assets\images\icon\notification.png" />
+    <Content Include="assets\images\icon\partner-2.png" />
+    <Content Include="assets\images\icon\partners.svg" />
+    <Content Include="assets\images\icon\passbook.png" />
+    <Content Include="assets\images\icon\play.png" />
+    <Content Include="assets\images\icon\pocket-52.png" />
+    <Content Include="assets\images\icon\poker-baazi.png" />
+    <Content Include="assets\images\icon\poker-dangal.png" />
+    <Content Include="assets\images\icon\rakeback.png" />
+    <Content Include="assets\images\icon\refer-2.png" />
+    <Content Include="assets\images\icon\refer-a-friend.png" />
+    <Content Include="assets\images\icon\refer.png" />
+    <Content Include="assets\images\icon\reward-2.png" />
+    <Content Include="assets\images\icon\rewards.png" />
+    <Content Include="assets\images\icon\star.svg" />
+    <Content Include="assets\images\icon\ticket.png" />
+    <Content Include="assets\images\icon\user-thumb.png" />
+    <Content Include="assets\images\icon\user.png" />
+    <Content Include="assets\images\icon\whisp-leaderboard.png" />
+    <Content Include="assets\images\icon\whisp-logo-color.png" />
+    <Content Include="assets\images\icon\whisp-logo.png" />
+    <Content Include="assets\images\icon\withdraw.svg" />
+    <Content Include="assets\images\layout\4 poker chips.png" />
+    <Content Include="assets\images\layout\login-bg.jpg" />
+    <Content Include="assets\images\layout\prizes\gaming-table.png" />
+    <Content Include="assets\images\layout\prizes\poker-chipset.png" />
+    <Content Include="assets\images\layout\prizes\real-cash.png" />
+    <Content Include="assets\images\layout\prizes\ticket.png" />
+    <Content Include="assets\images\layout\profile_user.jpg" />
+    <Content Include="assets\images\logo.png" />
+    <Content Include="assets\images\october.png" />
+    <Content Include="assets\images\partner\9stacks-logo.png" />
+    <Content Include="assets\images\partner\pokerbaazi-logo.png" />
+    <Content Include="assets\images\partner\pokerdangal-logo.png" />
+    <Content Include="assets\images\partner\poket52-logo.png" />
+    <Content Include="assets\images\poker-dangal\pokerbaazi-logo-white.png" />
+    <Content Include="assets\images\poker-dangal\pokerdangal-logo.jpg" />
+    <Content Include="assets\images\refer-a-friend-bg-1.png" />
+    <Content Include="assets\images\refer-a-friend-bg.png" />
+    <Content Include="assets\images\rewards.jpg" />
+    <Content Include="assets\images\rummy-banner.png" />
+    <Content Include="assets\images\rummy-logo.png" />
+    <Content Include="assets\images\user-img.png" />
+    <Content Include="assets\images\user_image1.png" />
+    <Content Include="assets\images\vertical-box-shadow.png" />
+    <Content Include="assets\javascript\app.js" />
+    <Content Include="assets\sass\pages\index.css" />
+    <Content Include="assets\sass\theme.css" />
+    <Content Include="assets\vendor\bootstrap.js" />
+    <Content Include="assets\vendor\bootstrap\js\affix.js" />
+    <Content Include="assets\vendor\bootstrap\js\alert.js" />
+    <Content Include="assets\vendor\bootstrap\js\button.js" />
+    <Content Include="assets\vendor\bootstrap\js\carousel.js" />
+    <Content Include="assets\vendor\bootstrap\js\collapse.js" />
+    <Content Include="assets\vendor\bootstrap\js\dropdown.js" />
+    <Content Include="assets\vendor\bootstrap\js\modal.js" />
+    <Content Include="assets\vendor\bootstrap\js\popover.js" />
+    <Content Include="assets\vendor\bootstrap\js\scrollspy.js" />
+    <Content Include="assets\vendor\bootstrap\js\tab.js" />
+    <Content Include="assets\vendor\bootstrap\js\tooltip.js" />
+    <Content Include="assets\vendor\bootstrap\js\transition.js" />
+    <Content Include="assets\vendor\font-awesome\css\font-awesome.css" />
+    <Content Include="assets\vendor\font-awesome\font\fontawesome-webfont.svg" />
+    <Content Include="assets\vendor\jquery.js" />
+    <Content Include="assets\vendor\slick\slick.min.css" />
+    <Content Include="assets\vendor\slick\slick.min.js" />
+    <Content Include="default.html" />
+    <Content Include="facebookshare.aspx" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="HtmlPage1.html" />
+    <Content Include="OneSignalSDKUpdaterWorker.js" />
+    <Content Include="OneSignalSDKWorker.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Admin\assets\css\black-dashboard.css.map" />
+    <Content Include="Admin\assets\fonts\nucleo.eot" />
+    <Content Include="Admin\assets\fonts\nucleo.ttf" />
+    <Content Include="Admin\assets\fonts\nucleo.woff" />
+    <Content Include="Admin\assets\fonts\nucleo.woff2" />
+    <Content Include="Admin\assets\js\black-dashboard.js.map" />
+    <Content Include="Admin\assets\scss\black-dashboard.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_alert.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_background-variant.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_badge.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_border-radius.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_box-shadow.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_breakpoints.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_buttons.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_caret.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_clearfix.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_float.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_forms.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_gradients.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_grid-framework.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_grid.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_hover.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_image.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_list-group.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_lists.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_nav-divider.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_pagination.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_reset-text.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_resize.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_screen-reader.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_size.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_table-row.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_text-emphasis.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_text-hide.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_text-truncate.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_transition.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\mixins\_visibility.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\utilities\_align.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\utilities\_background.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\utilities\_borders.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\utilities\_clearfix.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\utilities\_display.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\utilities\_embed.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\utilities\_flex.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\utilities\_float.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\utilities\_position.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\utilities\_screenreaders.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\utilities\_shadows.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\utilities\_sizing.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\utilities\_spacing.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\utilities\_text.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\utilities\_visibility.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_alert.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_badge.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_breadcrumb.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_button-group.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_buttons.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_card.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_carousel.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_close.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_code.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_custom-forms.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_dropdown.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_forms.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_functions.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_grid.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_images.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_input-group.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_jumbotron.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_list-group.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_media.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_mixins.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_modal.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_nav.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_navbar.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_pagination.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_popover.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_print.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_progress.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_reboot.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_root.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_tables.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_tooltip.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_transitions.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_type.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_utilities.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\bootstrap\_variables.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\cards\_card-animation-on-hover.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\cards\_card-chart.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\cards\_card-collapse.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\cards\_card-contributions.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\cards\_card-lock.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\cards\_card-map.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\cards\_card-plain.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\cards\_card-pricing.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\cards\_card-profile.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\cards\_card-register.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\cards\_card-stats-mini.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\cards\_card-stats.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\cards\_card-subcategories.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\cards\_card-task.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\cards\_card-testimonials.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\cards\_card-user.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\cards\_card-wizard.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\mixins\opacity.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\mixins\_alert.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\mixins\_background-variant.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\mixins\_badges.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\mixins\_buttons.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\mixins\_dropdown.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\mixins\_forms.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\mixins\_icon.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\mixins\_inputs.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\mixins\_modals.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\mixins\_page-header.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\mixins\_popovers.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\mixins\_vendor-prefixes.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\mixins\_wizard.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\utilities\_backgrounds.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\utilities\_floating.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\utilities\_helper.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\utilities\_position.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\utilities\_shadows.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\utilities\_sizing.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\utilities\_spacing.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\utilities\_text.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\utilities\_transform.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\vendor\_plugin-animate-bootstrap-notify.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\vendor\_plugin-bootstrap-select.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\vendor\_plugin-bootstrap-switch.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\vendor\_plugin-card-wizard.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\vendor\_plugin-datatables.net.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\vendor\_plugin-datetimepicker.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\vendor\_plugin-fullcalendar.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\vendor\_plugin-jasny-fileupload.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\vendor\_plugin-jquery.jvectormap.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\vendor\_plugin-nouislider.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\vendor\_plugin-perfect-scrollbar.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\vendor\_plugin-sweetalert2.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\vendor\_plugin-tagsinput.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_alerts.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_avatars.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_badge.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_buttons.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_card.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_checkboxes-radio.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_close.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_custom-forms.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_dropdown.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_example-pages.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_fixed-plugin.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_footer.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_forms.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_functions.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_global.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_grid.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_icons.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_images.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_info-areas.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_input-group.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_misc.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_mixins.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_modal.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_nav.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_navbar.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_pagination.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_pills.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_popover.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_progress.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_reboot.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_rtl.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_sidebar-and-main-panel.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_tables.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_tabs.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_timeline.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_type.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_utilities.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_variables.scss" />
+    <Content Include="Admin\assets\scss\black-dashboard\custom\_white-content.scss" />
+    <Content Include="Admin\FileHandler.ashx" />
+    <Content Include="Admin\Upload\Rakeback\Rakeback_2020_10_07_08_17_14.csv" />
+    <Content Include="Admin\Upload\Rakeback\Rakeback_2020_10_07_08_37_36.csv" />
+    <Content Include="Admin\Upload\Rakeback\Rakeback_2020_10_07_08_42_52.csv" />
+    <Content Include="Admin\Upload\Rakeback\Rakeback_2020_10_07_08_49_30.csv" />
+    <Content Include="libman.json" />
+    <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\rakeback - Web Deploy.pubxml" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="sounds.mp3" />
+    <Content Include="static\images\banners\banner_1_65b17528-0570-4398-a28c-aa684fff3188.jpg" />
+    <Content Include="static\images\banners\banner_1_94398470-f6a3-4be5-bdea-2a209877d565.jpg" />
+    <Content Include="static\images\banners\banner_1_c7ec4ff0-4618-47e7-abb2-0ae7cc8eca1a.jpg" />
+    <Content Include="static\images\banners\banner_1_ef1c3482-df9c-4a5d-82e3-a89e500cc715.jpg" />
+    <Content Include="sw.js" />
+    <Content Include="views\about-us.html" />
+    <Content Include="views\blog-detail.html" />
+    <Content Include="views\blog.html" />
+    <Content Include="views\change-password.html" />
+    <Content Include="views\deals.html" />
+    <Content Include="views\email-verification.html" />
+    <Content Include="views\facebook.html" />
+    <Content Include="views\feed.html" />
+    <Content Include="views\forgot-password.html" />
+    <Content Include="views\contact-us.html" />
+    <Content Include="views\dashboard.html" />
+    <Content Include="views\home.html" />
+    <Content Include="views\leaderboard.html" />
+    <Content Include="views\login.html" />
+    <Content Include="views\logout.html" />
+    <Content Include="views\notification.html" />
+    <Content Include="views\partner.html" />
+    <Content Include="views\passbook.html" />
+    <Content Include="views\pokerbazzi.html" />
+    <Content Include="views\refer.html" />
+    <Content Include="views\registration.html" />
+    <Content Include="views\rewards.html" />
+    <Content Include="views\rummy\deal.html" />
+    <Content Include="views\rummy\home.html" />
+    <Content Include="views\rummy\_rummyFooter.html" />
+    <Content Include="views\rummy\_rummyHeader.html" />
+    <Content Include="views\terms-of-use.html" />
+    <Content Include="views\_activity.html" />
+    <Content Include="views\_footer.html" />
+    <Content Include="views\_header.html" />
+    <Content Include="views\_sideMenu.html" />
+    <Content Include="views\_withdraw.html" />
+    <Content Include="WhisperingShoutsService.asmx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin\FileHandler.ashx.cs">
+      <DependentUpon>FileHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\RSQLConnection.cs" />
+    <Compile Include="CommanClass.cs" />
+    <Compile Include="facebookshare.aspx.cs">
+      <DependentUpon>facebookshare.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="facebookshare.aspx.designer.cs">
+      <DependentUpon>facebookshare.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FileHandler.ashx.cs">
+      <DependentUpon>FileHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Paytm.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomPassword.cs" />
+    <Compile Include="Razorpay.cs" />
+    <Compile Include="WhisperingShoutsService.asmx.cs">
+      <DependentUpon>WhisperingShoutsService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FileHandler.ashx" />
+    <Content Include="manifest.json" />
+    <Content Include="assets\css2\style.scss" />
+    <Content Include="assets\css\pages\index.css.map" />
+    <Content Include="assets\css\pages\poker-dangal.css.map" />
+    <Content Include="assets\fonts\lato-black-webfont.eot" />
+    <Content Include="assets\fonts\lato-black-webfont.ttf" />
+    <Content Include="assets\fonts\lato-black-webfont.woff" />
+    <Content Include="assets\fonts\lato-italic-webfont.eot" />
+    <Content Include="assets\fonts\lato-italic-webfont.ttf" />
+    <Content Include="assets\fonts\lato-italic-webfont.woff" />
+    <Content Include="assets\fonts\lato-light-webfont.eot" />
+    <Content Include="assets\fonts\lato-light-webfont.ttf" />
+    <Content Include="assets\fonts\lato-light-webfont.woff" />
+    <Content Include="assets\fonts\lato-regular-webfont.eot" />
+    <Content Include="assets\fonts\lato-regular-webfont.ttf" />
+    <Content Include="assets\fonts\lato-regular-webfont.woff" />
+    <Content Include="assets\images\banner\banner.psd" />
+    <Content Include="assets\images\partner\partner.psd" />
+    <Content Include="assets\sass\components\dashboard\_index.scss" />
+    <Content Include="assets\sass\components\dashboard\_layout.scss" />
+    <Content Include="assets\sass\components\dashboard\_leaderboard.scss" />
+    <Content Include="assets\sass\components\dashboard\_sidebar.scss" />
+    <Content Include="assets\sass\components\_auth.scss" />
+    <Content Include="assets\sass\components\_global.scss" />
+    <Content Include="assets\sass\components\_header.scss" />
+    <Content Include="assets\sass\components\_home.scss" />
+    <Content Include="assets\sass\components\_variables.scss" />
+    <Content Include="assets\sass\pages\index.scss" />
+    <Content Include="assets\sass\pages\_poker-dangal.scss" />
+    <Content Include="assets\sass\pages\_rummy.scss" />
+    <Content Include="assets\sass\theme.scss" />
+    <Content Include="assets\vendor\bootstrap\less\alerts.less" />
+    <Content Include="assets\vendor\bootstrap\less\badges.less" />
+    <Content Include="assets\vendor\bootstrap\less\bootstrap.less" />
+    <Content Include="assets\vendor\bootstrap\less\breadcrumbs.less" />
+    <Content Include="assets\vendor\bootstrap\less\button-groups.less" />
+    <Content Include="assets\vendor\bootstrap\less\buttons.less" />
+    <Content Include="assets\vendor\bootstrap\less\carousel.less" />
+    <Content Include="assets\vendor\bootstrap\less\close.less" />
+    <Content Include="assets\vendor\bootstrap\less\code.less" />
+    <Content Include="assets\vendor\bootstrap\less\component-animations.less" />
+    <Content Include="assets\vendor\bootstrap\less\dropdowns.less" />
+    <Content Include="assets\vendor\bootstrap\less\forms.less" />
+    <Content Include="assets\vendor\bootstrap\less\glyphicons.less" />
+    <Content Include="assets\vendor\bootstrap\less\grid.less" />
+    <Content Include="assets\vendor\bootstrap\less\input-groups.less" />
+    <Content Include="assets\vendor\bootstrap\less\jumbotron.less" />
+    <Content Include="assets\vendor\bootstrap\less\labels.less" />
+    <Content Include="assets\vendor\bootstrap\less\list-group.less" />
+    <Content Include="assets\vendor\bootstrap\less\media.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\alerts.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\background-variant.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\border-radius.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\buttons.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\center-block.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\clearfix.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\forms.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\gradients.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\grid-framework.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\grid.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\hide-text.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\image.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\labels.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\list-group.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\nav-divider.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\nav-vertical-align.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\opacity.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\pagination.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\panels.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\progress-bar.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\reset-filter.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\reset-text.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\resize.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\responsive-visibility.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\size.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\tab-focus.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\table-row.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\text-emphasis.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\text-overflow.less" />
+    <Content Include="assets\vendor\bootstrap\less\mixins\vendor-prefixes.less" />
+    <Content Include="assets\vendor\bootstrap\less\modals.less" />
+    <Content Include="assets\vendor\bootstrap\less\navbar.less" />
+    <Content Include="assets\vendor\bootstrap\less\navs.less" />
+    <Content Include="assets\vendor\bootstrap\less\normalize.less" />
+    <Content Include="assets\vendor\bootstrap\less\pager.less" />
+    <Content Include="assets\vendor\bootstrap\less\pagination.less" />
+    <Content Include="assets\vendor\bootstrap\less\panels.less" />
+    <Content Include="assets\vendor\bootstrap\less\popovers.less" />
+    <Content Include="assets\vendor\bootstrap\less\print.less" />
+    <Content Include="assets\vendor\bootstrap\less\progress-bars.less" />
+    <Content Include="assets\vendor\bootstrap\less\responsive-embed.less" />
+    <Content Include="assets\vendor\bootstrap\less\responsive-utilities.less" />
+    <Content Include="assets\vendor\bootstrap\less\scaffolding.less" />
+    <Content Include="assets\vendor\bootstrap\less\tables.less" />
+    <Content Include="assets\vendor\bootstrap\less\theme.less" />
+    <Content Include="assets\vendor\bootstrap\less\thumbnails.less" />
+    <Content Include="assets\vendor\bootstrap\less\tooltip.less" />
+    <Content Include="assets\vendor\bootstrap\less\type.less" />
+    <Content Include="assets\vendor\bootstrap\less\utilities.less" />
+    <Content Include="assets\vendor\bootstrap\less\variables.less" />
+    <Content Include="assets\vendor\bootstrap\less\wells.less" />
+    <Content Include="assets\vendor\font-awesome\font\fontawesome-webfont.eot" />
+    <Content Include="assets\vendor\font-awesome\font\fontawesome-webfont.ttf" />
+    <Content Include="assets\vendor\font-awesome\font\fontawesome-webfont.woff" />
+    <Content Include="assets\vendor\font-awesome\font\FontAwesome.otf" />
+    <Content Include="assets\vendor\font-awesome\less\bootstrap.less" />
+    <Content Include="assets\vendor\font-awesome\less\core.less" />
+    <Content Include="assets\vendor\font-awesome\less\extras.less" />
+    <Content Include="assets\vendor\font-awesome\less\font-awesome-ie7.less" />
+    <Content Include="assets\vendor\font-awesome\less\font-awesome.less" />
+    <Content Include="assets\vendor\font-awesome\less\icons.less" />
+    <Content Include="assets\vendor\font-awesome\less\mixins.less" />
+    <Content Include="assets\vendor\font-awesome\less\path.less" />
+    <Content Include="assets\vendor\font-awesome\less\variables.less" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="web.config" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Admin\images\blog\" />
+    <Folder Include="Admin\images\contests\" />
+    <Folder Include="Error\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>58577</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:58577/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

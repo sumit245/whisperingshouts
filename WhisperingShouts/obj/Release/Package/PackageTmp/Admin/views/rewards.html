@@ -1,0 +1,153 @@
+﻿
+<div class="wrapper">
+    <div class="navbar-minimize-fixed">
+        <button class="minimize-sidebar btn btn-link btn-just-icon">
+            <i class="tim-icons icon-align-center visible-on-sidebar-regular text-muted"></i>
+            <i class="tim-icons icon-bullet-list-67 visible-on-sidebar-mini text-muted"></i>
+        </button>
+    </div>
+    <div ng-include="'views/_sidebar.html'">
+    </div>
+    <div class="main-panel">
+        <!-- Navbar -->
+        <div ng-include="'views/_navbar.html'">
+        </div>
+        <!-- End Navbar -->
+        <div class="content">
+
+            <!--<div class="col-md-8 ml-auto mr-auto">
+                <h2 class="text-center">Rewards</h2>
+
+            </div>-->
+            <div class="row mt-5">
+                <div class="col-md-12" ng-if="!EditForm">
+                    <div class="card">
+                        <div class="card-header">
+                            <!--<h5 class="card-category">Top Players</h5>-->
+                            <h3 class="card-title"> Rewards</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="toolbar">
+                                <!--        Here you can write extra buttons/actions for the toolbar              -->
+                            </div>
+                            <div class="table-responsive ps">
+                                <table id="dtwithdrawrequest" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Reward Title</th>
+                                            <th>Reward Sub Title</th>
+                                            <th>Reward Value</th>
+                                            <th>Reward Description</th>
+                                            <th>Status</th>
+                                            <th class="sorting_desc_disabled sorting_asc_disabled text-right">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in RewardsList">
+                                            <td>{{item.reward_title}}</td>
+                                            <td>{{item.reward_sub_title}}</td>
+                                            <td>{{item.reward_value}}</td>
+                                            <td>{{item.reward_description}}</td>
+                                            <td>{{item.is_active=='1'?'Active':'Inactive'}}</td>
+                                            <td class="text-right">
+                                                <a class="btn btn-link btn-warning btn-icon btn-sm edit" ng-click="ShowHideForm(true, item.reward_id)"><i class="tim-icons icon-pencil"></i></a>
+                                                <a href="javascript:void(0)" class="btn btn-link btn-danger btn-icon btn-sm remove"><i class="tim-icons icon-simple-remove"></i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary" ng-click="ShowHideForm(true)">Add</button>
+                            </div>
+                        </div>
+
+                        <!-- end content-->
+                    </div>
+                    <!--  end card  -->
+                </div>
+                <!-- end col-md-12 -->
+
+
+
+                <div class="col-md-12" ng-if="EditForm">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">
+                                Reward
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <form class="form-horizontal" id="rewardform" name="rewardform" novalidate>
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Reward Title</label>
+                                    <div class="col-sm-10">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" autocomplete="off" ng-model="rewardtitle" required>
+                                            <span class="form-text error-message" ng-show="rewardform.rewardtitle.$dirty && rewardform.rewardtitle.$invalid">Please enter reward title</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Reward Sub Title</label>
+                                    <div class="col-sm-10">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" autocomplete="off" ng-model="rewardsubtitle" required>
+                                            <span class="form-text error-message" ng-show="rewardform.rewardsubtitle.$dirty && rewardform.rewardsubtitle.$invalid">Please enter reward title</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Reward Value</label>
+                                    <div class="col-sm-10">
+                                        <div class="form-group">
+                                            <input type="number" min="1" max="99999" class="form-control" autocomplete="off" ng-model="rewardvalue" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Reward Description</label>
+                                    <div class="col-sm-10">
+                                        <div class="form-group">
+                                            <textarea class="form-control" placeholder="Reward Description" autocomplete="off" ng-model="rewarddescription" required></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="card-footer">
+                                        <button type="submit" ng-if="!IsAddForm" class="btn btn-primary" ng-disabled="rewardform.$invalid" ng-click="UpdateReward(reward_id, rewardtitle, rewardsubtitle, rewardvalue, rewarddescription)">Update</button>
+
+                                        <button type="submit" ng-if="IsAddForm" class="btn btn-primary" ng-disabled="rewardform.$invalid" ng-click="AddReward(reward_id, rewardtitle, rewardsubtitle, rewardvalue, rewarddescription)">Add</button>
+
+                                        <button type="submit" class="btn btn-primary" ng-click="ShowHideForm(false)">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+        <footer class="footer">
+            <div class="container-fluid">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" class="nav-link">
+                            About Us
+                        </a>
+                    </li>
+                </ul>
+                <div class="copyright">
+                    ©2019
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+

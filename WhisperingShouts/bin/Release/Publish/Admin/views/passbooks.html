@@ -1,0 +1,75 @@
+﻿<div class="wrapper">
+    <div class="navbar-minimize-fixed">
+        <button class="minimize-sidebar btn btn-link btn-just-icon">
+            <i class="tim-icons icon-align-center visible-on-sidebar-regular text-muted"></i>
+            <i class="tim-icons icon-bullet-list-67 visible-on-sidebar-mini text-muted"></i>
+        </button>
+    </div>
+    <div ng-include="'views/_sidebar.html'">
+    </div>
+    <div class="main-panel">
+        <!-- Navbar -->
+        <div ng-include="'views/_navbar.html'">
+        </div>
+        <!-- End Navbar -->
+        <div class="content">
+            <!--<div class="col-md-8 ml-auto mr-auto">
+                <h2 class="text-center">Partner User name</h2>
+            </div>-->
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <!--<h5 class="card-category">Top Players</h5>-->
+                            <h3 class="card-title"> Transactions</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="toolbar">
+                                <!--        Here you can write extra buttons/actions for the toolbar              -->
+                            </div>
+                            <div class="table-responsive ps">
+                                <table id="dtpassbooks" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>User</th>
+                                            <th>Wallet</th>
+                                            <th>Withdrawal</th>
+                                            <th>Deposit</th>
+                                            <th>Pre Balance</th>
+                                            <th>Post Balance</th>
+                                            <th>Accounting Entry</th>
+                                            <th>Date</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in PassbooksList">
+                                            <td style="border:1px solid; border-color: rgba(255, 255, 255, 0.1);">{{ $index + 1 }}</td>
+                                            <td style="border:1px solid; border-color: rgba(255, 255, 255, 0.1);">{{item.user}}</td>
+                                            <td style="border:1px solid; border-color: rgba(255, 255, 255, 0.1);">{{item.wallet}}</td>
+                                            <td style="border:1px solid; border-color: rgba(255, 255, 255, 0.1);">{{item.withdrawal}}</td>
+                                            <td style="border:1px solid; border-color: rgba(255, 255, 255, 0.1);">{{item.deposit}}</td>
+                                            <td style="border:1px solid; border-color: rgba(255, 255, 255, 0.1);">{{item.pre_balance}}</td>
+                                            <td style="border:1px solid; border-color: rgba(255, 255, 255, 0.1);">{{item.post_balance}}</td>
+                                            <td style="border:1px solid; border-color: rgba(255, 255, 255, 0.1);">{{item.accounting_entry}}</td>
+                                            <td style="border:1px solid; border-color: rgba(255, 255, 255, 0.1);">{{item.created_at | date : "dd MMM y"}}</td>
+                                            <td style="border:1px solid; border-color: rgba(255, 255, 255, 0.1);">{{item.description}}</td>
+                                        </tr>
+                                    </tbody>
+                                   
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end content-->
+                    </div>
+                    <!--  end card  -->
+                </div>
+                <!-- end col-md-12 -->
+            </div>
+            <!-- end row -->
+        </div>
+        <div ng-include="'views/_footer.html'">
+        </div>
+    </div>
+</div>

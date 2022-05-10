@@ -1,0 +1,63 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        var _portal = localStorage.getItem("portal");
+        if (_portal.toLowerCase() == 'rummy') {
+            replaceColor('#2ecdf3', '#BB001B');
+            replaceColor('#2ECDF3', '#BB001B');
+            replaceColor('#2cc7f8', '#BB001B');
+            replaceColor('#2db2d3', '#BB001B');
+            replaceColor('rgb(46, 205, 243)', '#BB001B');
+        }
+    });
+</script>
+<ul class="dashboard-nav">
+    <li>
+        <a href="/deals">
+            <img class="img-fluid icon logo" ng-src="/assets/images/icon/{{portalWhispIcon}}" alt="">
+            <p>Deals</p>
+        </a>
+    </li>
+    <li>
+        <a href="/partner">
+            <img class="img-fluid icon" id="img_partner" src="/assets/images/icon/partner-2.png" alt="">
+            <p>Partners</p>
+        </a>
+    </li>
+    <li>
+        <a href="/passbook">
+            <img class="img-fluid icon" id="img_passbook" src="/assets/images/icon/passbook.png" alt="">
+            <p>Passbook</p>
+        </a>
+    </li>
+    <li>
+        <a href="/leaderboard">
+            <img class="img-fluid icon" id="img_leaderboard" src="/assets/images/icon/leaderboard-2.png" alt="">
+            <p>Leaderboard</p>
+        </a>
+    </li>
+    <li>
+        <a href="/refer">
+            <img class="img-fluid icon" id="img_refer" src="/assets/images/icon/refer-2.png" alt="">
+            <p>Refer a friend</p>
+        </a>
+    </li>
+    <li>
+        <a href="/rewards">
+            <img class="img-fluid icon" src="/assets/images/icon/reward-2.png" alt="">
+            <p>Rewards</p>
+        </a>
+    </li>
+</ul>
+<style type="text/css">
+    .activeMenu {
+        /*filter: initial !important;*/
+        /*filter: drop-shadow(0px 0px 1px #2ECDF3) !important;*/
+        opacity: 1 !important;
+    }
+</style>
+<script src="/assets/vendor/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#img_" + window.location.pathname.replace('/', '')).addClass('activeMenu');
+    });
+</script>

@@ -1,0 +1,1369 @@
+.card--shadow {
+  background: -webkit-gradient(linear, left top, right top, from(#26292d), to(#111214));
+  background: linear-gradient(to right, #26292d, #111214);
+  -webkit-box-shadow: inset 0 0 15px 2px #1a1a1a, 5px 5px 15px 10px #1a1a1a;
+          box-shadow: inset 0 0 15px 2px #1a1a1a, 5px 5px 15px 10px #1a1a1a;
+  border: 5px solid #1a1a1a;
+  border-radius: 15px;
+}
+
+.default-gradient {
+  background: -webkit-gradient(linear, left top, right top, from(#26292d), to(#111214));
+  background: linear-gradient(to right, #26292d, #111214);
+}
+
+body {
+  font-family: "Jost", sans-serif;
+  background-color: #2e3237;
+  color: #999;
+}
+
+.heading {
+  color: #2ecdf3;
+}
+
+.section {
+  padding: 3rem 0;
+}
+
+.section-top-border {
+  border-top: 3px solid #3f3f3f;
+}
+
+.table {
+  width: 100%;
+}
+
+.table {
+  color: #999;
+}
+
+.table thead td, .table thead th {
+  color: #2ecdf3;
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+
+.btn--primary {
+  border-radius: 20px;
+  background: #029ed8;
+  padding: 0.5rem 2rem;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+.container {
+  max-width: 950px;
+}
+
+.item-loading {
+  position: relative;
+  display: inline-block;
+  padding-left: 2rem;
+  opacity: 0.8;
+}
+
+.item-loading:before {
+  content: '';
+  position: absolute;
+  left: 0.5rem;
+  border: 2px solid #2ecdf3;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  width: 17px;
+  height: 17px;
+  margin: auto 0;
+  bottom: 0;
+  top: 0;
+  -webkit-animation: loading-spin 2s linear infinite;
+          animation: loading-spin 2s linear infinite;
+}
+
+@-webkit-keyframes loading-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes loading-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+header {
+  padding: 1rem 0;
+  position: relative;
+}
+
+header:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+  height: 5px;
+  width: 100%;
+  background: #26282b;
+  -webkit-box-shadow: 0 0 20px 2px #000;
+          box-shadow: 0 0 20px 2px #000;
+}
+
+header .navbar-brand {
+  width: 9rem;
+}
+
+header .nav-link {
+  color: #7a7f83;
+  text-transform: uppercase;
+  margin-left: 1rem;
+}
+
+header .profile-picture img {
+  width: 30px;
+  height: 30px;
+  background: #fff;
+  border: 1px solid #2ecdf3;
+}
+
+.site-selection {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.site-selection li {
+  display: inline-block;
+}
+
+.site-selection a {
+  background-color: #000;
+  color: #2ecdf3;
+  padding: 1rem 3rem;
+  text-transform: uppercase;
+  background-image: url("../images/button.png");
+  background-size: 100% 100%;
+  display: inline-block;
+}
+
+.site-selection a.active {
+  background-image: url("../images/button-active.png");
+}
+
+.home-main-banner {
+  position: relative;
+}
+
+.home-main-banner .banner-img {
+  width: 100%;
+}
+
+.home-main-banner .content {
+  position: absolute;
+  bottom: 2rem;
+  width: 100%;
+}
+
+.home-intro .listing .heading {
+  font-weight: 700;
+}
+
+.home-intro .listing .icon {
+  max-width: 10rem;
+}
+
+.home-intro .listing p {
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.home-intro .about-section .play-video {
+  display: block;
+  border: 3px solid #e5e073;
+  height: 100%;
+  border-radius: 3rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.home-intro .about-section .play-video .icon {
+  max-width: 4rem;
+}
+
+.section-promotions {
+  color: #6e6e6e;
+}
+
+.section-promotions .icon {
+  height: 4rem;
+}
+
+.section-rakeback-deals {
+  background-image: url("../images/card-bg.png");
+  background-size: cover;
+}
+
+.section-rakeback-deals .icon {
+  margin: 0 auto;
+  margin-top: -4rem;
+  display: block;
+  width: 7rem;
+}
+
+.section-rakeback-deals .content {
+  margin-top: 4rem;
+  padding: 1rem;
+  height: 90%;
+}
+
+.section-rakeback-deals .content .brand-name {
+  margin: 1rem 0;
+}
+
+.section-rakeback-deals .content .heading {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.section-rakeback-deals .content .heading span {
+  display: block;
+  font-size: 2em;
+}
+
+.section-leaderboard table {
+  margin-left: 10%;
+}
+
+.section-leaderboard .section-header {
+  text-align: center;
+  max-width: 40rem;
+  margin: 0 auto;
+  position: relative;
+}
+
+.section-leaderboard .section-header .icon {
+  position: absolute;
+  right: 0;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  top: 0;
+}
+
+.section-rewards {
+  background: #232426;
+  color: #555555;
+}
+
+.section-rewards .intro-content {
+  text-align: center;
+}
+
+.section-rewards .intro-content .main-image {
+  max-width: 60%;
+}
+
+.section-rewards .intro-content p {
+  max-width: 30rem;
+  display: block;
+  margin: 0 auto;
+}
+
+.section-rewards .prizes h4 {
+  font-size: 1rem;
+}
+
+.section-refer-a-friend {
+  overflow: hidden;
+}
+
+.section-refer-a-friend .container {
+  position: relative;
+}
+
+.section-refer-a-friend .floating-image {
+  position: absolute;
+  right: 0;
+  top: -3rem;
+  height: 7rem;
+}
+
+.section-testimonial .content {
+  padding: 1rem 2.5rem;
+}
+
+.section-testimonial .user-image {
+  border-radius: 50%;
+  border: 3px solid #2ecdf3;
+}
+
+.section-testimonial p {
+  margin-top: 3rem;
+  position: relative;
+}
+
+.section-testimonial p:before, .section-testimonial p:after {
+  content: '"';
+  color: #2ecdf3;
+  position: absolute;
+  top: 0;
+  left: -2rem;
+  font-size: 5rem;
+  line-height: 0;
+}
+
+.section-testimonial p:after {
+  left: unset;
+  right: -2rem;
+  top: unset;
+  bottom: -1rem;
+}
+
+.section-faq .nav-tabs {
+  border: 0;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.section-faq .nav-link {
+  background-color: #fff;
+  -webkit-box-shadow: 0 0.625rem 0.938rem 0 rgba(59, 55, 188, 0.5);
+          box-shadow: 0 0.625rem 0.938rem 0 rgba(59, 55, 188, 0.5);
+  color: #1d193b;
+  border-radius: 1.563rem;
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  margin: 0 0.6rem;
+}
+
+.section-faq .nav-link.active {
+  border-color: #2ecdf3;
+  color: #fff;
+  background: #2ecdf3;
+}
+
+.section-faq .card {
+  border-radius: 0;
+  margin-bottom: 0.7rem;
+  border: 0;
+}
+
+.section-faq .card-header {
+  background: #000;
+  border-radius: 0;
+}
+
+.section-faq .card-header .btn {
+  color: #fff;
+  opacity: 0.8;
+  font-weight: 600;
+  text-decoration: none !important;
+}
+
+.auth-page .left-column {
+  height: 100vh;
+  background-image: url("../images/layout/login-bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  z-index: 1;
+  padding-left: 4.5rem;
+  color: #fff;
+}
+
+.auth-page .left-column:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.7;
+  z-index: -1;
+}
+
+.auth-page .left-column .page-heading {
+  font-size: 1.6rem;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.auth-page .left-column .page-heading:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1rem;
+  height: 1px;
+  background: #fff;
+  width: 3rem;
+  opacity: 0.5;
+}
+
+.auth-page .left-column .content {
+  max-width: 30rem;
+}
+
+.auth-page .left-column p {
+  color: #999;
+}
+
+.auth-page .right-column {
+  background: #393939 0% 0% no-repeat padding-box;
+  -webkit-box-shadow: 0px 3px 6px #00000029;
+          box-shadow: 0px 3px 6px #00000029;
+  padding: 2rem 3rem;
+  color: #fff;
+}
+
+.auth-page .right-column .section-heading {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.auth-page .right-column h3 {
+  display: none;
+}
+
+.auth-page .right-column .content {
+  width: 100%;
+  max-width: 30rem;
+  margin: 0 auto;
+}
+
+.auth-page .right-column .input-container {
+  display: block;
+}
+
+.auth-page .right-column .form-control {
+  border-radius: 0;
+  background: transparent;
+  border: 1px solid #999;
+  color: #fff;
+}
+
+.auth-page .right-column .error-message {
+  display: block;
+}
+
+.auth-page .right-column [type=submit] {
+  background: #2ecdf3;
+  border: 0;
+  width: unset;
+  padding: 0.6rem 2rem;
+  padding-top: 0.7rem;
+  font-size: 1rem;
+  line-height: 1;
+  color: #fff;
+}
+
+.auth-page .right-column [type=submit]:hover {
+  background: #029ed8;
+  color: #fff;
+}
+
+.auth-page .right-column .primary-link {
+  text-align: right;
+  color: #2cc7f8;
+  border-bottom: 1px solid;
+  display: inline-block;
+  text-decoration: none !important;
+}
+
+.auth-page .right-column #auth-loggedout {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.social-login {
+  margin-top: 2rem;
+}
+
+.social-login a {
+  display: inline-block;
+  border: 0;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  text-decoration: none !important;
+  -webkit-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+}
+
+.social-login a:hover {
+  -webkit-box-shadow: 0 10px 15px -5px rgba(255, 255, 255, 0.2);
+          box-shadow: 0 10px 15px -5px rgba(255, 255, 255, 0.2);
+}
+
+.social-login a .fa {
+  margin-right: 1rem;
+}
+
+.social-login a.login-google {
+  background-color: #db4437;
+}
+
+.social-login a.login-facebook {
+  background-color: #3B5998;
+}
+
+@media (min-width: 1200px) {
+  .page-dashboard .container {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .page-dashboard .container {
+    max-width: 1250px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .page-dashboard .container {
+    max-width: 1400px;
+  }
+}
+
+.page-dashboard #layout-content {
+  padding-top: 2rem;
+}
+
+.page-dashboard .form-control {
+  border-radius: 0;
+  background: transparent;
+  border: 1px solid #999;
+  color: #fff;
+}
+
+.page-dashboard .form-control[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.page-dashboard .table thead td,
+.page-dashboard .table thead th {
+  font-size: 1rem;
+}
+
+.page-dashboard select option {
+  margin: 40px;
+  background: #000;
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+.page-dashboard .page-title {
+  color: #2ecdf3;
+  margin-bottom: 2rem;
+}
+
+.page-dashboard .color-primary {
+  color: #2ecdf3;
+}
+
+.page-dashboard .btn {
+  border-radius: 2rem;
+  padding: 0.3rem 1rem;
+}
+
+.page-dashboard .btn-primary {
+  background-color: #2ecdf3;
+  border-color: #2ecdf3;
+}
+
+.dashboard-nav {
+  padding-left: 0;
+  list-style-type: none;
+  -webkit-box-shadow: 5px 2px 5px #131212;
+          box-shadow: 5px 2px 5px #131212;
+  padding-top: 1rem;
+}
+
+.dashboard-nav a {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none !important;
+}
+
+.dashboard-nav li {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.dashboard-nav .icon {
+  height: 3rem;
+  margin-bottom: 5px;
+}
+
+.dashboard-nav .icon:not(.logo) {
+  -webkit-filter: invert(1);
+          filter: invert(1);
+  opacity: 0.4;
+}
+
+.dashboard-nav p {
+  font-size: 0.7rem;
+  color: #7d7c7c;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.sidebar-promotion ul {
+  list-style: none;
+  text-align: center;
+  margin-top: 1rem;
+  padding-left: 0;
+}
+
+.sidebar-promotion ul li {
+  display: inline-block;
+  padding: 0 0.5rem;
+  line-height: 1;
+}
+
+.sidebar-promotion ul li:not(:last-child) {
+  border-right: 1px solid #2ecdf3;
+}
+
+.sidebar-promotion .content {
+  height: 70vh;
+}
+
+.leaderboard-list .nav-tabs {
+  border-bottom: 1px solid #7b7b7b;
+}
+
+.leaderboard-list .nav-tabs .nav-link {
+  border-radius: 0;
+  background: transparent;
+  border: 0;
+  color: #999;
+  border-bottom: 2px solid transparent;
+}
+
+.leaderboard-list .nav-tabs .nav-link.active {
+  color: #2ecdf3;
+  font-weight: 500;
+  border-bottom-color: #2ecdf3;
+}
+
+.poker-dangal-page-wrapper .rakeback-deal-section {
+  padding-top: 4rem;
+}
+
+.poker-dangal-page-wrapper .rakeback-deal-section .logo-img {
+  max-width: 14rem;
+  margin: 0 auto;
+  display: block;
+}
+
+@media only screen and (max-width: 500px) {
+  .poker-dangal-page-wrapper .rakeback-deal-section .logo-img {
+    margin-bottom: 3rem;
+  }
+}
+
+.poker-dangal-page-wrapper .rakeback-deal-section .heading {
+  margin: 0;
+}
+
+@media only screen and (max-width: 500px) {
+  .poker-dangal-page-wrapper .rakeback-deal-section .heading {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.poker-dangal-page-wrapper .rakeback-deal-section .subheading {
+  color: #fff;
+  font-size: 1.55rem;
+  line-height: 1;
+  font-weight: 400;
+  font-size: 1.6rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .poker-dangal-page-wrapper .rakeback-deal-section .subheading {
+    font-size: 1.25rem;
+  }
+}
+
+.poker-dangal-page-wrapper .rakeback-deal-section .rakeback-steps {
+  margin-top: 2rem;
+}
+
+.poker-dangal-page-wrapper .rakeback-deal-section .rakeback-steps p {
+  color: #fff;
+  opacity: .8;
+  font-size: 1.3rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .poker-dangal-page-wrapper .rakeback-deal-section .rakeback-steps p {
+    font-size: 1.1rem;
+  }
+}
+
+.poker-dangal-page-wrapper .rakeback-deal-section .rakeback-steps p.note {
+  color: #999;
+  font-size: 1.1rem;
+}
+
+.poker-dangal-page-wrapper .rakeback-deal-section .deposit-bonus {
+  padding: 1rem;
+}
+
+.poker-dangal-page-wrapper .rakeback-deal-section .deposit-bonus .title {
+  color: #2ecdf3;
+  font-size: 1.6rem;
+  text-align: center;
+  margin-bottom: 1.3rem;
+}
+
+.poker-dangal-page-wrapper .rakeback-deal-section .deposit-bonus .coupon-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.poker-dangal-page-wrapper .rakeback-deal-section .deposit-bonus .coupon-wrapper .coupon {
+  border: 2px dashed #2ecdf3;
+  padding: 10px;
+  margin-right: 15px;
+}
+
+.poker-dangal-page-wrapper .rakeback-deal-section .deposit-bonus .coupon-wrapper .coupon p {
+  margin: 0;
+  color: #2ecdf3;
+}
+
+.poker-dangal-page-wrapper .rakeback-deal-section .deposit-bonus .coupon-wrapper .coupon p:last-of-type {
+  color: #fff;
+  font-size: 1.7rem;
+}
+
+.poker-dangal-page-wrapper .rakeback-deal-section .deposit-bonus .coupon-wrapper .bonus-details p {
+  margin: 0;
+}
+
+.poker-dangal-page-wrapper .rakeback-deal-section .deposit-bonus .coupon-wrapper .bonus-details p.amount {
+  color: #2ecdf3;
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+.poker-dangal-page-wrapper .rakeback-deal-section .support-section {
+  margin-top: 3rem;
+}
+
+.poker-dangal-page-wrapper .rakeback-deal-section .support-section .heading {
+  margin-bottom: 1rem;
+}
+
+.poker-dangal-page-wrapper .rakeback-deal-section .support-section .pd-details p {
+  color: #fff;
+  opacity: .9;
+  margin: 0;
+}
+
+.poker-dangal-page-wrapper .withdraw-policy {
+  width: 75%;
+  display: block;
+  margin: 0 auto;
+  margin-top: 5rem;
+  padding: 3rem 3rem;
+  border-radius: 15px;
+  margin-bottom: 3rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .poker-dangal-page-wrapper .withdraw-policy {
+    padding: 1.5rem 0.3rem;
+    width: 95%;
+  }
+  .poker-dangal-page-wrapper .withdraw-policy .heading {
+    font-size: 1.6rem;
+  }
+}
+
+.poker-dangal-page-wrapper .withdraw-policy p {
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.poker-dangal-page-wrapper .promotional-codes {
+  padding: 4rem 0;
+  margin: 0 3.5%;
+}
+
+@media only screen and (max-width: 500px) {
+  .poker-dangal-page-wrapper .promotional-codes {
+    padding: 2rem 0;
+  }
+}
+
+.poker-dangal-page-wrapper .promotional-codes .heading {
+  padding-left: 20rem;
+  margin-bottom: 2rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .poker-dangal-page-wrapper .promotional-codes .heading {
+    padding-left: 15px;
+  }
+}
+
+.poker-dangal-page-wrapper .promotional-codes .card--shadow {
+  padding: 3rem 0;
+}
+
+.poker-dangal-page-wrapper .promotional-codes .coupons {
+  padding-left: 20rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding-right: 3rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .poker-dangal-page-wrapper .promotional-codes .coupons {
+    padding-left: 15px;
+    padding-right: 15px;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+}
+
+.poker-dangal-page-wrapper .promotional-codes .coupons .coupon-single {
+  max-width: 46%;
+  padding: 11px 1.3rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .poker-dangal-page-wrapper .promotional-codes .coupons .coupon-single {
+    max-width: 100%;
+  }
+}
+
+.poker-dangal-page-wrapper .promotional-codes .coupons .coupon-single p {
+  color: #fff;
+}
+
+.poker-dangal-page-wrapper .promotional-codes .coupons .coupon-single p:last-of-type {
+  margin: 0;
+}
+
+.poker-dangal-page-wrapper .promotional-codes .coupons .coupon-single .coupon-num {
+  color: #fff;
+  font-size: 1.5rem;
+  border: 2px dotted #2ecdf3;
+  display: inline-block;
+  padding: 6px;
+}
+
+.poker-dangal-page-wrapper .tournament-of-the-month {
+  padding: 4rem 0;
+  margin: 0 3.5%;
+}
+
+@media only screen and (max-width: 500px) {
+  .poker-dangal-page-wrapper .tournament-of-the-month {
+    padding: 2rem 0;
+  }
+}
+
+.poker-dangal-page-wrapper .tournament-of-the-month .heading {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .poker-dangal-page-wrapper .tournament-of-the-month .heading {
+    font-size: 1.6rem;
+  }
+}
+
+.poker-dangal-page-wrapper .tournament-of-the-month .details-wrapper {
+  padding: 1rem;
+  margin-right: 1.5rem;
+}
+
+.poker-dangal-page-wrapper .tournament-of-the-month .details-wrapper:last-of-type {
+  margin-right: 0;
+}
+
+.poker-dangal-page-wrapper .tournament-of-the-month .name {
+  color: #fff;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+}
+
+.poker-dangal-page-wrapper .tournament-of-the-month .amount {
+  color: #2ecdf3;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.poker-dangal-page-wrapper .highlights-promotions {
+  padding: 4rem 0;
+}
+
+@media only screen and (max-width: 500px) {
+  .poker-dangal-page-wrapper .highlights-promotions {
+    padding: 2rem 0;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .poker-dangal-page-wrapper .highlights-promotions {
+    padding: 4rem 15px;
+  }
+}
+
+.poker-dangal-page-wrapper .highlights-promotions .heading {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .poker-dangal-page-wrapper .highlights-promotions .heading {
+    font-size: 1.6rem;
+  }
+}
+
+.poker-dangal-page-wrapper .highlights-promotions .container {
+  border-radius: 25px;
+  padding: 3rem 1rem;
+}
+
+.poker-dangal-page-wrapper .highlights-promotions .logo-img {
+  display: block;
+  margin: 0 auto;
+}
+
+.poker-dangal-page-wrapper .highlights-promotions p.highlight-title {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #2ecdf3;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.poker-dangal-page-wrapper .tournaments-of-the-day {
+  padding: 4rem 0;
+}
+
+@media only screen and (max-width: 500px) {
+  .poker-dangal-page-wrapper .tournaments-of-the-day {
+    padding: 2rem 0;
+  }
+}
+
+.poker-dangal-page-wrapper .tournaments-of-the-day .heading {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .poker-dangal-page-wrapper .tournaments-of-the-day .heading {
+    font-size: 1.6rem;
+  }
+}
+
+.poker-dangal-page-wrapper .tournaments-of-the-day .tourament-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.poker-dangal-page-wrapper .tournaments-of-the-day .tourament-wrapper .tournament-single {
+  -ms-flex-preferred-size: 46%;
+      flex-basis: 46%;
+  min-height: 14rem;
+  border-radius: 25px;
+  margin-bottom: 2rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .poker-dangal-page-wrapper .tournaments-of-the-day .tourament-wrapper .tournament-single {
+    -ms-flex-preferred-size: 100%;
+        flex-basis: 100%;
+  }
+}
+
+.poker-dangal-page-wrapper .tournaments-of-the-day .tourament-wrapper .tournament-single .img-section {
+  width: 100%;
+  height: 5.5rem;
+  background: #d3d3d3;
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+}
+
+.poker-dangal-page-wrapper .tournaments-of-the-day .tourament-wrapper .tournament-single .tournament-details {
+  padding: .6rem;
+}
+
+.poker-dangal-page-wrapper .tournaments-of-the-day .tourament-wrapper .tournament-single .tournament-details .name {
+  color: #2ecdf3;
+  font-weight: 500;
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: .8rem;
+}
+
+.poker-dangal-page-wrapper .tournaments-of-the-day .tourament-wrapper .tournament-single .tournament-details p {
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+.rummy-page-wrapper .masthead-slider-wrapper {
+  padding: 0 4%;
+  position: relative;
+}
+
+.rummy-page-wrapper .masthead-slider-wrapper .slick-slide img {
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 500px) {
+  .rummy-page-wrapper .masthead-slider-wrapper .slick-slide img {
+    width: 100%;
+    min-height: 25vh;
+  }
+}
+
+.rummy-page-wrapper .masthead-slider-wrapper .arrow {
+  position: absolute;
+  top: 28%;
+  width: 4rem;
+}
+
+@media only screen and (max-width: 1024px) {
+  .rummy-page-wrapper .masthead-slider-wrapper .arrow {
+    z-index: 2;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .rummy-page-wrapper .masthead-slider-wrapper .arrow {
+    top: 15%;
+    width: 2rem;
+  }
+}
+
+.rummy-page-wrapper .masthead-slider-wrapper .arrow.arrow-rt {
+  right: 0;
+  right: 7%;
+}
+
+.rummy-page-wrapper .masthead-slider-wrapper .arrow.arrow-lt {
+  left: 7%;
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.rummy-page-wrapper .rummy-form {
+  margin-top: 2rem;
+}
+
+.rummy-page-wrapper .rummy-form .form-heading {
+  color: #fff;
+  text-align: center;
+}
+
+.rummy-page-wrapper .rummy-form .form-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.rummy-page-wrapper .rummy-form .form-row input {
+  background-color: #2e3237 !important;
+  height: 3rem;
+  border-radius: 28px;
+  padding: 10px 14px;
+  color: #fff;
+}
+
+@media only screen and (max-width: 500px) {
+  .rummy-page-wrapper .rummy-form .form-row input {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
+.rummy-page-wrapper .rummy-form button {
+  background: #C50625;
+  color: #fff;
+  border: 1px solid #C50625;
+  border-radius: 25px;
+  padding: 7px 5rem;
+  margin: 0 auto;
+  display: block;
+  margin-top: 3rem;
+}
+
+.rummy-page-wrapper .deals-section {
+  margin: 4rem 0;
+}
+
+.rummy-page-wrapper .deals-section .deals-section-wrapper {
+  padding: 0 6%;
+}
+
+@media only screen and (max-width: 1024px) {
+  .rummy-page-wrapper .deals-section .deals-section-wrapper {
+    padding: 0 3%;
+  }
+}
+
+.rummy-page-wrapper .deals-section .sec-title {
+  font-size: 2.3rem;
+  color: #ecd6d4;
+  font-weight: 700;
+  text-shadow: 4px 3px #000;
+  margin-bottom: 3rem;
+}
+
+.rummy-page-wrapper .deals-section .deals-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.rummy-page-wrapper .deals-section .deals-wrapper .deal-single {
+  -ms-flex-preferred-size: 32rem;
+      flex-basis: 32rem;
+  padding: 2.4rem 2rem;
+  margin-bottom: 3.4rem;
+}
+
+@media only screen and (max-width: 1024px) {
+  .rummy-page-wrapper .deals-section .deals-wrapper .deal-single {
+    padding: 1.4rem 1rem;
+    -ms-flex-preferred-size: 47%;
+        flex-basis: 47%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .rummy-page-wrapper .deals-section .deals-wrapper .deal-single {
+    -ms-flex-preferred-size: 40%;
+        flex-basis: 40%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .rummy-page-wrapper .deals-section .deals-wrapper .deal-single {
+    -ms-flex-preferred-size: 100%;
+        flex-basis: 100%;
+  }
+}
+
+.rummy-page-wrapper .deals-section .deals-wrapper .deal-single .top-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@media only screen and (max-width: 768px) {
+  .rummy-page-wrapper .deals-section .deals-wrapper .deal-single .top-row {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .rummy-page-wrapper .deals-section .deals-wrapper .deal-single .top-row .rating-section img {
+    width: 100%;
+  }
+}
+
+.rummy-page-wrapper .deals-section .deals-wrapper .deal-single .top-row .rating-section .stars {
+  margin-left: 1rem;
+}
+
+.rummy-page-wrapper .deals-section .deals-wrapper .deal-single .top-row .rating-section .stars img {
+  width: 12px !important;
+}
+
+.rummy-page-wrapper .deals-section .deals-wrapper .deal-single .top-row .rating-section .stars a {
+  color: #eac5c5;
+  text-decoration: underline;
+}
+
+.rummy-page-wrapper .deals-section .deals-wrapper .deal-single .top-row .rating-section .num {
+  font-size: 3rem;
+  font-weight: 500;
+  color: #fff;
+}
+
+.rummy-page-wrapper .deals-section .deals-wrapper .deal-single .top-row .rating-section .ratings {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.rummy-page-wrapper .deals-section .deals-wrapper .deal-single .top-row .deal-details {
+  margin-left: 30px;
+}
+
+@media only screen and (max-width: 768px) {
+  .rummy-page-wrapper .deals-section .deals-wrapper .deal-single .top-row .deal-details {
+    margin-left: 0;
+  }
+}
+
+.rummy-page-wrapper .deals-section .deals-wrapper .deal-single .top-row .deal-details .name {
+  color: #fff;
+  font-size: 1.6rem;
+}
+
+.rummy-page-wrapper .deals-section .deals-wrapper .deal-single .top-row .deal-details p {
+  margin: 0;
+  color: #eac5c5;
+}
+
+.rummy-page-wrapper .deals-section .deals-wrapper .deal-single .bottom-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 1.5rem;
+}
+
+.rummy-page-wrapper .deals-section .deals-wrapper .deal-single .bottom-row .details {
+  width: 16rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .rummy-page-wrapper .deals-section .deals-wrapper .deal-single .bottom-row .details {
+    width: 13rem;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .rummy-page-wrapper .deals-section .deals-wrapper .deal-single .bottom-row .details {
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+.rummy-page-wrapper .deals-section .deals-wrapper .deal-single .bottom-row .details p {
+  color: #fff;
+  margin: 0;
+}
+
+.rummy-page-wrapper .deals-section .deals-wrapper .deal-single .bottom-row .details p:nth-of-type(2) {
+  font-size: 1.7rem;
+}
+
+.rummy-page-wrapper .deals-section .deals-wrapper .deal-single .bottom-row .deal-btn {
+  background: #C50625;
+  color: #fff;
+  border: 1px solid #C50625;
+  border-radius: 25px;
+  padding: 5px 2.1rem;
+  font-size: 14px;
+}
+
+.rummy-page-wrapper .rummy-update .content-row-single {
+  margin-bottom: 2rem;
+}
+
+.rummy-page-wrapper .rummy-update .content-row-single .subtitle {
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.rummy-page-wrapper .rummy-update .most-recent, .rummy-page-wrapper .rummy-update .most-popuplar {
+  background-color: #CCCCCC;
+  min-height: 400px;
+  border-radius: 25px;
+  width: 100%;
+  margin-bottom: 2rem;
+  position: relative;
+  padding: 1rem;
+}
+
+.rummy-page-wrapper .rummy-update .most-recent .title, .rummy-page-wrapper .rummy-update .most-popuplar .title {
+  color: #333333;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.rummy-page-wrapper .rummy-update .most-recent::after, .rummy-page-wrapper .rummy-update .most-popuplar::after {
+  content: "";
+  width: 92%;
+  top: 3.5rem;
+  height: 4px;
+  background: #a1a1a1;
+  position: absolute;
+}
+
+.rummy-page-wrapper .rummy-update .most-recent::before, .rummy-page-wrapper .rummy-update .most-popuplar::before {
+  content: "";
+  width: 92%;
+  bottom: 3.5rem;
+  height: 4px;
+  background: #a1a1a1;
+  position: absolute;
+}
+/*# sourceMappingURL=theme.css.map */

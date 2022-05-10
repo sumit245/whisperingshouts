@@ -1,0 +1,191 @@
+﻿ <!-- header top begin -->
+<div ng-include="'views/_header.html'">
+</div>
+<!-- header top end -->
+
+<style>
+    .header-section {
+        display: block !important;
+    }
+
+    .logo-section {
+        display: block !important;
+    }
+
+    .bodynew {
+        background: #fff;
+    }
+</style>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
+
+<script>
+
+    // Load the SDK Asynchronously
+
+    (function (d) {
+        var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement('script'); js.id = id; js.async = true;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        ref.parentNode.insertBefore(js, ref);
+    }(document));
+
+    // Init the SDK upon load
+
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '1393744880722096', // App ID
+            channelUrl: '//' + window.location.hostname + '/channel', // Path to your Channel File
+            scope: 'id,name,email,picture', // This to get the user details back
+            status: true, // check login status
+            cookie: true, // enable cookies to allow the server to access the session
+            xfbml: true  // parse XFBML
+        });
+
+        // listen for and handle auth.statusChange events
+
+        FB.Event.subscribe('auth.statusChange', function (response) {
+            debugger;
+            if (response.authResponse) {
+                // user has auth'd your app and is logged into Facebook
+                FB.api('/me?fields=id,name,email,picture', function (me) {
+                    if (me.name) {
+                        if (me.email == null || me.email === undefined || me.email == "") {
+                            GetAlert("Email id is not shared with your facebook account!", "error");
+                        }
+                        else {
+                            Login(me.email, "FACEBOOK", 1, me.name, me.id);
+                        }
+                        //document.getElementById('auth-displayname').innerHTML = me.name;
+
+                        //document.getElementById('FBId').innerHTML = me.id;
+                        //document.getElementById('DisplayEmail').innerHTML = me.email;
+                        //document.getElementById('ProfilePic').src = me.picture.data.url;
+
+                    }
+                })
+
+                document.getElementById('auth-loggedout').style.display = 'none';
+                document.getElementById('auth-loggedin').style.display = 'block';
+
+            } else {
+
+                // user has not auth'd your app, or is not logged into Facebook
+
+                document.getElementById('auth-loggedout').style.display = 'block';
+                document.getElementById('auth-loggedin').style.display = 'none';
+
+            }
+
+        });
+
+        $("#auth-logoutlink").click(function () { FB.logout(function () { window.location.reload(); }); });
+
+    }
+
+    function Login(userid, password, IsLoginWithFaceBook, name, facebook_id) {
+        try {
+            ajaxindicatorstart('please wait..');
+            var _obj = {
+                userid: userid,
+                password: password,
+                latitude: "",
+                longitude: "",
+                IsLoginWithFaceBook: IsLoginWithFaceBook,
+                name: name,
+                facebook_id: facebook_id
+            };
+
+            $.ajax({
+                method: 'POST',
+                url: 'WhisperingShoutsService.asmx/Login',
+                data: JSON.stringify(_obj),
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+
+                success: function (data) {
+                    ajaxindicatorstop();
+                    var _data = $.parseJSON(data.d);
+                    if (_data !== null && _data.length > 0) {
+                        var details = _data[0];
+                        if (details.IsSuccess === 1) {
+                            FB.logout(function () {
+                                window.location.href = '/dashboard';
+                            });
+                        }
+                        else {
+                            FB.logout(function () {
+                                GetAlert(details.ResponseMSG, 'error');
+                            });
+                        }
+                    }
+
+                },
+                error: function (result) {
+                    ajaxindicatorstop();
+                    GetAlert("Slow network detected, please try again!", "error");
+                }
+
+            });
+
+        }
+        catch (ex) {
+            //ajaxindicatorstop();
+        }
+    }
+
+</script>
+
+<div class="page-wrapper bg-gra-01 p-t-100  font-poppins" style="background:#000000 !important;">
+    <div class="wrapper wrapper--w960">
+        <div class="card card-3">
+            <div class="card-heading"></div>
+            <div class="card-body">
+                <h2 class="title">LOGIN</h2>
+                <form role="form" id="loginform" name="loginform" novalidate>
+
+                    <div class="input-group">
+                        <input type="email" class="input--style-3" ng-model="emailid" name="emailid" autocomplete="off" maxlength="200" placeholder="Email id" required>
+                        <span class="error-message" ng-show="loginform.emailid.$dirty && loginform.emailid.$invalid">Please enter email-id.</span>
+
+                    </div>
+                    <div class="input-group">
+                        <input type="password" class="input--style-3" ng-model="password" name="password" autocomplete="off" maxlength="100" placeholder="Password" required>
+                        <span class="error-message" ng-show="loginform.emailid.$dirty && loginform.emailid.$invalid">Please enter password.</span>
+                    </div>
+                    <div class="p-t-10">
+                        <input class="btn btn--pill btn--green" ng-disabled="loginform.$invalid" type="button" ng-model="btnlogin" ng-click="Login(0)" value="Sign in" />
+
+                    </div>
+
+                    <div class="input-group p-t-10" id="auth-loggedout" style="padding-left:50px !important; border:none !important;">
+                        <!--<div class="fb-login-button" autologoutlink="true" scope="email">Login with Facebook</div>-->
+
+                        <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-auto-logout-link="true"></div>
+
+                    </div>
+
+                </form>
+                <div class="text-center small" style="color:#fff;">Forgot Password? <a href="/forgot-password">Click here</a></div>
+                <div class="text-center small" style="color:#fff;">Don't have an account? <a href="/registration">Sign up</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Icons font CSS-->
+<link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+<link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+<!-- Font special for pages-->
+<link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<!-- Vendor CSS-->
+<link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+<link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+<!-- Main CSS-->
+<link href="css/main.css" rel="stylesheet" media="all">
+

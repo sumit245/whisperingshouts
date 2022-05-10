@@ -1,0 +1,83 @@
+﻿ <!-- header top begin -->
+<div ng-include="'views/_header.html'">
+</div>
+<!-- header top end -->
+<style>
+    .header-section {
+        display: block !important;
+    }
+
+    .logo-section {
+        display: block !important;
+    }
+
+    .bodynew {
+        background: #fff;
+    }
+</style>
+<div class="page-wrapper bg-gra-01 p-t-100  font-poppins" style="background:#000000 !important;">
+    <div class="wrapper wrapper--w960">
+        <div class="card card-3">
+            <div class="card-heading"></div>
+            <div class="card-body" ng-show="!ThankYouPage">
+                <h2 class="title">Sign Up</h2>
+                <form role="form" id="regform" name="regform" novalidate>
+
+                    <div class="input-group">
+                        <input type="text" class="input--style-3" ng-model="username" name="username" autocomplete="off" maxlength="100" placeholder="Your Name" required />
+                        <span class="error-message" ng-show="regform.username.$dirty && regform.username.$invalid">Please enter your name.</span>
+
+                    </div>
+                    <div class="input-group">
+                        <input type="email" class="input--style-3" ng-model="emailid" name="emailid" autocomplete="off" maxlength="200" placeholder="Email Address" required>
+                        <span class="error-message" ng-show="regform.emailid.$dirty && regform.emailid.$invalid">Please enter your valid email address.</span>
+                    </div>
+
+
+
+                    <div class="input-group">
+                        <input type="text" class="input--style-3" ng-model="mobileno" name="mobileno" autocomplete="off" maxlength="10" placeholder="Mobile No." onkeypress="return checkNumber(this.value, event);" xtype="tel" required>
+                        <span class="error-message" ng-show="regform.mobileno.$dirty && regform.mobileno.$invalid">Please enter your mobile no.</span>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" class="input--style-3" ng-model="password" name="password" autocomplete="off" maxlength="100" placeholder="Password" required>
+                        <span class="error-message" ng-show="regform.password.$dirty && regform.password.$invalid">Please enter password.</span>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" class="input--style-3" ng-model="confirmpassword" name="confirmpassword" autocomplete="off" maxlength="100" placeholder="Confirm Password" required>
+                        <span class="error-message" ng-show="regform.confirmpassword.$dirty && regform.confirmpassword.$invalid">Please enter confirm password.</span>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="input--style-3" ng-model="refrelcode" ng-disabled="IsReferralCodeExists" name="refrelcode" autocomplete="off" maxlength="100" placeholder="Refrel Code">
+
+                    </div>
+                    <div class="p-t-10">
+                        <input class="btn btn--pill btn--green" ng-disabled="regform.$invalid" type="button" ng-model="btnregister" ng-click="Register()" value="Sign up" />
+                    </div>
+                </form>
+                <div class="text-center small" style="color:#fff;">Already have an account? <a href="/login">Sign in</a></div>
+            </div>
+
+            <div class="card-body" ng-show="ThankYouPage">
+                <h2 class="title">Thank you</h2>
+                <p>Thank you for signing up at Whispering Shouts.</p>
+                <p>Kindly verify your email id by clicking the link provided in the email sent to your email account.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Icons font CSS-->
+<link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+<link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+<!-- Font special for pages-->
+<link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<!-- Vendor CSS-->
+<link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+<link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+<!-- Main CSS-->
+<link href="css/main.css" rel="stylesheet" media="all">

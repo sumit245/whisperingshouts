@@ -1,0 +1,513 @@
+﻿
+<div ng-include="'views/_header.html'">
+</div>
+<br /><br />
+<br /><br />
+
+<section id="rewards_AAAAAAA" class="padd-section-deals text-center">
+    <div class="container">
+        <div class="text-center">
+
+            <h2 class="rewards-h2">Loyalty Rewards</h2>
+            <div id="border-div" ng-if="_IsUserLoggedIn">
+                <div class="percomplete" style="width:{{TotalPercentComplete}}%;">{{TotalPercentComplete}}% completed</div>
+            </div>
+
+            <div class="row py-3" ng-if="_IsUserLoggedIn">
+                <div class="col-md-6">
+                    <p class="current-points">Current Points {{AvailablePoints}}</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="reach-level">{{PointsRequiredToNextLevel}} Points needed to Reach level {{CurrentLevel+1}}</p>
+                </div>
+            </div>
+
+
+            <!--<div class="row py-3">
+                <div class="col-md-12">
+                    <ul class="nav nav-tabs first-tab">
+                        <li class="active"><a data-toggle="tab" class="rewards-tab" href="javascript:void(#all)">All</a></li>
+                        <li><a data-toggle="tab" class="rewards-tab tab-margin" href="javascript:void(#unlocked)">Unlocked</a></li>
+                        <li><a data-toggle="tab" class="rewards-tab tab-margin" href="javascript:void(#locked)">Locked</a></li>
+                        <li class="claimed"><a data-toggle="tab" class="rewards-tab tab-margin" href="javascript:void(#claimed)">Claimed</a></li>
+                    </ul>
+                </div>
+            </div>-->
+            <!--class="button-div"-->
+            <div class="tab-content">
+                <div id="all" class="tab-pane in active">
+                    <div class="row">
+                        <div class="col-md-4 py-3" ng-repeat="item in RewardsList">
+                            <div class="card" style="box-shadow: 4px 4px 0px #a677ed;">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{item.reward_title}}</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{item.reward_sub_title}}</h6>
+                                    <div ng-class="{ 'button-div': TotalDiamond>=item.reward_value, 'unlocked-button-div': TotalDiamond<item.reward_value }">
+                                        <a href="javascript:void(0)" ng-if="TotalDiamond<item.reward_value">
+                                            <i class="fa fa-diamond" aria-hidden="true"></i>
+                                            {{item.reward_value}}
+                                        </a>
+                                        <a href="javascript:void(1)" ng-if="TotalDiamond>=item.reward_value">
+                                            <i class="fa fa-diamond" aria-hidden="true"></i>
+                                            {{item.reward_value}}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="unlocked" class="tab-pane fade">
+                    <div class="row">
+                        <div class="col-md-4 py-3">
+                            <div class="card" style="box-shadow: 4px 4px 0px #a677ed;">
+                                <div class="card-body">
+                                    <h4 class="card-title">1</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">120 Real Cash Bonus</h6>
+                                    <div class="button-div">
+                                        <a href="#">
+                                            <i class="fa fa-diamond" aria-hidden="true"></i>
+                                            25
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 py-3">
+                            <div class="card" style="box-shadow: 4px 4px 0px #a677ed;">
+                                <div class="card-body">
+                                    <h4 class="card-title">1</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">200 Real Cash Bonus</h6>
+                                    <div class="button-div">
+                                        <a href="#">
+                                            <i class="fa fa-diamond" aria-hidden="true"></i>
+                                            50
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 py-3">
+                            <div class="card" style="box-shadow: 4px 4px 0px #a677ed;">
+                                <div class="card-body">
+                                    <h4 class="card-title">1</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">120 Real Cash Bonus</h6>
+                                    <div class="button-div">
+                                        <a href="#">
+                                            <i class="fa fa-diamond" aria-hidden="true"></i>
+                                            25
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 py-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">1</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">120 Real Cash Bonus</h6>
+                                    <div class="button-div">
+                                        <a href="#">
+                                            <i class="fa fa-diamond" aria-hidden="true"></i>
+                                            25
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 py-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">1</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">200 Real Cash Bonus</h6>
+                                    <div class="button-div">
+                                        <a href="#">
+                                            <i class="fa fa-diamond" aria-hidden="true"></i>
+                                            50
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 py-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">1</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">120 Real Cash Bonus</h6>
+                                    <div class="button-div">
+                                        <a href="#">
+                                            <i class="fa fa-diamond" aria-hidden="true"></i>
+                                            25
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="locked" class="tab-pane fade">
+                    <div class="row">
+                        <div class="col-md-4 py-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">4</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted locked-card">BSS SuperStack 25 Lac GTD(RE)</h6>
+                                    <div class="unlocked-button-div">
+                                        <a href="#">
+                                            <i class="fa fa-diamond" aria-hidden="true"></i>
+                                            1100
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 py-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">5</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted locked-card">The Endeavour 15 Lac GTD(RE) + 3500 Redeemable Prize</h6>
+                                    <div class="unlocked-button-div">
+                                        <a href="#">
+                                            <i class="fa fa-diamond" aria-hidden="true"></i>
+                                            1300
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 py-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">6</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted locked-card">The Money Maker 1 Crore GTD</h6>
+                                    <div class="unlocked-button-div">
+                                        <a href="#">
+                                            <i class="fa fa-diamond" aria-hidden="true"></i>
+                                            1500
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 py-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">4</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted locked-card">BSS SuperStack 25 Lac GTD(RE)</h6>
+                                    <div class="unlocked-button-div">
+                                        <a href="#">
+                                            <i class="fa fa-diamond" aria-hidden="true"></i>
+                                            1100
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 py-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">5</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted locked-card">The Endeavour 15 Lac GTD(RE) + 3500 Redeemable Prize</h6>
+                                    <div class="unlocked-button-div">
+                                        <a href="#">
+                                            <i class="fa fa-diamond" aria-hidden="true"></i>
+                                            1300
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 py-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">6</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted locked-card">The Money Maker 1 Crore GTD</h6>
+                                    <div class="unlocked-button-div">
+                                        <a href="#">
+                                            <i class="fa fa-diamond" aria-hidden="true"></i>
+                                            1500
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="claimed" class="tab-pane fade">
+                    <div class="row">
+                        <div class="col-md-4 py-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">7</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">Fri-Yay 10 LAC GTD</h6>
+                                    <div class="claimed-button-div">
+                                        <a href="#">
+                                            <i class="fa fa-diamond" aria-hidden="true"></i>
+                                            750
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 py-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">8</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">4000 Redeemable Chips</h6>
+                                    <div class="claimed-button-div">
+                                        <a href="#">
+                                            <i class="fa fa-diamond" aria-hidden="true"></i>
+                                            900
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 py-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">9</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">Value Town 10 LAC GTD</h6>
+                                    <div class="claimed-button-div">
+                                        <a href="#">
+                                            <i class="fa fa-diamond" aria-hidden="true"></i>
+                                            1200
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 py-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">7</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">Fri-Yay 10 LAC GTD</h6>
+                                    <div class="claimed-button-div">
+                                        <a href="#">
+                                            <i class="fa fa-diamond" aria-hidden="true"></i>
+                                            750
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 py-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">8</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">4000 Redeemable Chips</h6>
+                                    <div class="claimed-button-div">
+                                        <a href="#">
+                                            <i class="fa fa-diamond" aria-hidden="true"></i>
+                                            900
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 py-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">9</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">Value Town 10 LAC GTD</h6>
+                                    <div class="claimed-button-div">
+                                        <a href="#">
+                                            <i class="fa fa-diamond" aria-hidden="true"></i>
+                                            1200
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</section>
+
+
+<style>
+       /*----------------------------------------------------------------
+    #rackback-deals section
+    ------------------------------------------------------------------*/
+       #rewards {
+           display: inline-block;
+           height: 100%;
+           width: 100%;
+       }
+
+       .rewards-h2 {
+           font-family: "Futura light bt",sans-serif;
+           font-weight: 400;
+           font-size: 44px;
+           color: #292929;
+       }
+
+       #border-div {
+           border-bottom: 20px solid #4badad5c;
+           border-bottom-left-radius: 50px 20px;
+           border-bottom-right-radius: 50px 20px;
+           padding-top: 10px;
+       }
+
+       .rewards-h2 span {
+           font-family: "Futura light bt",sans-serif;
+           font-weight: 400;
+           font-size: 20px;
+           color: #292929;
+       }
+
+       .padd-section-deals {
+           padding-top: 120px;
+       }
+
+       .rewards-tab {
+           color: #6c757d;
+           text-decoration: none;
+           font-size: 16px;
+           font-family: AvenirLTStd-Heavy, sans-serif;
+       }
+
+       .first-tab li a {
+           padding: 10px;
+           border: 1px solid #3704e9;
+           color: #000;
+           text-decoration: none;
+           box-shadow: 3px 3px grey;
+       }
+
+       .nav-tabs {
+           border-bottom: none !important;
+       }
+
+       .tab-content {
+           margin-top: 20px;
+       }
+
+       .card {
+           height: 190px;
+       }
+
+       .button-div {
+           padding: 10px 0px 10px 10px;
+           background: #6a1ce1;
+           border-radius: 20px;
+           width: 94px;
+           margin: 0 auto;
+           color: #fff;
+       }
+
+           .button-div a {
+               color: #fff;
+               text-decoration: none;
+           }
+
+       .unlocked-button-div {
+           padding: 10px 0px 10px 10px;
+           background-color: #6a1ce1;
+           width: 94px;
+           border-radius: 20px;
+           border: none;
+           color: #fff;
+           text-align: center;
+           margin: 0 auto;
+           opacity: 0.6;
+           transition: 0.3s;
+       }
+
+           .unlocked-button-div a {
+               color: #fff;
+               text-decoration: none;
+           }
+
+       .claimed-button-div {
+           padding: 10px 0px 10px 10px;
+           background: green;
+           border-radius: 20px;
+           width: 94px;
+           margin: 0 auto;
+           color: #fff;
+       }
+
+           .claimed-button-div a {
+               color: #fff;
+               text-decoration: none;
+           }
+
+       .first-tab li a.active {
+           background: #4badad;
+           color: #fff;
+           border: 1px solid #4badad;
+       }
+
+       .card-subtitle {
+           padding-bottom: 25px;
+           white-space: nowrap;
+           overflow: hidden;
+           text-overflow: ellipsis;
+       }
+
+       .locked-card {
+           color: #6c757da1 !important;
+       }
+
+       @media only screen and (min-width: 1200px) {
+           .tab-margin {
+               margin-left: 35%;
+               text-align: center;
+           }
+       }
+
+       @media only screen and (max-width: 600px) {
+           .tab-margin {
+               margin-left: 25px;
+               text-align: center;
+           }
+
+           .claimed {
+               margin-top: 25px;
+           }
+
+               .claimed a {
+                   margin-left: 0px !important;
+               }
+       }
+</style>
+
+<style>
+    .percomplete {
+        background-color: #4CAF50;
+        border-bottom-left-radius: 50px 20px;
+    }
+
+    #border-div {
+        border-bottom: 0px solid #4badad5c;
+        border-bottom-left-radius: 50px 20px;
+        border-bottom-right-radius: 50px 20px;
+        padding-top: 0px;
+        background-color: #4badad5c;
+    }
+</style>

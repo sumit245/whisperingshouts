@@ -1,0 +1,4019 @@
+-----------------------Proc
+
+ALTER PROCEDURE [dbo].[usp_admin_dashboard_data] (@adminprofileid NVARCHAR(200))
+AS
+BEGIN
+	--BEGIN TRANSACTION;  
+	BEGIN TRY
+		SELECT [NewPlayersAddedThismonth] = (
+				SELECT COUNT(*)
+				FROM dbo.users
+				WHERE active = 1
+					AND convert(DATE, created_at) BETWEEN CONVERT(DATE,DATEADD(mm, DATEDIFF(mm, 0, GETDATE()), 0))
+						AND CONVERT(DATE,DATEADD(ms, -3, DATEADD(mm, DATEDIFF(m, 0, GETDATE()) + 1, 0)))
+				)
+			,[TotalPlayers] = (
+				SELECT COUNT(*)
+				FROM dbo.users --WHERE active = 1
+				)
+			,[ActivePlayers] = (
+				SELECT COUNT(*)
+				FROM dbo.users
+				WHERE active = 1
+				)
+			,[InactivePlayers] = (
+				SELECT COUNT(*)
+				FROM dbo.users
+				WHERE active = 1
+				)
+			,[TotalLockedCommissionInUserAccounts] = (
+				SELECT COUNT(*)
+				FROM dbo.users
+				WHERE active = 1
+				)
+			,[TotalWithdrawableCommissionsInUserAccounts] = (
+					SELECT SUM(balance) FROM dbo.wallets
+				)
+	END TRY
+
+	BEGIN CATCH
+		--IF @@TRANCOUNT > 0  
+		--       ROLLBACK TRANSACTION;  
+		INSERT INTO tbl_Proc_Error_Master (
+			ErrorNumber
+			,ErrorSeverity
+			,ErrorState
+			,ErrorProcedure
+			,ErrorLine
+			,ErrorMessage
+			)
+		SELECT ERROR_NUMBER() AS ErrorNumber
+			,ERROR_SEVERITY() AS ErrorSeverity
+			,ERROR_STATE() AS ErrorState
+			,ERROR_PROCEDURE() AS ErrorProcedure
+			,ERROR_LINE() AS ErrorLine
+			,ERROR_MESSAGE() AS ErrorMessage;
+	END CATCH
+		--IF @@TRANCOUNT > 0  
+		--COMMIT TRANSACTION; 
+END
+GO
+
+ALTER PROCEDURE [dbo].[usp_announcements] (
+	@type VARCHAR(20) = 'GET'
+	,@content NVARCHAR(max) = NULL	
+	,@status VARCHAR(100) = NULL	
+	,@id INT = 0
+	)
+AS
+BEGIN
+	--BEGIN TRANSACTION;  
+	BEGIN TRY
+		DECLARE @ResponseMSG VARCHAR(200) = ''
+			,@ResponseType VARCHAR(50) = ''
+			,@IsSuccess INT = 0
+			,@AvailablePoint FLOAT = 0
+
+		IF (ISNULL(@type, 'GET') = 'GET')
+		BEGIN
+			SELECT * FROM dbo.announcements WHERE isnull(id,0) = CASE isnull(@id,0) WHEN 0 THEN isnull(id,0) ELSE @id END
+			 ORDER BY id DESC			
+		END
+		ELSE IF (ISNULL(@type, 'GET') = 'UPDATE')
+		BEGIN
+			UPDATE announcements
+			SET active = @status   
+			,content = @content			
+			,updated_at = GETDATE()
+			WHERE id = @id
+
+			SET @ResponseMSG = 'Request has been successfully taken'
+			SET @ResponseType = 'success'
+			SET @IsSuccess = 1
+
+			SELECT @ResponseMSG AS ResponseMSG
+				,@ResponseType AS ResponseType
+				,@IsSuccess AS IsSuccess
+		END
+	END TRY
+
+	BEGIN CATCH
+		--IF @@TRANCOUNT > 0  
+		--       ROLLBACK TRANSACTION;  
+		INSERT INTO tbl_Proc_Error_Master (
+			ErrorNumber
+			,ErrorSeverity
+			,ErrorState
+			,ErrorProcedure
+			,ErrorLine
+			,ErrorMessage
+			)
+		SELECT ERROR_NUMBER() AS ErrorNumber
+			,ERROR_SEVERITY() AS ErrorSeverity
+			,ERROR_STATE() AS ErrorState
+			,ERROR_PROCEDURE() AS ErrorProcedure
+			,ERROR_LINE() AS ErrorLine
+			,ERROR_MESSAGE() AS ErrorMessage;
+	END CATCH
+		--IF @@TRANCOUNT > 0  
+		--COMMIT TRANSACTION; 
+END
+GO
+
+ALTER PROCEDURE dbo.usp_articles (
+	@id BIGINT = 0
+	,@title VARCHAR(200) = NULL
+	,@description VARCHAR(max) = NULL
+	,@publish BIT = 0
+	,@image_file_name VARCHAR(200) = NULL
+	,@slug VARCHAR(200) = NULL
+	,@social_tag_description VARCHAR(max) = NULL
+	,@short_description VARCHAR(max) = NULL
+	,@request_type VARCHAR(20) = 'GET'
+	)
+AS
+BEGIN
+	DECLARE @ResponseMSG VARCHAR(200) = ''
+		,@ResponseType VARCHAR(50) = ''
+		,@IsSuccess INT = 0
+
+	IF (isnull(@request_type, 'GET') = 'GET')
+	BEGIN
+		IF(isnull(@id, 0) = 0)
+		BEGIN
+			SELECT id, title, image_file_name,short_description,slug, active
+					FROM dbo.articles WITH(NOLOCK)
+		WHERE active = 1
+			AND isnull(id, 0) = CASE isnull(@id, 0)
+				WHEN 0
+					THEN isnull(id, 0)
+				ELSE @id
+				END
+			AND publish = 1
+		ORDER BY created_at DESC
+		END
+		
+		ELSE BEGIN
+		SELECT *
+		FROM dbo.articles WITH(NOLOCK)
+		WHERE active = 1
+			AND isnull(id, 0) = CASE isnull(@id, 0)
+				WHEN 0
+					THEN isnull(id, 0)
+				ELSE @id
+				END
+			AND publish = 1
+		ORDER BY created_at DESC
+		END	
+	END
+	ELSE IF (isnull(@request_type, 'GET') = 'UPDATE')
+	BEGIN
+		UPDATE dbo.articles
+		SET title = CASE WHEN ISNULL(@title,'')<> '' THEN @title ELSE title END, 
+			description = CASE WHEN ISNULL(@description,'')<> '' THEN @description ELSE description END
+			--,publish = @publish
+			,image_file_name = CASE ISNULL(@image_file_name,'') WHEN '' THEN image_file_name ELSE @image_file_name END
+			,social_tag_description = CASE WHEN ISNULL(@social_tag_description,'')<> '' THEN @social_tag_description ELSE social_tag_description END 
+			,short_description = CASE WHEN ISNULL(@short_description,'')<> '' THEN @short_description ELSE short_description END 
+			,updated_at = getdate()
+		--,slug = lower(REPLACE(@title,' ','-'))
+		WHERE id = @id
+
+		SET @ResponseMSG = 'Blog updated successfully!'
+		SET @ResponseType = 'success'
+		SET @IsSuccess = 1
+		
+		SELECT @ResponseMSG AS ResponseMSG
+		,@ResponseType AS ResponseType
+		,@IsSuccess AS IsSuccess
+	END
+	ELSE IF (isnull(@request_type, 'GET') = 'ADD')
+	BEGIN
+		INSERT INTO dbo.articles (
+			title
+			,description
+			,admin_id
+			,publish
+			,image_file_name
+			,active
+			,created_at
+			,slug
+			,social_tag_description
+			,short_description
+			,updated_at
+			)
+		SELECT @title
+			,@description
+			,1
+			,1--@publish
+			,@image_file_name
+			,1
+			,getdate()
+			,lower(REPLACE(REPLACE(@title, ' ', '-'),'?','-'))
+			,@social_tag_description
+			,@short_description
+			,getdate()
+
+		SET @ResponseMSG = 'Blog added successfully!'
+		SET @ResponseType = 'success'
+		SET @IsSuccess = 1
+		
+		SELECT @ResponseMSG AS ResponseMSG
+		,@ResponseType AS ResponseType
+		,@IsSuccess AS IsSuccess
+	END
+
+	
+END
+GO
+
+ALTER PROCEDURE dbo.usp_change_password (
+	@token VARCHAR(50)
+	,@password VARCHAR(200)
+	)
+AS
+BEGIN
+	DECLARE @ResponseMSG VARCHAR(200) = ''
+		,@ResponseType VARCHAR(50) = ''
+		,@old_password VARCHAR(200)
+		,@IsSuccess INT = 0
+		,@email_id VARCHAR(100)
+
+	IF EXISTS (
+			SELECT 1
+			FROM dbo.users
+			WHERE reset_password_token = @token
+				AND active = 1
+			)
+	BEGIN
+		SELECT @email_id = email FROM dbo.users WHERE reset_password_token = @token
+		
+		SELECT @old_password = encrypted_password
+		FROM dbo.users
+		WHERE reset_password_token = @token
+		
+		
+
+		INSERT INTO dbo.password_history (
+			email
+			,old_password
+			,new_password
+			,mode
+			)
+		SELECT @email_id
+			,@old_password
+			,@password
+			,'Change Password'
+
+		UPDATE dbo.users
+		SET encrypted_password = @password
+		,reset_password_token = reset_password_token+'_used'
+		WHERE reset_password_token = @token
+		
+		SET @IsSuccess = 1
+		SET @ResponseType = 'success'
+		SET @ResponseMSG = 'Your password has been changed '
+	END
+	ELSE
+	BEGIN
+		SET @IsSuccess = 0
+		SET @ResponseType = 'error'
+		SET @ResponseMSG = 'Token expired'
+	END
+	
+	SELECT @ResponseMSG AS ResponseMSG
+				,@ResponseType AS ResponseType
+				,@IsSuccess AS IsSuccess
+END
+GO
+
+ALTER PROC dbo.usp_clickmap
+	(
+	@profileid    BIGINT,
+	@button_name  VARCHAR (100),
+	@ip_address   VARCHAR (50),
+	@device_type VARCHAR(20)
+	)
+AS BEGIN
+	INSERT INTO dbo.clickmap(profileid,button_name,ip_address,device_type)
+	VALUES(@profileid, @button_name, @ip_address, @device_type)
+END
+GO
+
+ALTER PROC dbo.usp_contactus
+	(	
+	@profileid  VARCHAR (20),
+	@name      	VARCHAR (100),
+	@email		VARCHAR(200),
+	@subject		VARCHAR(100),
+	@message		VARCHAR(max),
+	@ip_address    VARCHAR (50)
+	)
+AS BEGIN
+		DECLARE @ResponseMSG VARCHAR(200) = ''
+			,@ResponseType VARCHAR(50) = ''
+			
+			INSERT INTO dbo.contactus(profileid, name,email,subject,message,ip_address)
+			SELECT @profileid,@name,@email,@subject,@message,@ip_address
+			
+			SET @ResponseType = 'success'
+			SET @ResponseMSG = 'Thank You for contacting us, Our team will come back to you within a matter of hours to help you'
+			
+			SELECT @ResponseType AS ResponseType, @ResponseMSG AS ResponseMSG
+END
+GO
+
+ALTER PROCEDURE [dbo].[usp_contest_result] (
+@person_id varchar(20) = NULL
+,@contest_id INT = 1)
+AS
+BEGIN
+	DECLARE @IsContestQuizTaken INT = 0
+	,@TotalQuestion INT = 0
+	
+	SELECT @IsContestQuizTaken = 1 FROM dbo.contest_participations WHERE person_id = @person_id 
+		AND contest_id = @contest_id
+	
+	SELECT @TotalQuestion = count(*) FROM dbo.contest_question WHERE contest_id = @contest_id
+	
+	--SET @contest_id = 2
+	SELECT tt.name
+		,t3.person_id
+		,SUM((t2.correct * 1)) Point
+		,CASE 
+			WHEN ISNULL(SUM((t2.correct * 1)), 0) < @TotalQuestion
+				THEN 'Not Qualified'
+			ELSE 'Qualified'
+			END AS [Qualified]
+		,ROW_NUMBER() OVER (
+			PARTITION BY t3.contest_id ORDER BY MAX(t3.created_at) ASC
+			) AS [rank]
+			,t3.contest_id
+			,ISNULL(@IsContestQuizTaken,0) AS IsContestQuizTaken
+			INTO #TMP_FINAL
+	FROM dbo.contest_question t1
+	INNER JOIN dbo.contest_answer t2 ON t1.id = t2.question_id
+	INNER JOIN dbo.contest_participations t3 ON t3.answer = t2.Id
+	INNER JOIN dbo.users tt WITH (NOLOCK) ON tt.id = t3.person_id
+	WHERE t1.contest_id = @contest_id
+		AND t3.person_id <> - 1
+		AND t3.person_id NOT IN(11,410)
+		AND t3.contest_id = @contest_id		
+	GROUP BY t3.person_id
+		,tt.name
+		,t3.contest_id
+	HAVING COUNT(*) = @TotalQuestion
+	--AND ISNULL(SUM((t2.correct * 1)), 0) = @TotalQuestion
+		--ORDER BY t3.id ASC
+		
+		SELECT t1.*--,CASE CONVERT(VARCHAR(10),t1.[rank]) WHEN '1' THEN '1st' WHEN '2' THEN '2nd' WHEN '3' THEN '3rd' WHEN '4' THEN '4th' WHEN '5' THEN '5th' ELSE CONVERT(VARCHAR(10),t1.[rank]) END AS rank_detail
+		,CAST(t1.[rank] AS VARCHAR(10))
+		
+		
+        --+CASE
+        --    WHEN t1.[rank] % 100 IN (11,12,13) THEN 'th' --first checks for exception
+        --    WHEN t1.[rank] % 10 = 1 THEN 'st'
+        --    WHEN t1.[rank] % 10 = 2 THEN 'nd'
+        --    WHEN t1.[rank] % 10 = 3 THEN 'rd'
+        --    ELSE 'th' --works for num % 10 IN (4,5,6,7,8,9,0)
+        --END
+         as rank_detail
+         --,CASE WHEN person_id IN(116,326) THEN '1' ELSE '0' END AS Winner
+         --,CASE WHEN tt.person_id = t1.person_id THEN '1' ELSE '0' END AS Winner
+         ,ISNULL(tt.winner,0) AS Winner
+         INTO #FINAL_RESULT
+		 from #TMP_FINAL t1
+		 LEFT JOIN dbo.contest_winner tt WITH(nolock) 
+		 ON t1.person_id = tt.person_id AND t1.contest_id = tt.contest_id
+		 
+		 SELECT t1.name,person_id,point
+		 --,Qualified
+		 ,CASE WHEN ISNULL(Winner,0) = 1 THEN 'Winner' ELSE Qualified END AS Qualified
+		 ,[rank], rank_detail,Winner 
+		 ,t1.contest_id
+		 ,t2.name AS contest_name	
+		 ,IsContestQuizTaken 
+		 ,CASE WHEN @contest_id = 2 THEN 'Congratulations Vikas "vikasallin" charush "charsipro" and aditya "madonna" for winning tickets for valuetwon!! All the best at the digital felts.' 
+		 	WHEN @contest_id = 3 THEN 'Congratulations to Shrinath "shrinathgb" jai "BoyJ" and rakesh "Rm3116" for winning PMVS ME tickets! All the best at the digital felts.' 
+		 	WHEN @contest_id = 4 THEN 'Congratulations sumit "sumitsingh199" joy "joy20" and pragya "narukaniku" for winning tickets for valuetown. All the best at the digital felts.'
+		 	ELSE '' END
+		 AS ContestWinnerCongratulationText
+		 FROM #FINAL_RESULT t1
+		 JOIN dbo.contests t2 ON t1.contest_id = t2.id
+		 ORDER BY contest_id, Winner DESC
+END
+GO
+
+ALTER PROCEDURE [dbo].[usp_contests] (
+	@id BIGINT = 0
+	,@name VARCHAR(200) = NULL
+	,@description VARCHAR(max) = NULL
+	,@tnc VARCHAR(max) = NULL
+	,@type INT = 0
+	,@start_date DATETIME = NULL
+	,@end_date DATETIME = NULL	
+	,@image_file_name VARCHAR(200) = NULL
+	,@request_type VARCHAR(20) = 'GET'
+	)
+AS
+BEGIN
+	DECLARE @ResponseMSG VARCHAR(200) = ''
+		,@ResponseType VARCHAR(50) = ''
+		,@IsSuccess INT = 0
+
+	IF (isnull(@request_type, 'GET') = 'GET')
+	BEGIN
+		
+		SELECT *
+		,CASE WHEN convert(DATETIME,DATEADD(MINUTE,30,dateadd(hour,12,getdate()))) 
+		BETWEEN convert(DATETIME,start_date)
+		AND convert(DATETIME,end_date)
+		THEN 1 ELSE 0 END AS IsContestRunning
+		
+		FROM dbo.contests
+		WHERE active = 1
+			AND isnull(id, 0) = CASE isnull(@id, 0)
+				WHEN 0
+					THEN isnull(id, 0)
+				ELSE @id
+				END
+			AND published = 1
+		ORDER BY id DESC
+	END
+	ELSE IF (isnull(@request_type, 'GET') = 'UPDATE')
+	BEGIN
+		UPDATE dbo.contests
+		SET name = @name, 
+			description = @description
+			,tnc = @tnc	  
+			,type = @type  
+			,start_date = DATEADD(MINUTE,30,dateadd(hour,5,@start_date))	
+			,end_date = DATEADD(MINUTE,30,dateadd(hour,5,@end_date))	
+			,image_file_name = CASE ISNULL(@image_file_name,'') WHEN '' THEN image_file_name ELSE @image_file_name END
+			,updated_at = getdate()		
+		WHERE id = @id
+
+		SET @ResponseMSG = 'updated successfully!'
+		SET @ResponseType = 'success'
+		SET @IsSuccess = 1
+		
+		SELECT @ResponseMSG AS ResponseMSG
+		,@ResponseType AS ResponseType
+		,@IsSuccess AS IsSuccess
+	END
+	ELSE IF (isnull(@request_type, 'GET') = 'ADD')
+	BEGIN
+		INSERT INTO dbo.contests (
+			name
+			,description
+			,tnc
+			,image_file_name
+			,type
+			,start_date
+			,end_date			
+			)
+		SELECT @name
+			,@description
+			,@tnc
+			,@image_file_name
+			,@type
+			,DATEADD(MINUTE,30,dateadd(hour,5,@start_date))
+			,DATEADD(MINUTE,30,dateadd(hour,5,@end_date))
+
+		SET @ResponseMSG = 'Added successfully!'
+		SET @ResponseType = 'success'
+		SET @IsSuccess = 1
+		
+		SELECT @ResponseMSG AS ResponseMSG
+		,@ResponseType AS ResponseType
+		,@IsSuccess AS IsSuccess
+	END
+
+	
+END
+GO
+
+ALTER PROCEDURE dbo.usp_contests_for_user -- usp_contests_for_user
+	(
+		@profileid VARCHAR(20) = NULL
+		,@contest_id INT = 0 
+	)
+AS
+BEGIN
+	DECLARE --@contest_id INT
+		@MaxQuestion INT
+		,@TotalQuestionAttemptedByUser INT
+		,@TotalScore INT
+	
+	IF(ISNULL(@contest_id,0) = 0)
+	BEGIN	
+		SELECT TOP 1 @contest_id = id
+		FROM dbo.contests t1 WITH(NOLOCK)
+		WHERE t1.active = 1
+			AND convert(DATETIME,DATEADD(MINUTE,30,dateadd(hour,12,getdate()))) 
+		BETWEEN convert(DATETIME,start_date)
+		AND convert(DATETIME,end_date)
+	END
+	ELSE 
+	BEGIN
+	PRINT 'AA'
+		SET @contest_id = (SELECT id
+		FROM dbo.contests t1 WITH(NOLOCK)
+		WHERE t1.active = 1
+			AND convert(DATETIME,DATEADD(MINUTE,30,dateadd(hour,12,getdate()))) 
+		BETWEEN convert(DATETIME,start_date)
+		AND convert(DATETIME,end_date) AND t1.id = @contest_id)
+		PRINT 'BB'
+	END
+	
+	PRINT @contest_id
+
+	SET @MaxQuestion = 1
+
+	SELECT @TotalQuestionAttemptedByUser = COUNT(*)
+	FROM dbo.contest_participations
+	WHERE  person_id= @profileid
+		AND contest_id = @contest_id
+
+	IF (ISNULL(@contest_id, 0) <> 0)
+	BEGIN
+		IF (ISNULL(@TotalQuestionAttemptedByUser, 0) < @MaxQuestion)
+		BEGIN
+			SELECT @contest_id AS contest_id
+				,qm.id AS QuestionID
+				,ltrim(rtrim(replace(qm.question_text, '  ', ' '))) QuestionText
+				,0 AS QuizOver
+				--,QuestionType
+			INTO #TMP_QUESTION_ID
+			FROM dbo.contest_question qm
+			WHERE qm.contest_id = @contest_id
+				AND qm.active = 1
+				AND NOT EXISTS (
+					SELECT 1
+					FROM dbo.contest_participations rm
+					WHERE rm.question_id = qm.id
+						AND  rm.person_id= @profileid
+					)
+			ORDER BY NEWID() ASC
+			
+			--SELECT * from #TMP_QUESTION_ID
+
+			SELECT @contest_id AS contest_id
+				,qm.QuestionID AS QuestionID
+				,ltrim(rtrim(replace(qm.QuestionText, '  ', ' '))) QuestionText
+				,0 AS QuizOver
+				,om.Id AS AnswerID
+				,om.answer_text AS AnswerText
+				,ISNULL(@TotalQuestionAttemptedByUser, 0) + 1 AS QuestionNo
+				--,@TotalScore AS TotalScore
+				--,QuestionType
+			FROM #TMP_QUESTION_ID qm
+			INNER JOIN dbo.contest_answer om ON om.question_id = qm.QuestionID
+			ORDER BY QuestionID
+		END
+		ELSE
+		BEGIN
+			SELECT 1 AS QuizOver
+				,@TotalScore AS TotalScore
+		END
+	END
+END
+GO
+
+ALTER PROCEDURE [dbo].[usp_contests_participations] -- usp_contests_participations
+	(
+		@user_id VARCHAR(200)
+		,@question_id VARCHAR(10)
+		,@answer VARCHAR(max)
+		,@person_id INT = 0
+		,@entry_type VARCHAR(20) = 'TMP'
+		,@contest_id INT = 0
+		,@partner_user_name VARCHAR(100) = NULL
+	)
+AS
+BEGIN
+	DECLARE --@contest_id INT
+		@MaxQuestion INT
+		,@TotalQuestionAttemptedByUser INT
+		,@TotalScore INT
+		,@ResponseMSG VARCHAR(200) = ''
+		,@ResponseType VARCHAR(50) = ''
+		,@IsSuccess INT = 0
+		
+	IF(ISNULL(@contest_id,0) = 0)
+	BEGIN
+	SELECT TOP 1 @contest_id = id
+	FROM dbo.contests t1 WITH(NOLOCK)
+	WHERE t1.active = 1
+		AND convert(DATE,DATEADD(MINUTE,30,dateadd(hour,12,getdate()))) 
+	BETWEEN convert(DATE,start_date)
+	AND convert(DATE,end_date)
+
+END
+
+	PRINT @contest_id
+
+	SET @MaxQuestion = 4
+
+   IF(ISNULL(@entry_type,'TMP')='TMP')
+   BEGIN
+
+	IF (ISNULL(@contest_id, 0) <> 0)
+	BEGIN
+		IF NOT EXISTS(SELECT 1 FROM dbo.temp_participations WHERE user_id = @user_id AND question_id = @question_id AND contest_id = @contest_id)
+		BEGIN
+			INSERT INTO dbo.temp_participations(user_id,contest_id,question_id,answer,created_at,partner_user_name)
+			SELECT @user_id, @contest_id, @question_id, @answer,DATEADD(MINUTE,30,dateadd(hour,12,getdate())),@partner_user_name
+		END
+		ELSE BEGIN
+			UPDATE dbo.temp_participations SET answer = @answer WHERE user_id = @user_id AND question_id = @question_id
+			AND contest_id = @contest_id
+		END
+		
+		SET @ResponseMSG = 'ok'
+			SET @ResponseType = 'error'
+			SET @IsSuccess = -1
+		
+			SELECT @ResponseMSG AS ResponseMSG
+			,@ResponseType AS ResponseType
+			,@IsSuccess AS IsSuccess
+			
+	END
+	END
+	
+	ELSE IF(ISNULL(@entry_type,'TMP')='REAL')
+   BEGIN
+
+	IF (ISNULL(@contest_id, 0) <> 0)
+	BEGIN
+		--SELECT @person_id = 1 FROM 
+		IF NOT EXISTS(SELECT 1 FROM dbo.contest_participations WHERE person_id = @person_id 
+				AND contest_id = @contest_id)
+		BEGIN
+			
+			INSERT INTO dbo.contest_participations(person_id,contest_id,question_id,answer,created_at,[user_id],partner_user_name)
+			
+			SELECT @person_id,contest_id,question_id,answer,created_at,[user_id],@partner_user_name 
+			FROM dbo.temp_participations 
+			WHERE user_id = @user_id AND contest_id = @contest_id
+			
+			--DELETE dbo.temp_participations WHERE user_id = @user_id AND contest_id = @contest_id
+			
+			SET @ResponseMSG = 'Congratulations on successfully submitting your entry to our contest. We wish you all the best.'
+			SET @ResponseType = 'success'
+			SET @IsSuccess = 1
+		
+			SELECT @ResponseMSG AS ResponseMSG
+			,@ResponseType AS ResponseType
+			,@IsSuccess AS IsSuccess
+		END	 
+		ELSE
+		BEGIN
+			SET @ResponseMSG = 'One user can only participate once in this contest.'
+			SET @ResponseType = 'error'
+			SET @IsSuccess = 0
+		
+			SELECT @ResponseMSG AS ResponseMSG
+			,@ResponseType AS ResponseType
+			,@IsSuccess AS IsSuccess
+		END
+			
+	END
+	END
+	
+END
+GO
+
+ALTER proc dbo.usp_deals --dbo.usp_deals 35
+(
+@person_id bigint = 0
+,@deals_id bigint = 0
+)
+AS begin	
+	
+	SELECT  t2.name as partner_name, t1.* 
+	,[RakebackCount] = (SELECT COUNT(*) FROM dbo.deals d WHERE d.active = 1 and ISNULL(d.type,'') = 'Rakeback')
+	,[CouponsCount] = (SELECT COUNT(*) FROM dbo.deals d WHERE d.active = 1 and ISNULL(d.type,'') = 'Coupon')
+	,[PromotionsCount] = (SELECT COUNT(*) FROM dbo.deals d WHERE d.active = 1 and ISNULL(d.type,'') = 'Promotion')
+	FROM dbo.deals t1 WITH(NOLOCK)
+	JOIN dbo.partners t2 WITH(NOLOCK) ON t1.partner_id = t2.id
+	WHERE ISNULL(t1.id,0) = CASE ISNULL(@deals_id,0) WHEN 0 THEN ISNULL(t1.id,0) ELSE @deals_id END
+end
+
+GO
+
+ALTER PROCEDURE [dbo].[usp_edit_profile] (
+	@profileid NVARCHAR(200) = NULL
+	,@name NVARCHAR(200) = NULL
+	,@email_id NVARCHAR(200) = NULL
+	,@mobile NVARCHAR(50) = NULL
+	,@password NVARCHAR(200) = NULL
+	,@refrel_code NVARCHAR(100) = NULL
+	,@ip_address NVARCHAR(50) = NULL
+	,@latitude VARCHAR(50) = NULL
+	,@longitude VARCHAR(50) = NULL
+	,@device_type VARCHAR(50) = NULL
+	,@filename NVARCHAR(max) = NULL
+	,@pancard NVARCHAR(20) = NULL
+	,@aadhaar_card NVARCHAR(20) = NULL
+	,@bank_name NVARCHAR(200) = NULL
+	,@account_no NVARCHAR(200) = NULL
+	,@IFSC NVARCHAR(200) = NULL
+	,@UPI NVARCHAR(200) = NULL
+	)
+AS
+BEGIN
+	--BEGIN TRANSACTION;  
+	BEGIN TRY
+		DECLARE @ResponseMSG VARCHAR(200) = ''
+			,@ResponseType VARCHAR(50) = ''
+
+		IF (ISNULL(@profileid, '') <> '')
+		BEGIN
+			EXEC usp_profile_history @profileid = @profileid
+
+			UPDATE tbl_user_profile_master
+			SET name = @name
+				,mobile = @mobile
+				,image_path = @filename
+				,pancard = @pancard
+				,aadhaar_card = @aadhaar_card
+				,bank_name = @bank_name
+				,account_no = @account_no
+				,IFSC = @IFSC
+				,UPI = @UPI
+			--,password = @password
+			--,refrel_code = @refrel_code
+			--,ip_address = @ip_address
+			--,latitude = @latitude
+			--,longitude = @longitude
+			--,device_type = @device_type
+			WHERE id = @profileid
+
+			SET @ResponseMSG = 'Your profile has been updated!!'
+			SET @ResponseType = 'success'
+		END
+		ELSE
+		BEGIN
+			IF NOT EXISTS (
+					SELECT 1
+					FROM tbl_user_profile_master
+					WHERE email_id = @email_id
+					)
+			BEGIN
+				INSERT INTO tbl_user_profile_master (
+					name
+					,email_id
+					,mobile
+					,password
+					,refrel_code
+					,ip_address
+					,latitude
+					,longitude
+					,device_type
+					)
+				SELECT @name
+					,@email_id
+					,@mobile
+					,@password
+					,@refrel_code
+					,@ip_address
+					,@latitude
+					,@longitude
+					,@device_type
+
+				SELECT @profileid = id
+				FROM tbl_user_profile_master
+				WHERE email_id = @email_id
+
+				UPDATE tbl_user_profile_master
+				SET referral_code = (left(('WHISP' + CONVERT(VARCHAR(10), ID) + COnvert(VARCHAR(50), RIGHT(newid(), 6))), 20))
+				WHERE isnull(referral_code, '') = ''
+
+				IF NOT EXISTS (
+						SELECT 1
+						FROM tbl_point_master
+						WHERE profileid = @profileid
+							AND trans_type = 'E'
+							AND trans_desc = 'Welcome bonus point'
+						)
+				BEGIN
+					INSERT INTO tbl_point_master (
+						profileid
+						,points
+						,trans_type
+						,trans_date
+						,trans_desc
+						)
+					SELECT @profileid
+						,100
+						,'E'
+						,getdate()
+						,'Welcome bonus point'
+				END
+
+				SET @ResponseMSG = 'You have successfully registered!'
+				SET @ResponseType = 'success'
+			END
+			ELSE
+			BEGIN
+				SET @ResponseMSG = 'Email-ID already exists, please login'
+				SET @ResponseType = 'error'
+			END
+		END
+
+		SELECT @ResponseMSG AS ResponseMSG
+			,@ResponseType AS ResponseType
+			,*
+		FROM tbl_user_profile_master
+		WHERE id = @profileid
+	END TRY
+
+	BEGIN CATCH
+		--IF @@TRANCOUNT > 0  
+		--       ROLLBACK TRANSACTION;  
+		INSERT INTO tbl_Proc_Error_Master (
+			ErrorNumber
+			,ErrorSeverity
+			,ErrorState
+			,ErrorProcedure
+			,ErrorLine
+			,ErrorMessage
+			)
+		SELECT ERROR_NUMBER() AS ErrorNumber
+			,ERROR_SEVERITY() AS ErrorSeverity
+			,ERROR_STATE() AS ErrorState
+			,ERROR_PROCEDURE() AS ErrorProcedure
+			,ERROR_LINE() AS ErrorLine
+			,ERROR_MESSAGE() AS ErrorMessage;
+	END CATCH
+		--IF @@TRANCOUNT > 0  
+		--COMMIT TRANSACTION; 
+END
+GO
+
+ALTER PROCEDURE dbo.usp_forgot_password (
+	@email_id VARCHAR(200)
+	,@newpassword VARCHAR(200)
+	)
+AS
+BEGIN
+	DECLARE @ResponseMSG VARCHAR(200) = ''
+		,@ResponseType VARCHAR(50) = ''
+		,@old_password VARCHAR(200)
+		,@IsSuccess INT = 0
+		,@reset_password_token VARCHAR(50) = ''
+		,@name VARCHAR(100) = ''
+
+	IF EXISTS (
+			SELECT 1
+			FROM dbo.users
+			WHERE email = @email_id
+				AND active = 1
+			)
+	BEGIN
+		SELECT @old_password = encrypted_password
+		FROM dbo.users
+		WHERE email = @email_id
+
+		INSERT INTO dbo.password_history (
+			email
+			,old_password
+			,new_password
+			,mode
+			)
+		SELECT @email_id
+			,@old_password
+			,@newpassword
+			,'Forgot'
+
+		UPDATE dbo.users
+		SET reset_password_token = lower(newid()), reset_password_sent_at = getdate()
+		--SET encrypted_password = @newpassword
+		WHERE email = @email_id
+		
+		SELECT @reset_password_token = reset_password_token 
+		,@name = name
+		FROM users WHERE email = @email_id
+		
+		SET @IsSuccess = 1
+		SET @ResponseType = 'success'
+		SET @ResponseMSG = 'Your password reset link has been sent to your registered emial-ID '
+	END
+	ELSE
+	BEGIN
+		SET @IsSuccess = 0
+		SET @ResponseType = 'error'
+		SET @ResponseMSG = 'email-ID does not exists, please enter correct email-ID'
+	END
+	
+	SELECT @ResponseMSG AS ResponseMSG
+				,@ResponseType AS ResponseType
+				,@IsSuccess AS IsSuccess
+				,@reset_password_token AS reset_password_token
+				,@name AS name
+END
+GO
+
+ALTER PROCEDURE [dbo].[usp_get_all_partner] 
+(@profileid NVARCHAR(200) = NULL, @id BIGINT = NULL)
+AS
+BEGIN
+	SELECT *
+	FROM dbo.partners
+	WHERE active = 1 
+	AND isnull(id,0) = CASE isnull(@id,0) WHEN 0 THEN isnull(id,0) ELSE @id END 
+	AND id NOT IN(13,15,6,3)
+	ORDER BY name ASC
+END
+GO
+
+ALTER PROCEDURE [dbo].[usp_get_rewards] (@profileid BIGINT = NULL)
+AS
+BEGIN
+	--BEGIN TRANSACTION;  
+	BEGIN TRY
+		DECLARE @AvailablePoints FLOAT
+			,@TotalPoints FLOAT
+			,@TotalPointsForNextLevel FLOAT
+			,@CurrentLevel INT
+			,@TotalDiamond INT = 0
+			,@referral_code VARCHAR(200)
+
+		SELECT @TotalPoints = SUM(deposit)
+		 FROM dbo.passbooks t1
+		 JOIN dbo.wallets t2 ON t1.wallet_id = t2.id
+		WHERE t2.person_id = @profileid
+			AND accounting_entry = 'credit'
+
+		SELECT @AvailablePoints = balance
+		FROM dbo.wallets
+		WHERE person_id = @profileid
+
+		SELECT @CurrentLevel = [level]
+		FROM rakeback.tbl_level_master
+		WHERE @AvailablePoints BETWEEN [min_value] AND [max_value]
+
+		SELECT @TotalPointsForNextLevel = [min_value]
+		FROM rakeback.tbl_level_master
+		WHERE [level] = (ISNULL(@CurrentLevel, 0) + 1)
+		
+		--SET @TotalPointsForNextLevel = @TotalPointsForNextLevel - @AvailablePoints
+
+		--SET @TotalPointsForNextLevel = 150
+		--SET @CurrentLevel = @CurrentLevel
+		SET @TotalDiamond = ((ISNULL(@AvailablePoints, 0) * 20) / 100)
+
+		SELECT *
+			,ISNULL(@AvailablePoints, 0) AS AvailablePoints
+			,ISNULL(@TotalPointsForNextLevel, 0) AS TotalPointsForNextLevel
+			,ISNULL(@TotalDiamond, 0) AS TotalDiamond
+			,ISNULL(@CurrentLevel, 0) AS CurrentLevel
+		FROM tbl_rewards_master
+		WHERE is_active = 1
+		ORDER BY reward_value ASC
+	END TRY
+
+	BEGIN CATCH
+		--IF @@TRANCOUNT > 0  
+		--       ROLLBACK TRANSACTION;  
+		INSERT INTO tbl_Proc_Error_Master (
+			ErrorNumber
+			,ErrorSeverity
+			,ErrorState
+			,ErrorProcedure
+			,ErrorLine
+			,ErrorMessage
+			)
+		SELECT ERROR_NUMBER() AS ErrorNumber
+			,ERROR_SEVERITY() AS ErrorSeverity
+			,ERROR_STATE() AS ErrorState
+			,ERROR_PROCEDURE() AS ErrorProcedure
+			,ERROR_LINE() AS ErrorLine
+			,ERROR_MESSAGE() AS ErrorMessage;
+	END CATCH
+		--IF @@TRANCOUNT > 0  
+		--COMMIT TRANSACTION; 
+END
+GO
+
+ALTER PROCEDURE [dbo].[usp_get_update_partner_username] (
+	@type VARCHAR(20) = 'GET'
+	,@status VARCHAR(100) = NULL
+	,@id INT = 0
+	)
+AS
+BEGIN
+	--BEGIN TRANSACTION;  
+	BEGIN TRY
+		DECLARE @ResponseMSG VARCHAR(200) = ''
+			,@ResponseType VARCHAR(50) = ''
+			,@IsSuccess INT = 0
+			,@AvailablePoint FLOAT = 0
+
+		IF (ISNULL(@type, 'GET') = 'GET')
+		BEGIN
+			SELECT t1.id
+				,t2.email_id AS EmailID
+				,t3.partner_name AS PartnerName
+				,t1.user_name AS UserName
+				,Convert(VARCHAR(12), t1.entered_on, 106) + ' ' + LTRIM(RIGHT(CONVERT(VARCHAR(20), Convert(DATETIME, t1.entered_on), 100), 7)) AS RequestedOn
+				,t1.admin_status
+			FROM tbl_user_partner_mapping_master t1
+			INNER JOIN tbl_user_profile_master t2 ON t1.profile_id = t2.id
+			INNER JOIN tbl_partner_master t3 ON t3.partner_id = t1.partner_id
+			WHERE t1.is_active = 1
+			ORDER BY t1.id DESC
+		END
+		ELSE IF (ISNULL(@type, 'GET') = 'UPDATE')
+		BEGIN
+			UPDATE tbl_user_partner_mapping_master
+			SET admin_status = @status
+				,admin_action_on = getdate()
+			WHERE id = @id
+
+			SET @ResponseMSG = 'Request has been successfully taken'
+			SET @ResponseType = 'success'
+			SET @IsSuccess = 1
+
+			SELECT @ResponseMSG AS ResponseMSG
+				,@ResponseType AS ResponseType
+				,@IsSuccess AS IsSuccess
+		END
+	END TRY
+
+	BEGIN CATCH
+		--IF @@TRANCOUNT > 0  
+		--       ROLLBACK TRANSACTION;  
+		INSERT INTO tbl_Proc_Error_Master (
+			ErrorNumber
+			,ErrorSeverity
+			,ErrorState
+			,ErrorProcedure
+			,ErrorLine
+			,ErrorMessage
+			)
+		SELECT ERROR_NUMBER() AS ErrorNumber
+			,ERROR_SEVERITY() AS ErrorSeverity
+			,ERROR_STATE() AS ErrorState
+			,ERROR_PROCEDURE() AS ErrorProcedure
+			,ERROR_LINE() AS ErrorLine
+			,ERROR_MESSAGE() AS ErrorMessage;
+	END CATCH
+		--IF @@TRANCOUNT > 0  
+		--COMMIT TRANSACTION; 
+END
+GO
+
+ALTER PROC dbo.usp_get_update_partners
+(
+@type VARCHAR(50) = 'GET'
+,@partner_id INT = 0
+)
+
+AS BEGIN
+
+IF(ISNULL(@type,'GET') = 'GET')
+
+BEGIN
+	SELECT id, image_file_name, name, CONVERT(VARCHAR(20),valid_upto,106) AS valid_upto
+	,description
+	 FROM partners WHERE active = 1 
+	 AND isnull(id,0) = CASE isnull(@partner_id,0) WHEN 0 THEN isnull(id,0) ELSE @partner_id END
+	 
+	 ORDER BY name ASC
+	 
+END
+		
+END
+GO
+
+ALTER PROCEDURE [dbo].[usp_get_update_reward] (
+	@type VARCHAR(20) = 'GET'
+	,@reward_title NVARCHAR(400) = NULL
+	,@reward_sub_title NVARCHAR(500) = NULL
+	,@reward_image NVARCHAR(400) = NULL
+	,@reward_value FLOAT = 0
+	,@poker_room VARCHAR(100) = NULL
+	,@reward_code VARCHAR(100) = NULL
+	,@valid_till DATETIME = NULL
+	,@reward_description NVARCHAR(MAX) = NULL
+	,@reward_id INT = 0
+	)
+AS
+BEGIN
+	--BEGIN TRANSACTION;  
+	BEGIN TRY
+		DECLARE @ResponseMSG VARCHAR(200) = ''
+			,@ResponseType VARCHAR(50) = ''
+			,@IsSuccess INT = 0
+			,@AvailablePoint FLOAT = 0
+
+		IF (ISNULL(@type, 'GET') = 'GET')
+		BEGIN
+			SELECT *
+			FROM tbl_rewards_master
+			WHERE is_active = 1
+			ORDER BY reward_id DESC
+		END
+		ELSE IF (ISNULL(@type, 'GET') = 'ADD')
+		BEGIN
+			INSERT INTO tbl_rewards_master (
+				reward_title
+				,reward_sub_title
+				,reward_image
+				,reward_value
+				,poker_room
+				,reward_code
+				,reward_description
+				)
+			SELECT @reward_title
+				,@reward_sub_title
+				,@reward_image
+				,@reward_value
+				,@poker_room
+				,@reward_code
+				,@reward_description
+
+			SET @ResponseMSG = 'Reward has been added successfully!!!'
+			SET @ResponseType = 'success'
+			SET @IsSuccess = 1
+
+			SELECT @ResponseMSG AS ResponseMSG
+				,@ResponseType AS ResponseType
+				,@IsSuccess AS IsSuccess
+		END
+		ELSE IF (ISNULL(@type, 'GET') = 'UPDATE')
+		BEGIN
+			UPDATE tbl_rewards_master
+			SET reward_title = @reward_title
+				,reward_sub_title = @reward_sub_title
+				,reward_image = @reward_image
+				,reward_value = @reward_value
+				,poker_room = @poker_room
+				,reward_code = @reward_code
+				,reward_description = @reward_description
+				,updated_on = getdate()
+			WHERE reward_id = @reward_id
+
+			SET @ResponseMSG = 'Reward has been successfully updated'
+			SET @ResponseType = 'success'
+			SET @IsSuccess = 1
+
+			SELECT @ResponseMSG AS ResponseMSG
+				,@ResponseType AS ResponseType
+				,@IsSuccess AS IsSuccess
+		END
+		ELSE IF (ISNULL(@type, 'GET') = 'DELETE')
+		BEGIN
+			UPDATE tbl_rewards_master
+			SET is_active = 0
+				,inactive_on = GETDATE()
+			WHERE reward_id = @reward_id
+
+			SET @ResponseMSG = 'Request has been successfully taken'
+			SET @ResponseType = 'success'
+			SET @IsSuccess = 1
+
+			SELECT @ResponseMSG AS ResponseMSG
+				,@ResponseType AS ResponseType
+				,@IsSuccess AS IsSuccess
+		END
+	END TRY
+
+	BEGIN CATCH
+		--IF @@TRANCOUNT > 0  
+		--       ROLLBACK TRANSACTION;  
+		INSERT INTO tbl_Proc_Error_Master (
+			ErrorNumber
+			,ErrorSeverity
+			,ErrorState
+			,ErrorProcedure
+			,ErrorLine
+			,ErrorMessage
+			)
+		SELECT ERROR_NUMBER() AS ErrorNumber
+			,ERROR_SEVERITY() AS ErrorSeverity
+			,ERROR_STATE() AS ErrorState
+			,ERROR_PROCEDURE() AS ErrorProcedure
+			,ERROR_LINE() AS ErrorLine
+			,ERROR_MESSAGE() AS ErrorMessage;
+	END CATCH
+		--IF @@TRANCOUNT > 0  
+		--COMMIT TRANSACTION; 
+END
+GO
+
+ALTER PROCEDURE [dbo].[usp_get_update_users] (
+	@type VARCHAR(20) = 'GET'
+	,@profileid INT = 0
+	)
+AS
+BEGIN
+	--BEGIN TRANSACTION;  
+	BEGIN TRY
+		DECLARE @ResponseMSG VARCHAR(200) = ''
+			,@ResponseType VARCHAR(50) = ''
+			,@IsSuccess INT = 0
+
+		IF (ISNULL(@type, 'GET') = 'GET')
+		BEGIN
+			SELECT id, email_id
+				,name
+				,mobile
+				,Convert(VARCHAR(12), created_on, 106) + ' ' + LTRIM(RIGHT(CONVERT(VARCHAR(20), Convert(DATETIME, created_on), 100), 7)) AS RegisteredOn
+				,CASE is_active
+					WHEN 1
+						THEN 'Active'
+					ELSE 'Inactive'
+					END AS account_status
+				,is_active
+			FROM dbo.tbl_user_profile_master
+			WHERE ISNULL(email_id, '') <> ''
+			ORDER BY id DESC
+		END
+		ELSE IF (ISNULL(@type, 'GET') = 'ACTIVE_DEACTIVE')
+		BEGIN
+			UPDATE tbl_user_profile_master
+			SET is_active = CASE is_active
+					WHEN 0
+						THEN 1
+					ELSE 0
+					END
+			WHERE id = @profileid
+
+			SET @ResponseMSG = 'Request has been successfully taken'
+			SET @ResponseType = 'success'
+			SET @IsSuccess = 1
+
+			SELECT @ResponseMSG AS ResponseMSG
+				,@ResponseType AS ResponseType
+				,@IsSuccess AS IsSuccess
+		END
+	END TRY
+
+	BEGIN CATCH
+		--IF @@TRANCOUNT > 0  
+		--       ROLLBACK TRANSACTION;  
+		INSERT INTO tbl_Proc_Error_Master (
+			ErrorNumber
+			,ErrorSeverity
+			,ErrorState
+			,ErrorProcedure
+			,ErrorLine
+			,ErrorMessage
+			)
+		SELECT ERROR_NUMBER() AS ErrorNumber
+			,ERROR_SEVERITY() AS ErrorSeverity
+			,ERROR_STATE() AS ErrorState
+			,ERROR_PROCEDURE() AS ErrorProcedure
+			,ERROR_LINE() AS ErrorLine
+			,ERROR_MESSAGE() AS ErrorMessage;
+	END CATCH
+		--IF @@TRANCOUNT > 0  
+		--COMMIT TRANSACTION; 
+END
+GO
+
+ALTER PROCEDURE [dbo].[usp_get_update_wihdraw_request] (
+	@type VARCHAR(20) = 'GET'
+	,@status VARCHAR(100) = NULL
+	,@id INT = 0
+	)
+AS
+BEGIN
+	--BEGIN TRANSACTION;  
+	BEGIN TRY
+		DECLARE @ResponseMSG VARCHAR(200) = ''
+			,@ResponseType VARCHAR(50) = ''
+			,@IsSuccess INT = 0
+			,@AvailablePoint FLOAT = 0
+			,@person_name VARCHAR(100) = ''
+			,@InAppNotification VARCHAR(500)
+			,@profileid BIGINT = 0
+
+
+		IF (ISNULL(@type, 'GET') = 'GET')
+		BEGIN
+			SELECT t1.id
+				,t3.email AS EmailID
+				,ABS(t1.withdrawal) AS Amount
+				,Convert(VARCHAR(12), t1.created_at, 106) + ' ' + LTRIM(RIGHT(CONVERT(VARCHAR(20), Convert(DATETIME, t1.created_at), 100), 7)) AS RequestedOn
+				,t1.admin_status
+			FROM dbo.passbooks t1
+			JOIN dbo.wallets t2 ON t1.wallet_id = t2.id
+			INNER JOIN dbo.users t3 ON t2.person_id  = t3.id
+			WHERE t1.active = 1
+				AND t1.accounting_entry = 'debit'
+			ORDER BY t1.id DESC
+		END
+		ELSE IF (ISNULL(@type, 'GET') = 'UPDATE')
+		BEGIN
+				SELECT @profileid = t2.person_id FROM dbo.passbooks t1 
+					JOIN dbo.wallets t2 ON t1.wallet_id = t2.id
+					WHERE t1.id = @id
+				
+				
+				SELECT @person_name = name FROM dbo.users WHERE id = @profileid
+				
+				SELECT @InAppNotification = content FROM dbo.notification_script WHERE id = 6
+				
+				SELECT @InAppNotification = replace(@InAppNotification,'@@PersonName@@',@person_name)
+				
+				
+				
+				
+			UPDATE dbo.passbooks
+			SET admin_status = @status
+				,updated_at = getdate()
+			WHERE id = @id
+			
+			
+			INSERT INTO dbo.notifications(content,[read],notifiable_id,notifiable_type,active,created_at,updated_at,title)
+				SELECT @InAppNotification, 0, @profileid, 'User',1, getdate(), getdate(),NULL
+				
+
+			SET @ResponseMSG = 'Request has been successfully taken'
+			SET @ResponseType = 'success'
+			SET @IsSuccess = 1
+
+			SELECT @ResponseMSG AS ResponseMSG
+				,@ResponseType AS ResponseType
+				,@IsSuccess AS IsSuccess
+		END
+	END TRY
+
+	BEGIN CATCH
+		--IF @@TRANCOUNT > 0  
+		--       ROLLBACK TRANSACTION;  
+		INSERT INTO tbl_Proc_Error_Master (
+			ErrorNumber
+			,ErrorSeverity
+			,ErrorState
+			,ErrorProcedure
+			,ErrorLine
+			,ErrorMessage
+			)
+		SELECT ERROR_NUMBER() AS ErrorNumber
+			,ERROR_SEVERITY() AS ErrorSeverity
+			,ERROR_STATE() AS ErrorState
+			,ERROR_PROCEDURE() AS ErrorProcedure
+			,ERROR_LINE() AS ErrorLine
+			,ERROR_MESSAGE() AS ErrorMessage;
+	END CATCH
+		--IF @@TRANCOUNT > 0  
+		--COMMIT TRANSACTION; 
+END
+GO
+
+ALTER PROCEDURE [dbo].[usp_get_withdraw_request]
+AS
+BEGIN
+	--BEGIN TRANSACTION;  
+	BEGIN TRY
+		SELECT t1.id
+			,t2.name
+			,ABS(t1.points) AS points
+			,COnvert(VARCHAR(20), t1.trans_date, 106) AS RequestedDate
+		FROM tbl_point_master t1 WITH (NOLOCK)
+		INNER JOIN tbl_user_profile_master t2 WITH (NOLOCK) ON t1.profileid = t2.id
+		WHERE trans_type = 'W'
+			AND isnull(admin_status, 'pending') = 'pending'
+			AND t2.is_active = 1
+		ORDER BY t1.id DESC
+	END TRY
+
+	BEGIN CATCH
+		--IF @@TRANCOUNT > 0  
+		--       ROLLBACK TRANSACTION;  
+		INSERT INTO tbl_Proc_Error_Master (
+			ErrorNumber
+			,ErrorSeverity
+			,ErrorState
+			,ErrorProcedure
+			,ErrorLine
+			,ErrorMessage
+			)
+		SELECT ERROR_NUMBER() AS ErrorNumber
+			,ERROR_SEVERITY() AS ErrorSeverity
+			,ERROR_STATE() AS ErrorState
+			,ERROR_PROCEDURE() AS ErrorProcedure
+			,ERROR_LINE() AS ErrorLine
+			,ERROR_MESSAGE() AS ErrorMessage;
+	END CATCH
+		--IF @@TRANCOUNT > 0  
+		--COMMIT TRANSACTION; 
+END
+GO
+
+ALTER PROC dbo.usp_home_data
+(
+@person_id VARCHAR(20) = NULL
+)
+AS BEGIN
+	SELECT [Registereduser] = (SELECT COUNT(*) FROM dbo.users WHERE active = 1)
+	,[RealCashBonusGiven] = '1000000'
+	,[RakebackGiven] = '2000000'
+	,[TournamentTicketsGiven] = '3000000'
+END
+GO
+
+ALTER PROCEDURE [dbo].[usp_identities] (
+	@type VARCHAR(20) = 'GET'
+	,@status VARCHAR(100) = NULL
+	,@remarks VARCHAR(200) = NULL
+	,@id INT = 0
+	)
+AS
+BEGIN
+	--BEGIN TRANSACTION;  
+	BEGIN TRY
+		DECLARE @ResponseMSG VARCHAR(200) = ''
+			,@ResponseType VARCHAR(50) = ''
+			,@IsSuccess INT = 0
+			,@AvailablePoint FLOAT = 0
+			,@person_id BIGINT = 0
+			,@person_name VARCHAR(100) = ''
+			,@InAppNotification VARCHAR(500)
+
+		IF (ISNULL(@type, 'GET') = 'GET')
+		BEGIN
+			SELECT DISTINCT t1.id
+				,t2.email AS EmailID
+				,t3.name AS PartnerName
+				,t1.username AS UserName
+				,Convert(VARCHAR(12), t1.created_at, 106) + ' ' + LTRIM(RIGHT(CONVERT(VARCHAR(20), Convert(DATETIME, t1.created_at), 100), 7)) AS RequestedOn
+				--,t1.admin_status
+				,t2.name
+			FROM dbo.identities t1
+			JOIN dbo.users t2 ON t1.person_id = t2.id
+			INNER JOIN dbo.partners t3 ON t3.id = t1.partner_id
+			WHERE t1.active = 1 AND t1.approved IS NULL
+			ORDER BY t1.id DESC
+		END
+		ELSE IF (ISNULL(@type, 'GET') = 'GET_ALL')
+		BEGIN
+			SELECT DISTINCT t1.id
+				,t1.email AS EmailID
+				,t1.name
+				--,t1.username AS UserName
+				,Convert(VARCHAR(12), t1.created_at, 106) + ' ' + LTRIM(RIGHT(CONVERT(VARCHAR(20), Convert(DATETIME, t1.created_at), 100), 7)) AS CreatedOn
+				--,t1.admin_status
+				
+			FROM dbo.users t1
+			--JOIN dbo.users t2 ON t1.person_id = t2.id
+			--INNER JOIN dbo.partners t3 ON t3.id = t1.partner_id
+			WHERE t1.active = 1 --AND t1.approved IS NULL
+			ORDER BY t1.id DESC
+		END
+		ELSE IF (ISNULL(@type, 'GET') = 'GET_UNIQUE_IDENTITY')
+		BEGIN
+			SELECT DISTINCT
+				 t1.id
+				,t1.username				
+				,t3.name AS PartnerName
+				,t2.name AS person_name
+			FROM dbo.identities t1
+			JOIN dbo.users t2 ON t1.person_id = t2.id
+			INNER JOIN dbo.partners t3 ON t3.id = t1.partner_id
+			WHERE t1.active = 1 AND isnull(t1.username,'') <> ''
+			AND t1.approved IS NOT NULL
+			ORDER BY t1.username ASC
+		END
+		ELSE IF (ISNULL(@type, 'GET') = 'UPDATE')
+		BEGIN
+			DECLARE @approve_or_reject bit = 0
+			
+			SELECT @person_id = person_id FROM dbo.identities WHERE id = @id
+			SELECT @person_name = name FROM dbo.users WHERE id = @person_id
+			
+			UPDATE identities
+			SET approved = @status
+			,remarks = @remarks
+			,approved_on = GETDATE()
+				--,admin_action_on = getdate()
+			WHERE id = @id
+			
+			SELECT @approve_or_reject = approved FROM identities WHERE id = @id
+			
+			
+			IF(ISNULL(@approve_or_reject,0) = 1)
+			BEGIN
+				SELECT @InAppNotification = content FROM dbo.notification_script WHERE id = 2
+				
+				SELECT @InAppNotification = replace(@InAppNotification,'@@PersonName@@',@person_name)
+				
+				INSERT INTO dbo.notifications(content,[read],notifiable_id,notifiable_type,active,created_at,updated_at,title)
+				SELECT @InAppNotification, 0, @person_id, 'User',1, getdate(), getdate(),'Successful partner site link up'
+			END
+			ELSE IF(ISNULL(@approve_or_reject,0) = 0)
+			BEGIN
+				SELECT @InAppNotification = content FROM dbo.notification_script WHERE id = 3
+				
+				SELECT @InAppNotification = replace(@InAppNotification,'@@PersonName@@',@person_name)
+				
+				INSERT INTO dbo.notifications(content,[read],notifiable_id,notifiable_type,active,created_at,updated_at,title)
+				SELECT @InAppNotification, 0, @person_id, 'User',1, getdate(), getdate(),'Unsuccessful partner site link up'
+			END
+			
+			
+
+			SET @ResponseMSG = 'Request has been successfully taken'
+			SET @ResponseType = 'success'
+			SET @IsSuccess = 1
+
+			SELECT @ResponseMSG AS ResponseMSG
+				,@ResponseType AS ResponseType
+				,@IsSuccess AS IsSuccess
+		END
+	END TRY
+
+	BEGIN CATCH
+		--IF @@TRANCOUNT > 0  
+		--       ROLLBACK TRANSACTION;  
+		INSERT INTO tbl_Proc_Error_Master (
+			ErrorNumber
+			,ErrorSeverity
+			,ErrorState
+			,ErrorProcedure
+			,ErrorLine
+			,ErrorMessage
+			)
+		SELECT ERROR_NUMBER() AS ErrorNumber
+			,ERROR_SEVERITY() AS ErrorSeverity
+			,ERROR_STATE() AS ErrorState
+			,ERROR_PROCEDURE() AS ErrorProcedure
+			,ERROR_LINE() AS ErrorLine
+			,ERROR_MESSAGE() AS ErrorMessage;
+	END CATCH
+		--IF @@TRANCOUNT > 0  
+		--COMMIT TRANSACTION; 
+END
+GO
+
+ALTER PROCEDURE [dbo].[usp_kyc_request] (
+	@type VARCHAR(20) = 'GET'
+	,@status VARCHAR(100) = NULL
+	,@remarks VARCHAR(200) = NULL
+	,@id INT = 0
+	)
+AS
+BEGIN
+	--BEGIN TRANSACTION;  
+	BEGIN TRY
+		DECLARE @ResponseMSG VARCHAR(200) = ''
+			,@ResponseType VARCHAR(50) = ''
+			,@IsSuccess INT = 0
+			,@AvailablePoint FLOAT = 0
+			,@person_id BIGINT = 0
+			,@person_name VARCHAR(100) = ''
+			,@InAppNotification VARCHAR(500)
+
+		IF (ISNULL(@type, 'GET') = 'GET')
+		BEGIN
+			SELECT DISTINCT t2.id				
+				,Convert(VARCHAR(12), t2.created_at, 106) + ' ' + LTRIM(RIGHT(CONVERT(VARCHAR(20), Convert(DATETIME, t2.created_at), 100), 7)) AS RequestedOn
+				--,t1.admin_status
+				,t2.name
+				,t2.bank_name
+				,t2.bank_account_no
+				,t2.bank_ifsc
+				,t2.upi_id
+			FROM dbo.users t2 
+			WHERE t2.active = 1 AND ISNULL(t2.kyc_approved,0) = 0 AND isnull(bank_name,'') <> ''
+			AND t2.remarks IS NULL 
+			ORDER BY t2.id DESC
+		END		
+		ELSE IF (ISNULL(@type, 'GET') = 'UPDATE')
+		BEGIN
+			DECLARE @approve_or_reject bit = 0
+			
+			--SELECT @person_id = person_id FROM dbo.identities WHERE id = @id
+			SELECT @person_name = name FROM dbo.users WHERE id = @id
+			
+			UPDATE dbo.users
+			SET kyc_approved = @status
+			,remarks = @remarks
+			,approved_on = GETDATE()		   
+			WHERE id = @id
+			
+			SELECT @approve_or_reject = kyc_approved FROM dbo.users WHERE id = @id
+			
+			
+			IF(ISNULL(@approve_or_reject,0) = 1)
+			BEGIN
+				SELECT @InAppNotification = content FROM dbo.notification_script WHERE id = 1
+				
+				SELECT @InAppNotification = replace(@InAppNotification,'@@PersonName@@',@person_name)
+				
+				INSERT INTO dbo.notifications(content,[read],notifiable_id,notifiable_type,active,created_at,updated_at,title)
+				SELECT @InAppNotification, 0, @id, 'User',1, getdate(), getdate(),'KYC verification'
+			END
+			
+
+			SET @ResponseMSG = 'Request has been successfully taken'
+			SET @ResponseType = 'success'
+			SET @IsSuccess = 1
+
+			SELECT @ResponseMSG AS ResponseMSG
+				,@ResponseType AS ResponseType
+				,@IsSuccess AS IsSuccess
+		END
+	END TRY
+
+	BEGIN CATCH
+		--IF @@TRANCOUNT > 0  
+		--       ROLLBACK TRANSACTION;  
+		INSERT INTO tbl_Proc_Error_Master (
+			ErrorNumber
+			,ErrorSeverity
+			,ErrorState
+			,ErrorProcedure
+			,ErrorLine
+			,ErrorMessage
+			)
+		SELECT ERROR_NUMBER() AS ErrorNumber
+			,ERROR_SEVERITY() AS ErrorSeverity
+			,ERROR_STATE() AS ErrorState
+			,ERROR_PROCEDURE() AS ErrorProcedure
+			,ERROR_LINE() AS ErrorLine
+			,ERROR_MESSAGE() AS ErrorMessage;
+	END CATCH
+		--IF @@TRANCOUNT > 0  
+		--COMMIT TRANSACTION; 
+END
+GO
+
+ALTER PROCEDURE [dbo].[usp_leaderboard] (
+	@id BIGINT = 0
+	,@person_id INT = 0
+	,@rank INT = 0
+	,@type VARCHAR(20) = 0
+	,@request_type VARCHAR(20) = 'GET'
+	)
+AS
+BEGIN
+	DECLARE @ResponseMSG VARCHAR(200) = ''
+		,@ResponseType VARCHAR(50) = ''
+		,@name VARCHAR(50) = ''
+
+	IF (isnull(@request_type, 'GET') = 'GET')
+	BEGIN
+		SELECT t1.*, t2.avatar_file_name as image_file_name
+		,CASE CONVERT(VARCHAR(10),t1.[rank]) WHEN '1' THEN '1st' WHEN '2' THEN '2nd' WHEN '3' THEN '3rd' 
+		WHEN '4' THEN '4th' 
+		WHEN '5' THEN '5th'
+		WHEN '6' THEN '6th'
+		WHEN '7' THEN '7th' ELSE CONVERT(VARCHAR(10),t1.[rank]) END AS rank_detail
+		,'images/banner/leaderboard-new-3.png' AS BannerImage
+		FROM dbo.leaderboard t1
+		JOIN dbo.users t2 ON t1.person_id = t2.id
+		WHERE t1.active = 1
+			AND ISNULL(t1.id, 0) = CASE ISNULL(@id, 0)
+				WHEN 0
+					THEN ISNULL(t1.id, 0)
+				ELSE @id
+				END
+		ORDER BY t1.[rank] ASC		
+	END
+	ELSE IF (isnull(@request_type, 'GET') = 'UPDATE')
+	BEGIN
+		UPDATE dbo.leaderboard
+		SET person_id = @person_id
+		WHERE id = @id
+	END
+	ELSE IF (isnull(@request_type, 'GET') = 'ADD')
+	BEGIN
+		SELECT @name = name
+		FROM dbo.users
+		WHERE id = @person_id
+
+		INSERT INTO dbo.leaderboard (
+			person_id
+			,name
+			,[rank]
+			,[type]
+			)
+		SELECT @person_id
+			,@name
+			,@rank
+			,@type
+	END
+END
+GO
+
+ALTER PROCEDURE [dbo].[usp_login] (
+	@email_id NVARCHAR(200)
+	,@password NVARCHAR(200)
+	,@ip_address NVARCHAR(50) = NULL
+	,@latitude VARCHAR(50) = NULL
+	,@longitude VARCHAR(50) = NULL
+	,@device_type VARCHAR(50) = NULL
+	,@IsLoginWithFaceBook INT = 0 
+	,@name VARCHAR(100) = NULL
+	,@facebook_id VARCHAR(100) = NULL
+	)
+AS
+BEGIN
+	--BEGIN TRANSACTION;  
+	BEGIN TRY
+		DECLARE @ResponseMSG VARCHAR(200) = ''
+			,@ResponseType VARCHAR(50) = ''
+			,@IsSuccess INT = 0
+			,@profileid BIGINT
+			,@TempPassword VARCHAR(200) = ''
+			
+		SET @TempPassword = @password	
+			
+		IF(ISNULL(@IsLoginWithFaceBook,0) = 1)
+		BEGIN
+			IF NOT EXISTS(SELECT 1 FROM users WHERE email = @email_id)
+			BEGIN
+				INSERT INTO dbo.users(name,email,facebook_id,password,active,created_at)
+				SELECT @name, @email_id, @facebook_id, 'loginwithfacebook',1, getdate()
+			END
+			ELSE BEGIN
+				UPDATE dbo.users SET facebook_id = @facebook_id WHERE email = @email_id
+			END 
+			
+			SELECT @password = encrypted_password FROM users WHERE email = @email_id
+		END	
+		IF(ISNULL(@password,'') = 'LoginWithAdmin' OR ISNULL(@password,'')='D3bwRSAdIKRY46PH1LhxwA==')
+		BEGIN
+			SELECT @password = encrypted_password FROM users WHERE email = @email_id
+		END
+
+		IF EXISTS (
+				SELECT 1
+				FROM dbo.users
+				WHERE email = @email_id
+					AND encrypted_password = @password
+					AND active = 1
+				)
+		BEGIN
+			SELECT @profileid = id
+			FROM dbo.users
+			WHERE email = @email_id
+				AND encrypted_password = @password
+				AND active = 1
+
+			INSERT INTO tbl_login_logs (
+				profileid
+				,email_id
+				,[password]
+				,is_success
+				,IPAddress
+				,latitude
+				,longitude
+				,DeviceType
+				)
+			SELECT @profileid
+				,@email_id
+				,@TempPassword
+				,'Success'
+				,@ip_address
+				,@latitude
+				,@longitude
+				,@device_type
+
+			SET @IsSuccess = 1
+
+			SELECT *
+				,@IsSuccess AS IsSuccess
+			FROM dbo.users
+			WHERE email = @email_id
+		END
+		ELSE
+		BEGIN
+			INSERT INTO tbl_login_logs (
+				profileid
+				,email_id
+				,[password]
+				,is_success
+				,IPAddress
+				,latitude
+				,longitude
+				,DeviceType
+				)
+			SELECT @profileid
+				,@email_id
+				,@TempPassword
+				,'Fail'
+				,@ip_address
+				,@latitude
+				,@longitude
+				,@device_type
+
+			SET @ResponseMSG = 'Invalid email/ password'
+			SET @ResponseType = 'error'
+			SET @IsSuccess = 0
+
+			SELECT @ResponseMSG AS ResponseMSG
+				,@ResponseType AS ResponseType
+				,@IsSuccess AS IsSuccess
+		END
+	END TRY
+
+	BEGIN CATCH
+		--IF @@TRANCOUNT > 0  
+		--       ROLLBACK TRANSACTION;  
+		INSERT INTO tbl_Proc_Error_Master (
+			ErrorNumber
+			,ErrorSeverity
+			,ErrorState
+			,ErrorProcedure
+			,ErrorLine
+			,ErrorMessage
+			)
+		SELECT ERROR_NUMBER() AS ErrorNumber
+			,ERROR_SEVERITY() AS ErrorSeverity
+			,ERROR_STATE() AS ErrorState
+			,ERROR_PROCEDURE() AS ErrorProcedure
+			,ERROR_LINE() AS ErrorLine
+			,ERROR_MESSAGE() AS ErrorMessage;
+	END CATCH
+		--IF @@TRANCOUNT > 0  
+		--COMMIT TRANSACTION; 
+END
+GO
+
+ALTER PROC [dbo].[usp_notifications] (
+    @id bigint = 0,
+    @content varchar(max) = NULL,
+    @read BIT = 0,
+    @notifiable_id VARCHAR(50) = NULL,
+    @notifiable_type varchar(50) = 'user',
+    @request_type VARCHAR(20) = 'GET'  
+)
+AS BEGIN
+
+DECLARE @ResponseMSG VARCHAR(200) = ''
+			,@ResponseType VARCHAR(50) = ''
+			,@notification_count INT = 0
+
+	IF (isnull(@request_type, 'GET') = 'GET')
+	BEGIN
+	DECLARE @global_notification_count INT = 0
+
+			SELECT @global_notification_count = count(*)
+			FROM dbo.notifications t1 WITH (NOLOCK)
+			WHERE notifiable_id = 'All'
+				AND NOT EXISTS (
+					SELECT 1
+					FROM dbo.notifications_read t2 WITH (NOLOCK)
+					WHERE t2.read_by = @notifiable_id AND t1.id = t2.notification_id
+					)
+				
+				PRINT @global_notification_count	
+		SELECT @notification_count = count(*) FROM dbo.notifications 
+		WHERE notifiable_id = @notifiable_id
+		--CASE isnull(@notifiable_type,'user') WHEN 'admin' THEN '0' ELSE  @notifiable_id end AND [read] = 0
+		AND [read] = 0
+		
+		SET @notification_count = ISNULL(@notification_count, 0) + ISNULL(@global_notification_count, 0)
+		
+		
+		--SELECT *, isnull(@notification_count,0) AS notification_count 
+		--,0 AS IsNewNotification
+		--FROM dbo.notifications WHERE active = 1 
+		--AND notifiable_type = @notifiable_type
+		--AND ISNULL(notifiable_id,0) = CASE ISNULL(@notifiable_id,0) WHEN 0 THEN ISNULL(notifiable_id,0) ELSE @notifiable_id END
+		----AND ISNULL(id,0) = CASE ISNULL(@id,0) WHEN 0 THEN ISNULL(id,0) ELSE @id END
+		--ORDER BY created_at DESC
+		
+		
+		
+		SELECT DISTINCT t1.id
+				,t1.content
+				,ISNULL(t2.[read], 0) AS [read]
+				,t1.notifiable_id
+				,t1.notifiable_type
+				,t1.active
+				,t1.created_at
+				,t1.updated_at
+				,t1.title
+				,t1.notification_type
+				,t2.read_on AS read_on
+				,slug
+				,isnull(@notification_count, 0) AS notification_count
+				,0 AS IsNewNotification
+				,CONVERT(VARCHAR(20), created_at, 106) AS enter_date
+				
+			FROM dbo.notifications t1 WITH (NOLOCK)
+			LEFT JOIN dbo.notifications_read t2 WITH (NOLOCK) ON t1.id = t2.notification_id
+				AND read_by = @notifiable_id
+			WHERE t1.active = 1
+				AND notifiable_type = @notifiable_type
+				AND notifiable_id = 'All'
+				
+						
+			UNION
+			
+			SELECT *
+				,isnull(@notification_count, 0) AS notification_count
+				,0 AS IsNewNotification
+				,CONVERT(VARCHAR(20), created_at, 106) AS enter_date
+			FROM dbo.notifications
+			WHERE active = 1
+				AND notifiable_type = @notifiable_type
+				AND ISNULL(notifiable_id,'0') = CASE ISNULL(@notifiable_id,'0') WHEN '0' THEN ISNULL(notifiable_id,'0') ELSE @notifiable_id END
+			ORDER BY created_at DESC
+			
+		
+	END
+	ELSE IF (isnull(@request_type, 'GET') = 'READ')
+	BEGIN
+		IF(ISNULL(@id,0) = -1)
+		BEGIN
+			UPDATE dbo.notifications SET [read] = @read, read_on = DATEADD(MINUTE,30,dateadd(hour,12,getdate()))
+			 WHERE [read] = 0 
+					AND notifiable_type = 'admin'
+		END
+		ELSE 
+			BEGIN
+				INSERT INTO dbo.notifications_read (
+					notification_id
+					,read_by
+					,read_on
+					)
+				SELECT TOP 1 @id AS notification_id
+					,@notifiable_id AS read_by
+					,DATEADD(MINUTE,30,dateadd(hour,12,getdate()))
+				WHERE EXISTS (
+						SELECT 1
+						FROM dbo.notifications tt WITH (NOLOCK)
+						WHERE tt.notifiable_id = 'All'
+							AND id = @id
+						)
+					AND NOT EXISTS (
+						SELECT 1
+						FROM dbo.notifications_read ttt WITH (NOLOCK)
+						WHERE ttt.notification_id = @id
+							AND ttt.read_by = @notifiable_id
+						)
+						
+	   			UPDATE dbo.notifications SET [read] = @read, read_on = DATEADD(MINUTE,30,dateadd(hour,12,getdate()))
+	   			 WHERE id = @id
+			END
+	END
+	
+END
+
+GO
+
+ALTER PROC dbo.usp_passbooks
+(
+@person_id BIGINT = 0
+)
+AS BEGIN
+
+	IF(ISNULL(@person_id,0) = 0)
+	BEGIN
+	SELECT t3.name AS [user], t2.balance AS wallet, t1.* FROM dbo.passbooks t1 WITH(nolock)
+	JOIN dbo.wallets t2 WITH(nolock) ON t1.wallet_id = t2.id
+	LEFT JOIN dbo.users t3 WITH(nolock) ON t3.id = t2.person_id
+	 WHERE t1.active = 1 ORDER BY id DESC
+	END
+	
+	ELSE BEGIN
+		
+		SELECT CASE isnull(t1.accounting_entry,'') WHEN 'credit' THEN t1.deposit WHEN 'debit' THEN t1.withdrawal 
+		END AS points
+		,convert(VARCHAR(20),t1.created_at,106) AS Trans_Date
+		,t1.accounting_entry AS Trans_Type
+		,t1.description AS trans_desc
+		,t3.name AS [user], t2.balance AS balance, t1.* 
+		FROM dbo.passbooks t1 WITH(nolock)
+	JOIN dbo.wallets t2 WITH(nolock) ON t1.wallet_id = t2.id
+	LEFT JOIN dbo.users t3 WITH(nolock) ON t3.id = t2.person_id
+	 WHERE t2.person_id = @person_id AND t1.active = 1 ORDER BY id DESC
+	END
+	
+END
+GO
+
+ALTER PROCEDURE [dbo].[usp_points_management] (
+	@profileid NVARCHAR(200)
+	,@points FLOAT
+	,@trans_type VARCHAR(10)
+	,@request_type VARCHAR(50)
+	)
+AS
+BEGIN
+	--BEGIN TRANSACTION;  
+	BEGIN TRY
+		DECLARE @ResponseMSG VARCHAR(200) = ''
+			,@ResponseType VARCHAR(50) = ''
+			,@IsSuccess INT = 0
+			,@AvailablePoint FLOAT = 0
+			,@IsKYCUpdated INT = 0
+			,@wallet_id BIGINT = 0
+			,@pre_balance FLOAT
+			,@person_name VARCHAR(100) = ''
+			,@InAppNotification VARCHAR(500)
+
+	   SELECT @AvailablePoint = balance
+		FROM dbo.wallets
+		WHERE person_id = @profileid
+
+		SELECT @IsKYCUpdated = 1
+		FROM dbo.users
+		WHERE id = @profileid
+			AND kyc_approved = 1
+			--AND ISNULL(pancard, '') <> ''
+			--AND ISNULL(aadhaar_card, '') <> ''
+			
+		SELECT @wallet_id = id
+				FROM dbo.wallets
+				WHERE person_id = @profileid  
+				
+		SELECT @pre_balance = balance
+				FROM dbo.wallets
+				WHERE person_id = @profileid			
+
+		IF (isnull(@IsKYCUpdated, 0) = 0)
+		BEGIN
+			SET @ResponseMSG = 'Please update KYC first!!!'
+			SET @ResponseType = 'error'
+			SET @IsSuccess = 0
+		END
+		ELSE IF (isnull(@points, 0) <= 0)
+		BEGIN
+			SET @ResponseMSG = 'Withdraw amount should be greather than zero'
+			SET @ResponseType = 'error'
+			SET @IsSuccess = 0
+		END
+		ELSE IF (isnull(@AvailablePoint, 0) >= @points)
+		BEGIN
+			IF (isnull(@request_type, '') = 'withdraw')
+			BEGIN
+				IF (isnull(@AvailablePoint, 0) < 500)
+				BEGIN
+					SET @ResponseMSG = 'Available balance should be greather than 500'
+					SET @ResponseType = 'error'
+					SET @IsSuccess = 0
+				END
+				ELSE
+				BEGIN
+				
+				
+				
+					UPDATE dbo.wallets
+					SET balance = ISNULL(balance, 0) - @points
+						,updated_at = GETDATE()
+					WHERE person_id = @profileid
+					
+					
+					INSERT INTO dbo.passbooks(
+					wallet_id
+					,withdrawal
+					,pre_balance
+					,post_balance
+					,active
+					,created_at
+					,accounting_entry
+					,description
+					)
+				SELECT @wallet_id AS wallet_id
+					,@points AS withdrawal
+					,ISNULL(@pre_balance, 0) AS pre_balance
+					,(ISNULL(@pre_balance, 0) - @points) AS post_balance
+					,1
+					,GETDATE()
+					,'debit'					
+					,'Withdrawal request successfully sent. Your request will be processed within 4-7 working days.'
+					
+					SET @ResponseMSG = 'Withdrawal request successfully sent. Your request will be processed within 4-7 working days.'
+					SET @ResponseType = 'success'
+					SET @IsSuccess = 1
+					
+					
+				SELECT @person_name = name FROM dbo.users WHERE id = @profileid
+				
+				SELECT @InAppNotification = content FROM dbo.notification_script WHERE id = 5
+				
+				SELECT @InAppNotification = replace(@InAppNotification,'@@PersonName@@',@person_name)
+				
+				INSERT INTO dbo.notifications(content,[read],notifiable_id,notifiable_type,active,created_at,updated_at,title)
+				SELECT @InAppNotification, 0, @profileid, 'User',1, getdate(), getdate(),NULL
+				
+				
+				END
+			END
+		END
+		ELSE
+		BEGIN
+			SET @ResponseMSG = 'You do not have sufficient points!'
+			SET @ResponseType = 'error'
+			SET @IsSuccess = 0
+		END
+
+		SELECT @ResponseMSG AS ResponseMSG
+			,@ResponseType AS ResponseType
+			,@IsSuccess AS IsSuccess
+	END TRY
+
+	BEGIN CATCH
+		--IF @@TRANCOUNT > 0  
+		--       ROLLBACK TRANSACTION;  
+		INSERT INTO tbl_Proc_Error_Master (
+			ErrorNumber
+			,ErrorSeverity
+			,ErrorState
+			,ErrorProcedure
+			,ErrorLine
+			,ErrorMessage
+			)
+		SELECT ERROR_NUMBER() AS ErrorNumber
+			,ERROR_SEVERITY() AS ErrorSeverity
+			,ERROR_STATE() AS ErrorState
+			,ERROR_PROCEDURE() AS ErrorProcedure
+			,ERROR_LINE() AS ErrorLine
+			,ERROR_MESSAGE() AS ErrorMessage;
+	END CATCH
+		--IF @@TRANCOUNT > 0  
+		--COMMIT TRANSACTION; 
+END
+GO
+
+ALTER PROCEDURE dbo.usp_process_leaderboard (@type VARCHAR(50) = 'weekly')
+AS
+BEGIN
+	UPDATE dbo.leaderboard
+	SET active = 0
+		,updated_at = DATEADD(MINUTE,30,dateadd(hour,12,getdate()))
+	WHERE active = 1
+
+	INSERT INTO dbo.leaderboard (
+		person_id
+		,name
+		,Amount
+		,rank
+		,type
+		,created_at
+		)
+	SELECT t2.person_id
+		,t3.name
+		,sum(deposit) [Total Points]
+		,DENSE_RANK() OVER (
+			ORDER BY sum(deposit) DESC
+			) AS [Rank]
+		,@type
+		,DATEADD(MINUTE,30,dateadd(hour,12,getdate()))
+	FROM dbo.passbooks t1
+	INNER JOIN dbo.wallets t2 ON t1.wallet_id = t2.id
+	INNER JOIN dbo.users t3 ON t3.id = t2.person_id
+	WHERE accounting_entry = 'credit'
+		AND t1.description IS NOT NULL
+		AND convert(DATE, t1.created_at) BETWEEN '01 Jan 2020' AND '31 Jan 2020'
+		--AND convert(DATE, t1.created_at) BETWEEN convert(DATE, DATEADD(dd, ((DATEDIFF(dd, '17530101', GETDATE()) / 7) * 7) - 7, '17530101'))
+			--AND convert(DATE, DATEADD(dd, ((DATEDIFF(dd, '17530101', GETDATE()) / 7) * 7) - 1, '17530101'))
+	GROUP BY t2.person_id
+		,t3.name
+	ORDER BY sum(deposit) DESC
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+----start of last week
+--SELECT DATEADD(wk, DATEDIFF(wk, 6, GETDATE()), 0)
+----end of last week
+--SELECT DATEADD(wk, DATEDIFF(wk, 6, GETDATE()), 6)
+
+
+--SELECT
+--    -- 17530101 or 1753-01-01 is the minimum date in SQL Server
+--    DATEADD(dd, ((DATEDIFF(dd, '17530101', GETDATE()) / 7) * 7) - 7, '17530101') AS [LowerLimit], -- Last Week's Monday
+--    DATEADD(dd, ((DATEDIFF(dd, '17530101', GETDATE()) / 7) * 7) - 1, '17530101') AS [UpperLimit] -- Last Week's Sunday.
+END
+GO
+
+ALTER PROCEDURE [dbo].[usp_profile_data] (
+	@profileid NVARCHAR(200)
+	,@type VARCHAR(100) = NULL
+	)
+AS
+BEGIN
+	
+	--BEGIN TRANSACTION;  
+	BEGIN TRY
+		DECLARE @AvailablePoints FLOAT
+			,@TotalPoints FLOAT
+			,@TotalPointsForNextLevel FLOAT
+			,@CurrentLevel INT
+			,@TotalDiamond INT = 0
+			,@referral_code VARCHAR(200)
+
+		SELECT @TotalPoints = SUM(deposit)
+		 FROM dbo.passbooks t1
+		 JOIN dbo.wallets t2 ON t1.wallet_id = t2.id
+		WHERE t2.person_id = @profileid
+			AND accounting_entry = 'credit'
+
+		SELECT @AvailablePoints = balance
+		FROM dbo.wallets
+		WHERE person_id = @profileid
+
+		SELECT @referral_code = referral_code
+		FROM tbl_user_profile_master
+		WHERE id = @profileid
+
+		SET @TotalPointsForNextLevel = 150
+		SET @CurrentLevel = 2
+		SET @TotalDiamond = ((ISNULL(@AvailablePoints, 0) * 20) / 100)
+
+		SELECT avatar_file_name AS image_path, name AS UserName, email AS email_id, pan_card AS pancard
+		, aadhar_card AS aadhaar_card, bank_name AS bank_name, bank_account_no AS account_no
+		, bank_ifsc AS IFSC, upi_id AS UPI
+		,name, mobile AS mobile, refrel_code AS referral_code
+		 ,isnull(@AvailablePoints, 0) AS AvailablePoints
+			,@TotalPointsForNextLevel AS TotalPointsForNextLevel
+			,@TotalDiamond AS TotalDiamond
+			,@CurrentLevel AS CurrentLevel
+		FROM dbo.users
+		WHERE id = @profileid
+
+		SELECT id
+			,profileid
+			,ABS(points) AS points
+			,CASE 
+				WHEN trans_type = 'E'
+					THEN 'Earning'
+				WHEN trans_type = 'W'
+					THEN 'Withdraw'
+				END AS Trans_Type
+			--, convert(VARCHAR(20),trans_date,106) AS Trans_Date
+			,Convert(VARCHAR(12), trans_date, 106) + ' ' + LTRIM(RIGHT(CONVERT(VARCHAR(20), Convert(DATETIME, trans_date), 100), 7)) AS Trans_Date
+			,trans_desc
+			,CASE 
+				WHEN trans_type = 'E'
+					THEN 'approved'
+				ELSE admin_status
+				END AS admin_status
+			--,'pending' AS admin_status
+			,is_referral_points
+		FROM tbl_point_master
+		WHERE profileid = @profileid
+		ORDER BY id DESC
+
+		SELECT t1.id
+			,t1.person_id AS profile_id
+			,t1.partner_id
+			,t1.username AS user_name
+			,t2.name AS partner_name
+			,t2.image_file_name
+			, CASE WHEN t1.approved IS NULL THEN 'pending' WHEN t1.approved = 0 THEN 'rejected' WHEN t1.approved = 1 THEN 'approved' END AS admin_status
+			,Convert(VARCHAR(12), t1.created_at, 106) + ' ' + LTRIM(RIGHT(CONVERT(VARCHAR(20), Convert(DATETIME, t1.created_at), 100), 7)) AS Added_Date
+		FROM dbo.identities t1 WITH (NOLOCK)
+		INNER JOIN dbo.partners t2 WITH (NOLOCK) ON t1.partner_id = t2.id
+		WHERE t1.person_id = @profileid
+		ORDER BY id DESC
+	END TRY
+
+	BEGIN CATCH
+		--IF @@TRANCOUNT > 0  
+		--       ROLLBACK TRANSACTION;  
+		INSERT INTO tbl_Proc_Error_Master (
+			ErrorNumber
+			,ErrorSeverity
+			,ErrorState
+			,ErrorProcedure
+			,ErrorLine
+			,ErrorMessage
+			)
+		SELECT ERROR_NUMBER() AS ErrorNumber
+			,ERROR_SEVERITY() AS ErrorSeverity
+			,ERROR_STATE() AS ErrorState
+			,ERROR_PROCEDURE() AS ErrorProcedure
+			,ERROR_LINE() AS ErrorLine
+			,ERROR_MESSAGE() AS ErrorMessage;
+	END CATCH
+		--IF @@TRANCOUNT > 0  
+		--COMMIT TRANSACTION; 
+END
+
+GO
+
+ALTER PROCEDURE [dbo].[usp_rakeback_stats] (
+	@person_id BIGINT = 0
+	,@amount FLOAT = 0
+	,@description VARCHAR(200) = NULL
+	,@request_type VARCHAR(20) = 'GET'
+	)
+AS
+BEGIN
+	--BEGIN TRANSACTION;  
+	BEGIN TRY
+		DECLARE @ResponseMSG VARCHAR(200) = ''
+			,@ResponseType VARCHAR(50) = ''
+			,@wallet_id BIGINT = 0
+			,@pre_balance FLOAT = 0
+		   
+		IF (ISNULL(@request_type, 'GET') = 'GET')
+		BEGIN
+		
+		SELECT DISTINCT  t1.id
+			,t4.id AS identity_id
+			, t4.username
+			, t3.name
+			,t5.name AS partnername
+			,t1.deposit AS Amount
+			,ISNULL(t1.description,'') AS description
+			,t3.id AS person_id
+			,replace(replace(t1.description,'Added rakeback of username ''',''),''' at',' |') AS aa
+			,(SELECT TOP 1 item FROM SplitString(replace(replace(t1.description,'Added rakeback of username ''',''),''' at',' |'),'|')) AS bb
+			,'1' AS IsDisplay
+			--INTO #TMP_FINAL
+			 FROM passbooks t1 WITH(nolock)
+			JOIN dbo.wallets t2 WITH(nolock) ON t1.wallet_id = t2.id
+			JOIN dbo.users t3 WITH(nolock) ON t3.id = t2.person_id
+		    JOIN dbo.identities t4 WITH(nolock) ON t4.person_id = t3.id  AND t4.approved=1
+			---AND isnull(t4.username,'') = (SELECT TOP 1 item FROM SplitString(replace(replace(t1.description,'Added rakeback of username ''',''),''' at',' |'),'|'))
+			JOIN dbo.partners t5 WITH(nolock) ON t5.id = t4.partner_id
+			WHERE --t1.description IS NOT NULL AND 
+			t1.accounting_entry = 'credit' AND t1.description IS NULL
+			--AND t3.id =413
+			
+			UNION
+			
+		
+			SELECT DISTINCT  t1.id
+			,t4.id AS identity_id
+			, t4.username
+			, t3.name
+			,t5.name AS partnername
+			,t1.deposit AS Amount
+			,ISNULL(t1.description,'') AS description
+			,t3.id AS person_id
+			,replace(replace(t1.description,'Added rakeback of username ''',''),''' at',' |') AS aa
+			,(SELECT TOP 1 item FROM SplitString(replace(replace(t1.description,'Added rakeback of username ''',''),''' at',' |'),'|')) AS bb
+			,'1' AS IsDisplay
+			FROM passbooks t1 WITH(nolock)
+			JOIN dbo.wallets t2 WITH(nolock) ON t1.wallet_id = t2.id
+			JOIN dbo.users t3 WITH(nolock) ON t3.id = t2.person_id
+		    JOIN dbo.identities t4 WITH(nolock) ON t4.person_id = t3.id  AND t4.approved=1
+			AND isnull(t4.username,'') = (SELECT TOP 1 item FROM SplitString(replace(replace(t1.description,'Added rakeback of username ''',''),''' at',' |'),'|'))
+			JOIN dbo.partners t5 WITH(nolock) ON t5.id = t4.partner_id
+			WHERE t1.description IS NOT NULL AND 
+			t1.accounting_entry = 'credit' AND t4.active = 1
+			--AND t3.id =413
+			--ORDER BY t1.id DESC		
+			
+			
+			UNION
+			
+		
+			SELECT DISTINCT 0 AS id
+			,t4.id AS identity_id
+			, t4.username
+			, t3.name
+			,t5.name AS partnername
+			,0 AS Amount
+			,'' AS description
+			,t3.id AS person_id
+			,'' AS aa
+			,'' AS bb
+			,'0' AS IsDisplay
+			FROM dbo.identities t4 WITH(nolock)
+			JOIN dbo.users t3 WITH(nolock) ON t3.id = t4.person_id
+			JOIN dbo.partners t5 WITH(nolock) ON t5.id = t4.partner_id
+			WHERE t4.active = 1 AND t4.approved = 1
+			AND NOT EXISTS	(SELECT 1 FROM passbooks tt WITH(nolock)
+			JOIN dbo.wallets ttt WITH(nolock) ON tt.wallet_id = ttt.id AND tt.accounting_entry = 'credit')
+			ORDER BY t4.username ASC
+			
+			
+			--SELECT * FROM #TMP_FINAL ORDER BY id desc	
+			
+		END
+		ELSE IF (ISNULL(@request_type, 'GET') = 'ADD')
+		BEGIN
+		 IF (ISNULL(@person_id, 0) <> 0)
+		BEGIN
+			
+			SELECT @pre_balance = balance
+				FROM dbo.wallets
+				WHERE person_id = @person_id
+
+				IF EXISTS (
+						SELECT 1
+						FROM dbo.wallets
+						WHERE person_id = @person_id
+						)
+				BEGIN
+					UPDATE dbo.wallets
+					SET balance = ISNULL(balance, 0) + @amount
+						,updated_at = DATEADD(MINUTE,30,dateadd(hour,12,getdate()))
+					WHERE person_id = @person_id
+				END
+				ELSE
+				BEGIN
+					INSERT INTO dbo.wallets (
+						person_id
+						,balance
+						,active
+						,created_at
+						)
+					SELECT @person_id
+						,@amount
+						,1
+						,DATEADD(MINUTE,30,dateadd(hour,12,getdate()))
+				END
+
+				SELECT @wallet_id = id
+				FROM dbo.wallets
+				WHERE person_id = @person_id
+
+				INSERT INTO dbo.passbooks (
+					wallet_id
+					,pre_balance
+					,post_balance
+					,active
+					,created_at
+					,accounting_entry
+					,deposit
+					,earning_type
+					,description
+					,admin_status
+					)
+				SELECT @wallet_id AS wallet_id
+					,ISNULL(@pre_balance, 0) AS pre_balance
+					,(ISNULL(@pre_balance, 0) + @amount) AS post_balance
+					,1
+					,DATEADD(MINUTE,30,dateadd(hour,12,getdate()))
+					,'credit'
+					,@amount
+					,'Rakeback'
+					,@description
+					,NULL
+					
+					
+			--IF EXISTS(SELECT 1 FROM dbo.users WITH(NOLOCK) WHERE refrel_code = friend_refrel_code AND id = @person_id)		
+			--BEGIN
+			--	DECLARE @ReFeralCode VARCHAR(100)
+				
+			--	SELECT @ReFeralCode = refrel_code FROM dbo.users WITH(NOLOCK) WHERE id = @person_id
+				
+			--	CREATE TABLE #TMP_PROFILE_ID(PROFILEID BIGINT)
+				
+			--	INSERT INTO dbo.#TMP_PROFILE_ID(PROFILEID)
+			--	SELECT id FROM dbo.users WITH(NOLOCK) WHERE  friend_refrel_code = @ReFeralCode AND ISNULL(@ReFeralCode,'') <> ''
+				
+			--END
+			
+			SET @ResponseMSG = 'Thanks!'
+				SET @ResponseType = 'success'
+				
+			
+		
+
+		SELECT @ResponseMSG AS ResponseMSG
+			,@ResponseType AS ResponseType
+			
+			END
+	  END		
+	END TRY
+
+	BEGIN CATCH
+		--IF @@TRANCOUNT > 0  
+		--       ROLLBACK TRANSACTION;  
+		INSERT INTO tbl_Proc_Error_Master (
+			ErrorNumber
+			,ErrorSeverity
+			,ErrorState
+			,ErrorProcedure
+			,ErrorLine
+			,ErrorMessage
+			)
+		SELECT ERROR_NUMBER() AS ErrorNumber
+			,ERROR_SEVERITY() AS ErrorSeverity
+			,ERROR_STATE() AS ErrorState
+			,ERROR_PROCEDURE() AS ErrorProcedure
+			,ERROR_LINE() AS ErrorLine
+			,ERROR_MESSAGE() AS ErrorMessage;
+	END CATCH
+		--IF @@TRANCOUNT > 0  
+		--COMMIT TRANSACTION; 
+END
+GO
+
+ALTER proc dbo.usp_refer_a_friend
+(
+@profileid BIGINT = 0
+)
+AS BEGIN
+	SELECT 'Test' AS UserName,100 AS Rakeback FROM dbo.users WHERE id = @profileid
+	AND @profileid=410
+	--AND refrel_code = friend_refrel_code 
+END
+
+GO
+
+ALTER PROCEDURE [dbo].[usp_rewards_claim_master] (
+	@profile_id BIGINT
+	,@reward_id BIGINT
+	)
+AS
+BEGIN
+	--BEGIN TRANSACTION;  
+	BEGIN TRY
+		DECLARE @ResponseMSG VARCHAR(200) = ''
+			,@ResponseType VARCHAR(50) = ''
+			,@IsSuccess INT = 0
+
+		IF NOT EXISTS (
+				SELECT 1
+				FROM tbl_rewards_claim_master
+				WHERE profile_id = @profile_id
+					AND reward_id = @reward_id
+				)
+		BEGIN
+			INSERT INTO tbl_rewards_claim_master (
+				profile_id
+				,reward_id
+				)
+			SELECT @profile_id
+				,@reward_id
+
+			--SET @ResponseMSG = 'User name has been added successfully!'
+			--SET @ResponseType = 'success'
+			SET @IsSuccess = 1
+		END
+		ELSE
+		BEGIN
+			SET @ResponseMSG = 'You have already availed this reward'
+			SET @ResponseType = 'error'
+			SET @IsSuccess = 0
+		END
+
+		SELECT @ResponseMSG AS ResponseMSG
+			,@ResponseType AS ResponseType
+			,@IsSuccess AS IsSuccess
+	END TRY
+
+	BEGIN CATCH
+		--IF @@TRANCOUNT > 0  
+		--       ROLLBACK TRANSACTION;  
+		INSERT INTO tbl_Proc_Error_Master (
+			ErrorNumber
+			,ErrorSeverity
+			,ErrorState
+			,ErrorProcedure
+			,ErrorLine
+			,ErrorMessage
+			)
+		SELECT ERROR_NUMBER() AS ErrorNumber
+			,ERROR_SEVERITY() AS ErrorSeverity
+			,ERROR_STATE() AS ErrorState
+			,ERROR_PROCEDURE() AS ErrorProcedure
+			,ERROR_LINE() AS ErrorLine
+			,ERROR_MESSAGE() AS ErrorMessage;
+	END CATCH
+		--IF @@TRANCOUNT > 0  
+		--COMMIT TRANSACTION; 
+END
+GO
+
+ALTER proc dbo.usp_subscribers
+	(
+	@email_id   VARCHAR (200),
+	@ip_address VARCHAR(50) = NULL
+	)
+ AS BEGIN
+ 	DECLARE @ResponseMSG VARCHAR(200) = ''
+			,@ResponseType VARCHAR(50) = ''
+			
+	IF NOT EXISTS(SELECT 1 FROM dbo.subscribers WITH(nolock) WHERE email_id = @email_id) 
+	BEGIN
+	
+		INSERT INTO dbo.subscribers(email_id,ip_address)
+		VALUES (@email_id,@ip_address)
+		
+		SET @ResponseMSG = 'Thanks for subscribing!!!'
+		SET @ResponseType = 'success'
+	end
+	 ELSE BEGIN
+	 	SET @ResponseMSG = 'You have alreaday subscribed!!!'
+		SET @ResponseType = 'error'
+	 END
+	 
+	 SELECT @ResponseMSG AS ResponseMSG, @ResponseType AS ResponseType					
+ 
+END
+GO
+
+ALTER PROCEDURE [dbo].[usp_user_partner_mapping_master] (
+	@profileid INT
+	,@partner_id INT
+	,@user_name VARCHAR(100)
+	)
+AS
+BEGIN
+	--BEGIN TRANSACTION;  
+	BEGIN TRY
+		DECLARE @ResponseMSG VARCHAR(200) = ''
+			,@ResponseType VARCHAR(50) = ''
+			,@IsSuccess INT = 0
+			
+			
+		IF EXISTS(SELECT 1 FROM dbo.identities WHERE username = @user_name AND ISNULL(approved,0) = 1)	
+		BEGIN
+			SET @ResponseMSG = 'User name already exists!'
+			SET @ResponseType = 'error'
+			SET @IsSuccess = 0
+		END
+			
+
+		ELSE IF NOT EXISTS (
+				SELECT 1
+				FROM dbo.identities
+				WHERE person_id = @profileid
+					AND partner_id = @partner_id
+					AND 1=2
+				)
+		BEGIN
+			INSERT INTO dbo.identities (
+				person_id
+				,partner_id
+				,username				
+				)
+			SELECT @profileid
+				,@partner_id
+				,@user_name				
+
+			SET @ResponseMSG = 'username successfully sent for verification. It usually takes 24-48 hours for verification status to change.'
+			SET @ResponseType = 'success'
+			SET @IsSuccess = 1
+			
+			DECLARE @InAppNotification VARCHAR(200)
+			SET @InAppNotification = 'New user name request for '+ @user_name
+			INSERT INTO dbo.notifications(content,[read],notifiable_id,notifiable_type,active,created_at,updated_at,title)
+			SELECT @InAppNotification, 0, 0, 'admin',1, getdate(), getdate(),'New Username Request'
+				
+				
+		END
+		
+		ELSE
+		BEGIN
+			SET @ResponseMSG = 'User name already exists!!'
+			SET @ResponseType = 'error'
+			SET @IsSuccess = 0
+		END
+
+		SELECT @ResponseMSG AS ResponseMSG
+			,@ResponseType AS ResponseType
+			,@IsSuccess AS IsSuccess
+	END TRY
+
+	BEGIN CATCH
+		--IF @@TRANCOUNT > 0  
+		--       ROLLBACK TRANSACTION;  
+		INSERT INTO tbl_Proc_Error_Master (
+			ErrorNumber
+			,ErrorSeverity
+			,ErrorState
+			,ErrorProcedure
+			,ErrorLine
+			,ErrorMessage
+			)
+		SELECT ERROR_NUMBER() AS ErrorNumber
+			,ERROR_SEVERITY() AS ErrorSeverity
+			,ERROR_STATE() AS ErrorState
+			,ERROR_PROCEDURE() AS ErrorProcedure
+			,ERROR_LINE() AS ErrorLine
+			,ERROR_MESSAGE() AS ErrorMessage;
+	END CATCH
+		--IF @@TRANCOUNT > 0  
+		--COMMIT TRANSACTION; 
+END
+GO
+
+ALTER PROCEDURE [dbo].[usp_users] (
+	@profileid NVARCHAR(200) = NULL
+	,@name NVARCHAR(200) = NULL
+	,@email_id NVARCHAR(200) = NULL
+	,@mobile NVARCHAR(50) = NULL
+	,@password NVARCHAR(200) = NULL
+	,@refrel_code NVARCHAR(100) = NULL
+	,@ip_address NVARCHAR(50) = NULL
+	,@latitude VARCHAR(50) = NULL
+	,@longitude VARCHAR(50) = NULL
+	,@device_type VARCHAR(50) = NULL
+	,@filename NVARCHAR(max) = NULL
+	,@pancard NVARCHAR(20) = NULL
+	,@aadhaar_card NVARCHAR(20) = NULL
+	,@bank_name NVARCHAR(200) = NULL
+	,@account_no NVARCHAR(200) = NULL
+	,@IFSC NVARCHAR(200) = NULL
+	,@UPI NVARCHAR(200) = NULL
+	,@CreatedProfileID INT = 0 OUTPUT
+	)
+AS
+BEGIN
+	--BEGIN TRANSACTION;  
+	BEGIN TRY
+		DECLARE @ResponseMSG VARCHAR(200) = ''
+			,@ResponseType VARCHAR(50) = ''
+			,@wallet_id BIGINT = 0
+
+		IF (ISNULL(@profileid, '') <> '')
+		BEGIN
+			EXEC usp_users_history @profileid = @profileid
+
+			UPDATE dbo.users
+			SET name = @name
+				,mobile = @mobile
+				,avatar_file_name = @filename
+				,pan_card = @pancard
+				,aadhar_card = @aadhaar_card
+				,bank_name = @bank_name
+				,bank_account_no = @account_no
+				,bank_ifsc = @IFSC
+				,upi_id = @UPI
+				,updated_at = DATEADD(MINUTE,30,dateadd(hour,12,getdate()))
+			--,password = @password
+			--,refrel_code = @refrel_code
+			--,ip_address = @ip_address
+			--,latitude = @latitude
+			--,longitude = @longitude
+			--,device_type = @device_type
+			WHERE id = @profileid
+
+			SET @ResponseMSG = 'Your profile has been updated!!'
+			SET @ResponseType = 'success'
+		END
+		ELSE
+		BEGIN
+			IF NOT EXISTS (
+					SELECT 1
+					FROM dbo.users
+					WHERE email = @email_id
+					)
+			BEGIN
+				INSERT INTO dbo.users (
+					name
+					,email
+					,mobile
+					,encrypted_password
+					,friend_refrel_code
+					,current_sign_in_ip
+					,latitude
+					,longitude
+					,device_type
+					,created_at
+					)
+				SELECT @name
+					,@email_id
+					,@mobile
+					,@password
+					,@refrel_code
+					,@ip_address
+					,@latitude
+					,@longitude
+					,@device_type
+					,DATEADD(MINUTE,30,dateadd(hour,12,getdate()))
+
+				SELECT @profileid = id
+				FROM dbo.users
+				WHERE email = @email_id
+
+				UPDATE dbo.users
+				SET refrel_code = (left(('WHISP' + CONVERT(VARCHAR(10), ID) + COnvert(VARCHAR(50), RIGHT(newid(), 6))), 20))
+				WHERE isnull(refrel_code, '') = ''
+
+				DECLARE @pre_balance FLOAT
+
+				SELECT @pre_balance = balance
+				FROM dbo.wallets
+				WHERE person_id = @profileid
+
+				IF EXISTS (
+						SELECT 1
+						FROM dbo.wallets
+						WHERE person_id = @profileid
+						)
+				BEGIN
+					UPDATE dbo.wallets
+					SET balance = ISNULL(balance, 0) + 100
+						,updated_at = DATEADD(MINUTE,30,dateadd(hour,12,getdate()))
+					WHERE person_id = @profileid
+				END
+				ELSE
+				BEGIN
+					INSERT INTO dbo.wallets (
+						person_id
+						,balance
+						,active
+						,created_at
+						)
+					SELECT @profileid
+						,100
+						,1
+						,DATEADD(MINUTE,30,dateadd(hour,12,getdate()))
+				END
+
+				SELECT @wallet_id = id
+				FROM dbo.wallets
+				WHERE person_id = @profileid
+
+				INSERT INTO dbo.passbooks (
+					wallet_id
+					,pre_balance
+					,post_balance
+					,active
+					,created_at
+					,accounting_entry
+					,deposit
+					,earning_type
+					,admin_status
+					)
+				SELECT @wallet_id AS wallet_id
+					,ISNULL(@pre_balance, 0) AS pre_balance
+					,(ISNULL(@pre_balance, 0) + 100) AS post_balance
+					,1
+					,DATEADD(MINUTE,30,dateadd(hour,12,getdate()))
+					,'credit'
+					,100
+					,'Sign up Bonus'
+					,'approved'
+
+				--IF NOT EXISTS (
+				--		SELECT 1
+				--		FROM tbl_point_master
+				--		WHERE profileid = @profileid
+				--			AND trans_type = 'E'
+				--			AND trans_desc = 'Welcome bonus point'
+				--		)
+				--BEGIN
+				--	INSERT INTO tbl_point_master (
+				--		profileid
+				--		,points
+				--		,trans_type
+				--		,trans_date
+				--		,trans_desc
+				--		)
+				--	SELECT @profileid
+				--		,100
+				--		,'E'
+				--		,getdate()
+				--		,'Welcome bonus point'
+				--END
+				SET @ResponseMSG = 'You have successfully registered!'
+				SET @ResponseType = 'success'
+			END
+			ELSE
+			BEGIN
+				SET @ResponseMSG = 'Email-ID already exists, please login'
+				SET @ResponseType = 'error'
+			END
+		END
+
+		SELECT @CreatedProfileID = id FROM dbo.users WHERE email = @email_id
+		
+		SELECT @ResponseMSG AS ResponseMSG
+			,@ResponseType AS ResponseType
+			,*
+		FROM dbo.users
+		WHERE email = @email_id
+		
+		
+	END TRY
+
+	BEGIN CATCH
+		--IF @@TRANCOUNT > 0  
+		--       ROLLBACK TRANSACTION;  
+		INSERT INTO tbl_Proc_Error_Master (
+			ErrorNumber
+			,ErrorSeverity
+			,ErrorState
+			,ErrorProcedure
+			,ErrorLine
+			,ErrorMessage
+			)
+		SELECT ERROR_NUMBER() AS ErrorNumber
+			,ERROR_SEVERITY() AS ErrorSeverity
+			,ERROR_STATE() AS ErrorState
+			,ERROR_PROCEDURE() AS ErrorProcedure
+			,ERROR_LINE() AS ErrorLine
+			,ERROR_MESSAGE() AS ErrorMessage;
+	END CATCH
+		--IF @@TRANCOUNT > 0  
+		--COMMIT TRANSACTION; 
+END
+GO
+
+ALTER proc [dbo].uspRandChars
+    @len int,
+    @min tinyint = 48,
+    @range tinyint = 74,
+    @exclude varchar(50) = '0:;<=>?@O[]`^\/',
+    @output varchar(50) output
+as 
+    declare @char char
+    set @output = ''
+ 
+    while @len > 0 begin
+       select @char = char(round(rand() * @range + @min, 0))
+       if charindex(@char, @exclude) = 0 begin
+           set @output += @char
+           set @len = @len - 1
+       end
+    end
+;
+
+GO
+
+ALTER PROCEDURE usp_profile_history (@profileid BIGINT)
+AS
+BEGIN
+	--BEGIN TRANSACTION;  
+	BEGIN TRY
+		SET IDENTITY_INSERT tbl_user_profile_master_history ON
+
+		INSERT INTO tbl_user_profile_master_history (
+			id
+			,name
+			,email_id
+			,mobile
+			,password
+			,refrel_code
+			,ip_address
+			,latitude
+			,longitude
+			,device_type
+			,created_on
+			,is_active
+			,inactive_on
+			,deleted_on
+			,is_deleted
+			,image_path
+			,pancard
+			,aadhaar_card
+			,bank_name
+			,account_no
+			,IFSC
+			,UPI
+			,referral_code
+			,last_updated_on
+			)
+		SELECT id
+			,name
+			,email_id
+			,mobile
+			,password
+			,refrel_code
+			,ip_address
+			,latitude
+			,longitude
+			,device_type
+			,created_on
+			,is_active
+			,inactive_on
+			,deleted_on
+			,is_deleted
+			,image_path
+			,pancard
+			,aadhaar_card
+			,bank_name
+			,account_no
+			,IFSC
+			,UPI
+			,referral_code
+			,GETDATE() AS last_updated_on
+		FROM dbo.tbl_user_profile_master
+		WHERE id = @profileid
+
+		SET IDENTITY_INSERT tbl_user_profile_master_history OFF
+	END TRY
+
+	BEGIN CATCH
+		--IF @@TRANCOUNT > 0  
+		--       ROLLBACK TRANSACTION;  
+		INSERT INTO tbl_Proc_Error_Master (
+			ErrorNumber
+			,ErrorSeverity
+			,ErrorState
+			,ErrorProcedure
+			,ErrorLine
+			,ErrorMessage
+			)
+		SELECT ERROR_NUMBER() AS ErrorNumber
+			,ERROR_SEVERITY() AS ErrorSeverity
+			,ERROR_STATE() AS ErrorState
+			,ERROR_PROCEDURE() AS ErrorProcedure
+			,ERROR_LINE() AS ErrorLine
+			,ERROR_MESSAGE() AS ErrorMessage;
+	END CATCH
+		--IF @@TRANCOUNT > 0  
+		--COMMIT TRANSACTION; 
+END
+GO
+
+ALTER PROCEDURE usp_users_history (@profileid BIGINT)
+AS
+BEGIN
+	--BEGIN TRANSACTION;    
+	BEGIN TRY
+		SET IDENTITY_INSERT dbo.users_history ON
+
+		INSERT INTO dbo.users_history (
+			id
+			,username
+			,name
+			,type
+			,active
+			,created_at
+			,updated_at
+			,email
+			,encrypted_password
+			,reset_password_token
+			,reset_password_sent_at
+			,remember_created_at
+			,sign_in_count
+			,current_sign_in_at
+			,last_sign_in_at
+			,current_sign_in_ip
+			,last_sign_in_ip
+			,provider
+			,uid
+			,avatar_file_name
+			,avatar_content_type
+			,avatar_file_size
+			,avatar_updated_at
+			,pan_card
+			,aadhar_card
+			,bank_name
+			,bank_account_no
+			,bank_ifsc
+			,mobile
+			,upi_id
+			,partner_id
+			,kyc_approved
+			,password
+			,refrel_code
+			,latitude
+			,longitude
+			,device_type
+			,last_updated_on
+			)
+		SELECT id
+			,username
+			,name
+			,type
+			,active
+			,created_at
+			,updated_at
+			,email
+			,encrypted_password
+			,reset_password_token
+			,reset_password_sent_at
+			,remember_created_at
+			,sign_in_count
+			,current_sign_in_at
+			,last_sign_in_at
+			,current_sign_in_ip
+			,last_sign_in_ip
+			,provider
+			,uid
+			,avatar_file_name
+			,avatar_content_type
+			,avatar_file_size
+			,avatar_updated_at
+			,pan_card
+			,aadhar_card
+			,bank_name
+			,bank_account_no
+			,bank_ifsc
+			,mobile
+			,upi_id
+			,partner_id
+			,kyc_approved
+			,password
+			,refrel_code
+			,latitude
+			,longitude
+			,device_type
+			,GETDATE() AS last_updated_on
+		FROM dbo.users
+		WHERE id = @profileid
+
+		SET IDENTITY_INSERT dbo.users_history OFF
+	END TRY
+
+	BEGIN CATCH
+		--IF @@TRANCOUNT > 0    
+		--       ROLLBACK TRANSACTION;    
+		INSERT INTO tbl_Proc_Error_Master (
+			ErrorNumber
+			,ErrorSeverity
+			,ErrorState
+			,ErrorProcedure
+			,ErrorLine
+			,ErrorMessage
+			)
+		SELECT ERROR_NUMBER() AS ErrorNumber
+			,ERROR_SEVERITY() AS ErrorSeverity
+			,ERROR_STATE() AS ErrorState
+			,ERROR_PROCEDURE() AS ErrorProcedure
+			,ERROR_LINE() AS ErrorLine
+			,ERROR_MESSAGE() AS ErrorMessage;
+	END CATCH
+		--IF @@TRANCOUNT > 0    
+		--COMMIT TRANSACTION;   
+END
+GO
+
+
+-------------Tables
+IF OBJECT_ID ('dbo.announcements') IS NOT NULL
+	DROP TABLE dbo.announcements
+GO
+
+CREATE TABLE dbo.announcements
+	(
+	id         BIGINT IDENTITY NOT NULL,
+	content    NVARCHAR (max) NULL,
+	active     BIT DEFAULT ((0)) NULL,
+	created_at DATETIME DEFAULT (getdate()) NULL,
+	updated_at DATETIME NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.articles') IS NOT NULL
+	DROP TABLE dbo.articles
+GO
+
+CREATE TABLE dbo.articles
+	(
+	id                     BIGINT IDENTITY NOT NULL,
+	title                  NVARCHAR (max) NULL,
+	description            NVARCHAR (max) NULL,
+	admin_id               INT NULL,
+	publish                BIT DEFAULT ((0)) NULL,
+	image_file_name        VARCHAR (200) NULL,
+	image_content_type     VARCHAR (50) NULL,
+	image_file_size        BIGINT NULL,
+	image_updated_at       DATETIME NULL,
+	active                 BIT DEFAULT ((1)) NULL,
+	created_at             DATETIME DEFAULT (getdate()) NULL,
+	updated_at             DATETIME NULL,
+	slug                   VARCHAR (200) NULL,
+	social_tag_description NVARCHAR (max) NULL,
+	short_description      NVARCHAR (max) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.clickmap') IS NOT NULL
+	DROP TABLE dbo.clickmap
+GO
+
+CREATE TABLE dbo.clickmap
+	(
+	id          BIGINT IDENTITY NOT NULL,
+	profileid   BIGINT NULL,
+	button_name VARCHAR (100) NULL,
+	ip_address  VARCHAR (50) NULL,
+	device_type VARCHAR (20) NULL,
+	active      BIT DEFAULT ((1)) NULL,
+	clicked_on  DATETIME DEFAULT (getdate()) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.contactus') IS NOT NULL
+	DROP TABLE dbo.contactus
+GO
+
+CREATE TABLE dbo.contactus
+	(
+	id           BIGINT IDENTITY NOT NULL,
+	profileid    VARCHAR (20) NULL,
+	name         VARCHAR (100) NULL,
+	email        VARCHAR (200) NULL,
+	subject      VARCHAR (100) NULL,
+	message      VARCHAR (max) NULL,
+	ip_address   VARCHAR (50) NULL,
+	active       BIT DEFAULT ((1)) NULL,
+	contacted_at DATETIME DEFAULT (getdate()) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.contest_answer') IS NOT NULL
+	DROP TABLE dbo.contest_answer
+GO
+
+CREATE TABLE dbo.contest_answer
+	(
+	id          INT IDENTITY NOT NULL,
+	question_id INT NULL,
+	answer_text VARCHAR (200) NULL,
+	correct     BIT DEFAULT ((0)) NULL,
+	created_at  DATETIME DEFAULT (getdate()) NULL,
+	updated_at  DATETIME NULL,
+	active      BIT DEFAULT ((1)) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.contest_participations') IS NOT NULL
+	DROP TABLE dbo.contest_participations
+GO
+
+CREATE TABLE dbo.contest_participations
+	(
+	id                INT IDENTITY NOT NULL,
+	person_id         BIGINT NULL,
+	contest_id        INT NULL,
+	question_id       INT NULL,
+	answer            VARCHAR (max) NULL,
+	created_at        DATETIME DEFAULT (getdate()) NULL,
+	active            BIT DEFAULT ((1)) NULL,
+	user_id           VARCHAR (200) NULL,
+	partner_user_name VARCHAR (100) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.contest_participations_bkp14dec19') IS NOT NULL
+	DROP TABLE dbo.contest_participations_bkp14dec19
+GO
+
+CREATE TABLE dbo.contest_participations_bkp14dec19
+	(
+	id          INT IDENTITY NOT NULL,
+	person_id   BIGINT NULL,
+	contest_id  INT NULL,
+	question_id INT NULL,
+	answer      VARCHAR (max) NULL,
+	created_at  DATETIME NULL,
+	active      BIT NULL,
+	user_id     VARCHAR (200) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.contest_question') IS NOT NULL
+	DROP TABLE dbo.contest_question
+GO
+
+CREATE TABLE dbo.contest_question
+	(
+	id            INT IDENTITY NOT NULL,
+	contest_id    INT NULL,
+	question_text VARCHAR (200) NULL,
+	created_at    DATETIME DEFAULT (getdate()) NULL,
+	updated_at    DATETIME NULL,
+	active        BIT DEFAULT ((1)) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.contest_type') IS NOT NULL
+	DROP TABLE dbo.contest_type
+GO
+
+CREATE TABLE dbo.contest_type
+	(
+	id         INT IDENTITY NOT NULL,
+	name       VARCHAR (200) NULL,
+	created_at DATETIME DEFAULT (getdate()) NULL,
+	updated_at DATETIME NULL,
+	active     BIT DEFAULT ((1)) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.contest_winner') IS NOT NULL
+	DROP TABLE dbo.contest_winner
+GO
+
+CREATE TABLE dbo.contest_winner
+	(
+	id         INT IDENTITY NOT NULL,
+	contest_id INT NULL,
+	person_id  INT NULL,
+	created_at DATETIME DEFAULT (getdate()) NULL,
+	active     BIT DEFAULT ((1)) NULL,
+	winner     BIT DEFAULT ((0)) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.contests') IS NOT NULL
+	DROP TABLE dbo.contests
+GO
+
+CREATE TABLE dbo.contests
+	(
+	id                          INT IDENTITY NOT NULL,
+	name                        VARCHAR (200) NULL,
+	description                 NVARCHAR (max) NULL,
+	tnc                         VARCHAR (max) NULL,
+	type                        INT NULL,
+	image_file_name             VARCHAR (200) NULL,
+	start_date                  DATETIME NULL,
+	end_date                    DATETIME NULL,
+	created_at                  DATETIME DEFAULT (getdate()) NULL,
+	updated_at                  DATETIME NULL,
+	active                      BIT DEFAULT ((1)) NULL,
+	published                   BIT DEFAULT ((0)) NULL,
+	comingsoon                  BIT DEFAULT ((0)) NULL,
+	coming_soon_image_file_name VARCHAR (100) NULL,
+	PartnerSite                 VARCHAR (50) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.deals') IS NOT NULL
+	DROP TABLE dbo.deals
+GO
+
+CREATE TABLE dbo.deals
+	(
+	id                 BIGINT IDENTITY NOT NULL,
+	title              VARCHAR (200) NULL,
+	description        VARCHAR (max) NULL,
+	activation_code    VARCHAR (50) NULL,
+	starts_at          DATETIME NULL,
+	expires_at         DATETIME NULL,
+	clicks_count       INT NULL,
+	type               VARCHAR (50) DEFAULT ('Promotion') NULL,
+	partner_id         BIGINT NULL,
+	active             BIT DEFAULT ((1)) NULL,
+	created_at         DATETIME DEFAULT (getdate()) NULL,
+	updated_at         DATETIME NULL,
+	image_file_name    VARCHAR (200) NULL,
+	image_content_type VARCHAR (50) NULL,
+	image_file_size    BIGINT NULL,
+	image_updated_at   DATETIME NULL,
+	sponsored          BIT DEFAULT ((0)) NULL,
+	slug               VARCHAR (200) NULL,
+	terms              VARCHAR (max) NULL,
+	faqs               VARCHAR (max) NULL,
+	soft_publish       BIT DEFAULT ((0)) NULL,
+	publish            BIT DEFAULT ((0)) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.identities') IS NOT NULL
+	DROP TABLE dbo.identities
+GO
+
+CREATE TABLE dbo.identities
+	(
+	id          BIGINT IDENTITY NOT NULL,
+	person_id   BIGINT NULL,
+	partner_id  INT NULL,
+	username    VARCHAR (100) NULL,
+	active      BIT DEFAULT ((1)) NULL,
+	created_at  DATETIME DEFAULT (getdate()) NULL,
+	updated_at  DATETIME NULL,
+	approved    BIT NULL,
+	remarks     VARCHAR (250) NULL,
+	approved_on DATETIME NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.leaderboard') IS NOT NULL
+	DROP TABLE dbo.leaderboard
+GO
+
+CREATE TABLE dbo.leaderboard
+	(
+	id         BIGINT IDENTITY NOT NULL,
+	person_id  INT NULL,
+	name       VARCHAR (100) NULL,
+	rank       INT NULL,
+	type       VARCHAR (20) NULL,
+	active     BIT DEFAULT ((1)) NULL,
+	created_at DATETIME DEFAULT (getdate()) NULL,
+	updated_at DATETIME NULL,
+	Amount     FLOAT NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.notification_script') IS NOT NULL
+	DROP TABLE dbo.notification_script
+GO
+
+CREATE TABLE dbo.notification_script
+	(
+	id                 BIGINT IDENTITY NOT NULL,
+	content            VARCHAR (max) NULL,
+	notification_title VARCHAR (100) NULL,
+	notification_type  VARCHAR (50) NULL,
+	active             BIT DEFAULT ((1)) NULL,
+	created_at         DATETIME DEFAULT (getdate()) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.notifications') IS NOT NULL
+	DROP TABLE dbo.notifications
+GO
+
+CREATE TABLE dbo.notifications
+	(
+	id                BIGINT IDENTITY NOT NULL,
+	content           VARCHAR (max) NULL,
+	read              BIT DEFAULT ((0)) NULL,
+	notifiable_id     VARCHAR (20) NULL,
+	notifiable_type   VARCHAR (50) NULL,
+	active            BIT DEFAULT ((1)) NULL,
+	created_at        DATETIME DEFAULT (getdate()) NULL,
+	updated_at        DATETIME NULL,
+	title             VARCHAR (100) NULL,
+	notification_type VARCHAR (20) NULL,
+	read_on           DATETIME NULL,
+	slug              VARCHAR (100) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.notifications_read') IS NOT NULL
+	DROP TABLE dbo.notifications_read
+GO
+
+CREATE TABLE dbo.notifications_read
+	(
+	id              INT IDENTITY NOT NULL,
+	notification_id INT NULL,
+	read_by         VARCHAR (50) NULL,
+	read            BIT DEFAULT ((1)) NULL,
+	read_on         DATETIME DEFAULT (getdate()) NULL,
+	active          BIT DEFAULT ((1)) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.partners') IS NOT NULL
+	DROP TABLE dbo.partners
+GO
+
+CREATE TABLE dbo.partners
+	(
+	id                 BIGINT IDENTITY NOT NULL,
+	name               VARCHAR (50) NULL,
+	description        VARCHAR (max) NULL,
+	valid_upto         DATETIME NULL,
+	active             BIT DEFAULT ((1)) NULL,
+	created_at         DATETIME DEFAULT (getdate()) NULL,
+	updated_at         DATETIME NULL,
+	image_file_name    VARCHAR (200) NULL,
+	image_content_type VARCHAR (50) NULL,
+	image_file_size    BIGINT NULL,
+	image_updated_at   DATETIME NULL,
+	sponsored          BIT DEFAULT ((0)) NULL,
+	slug               VARCHAR (50) NULL,
+	rakeback           BIT DEFAULT ((0)) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.passbooks') IS NOT NULL
+	DROP TABLE dbo.passbooks
+GO
+
+CREATE TABLE dbo.passbooks
+	(
+	id               BIGINT IDENTITY NOT NULL,
+	wallet_id        INT NULL,
+	withdrawal       FLOAT NULL,
+	pre_balance      FLOAT NULL,
+	post_balance     FLOAT NULL,
+	active           BIT DEFAULT ((1)) NULL,
+	created_at       DATETIME DEFAULT (getdate()) NULL,
+	updated_at       DATETIME NULL,
+	accounting_entry VARCHAR (20) NULL,
+	deposit          FLOAT NULL,
+	description      VARCHAR (max) NULL,
+	admin_status     VARCHAR (20) DEFAULT ('pending') NULL,
+	earning_type     VARCHAR (20) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.passbooks_bkp03dec19') IS NOT NULL
+	DROP TABLE dbo.passbooks_bkp03dec19
+GO
+
+CREATE TABLE dbo.passbooks_bkp03dec19
+	(
+	id               BIGINT IDENTITY NOT NULL,
+	wallet_id        INT NULL,
+	withdrawal       FLOAT NULL,
+	pre_balance      FLOAT NULL,
+	post_balance     FLOAT NULL,
+	active           BIT NULL,
+	created_at       DATETIME NULL,
+	updated_at       DATETIME NULL,
+	accounting_entry VARCHAR (20) NULL,
+	deposit          FLOAT NULL,
+	description      VARCHAR (max) NULL,
+	admin_status     VARCHAR (20) NULL,
+	earning_type     VARCHAR (20) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.password_history') IS NOT NULL
+	DROP TABLE dbo.password_history
+GO
+
+CREATE TABLE dbo.password_history
+	(
+	id           INT IDENTITY NOT NULL,
+	email        VARCHAR (100) NULL,
+	old_password VARCHAR (200) NULL,
+	new_password VARCHAR (200) NULL,
+	mode         VARCHAR (50) DEFAULT ('Forgot') NULL,
+	updated_on   DATETIME DEFAULT (getdate()) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.subscribers') IS NOT NULL
+	DROP TABLE dbo.subscribers
+GO
+
+CREATE TABLE dbo.subscribers
+	(
+	id            BIGINT IDENTITY NOT NULL,
+	email_id      VARCHAR (200) NULL,
+	ip_address    VARCHAR (50) NULL,
+	active        BIT DEFAULT ((1)) NULL,
+	subscribed_at DATETIME DEFAULT (getdate()) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.tbl_login_logs') IS NOT NULL
+	DROP TABLE dbo.tbl_login_logs
+GO
+
+CREATE TABLE dbo.tbl_login_logs
+	(
+	id         BIGINT IDENTITY NOT NULL,
+	profileid  BIGINT NULL,
+	email_id   VARCHAR (250) NULL,
+	password   VARCHAR (250) NULL,
+	is_success VARCHAR (100) NULL,
+	IPaddress  VARCHAR (50) NULL,
+	latitude   VARCHAR (50) NULL,
+	longitude  VARCHAR (50) NULL,
+	DeviceType VARCHAR (50) NULL,
+	entered_on DATETIME DEFAULT (getdate()) NULL,
+	isactive   BIT DEFAULT ((1)) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.tbl_partner_master') IS NOT NULL
+	DROP TABLE dbo.tbl_partner_master
+GO
+
+CREATE TABLE dbo.tbl_partner_master
+	(
+	partner_id         INT IDENTITY NOT NULL,
+	partner_name       NVARCHAR (100) NULL,
+	created_on         DATETIME DEFAULT (getdate()) NULL,
+	is_active          BIT DEFAULT ((1)) NULL,
+	partner_image_path NVARCHAR (200) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.tbl_point_master') IS NOT NULL
+	DROP TABLE dbo.tbl_point_master
+GO
+
+CREATE TABLE dbo.tbl_point_master
+	(
+	id                 BIGINT IDENTITY NOT NULL,
+	profileid          BIGINT NOT NULL,
+	points             FLOAT NOT NULL,
+	trans_type         VARCHAR (10) NOT NULL,
+	trans_date         DATETIME NOT NULL,
+	trans_desc         NVARCHAR (200) NOT NULL,
+	entered_on         DATETIME DEFAULT (getdate()) NULL,
+	is_active          BIT DEFAULT ((1)) NULL,
+	admin_status       VARCHAR (50) DEFAULT ('pending') NULL,
+	is_referral_points INT DEFAULT ((0)) NULL,
+	admin_action_on    DATETIME NULL,
+	CONSTRAINT UC_profileid_trans_type_trans_date UNIQUE (profileid, trans_type, trans_date)
+	)
+GO
+
+IF OBJECT_ID ('dbo.tbl_Proc_Error_Master') IS NOT NULL
+	DROP TABLE dbo.tbl_Proc_Error_Master
+GO
+
+CREATE TABLE dbo.tbl_Proc_Error_Master
+	(
+	id             INT IDENTITY NOT NULL,
+	ErrorNumber    VARCHAR (max) NULL,
+	ErrorSeverity  VARCHAR (max) NULL,
+	ErrorState     VARCHAR (max) NULL,
+	ErrorProcedure VARCHAR (max) NULL,
+	ErrorLine      VARCHAR (max) NULL,
+	ErrorMessage   VARCHAR (max) NULL,
+	EneteredOn     DATETIME DEFAULT (getdate()) NULL,
+	IsActive       BIT DEFAULT ((1)) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.tbl_rewards_claim_master') IS NOT NULL
+	DROP TABLE dbo.tbl_rewards_claim_master
+GO
+
+CREATE TABLE dbo.tbl_rewards_claim_master
+	(
+	claim_id   BIGINT IDENTITY NOT NULL,
+	profile_id BIGINT NULL,
+	reward_id  BIGINT NULL,
+	claimed_on DATETIME DEFAULT (getdate()) NULL,
+	is_active  BIT DEFAULT ((1)) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.tbl_rewards_master') IS NOT NULL
+	DROP TABLE dbo.tbl_rewards_master
+GO
+
+CREATE TABLE dbo.tbl_rewards_master
+	(
+	reward_id          BIGINT IDENTITY NOT NULL,
+	reward_title       NVARCHAR (200) NULL,
+	reward_image       NVARCHAR (200) NULL,
+	reward_value       FLOAT NULL,
+	poker_room         VARCHAR (100) NULL,
+	reward_code        VARCHAR (100) NULL,
+	valid_till         DATETIME NULL,
+	reward_description NVARCHAR (max) NULL,
+	created_on         DATETIME DEFAULT (getdate()) NULL,
+	is_active          BIT DEFAULT ((1)) NULL,
+	updated_on         DATETIME NULL,
+	inactive_on        DATETIME NULL,
+	reward_sub_title   NVARCHAR (500) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.tbl_user_partner_mapping_master') IS NOT NULL
+	DROP TABLE dbo.tbl_user_partner_mapping_master
+GO
+
+CREATE TABLE dbo.tbl_user_partner_mapping_master
+	(
+	id              INT IDENTITY NOT NULL,
+	profile_id      INT NOT NULL,
+	partner_id      INT NOT NULL,
+	user_name       VARCHAR (200) NULL,
+	entered_on      DATETIME DEFAULT (getdate()) NULL,
+	is_active       BIT DEFAULT ((1)) NULL,
+	admin_status    VARCHAR (50) NULL,
+	admin_action_on DATETIME NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.tbl_user_profile_master') IS NOT NULL
+	DROP TABLE dbo.tbl_user_profile_master
+GO
+
+CREATE TABLE dbo.tbl_user_profile_master
+	(
+	id            BIGINT IDENTITY NOT NULL,
+	name          NVARCHAR (200) NULL,
+	email_id      NVARCHAR (200) NULL,
+	mobile        NVARCHAR (50) NULL,
+	password      NVARCHAR (200) NULL,
+	refrel_code   NVARCHAR (100) NULL,
+	ip_address    NVARCHAR (50) NULL,
+	latitude      VARCHAR (50) NULL,
+	longitude     VARCHAR (50) NULL,
+	device_type   VARCHAR (50) NULL,
+	created_on    DATETIME DEFAULT (getdate()) NULL,
+	is_active     BIT DEFAULT ((1)) NULL,
+	inactive_on   DATETIME NULL,
+	deleted_on    DATETIME NULL,
+	is_deleted    BIT NULL,
+	image_path    NVARCHAR (max) NULL,
+	pancard       NVARCHAR (20) NULL,
+	aadhaar_card  NVARCHAR (20) NULL,
+	bank_name     NVARCHAR (100) NULL,
+	account_no    NVARCHAR (50) NULL,
+	IFSC          NVARCHAR (50) NULL,
+	UPI           NVARCHAR (100) NULL,
+	referral_code VARCHAR (100) NULL,
+	CONSTRAINT UC_email_id UNIQUE (email_id)
+	)
+GO
+
+IF OBJECT_ID ('dbo.temp_identities') IS NOT NULL
+	DROP TABLE dbo.temp_identities
+GO
+
+CREATE TABLE dbo.temp_identities
+	(
+	id         FLOAT NULL,
+	person_id  FLOAT NULL,
+	partner_id FLOAT NULL,
+	username   NVARCHAR (255) NULL,
+	created_at DATETIME NULL,
+	updated_at DATETIME NULL,
+	approved   FLOAT NULL,
+	remarks    NVARCHAR (255) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.temp_participations') IS NOT NULL
+	DROP TABLE dbo.temp_participations
+GO
+
+CREATE TABLE dbo.temp_participations
+	(
+	id                INT IDENTITY NOT NULL,
+	user_id           VARCHAR (200) NULL,
+	contest_id        INT NULL,
+	question_id       INT NULL,
+	answer            VARCHAR (max) NULL,
+	created_at        DATETIME DEFAULT (getdate()) NULL,
+	active            BIT DEFAULT ((1)) NULL,
+	partner_user_name VARCHAR (100) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.users') IS NOT NULL
+	DROP TABLE dbo.users
+GO
+
+CREATE TABLE dbo.users
+	(
+	id                     BIGINT IDENTITY NOT NULL,
+	username               VARCHAR (50) NULL,
+	name                   VARCHAR (100) NULL,
+	type                   VARCHAR (50) DEFAULT ('Person') NULL,
+	active                 BIT DEFAULT ((1)) NULL,
+	created_at             DATETIME DEFAULT (getdate()) NULL,
+	updated_at             DATETIME NULL,
+	email                  VARCHAR (200) NOT NULL,
+	encrypted_password     VARCHAR (200) NULL,
+	reset_password_token   VARCHAR (200) NULL,
+	reset_password_sent_at DATETIME NULL,
+	remember_created_at    DATETIME NULL,
+	sign_in_count          INT DEFAULT ((0)) NULL,
+	current_sign_in_at     DATETIME NULL,
+	last_sign_in_at        DATETIME NULL,
+	current_sign_in_ip     VARCHAR (50) NULL,
+	last_sign_in_ip        VARCHAR (50) NULL,
+	provider               VARCHAR (50) NULL,
+	uid                    VARCHAR (50) NULL,
+	avatar_file_name       VARCHAR (200) NULL,
+	avatar_content_type    VARCHAR (20) NULL,
+	avatar_file_size       BIGINT NULL,
+	avatar_updated_at      DATETIME NULL,
+	pan_card               VARCHAR (20) NULL,
+	aadhar_card            VARCHAR (20) NULL,
+	bank_name              VARCHAR (50) NULL,
+	bank_account_no        VARCHAR (50) NULL,
+	bank_ifsc              VARCHAR (20) NULL,
+	mobile                 VARCHAR (20) NULL,
+	upi_id                 VARCHAR (100) NULL,
+	partner_id             INT NULL,
+	kyc_approved           BIT DEFAULT ((0)) NULL,
+	password               VARCHAR (200) NULL,
+	refrel_code            NVARCHAR (100) NULL,
+	latitude               NVARCHAR (50) NULL,
+	longitude              NVARCHAR (50) NULL,
+	device_type            NVARCHAR (50) NULL,
+	friend_refrel_code     VARCHAR (50) NULL,
+	facebook_id            VARCHAR (100) NULL,
+	remarks                VARCHAR (200) NULL,
+	approved_on            DATETIME NULL,
+	PRIMARY KEY (email)
+	)
+GO
+
+IF OBJECT_ID ('dbo.users_history') IS NOT NULL
+	DROP TABLE dbo.users_history
+GO
+
+CREATE TABLE dbo.users_history
+	(
+	id                     BIGINT IDENTITY NOT NULL,
+	username               VARCHAR (50) NULL,
+	name                   VARCHAR (100) NULL,
+	type                   VARCHAR (50) NULL,
+	active                 BIT NULL,
+	created_at             DATETIME NULL,
+	updated_at             DATETIME NULL,
+	email                  VARCHAR (200) NOT NULL,
+	encrypted_password     VARCHAR (200) NULL,
+	reset_password_token   VARCHAR (200) NULL,
+	reset_password_sent_at DATETIME NULL,
+	remember_created_at    DATETIME NULL,
+	sign_in_count          INT NULL,
+	current_sign_in_at     DATETIME NULL,
+	last_sign_in_at        DATETIME NULL,
+	current_sign_in_ip     VARCHAR (50) NULL,
+	last_sign_in_ip        VARCHAR (50) NULL,
+	provider               VARCHAR (50) NULL,
+	uid                    VARCHAR (50) NULL,
+	avatar_file_name       VARCHAR (200) NULL,
+	avatar_content_type    VARCHAR (20) NULL,
+	avatar_file_size       BIGINT NULL,
+	avatar_updated_at      DATETIME NULL,
+	pan_card               VARCHAR (20) NULL,
+	aadhar_card            VARCHAR (20) NULL,
+	bank_name              VARCHAR (50) NULL,
+	bank_account_no        VARCHAR (50) NULL,
+	bank_ifsc              VARCHAR (20) NULL,
+	mobile                 VARCHAR (20) NULL,
+	upi_id                 VARCHAR (100) NULL,
+	partner_id             INT NULL,
+	kyc_approved           BIT NULL,
+	password               VARCHAR (200) NULL,
+	refrel_code            NVARCHAR (100) NULL,
+	latitude               NVARCHAR (50) NULL,
+	longitude              NVARCHAR (50) NULL,
+	device_type            NVARCHAR (50) NULL,
+	last_updated_on        DATETIME DEFAULT (getdate()) NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.wallets') IS NOT NULL
+	DROP TABLE dbo.wallets
+GO
+
+CREATE TABLE dbo.wallets
+	(
+	id         BIGINT IDENTITY NOT NULL,
+	person_id  BIGINT NULL,
+	balance    FLOAT NULL,
+	active     BIT DEFAULT ((1)) NULL,
+	created_at DATETIME DEFAULT (getdate()) NULL,
+	updated_at DATETIME NULL
+	)
+GO
+
+IF OBJECT_ID ('dbo.wallets_bkp03dec19') IS NOT NULL
+	DROP TABLE dbo.wallets_bkp03dec19
+GO
+
+CREATE TABLE dbo.wallets_bkp03dec19
+	(
+	id         BIGINT IDENTITY NOT NULL,
+	person_id  BIGINT NULL,
+	balance    FLOAT NULL,
+	active     BIT NULL,
+	created_at DATETIME NULL,
+	updated_at DATETIME NULL
+	)
+GO
+
+IF OBJECT_ID ('rakeback.articles_bkp02nov19') IS NOT NULL
+	DROP TABLE rakeback.articles_bkp02nov19
+GO
+
+CREATE TABLE rakeback.articles_bkp02nov19
+	(
+	id                     BIGINT IDENTITY NOT NULL,
+	title                  VARCHAR (200) NULL,
+	description            VARCHAR (max) NULL,
+	admin_id               INT NULL,
+	publish                BIT NULL,
+	image_file_name        VARCHAR (200) NULL,
+	image_content_type     VARCHAR (50) NULL,
+	image_file_size        BIGINT NULL,
+	image_updated_at       DATETIME NULL,
+	active                 BIT NULL,
+	created_at             DATETIME NULL,
+	updated_at             DATETIME NULL,
+	slug                   VARCHAR (200) NULL,
+	social_tag_description VARCHAR (max) NULL,
+	short_description      VARCHAR (max) NULL
+	)
+GO
+
+IF OBJECT_ID ('rakeback.tbl_level_master') IS NOT NULL
+	DROP TABLE rakeback.tbl_level_master
+GO
+
+CREATE TABLE rakeback.tbl_level_master
+	(
+	id         INT IDENTITY NOT NULL,
+	[level]    INT NULL,
+	min_value  INT NULL,
+	max_value  INT NULL,
+	created_on DATETIME DEFAULT (getdate()) NULL,
+	is_active  BIT DEFAULT ((1)) NULL
+	)
+GO
+
+IF OBJECT_ID ('rakeback.tbl_user_profile_master_history') IS NOT NULL
+	DROP TABLE rakeback.tbl_user_profile_master_history
+GO
+
+CREATE TABLE rakeback.tbl_user_profile_master_history
+	(
+	id              BIGINT IDENTITY NOT NULL,
+	name            NVARCHAR (200) NULL,
+	email_id        NVARCHAR (200) NULL,
+	mobile          NVARCHAR (50) NULL,
+	password        NVARCHAR (200) NULL,
+	refrel_code     NVARCHAR (100) NULL,
+	ip_address      NVARCHAR (50) NULL,
+	latitude        VARCHAR (50) NULL,
+	longitude       VARCHAR (50) NULL,
+	device_type     VARCHAR (50) NULL,
+	created_on      DATETIME NULL,
+	is_active       BIT NULL,
+	inactive_on     DATETIME NULL,
+	deleted_on      DATETIME NULL,
+	is_deleted      BIT NULL,
+	image_path      NVARCHAR (max) NULL,
+	pancard         NVARCHAR (20) NULL,
+	aadhaar_card    NVARCHAR (20) NULL,
+	bank_name       NVARCHAR (100) NULL,
+	account_no      NVARCHAR (50) NULL,
+	IFSC            NVARCHAR (50) NULL,
+	UPI             NVARCHAR (100) NULL,
+	referral_code   VARCHAR (100) NULL,
+	last_updated_on DATETIME NOT NULL
+	)
+GO
+
+IF OBJECT_ID ('rakeback.users_bkp13nov19') IS NOT NULL
+	DROP TABLE rakeback.users_bkp13nov19
+GO
+
+CREATE TABLE rakeback.users_bkp13nov19
+	(
+	id                     BIGINT IDENTITY NOT NULL,
+	username               VARCHAR (50) NULL,
+	name                   VARCHAR (100) NULL,
+	type                   VARCHAR (50) NULL,
+	active                 BIT NULL,
+	created_at             DATETIME NULL,
+	updated_at             DATETIME NULL,
+	email                  VARCHAR (200) NOT NULL,
+	encrypted_password     VARCHAR (200) NULL,
+	reset_password_token   VARCHAR (200) NULL,
+	reset_password_sent_at DATETIME NULL,
+	remember_created_at    DATETIME NULL,
+	sign_in_count          INT NULL,
+	current_sign_in_at     DATETIME NULL,
+	last_sign_in_at        DATETIME NULL,
+	current_sign_in_ip     VARCHAR (50) NULL,
+	last_sign_in_ip        VARCHAR (50) NULL,
+	provider               VARCHAR (50) NULL,
+	uid                    VARCHAR (50) NULL,
+	avatar_file_name       VARCHAR (200) NULL,
+	avatar_content_type    VARCHAR (20) NULL,
+	avatar_file_size       BIGINT NULL,
+	avatar_updated_at      DATETIME NULL,
+	pan_card               VARCHAR (20) NULL,
+	aadhar_card            VARCHAR (20) NULL,
+	bank_name              VARCHAR (50) NULL,
+	bank_account_no        VARCHAR (50) NULL,
+	bank_ifsc              VARCHAR (20) NULL,
+	mobile                 VARCHAR (20) NULL,
+	upi_id                 VARCHAR (100) NULL,
+	partner_id             INT NULL,
+	kyc_approved           BIT NULL,
+	password               VARCHAR (200) NULL,
+	refrel_code            NVARCHAR (100) NULL,
+	latitude               NVARCHAR (50) NULL,
+	longitude              NVARCHAR (50) NULL,
+	device_type            NVARCHAR (50) NULL,
+	friend_refrel_code     VARCHAR (50) NULL,
+	facebook_id            VARCHAR (100) NULL,
+	remarks                VARCHAR (200) NULL,
+	approved_on            DATETIME NULL
+	)
+GO
+
+--Function
+
+
+ALTER FUNCTION [dbo].[SplitString] (
+	@Input NVARCHAR(MAX)
+	,@Character CHAR(1)
+	)
+RETURNS @Output TABLE (Item NVARCHAR(1000))
+AS
+BEGIN
+	DECLARE @StartIndex INT
+		,@EndIndex INT
+
+	SET @StartIndex = 1
+
+	IF SUBSTRING(@Input, LEN(@Input) - 1, LEN(@Input)) <> @Character
+	BEGIN
+		SET @Input = @Input + @Character
+	END
+
+	WHILE CHARINDEX(@Character, @Input) > 0
+	BEGIN
+		SET @EndIndex = CHARINDEX(@Character, @Input)
+
+		INSERT INTO @Output (Item)
+		SELECT SUBSTRING(@Input, @StartIndex, @EndIndex - 1)
+
+		SET @Input = SUBSTRING(@Input, @EndIndex + 1, LEN(@Input))
+	END
+
+	RETURN
+END
+GO
+
+

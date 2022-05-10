@@ -1,0 +1,5 @@
+
+Log Entry : 
+02/11/2021 00:04:54
+Error in: http://localhost:58577/WhisperingShoutsService.asmx/ForgotPassword. Error Message:Mail Sent. IP:::1
+__________________________

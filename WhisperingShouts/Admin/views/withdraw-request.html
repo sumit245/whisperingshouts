@@ -1,0 +1,85 @@
+﻿
+<div class="wrapper">
+    <div class="navbar-minimize-fixed">
+        <button class="minimize-sidebar btn btn-link btn-just-icon">
+            <i class="tim-icons icon-align-center visible-on-sidebar-regular text-muted"></i>
+            <i class="tim-icons icon-bullet-list-67 visible-on-sidebar-mini text-muted"></i>
+        </button>
+    </div>
+    <div ng-include="'views/_sidebar.html'">
+    </div>
+    <div class="main-panel">
+        <!-- Navbar -->
+        <div ng-include="'views/_navbar.html'">
+        </div>
+        <!-- End Navbar -->
+        <div class="content">
+            <!--<div class="col-md-8 ml-auto mr-auto">
+                <h2 class="text-center">Withdraw Request</h2>
+
+            </div>-->
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <!--<h5 class="card-category">Top Players</h5>-->
+                            <h3 class="card-title"> Withdraw Request</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="toolbar">
+                                <!--        Here you can write extra buttons/actions for the toolbar              -->
+                            </div>
+                            <div class="table-responsive ps">
+                                <table id="dtwithdrawrequest" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Email ID</th>
+                                            <th>Amount</th>
+                                            <th>Requested On</th>
+                                            <th>Status</th>
+                                            <th class="sorting_desc_disabled sorting_asc_disabled text-right">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in WithdrawRequestControllerList">
+                                            <td>{{item.id}}</td>
+                                            <td>{{item.EmailID}}</td>
+                                            <td>{{item.Amount}}</td>
+                                            <td>{{item.RequestedOn}}</td>
+                                            <td>{{item.admin_status}}</td>
+                                            <td class="text-right">
+                                                <a ng-if="item.admin_status=='pending'" href="javascript:void(0)" class="btn btn-link btn-warning btn-icon btn-sm edit" ng-click="ApproveReject('approved',item.id)"><i title="Approve" class="tim-icons icon-check-2"></i></a>
+                                                <!--<a ng-if="item.admin_status=='pending'" href="javascript:void(0)" class="btn btn-link btn-danger btn-icon btn-sm remove" ng-click="ApproveReject('rejected',item.id)"><i title="Reject" class="tim-icons icon-simple-remove"></i></a>-->
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end content-->
+                    </div>
+                    <!--  end card  -->
+                </div>
+                <!-- end col-md-12 -->
+            </div>
+            <!-- end row -->
+        </div>
+        <footer class="footer">
+            <div class="container-fluid">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" class="nav-link">
+                            About Us
+                        </a>
+                    </li>
+                </ul>
+                <div class="copyright">
+                    ©2019
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+

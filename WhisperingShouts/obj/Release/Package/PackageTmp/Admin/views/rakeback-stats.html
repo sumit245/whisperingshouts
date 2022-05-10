@@ -1,0 +1,174 @@
+﻿
+<div class="wrapper">
+    <div class="navbar-minimize-fixed">
+        <button class="minimize-sidebar btn btn-link btn-just-icon">
+            <i class="tim-icons icon-align-center visible-on-sidebar-regular text-muted"></i>
+            <i class="tim-icons icon-bullet-list-67 visible-on-sidebar-mini text-muted"></i>
+        </button>
+    </div>
+    <div ng-include="'views/_sidebar.html'">
+    </div>
+    <div class="main-panel">
+        <!-- Navbar -->
+        <div ng-include="'views/_navbar.html'">
+        </div>
+        <!-- End Navbar -->
+        <div class="content">
+            <!--<div class="col-md-8 ml-auto mr-auto">
+                <h2 class="text-center">Partner User name</h2>
+            </div>-->
+            <div class="row mt-5">
+                <div class="col-md-12" ng-show="!EditForm">
+                    <div class="card">
+                        <div class="card-header">
+                            <!--<h5 class="card-category">Top Players</h5>-->
+                            <h3 class="card-title"> Rakeback Stats</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="toolbar">
+                                <!--        Here you can write extra buttons/actions for the toolbar              -->
+                            </div>
+                            <div class="table-responsive ps">
+                                <table id="dtrakebackstats" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Identity</th>
+                                            <th>Person</th>
+                                            <th>Amount</th>
+                                            <th>Date</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <!--filter: !{RakebackStatsList : {description: ''} }-->
+                                    <tbody>
+                                        <tr ng-repeat="item in RakebackStatsList | filter:IsDisplay = '1'">
+                                            <td>{{item.id}}</td>
+                                            <td>{{item.username}}</td>
+                                            <td>{{item.name}}</td>
+                                            <td>{{item.Amount}}</td>
+                                            <td>{{item.created_at}}</td>
+                                            <td>{{item.description}}</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td>
+                                                <input type="button" ng-click="EditForm=true" value="Add" class="btn btn-primary btn-lg btn-block mb-3" />
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end content-->
+                    </div>
+                    <!--  end card  -->
+                </div>
+                <!-- end col-md-12 -->
+
+
+                <div class="col-md-12" ng-show="EditForm">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">
+                                Reward
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <form class="form-horizontal" id="rakebackstatsform" name="rakebackstatsform" novalidate>
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Identity</label>
+                                    <div class="col-sm-10">
+                                        <div class="form-group">
+                                            <select class="form-control" name="ddlidentity" ng-model="ddlidentity" ng-change="GetFilterData()" style="color: #000 !important;">
+                                                <option value="">Select a username</option>
+                                                <option data-ng-repeat="identity in AllIdentity" value="{{identity}}">{{identity}}</option>
+                                            </select>
+                                            <span class="form-text error-message" ng-show="rakebackstatsform.ddlidentity.$dirty && rakebackstatsform.ddlidentity.$invalid">Please select identity</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Person</label>
+                                    <div class="col-sm-10">
+                                        <div class="form-group" style="color:#fff;">
+                                            {{personname}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Partner</label>
+                                    <div class="col-sm-10">
+                                        <div class="form-group" style="color:#fff;">
+                                            {{partnername}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Total Rakeback</label>
+                                    <div class="col-sm-10">
+                                        <div class="form-group">
+                                            <input type="number" min="1" max="99999" class="form-control" autocomplete="off" ng-model="totalrakeback" required>
+                                            <span class="form-text error-message" ng-show="rakebackstatsform.totalrakeback.$dirty && rakebackstatsform.totalrakeback.$invalid">Please enter rakeback</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Cut Off</label>
+                                    <div class="col-sm-10">
+                                        <div class="form-group">
+                                            <input type="number" min="1" max="100" ng-change="CalculateAmount()" class="form-control" autocomplete="off" ng-model="cutoff" required>
+                                            <span class="form-text error-message" ng-show="rakebackstatsform.cutoff.$dirty && rakebackstatsform.cutoff.$invalid">Please enter cutoff</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Payable</label>
+                                    <div class="col-sm-10">
+                                        <div class="form-group">
+                                            <input type="text" readonly class="form-control" autocomplete="off" ng-model="payableamount" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary" ng-disabled="rakebackstatsform.$invalid" ng-click="AddRakebackStats()">Add</button>
+
+                                        <button type="submit" class="btn btn-primary" ng-click="EditForm=false">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">
+                                Bulk Reward
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <input type="file" class="form-control" required id="fldRakeback" name="fldRakeback" ng-model="fldRakeback" accept=".csv" />
+                            <button type="submit" class="btn btn-primary" ng-click="uploadRakebackFile()">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+        <div ng-include="'views/_footer.html'">
+        </div>
+    </div>
+</div>
+
+
+
+

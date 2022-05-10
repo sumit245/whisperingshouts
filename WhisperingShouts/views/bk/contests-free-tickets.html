@@ -1,0 +1,779 @@
+﻿ <!-- header top begin -->
+<div ng-include="'views/_header.html'">
+</div>
+<!-- header top end -->
+
+<style>
+    .header-section {
+        display: block !important;
+    }
+
+    .logo-section {
+        display: block !important;
+    }
+
+    .radio > input {
+        display: none;
+    }
+
+    .selectedclass {
+        /*background-color: forestgreen !important;*/
+        background-image: linear-gradient(90deg,#00bf50 1%,#00ce54) !important;
+    }
+
+    .lblclass {
+        background: #fff;
+        background-image: linear-gradient(90deg,#830068 1%,#d70021);
+        border-radius: 60px;
+        color: #fff;
+        /*border: 2px solid #fd190b;*/
+        width: 48%;
+        padding: 8px;
+        margin-left: 2%;
+        letter-spacing: 1px !important;
+        border-radius: 1.875rem;
+        cursor: pointer;
+        padding: 10px 5px;
+        margin: 10px 5px;
+        border: .125rem solid #f50;
+    }
+
+    /*.bodynew {
+        background: #fff;
+    }*/
+
+    @media (max-width:767px) {
+        .lblclass {
+            width: 100% !important;
+            margin-left: 0 !important;
+        }
+    }
+
+    li {
+        text-transform: none !important;
+    }
+</style>
+
+<style>
+    .pkgdtlIncAftr:after {
+        content: '';
+        top: 0%;
+        bottom: 9%;
+        right: 0px;
+        position: absolute;
+        border: 1px solid #e4e4e4;
+        border-radius: 50%;
+    }
+
+    .pkgdtlIncExcl > span.text-teal {
+        font-size: 16px;
+    }
+
+    .pkgdtlIncExcl {
+        margin-top: 20px;
+    }
+
+    li {
+        color: #626262;
+        /*font-size: 13px;*/
+        font-weight: 400;
+        letter-spacing: 2px;
+        /*line-height: 30px;*/
+    }
+
+    body {
+        background-color: #fff;
+        color: #333 !important;
+    }
+
+    @media (max-width: 767px) {
+        .bodynew {
+            background: #fff;
+        }
+    }
+
+    @media (min-width: 767px) {
+        .sectiondesktopclass {
+            margin-top: 50px;
+        }
+
+        .desktopclass {
+            position: relative;
+            top: -130px;
+            left: 105px;
+        }
+    }
+
+   
+
+    ul {
+        list-style: disc !important;
+    }
+</style>
+
+
+<!-- Main Stylesheet File -->
+<link href="/css/contests-free-tickets.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/css/roboto-font.css">
+<link rel="stylesheet" type="text/css" href="/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+<!-- datepicker -->
+<link rel="stylesheet" type="text/css" href="/css/jquery-ui.min.css">
+<!-- Main Style Css -->
+<link rel="stylesheet" href="/css/stepstyle.css" />
+<!-- MATERIAL DESIGN ICONIC FONT -->
+<link rel="stylesheet" href="fonts/material-design-iconic-font/css/material-design-iconic-font.css">
+
+<!-- DATE-PICKER -->
+<link rel="stylesheet" href="vendor/date-picker/css/datepicker.min.css">
+
+<!-- STYLE CSS -->
+<link rel="stylesheet" href="css/style2.css">
+<link rel="stylesheet" href="/css/contests-free-tickets.css" />
+
+
+
+<!--<section id="hero-section" class="wow fadeIn">
+    <div class="hero-container">
+        <h1>Participate in the #WSPoker Contest</h1>
+        <p class="top_heading">
+            <span>
+                We’ve got special contests running throughout the year for all of you! Check this space regularly to know about the upcoming contests and our grand prizes.<br />
+                We keep offering our players with unique opportunities to win tournament tickets, Poker Merchandize, bonus and other exciting prizes.<br />
+                Just follow the 3 simple steps to participate in the contests and claim your victory.
+            </span>
+    </div>
+</section>-->
+
+<section id="prize-section" class="padd-section text-center wow fadeInUp">
+    <div class="container" style="display:none">
+        <div class="row">
+            <div class="col-md-3 prize-div">
+                <div class="prize">
+                    <h4>Prizes</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row prize-second-div">
+            <div class="col-md-6 col-md-4 col-lg-4  first-prize">
+                <p>
+                    <span>1st</span>
+                </p>
+                <img src="images/trophy.png" width="70" height="70">
+            </div>
+            <div class="col-md-6 col-md-4 col-lg-4 first-prize">
+                <p>
+                    <span>2nd</span>
+                </p>
+                <img src="images/trophy.png" width="70" height="70">
+            </div>
+            <div class="col-md-6 col-md-4 col-lg-4  first-prize">
+                <p>
+                    <span>3rd</span>
+                </p>
+                <img src="images/trophy.png" width="70" height="70">
+            </div>
+
+        </div>
+    </div>
+</section>
+<!--<section class="sectiondesktopclass">
+    <div class="container">
+        <div class="row">
+            <p style="font-size:20px;">Coming Soon!</p>
+        </div>
+    </div>
+</section>-->
+
+<section class="sectiondesktopclass">
+    <div class="container" style="padding:0 !important;">
+
+        <div class="row" ng-hide="ContestOk">
+
+            <!--<img src="images/contest/contest-banner.jpeg" class="img-fluid" />-->
+
+            <div class="col-md-12">
+                <div class="">
+                    <img src="images/contest/value-town/banner.jpeg" class="img-fluid" ng-click="GetContest(2);" />
+                </div>
+                <div class="button_counter desktopclass" style="display:none;">
+                    <!--<div class="row col-md-12">
+                        <div class="col-md-3">
+                            <input type="button" name="next" id="contest1" class="next action-button" value="Join now" />
+                        </div>
+                        <div class="col-md-9">
+                            &nbsp;
+                        </div>
+                    </div>-->
+                    <!--<div class="row col-md-12">
+                        <div class="col-md-6">
+                            <div id="countdown" class="countdown float-left">
+                                <div id='tiles' class="tiles"></div>
+                                <div class="labels">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            &nbsp;
+
+                        </div>
+                    </div>-->
+                    <!--<span class="f20"><span class="hours"></span></span>:<span class="f20"><span class="minutes"></span></span>:<span class="f20"><span class="seconds"></span></span>-->
+                    <!--<section id="sectimer">
+                        <div class="container-fluid pl-3 pr-3 pt-3 pb-3">
+                            <h5 class="font-weight-bold text-center" style="color:#191919;">TIME LEFT FOR PREDICTION</h5>
+                            <div id="clockdiv" class="container justify-content-center">
+                                <div class="p-1 p-space">
+
+                                    <div class="smalltext">Hours</div>
+                                </div>
+                                <div class="p-1 p-space">
+
+                                    <div class="smalltext">Minutes</div>
+                                </div>
+                                <div class="p-1 p-space">
+
+                                    <div class="smalltext">Seconds</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>-->
+                </div>
+
+            </div>
+            <div class="col-md-12 mt-0 position-relative msform contests mb-0" style="margin-top:-135px !important; display:none;">
+                <img src="images/contest/contest2.jpg" style="border-radius:20px;width:100%" />
+                <div class="button_counter desktopclass">
+                    <div class="row col-md-12">
+                        <div class="col-md-3">
+                            <input type="button" name="next" class="next action-button" value="Join now" />
+                        </div>
+                        <div class="col-md-9">
+                            &nbsp;
+                        </div>
+                    </div>
+
+                    <div class="row col-md-12">
+                        <div class="col-md-6">
+                            <div id="countdown" class="countdown float-left">
+                                <div id='tiles1' class="tiles"></div>
+                                <div class="labels">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            &nbsp;
+
+                        </div>
+                    </div>
+
+                    <!--<span class="f20"><span class="hours"></span></span>:<span class="f20"><span class="minutes"></span></span>:<span class="f20"><span class="seconds"></span></span>-->
+                    <!--<section id="sectimer">
+                        <div class="container-fluid pl-3 pr-3 pt-3 pb-3">
+                            <h5 class="font-weight-bold text-center" style="color:#191919;">TIME LEFT FOR PREDICTION</h5>
+                            <div id="clockdiv" class="container justify-content-center">
+                                <div class="p-1 p-space">
+
+                                    <div class="smalltext">Hours</div>
+                                </div>
+                                <div class="p-1 p-space">
+
+                                    <div class="smalltext">Minutes</div>
+                                </div>
+                                <div class="p-1 p-space">
+
+                                    <div class="smalltext">Seconds</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>-->
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-show="ContestOk">
+
+            <div class="col-md-12" ng-show="Step1">
+                <div class="card" style="padding: 0px !important;">
+                    <!--<img src="images/contest-banner-1.jpg" />-->
+                    <img ng-src="images/contests/{{ContestsList[0].image_file_name}}" class="img-fluid" />
+                    <div class="msform">
+                        <ul id="progressbar" style="min-width:350px;">
+                            <div class="bg-line"></div>
+                            <li ng-class="Step1==true || Step2==true || Step3==true || Step4==true?'active':''">Step</li>
+                            <li ng-class="Step2==true || Step3==true || Step4==true?'active':''">Step</li>
+                            <li ng-class="Step3==true || Step4==true?'active':''">Step</li>
+                            <li ng-class="Step4==true?'active':''">Step</li>
+                        </ul>
+
+                        <fieldset>
+                            <div class="col-md-12 f14">
+                                <p>{{ContestsList[0].description}}</p>
+                            </div>
+                            <br />
+                            <input type="button" name="next" ng-click="Step1=false;Step2=true;Step3=false;Step4=false" class="next action-button" value="Join Now" />
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12" ng-show="Step2">
+                <div class="card" style="padding: 0px !important;">
+                    <img ng-src="images/contests/{{ContestsList[0].image_file_name}}" class="img-fluid" />
+                    <div class="msform">
+                        <ul id="progressbar">
+                            <div class="bg-line"></div>
+                            <li ng-class="Step1==true || Step2==true || Step3==true || Step4==true?'active':''">Step</li>
+                            <li ng-class="Step2==true || Step3==true || Step4==true?'active':''">Step</li>
+                            <li ng-class="Step3==true || Step4==true?'active':''">Step</li>
+                            <li ng-class="Step4==true?'active':''">Step</li>
+                        </ul>
+                        <fieldset>
+                            <div class="col-md-12 f14">
+                                <strong class="colorfull-font">How to participate?</strong>
+                                <br />
+                                <p>Answer some simple questions on the next step and click on submit when you are ready.</p>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-md-12 f14 font-open-snas bg-gray">
+                        <div class="container">
+                            <div class="msform text-left">
+                                <fieldset>
+                                    <h3 class="text-capitalize font-open-snas">Terms and Conditions :</h3>
+                                    <br />
+
+                                    <span id="spnTnC">
+
+                                    </span>
+                                    <!--<ul style="list-style: disc !important;">
+                                        <li>Entries should strictly come before the deadlines mentioned i.e 24th Nov 3:00 PM. Any entries/posts after that won’t be entertained.</li>
+                                        <li>Results will be declared by 6:00 PM on 24th Nov on our facebook page and tickets will be automatically credited to your account before the contest begins.</li>
+                                        <li>If the tournament is abandoned due to any reason,then the contest shall be considered cancelled.</li>
+                                        <li>Whisperingshouts does not hold responisbilty for any violiation of policies by user on partner sites and any claims of cashouts denied as a reason for the same. Please read the sites fair gameplay usage rules and cashout policies carefully.</li>
+                                        <li>Whisperingshouts has the discretion to modify/change/cancel any contest and in case of any dispute the decision of the management will be final.</li>
+                                        <li>Any personal messages/direct messages/posts through any social channels requesting free tickets for any contest will deem you disqualified.</li>
+                                    </ul>-->
+                                    <!--<p>• Any pm/dm/posts requesting tickets for this or any contest will deem you disqualified.</p>
+                                    <p>• Entries should strictly come before the deadlines mentioned. Any entries/posts after that won’t be entertained.</p>
+                                    <p>• If the tournament is abandoned due to any reason, the tickets shall be given on random selection for the next event of equal or lesser value based on availability.</p>
+                                    <p>• Whisperingshouts does not responisbilty for any violiation of policies by user on partner sites and any claims of cashouts denied as a reason for the same. Please read the sites fair gameplay usage rules and cashout policies carefully.</p>
+                                    <p>• Whisperingshouts has the discretion to modify/change/cancel any contest and in case of any dispute the decision of the management will be final.”</p>-->
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="msform" style="margin:0;">
+                        <fieldset>
+                            <input type="button" name="previous" ng-click="Step1=true;Step2=false;Step3=false;Step4=false" class="next action-button mt-10" value="Previous" />
+                            <input type="button" name="next" ng-click="GetUserSubmittedQuizOrNot()" class="next action-button mt-10" value="Next" />
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12" ng-show="Step3">
+                <div class="card" style="padding: 0px !important;">
+                    <img ng-src="images/contests/{{ContestsList[0].image_file_name}}" class="img-fluid" />
+                    <div class="msform">
+                        <ul id="progressbar">
+                            <div class="bg-line"></div>
+                            <li ng-class="Step1==true || Step2==true || Step3==true || Step4==true?'active':''">Step</li>
+                            <li ng-class="Step2==true || Step3==true || Step4==true?'active':''">Step</li>
+                            <li ng-class="Step3==true || Step4==true?'active':''">Step</li>
+                            <li ng-class="Step4==true?'active':''">Step</li>
+                        </ul>
+
+                        <form role="form" id="questionform" name="questionform" novalidate>
+                            <fieldset>
+                                <div class="col-md-12 f14" ng-repeat="question in AllQuestions">
+                                    <strong>{{$index+1}}. {{question}}</strong>
+                                    <br /><br />
+
+                                    <label class="lblclass" ng-repeat="ans in ContestsData | filter:{ QuestionText:question }" id="li_{{ans.AnswerID}}" name="li_{{ans.QuestionID}}">
+                                        {{$index=='0'?'A':$index=='1'?'B':$index=='2'?'C':$index==3?'D':'E'}}.
+                                        <input style="width:auto; display:none;" ng-click="SetQuestionAnswer(ans.AnswerID,ans.QuestionID)" value="{{ans.AnswerID}}" type="radio" name="rdbanswer_{{ans.QuestionID}}" required />
+                                        &nbsp; &nbsp;{{ans.AnswerText}}
+                                    </label>
+
+                                    <!--<ol>
+                                        <li ng-repeat="ans in ContestsData | filter:{ QuestionText:question }" id="li_{{ans.AnswerID}}" name="li_{{ans.QuestionID}}">
+                                            <label id="rdb_{{ans.AnswerID}}" style="cursor:pointer;">
+                                                <span>
+                                                    {{$index=='0'?'A':$index=='1'?'B':$index=='2'?'C':$index==3?'D':'E'}}.
+                                                    <input style="width:auto; display:none;" ng-click="SetQuestionAnswer(ans.AnswerID,ans.QuestionID)" value="{{ans.AnswerID}}" type="radio" name="rdbanswer_{{ans.QuestionID}}" required />
+                                                    {{ans.AnswerText}}
+                                                </span>
+                                            </label>
+                                        </li>
+                                    </ol>-->
+
+                                </div>
+                                <br /><br />
+
+                                <input type="button" name="previous" ng-click="Step1=false;Step2=true;Step3=false;Step4=false" class="next action-button mt-10" value="Previous" />
+
+                                <input type="button" ng-disabled="questionform.$invalid" name="next" ng-click="CheckAnswer();" class="next action-button mt-10" value="Next" />
+
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12" ng-show="Step4">
+
+                <div class="card" style="padding: 0px !important;">
+                    <img ng-src="images/contests/{{ContestsList[0].image_file_name}}" class="img-fluid" />
+                    <div class="msform">
+                        <ul id="progressbar">
+                            <div class="bg-line"></div>
+                            <li ng-class="Step1==true || Step2==true || Step3==true || Step4==true?'active':''">Step</li>
+                            <li ng-class="Step2==true || Step3==true || Step4==true?'active':''">Step</li>
+                            <li ng-class="Step3==true || Step4==true?'active':''">Step</li>
+                            <li ng-class="Step4==true?'active':''">Step</li>
+                        </ul>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="pkgdtlIncExcl pkgdtlIncAftr">
+                                        <strong class="colorfull-font">Sign Up</strong>
+                                        <form role="form" id="regform" name="regform" novalidate>
+                                            <fieldset>
+                                                <!--<div class="col-md-6 f14">
+                                                    <strong class="colorfull-font">Sign Up</strong>
+                                                    <br /> <br />
+                                                </div>-->
+                                                <div class="col-md-12 text-left contest_form ">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <label>Full Name</label>
+                                                            <input type="text" ng-model="name" name="name" autocomplete="off" maxlength="100" placeholder="Your Name" required />
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <label>Email Address</label>
+                                                            <input type="email" ng-model="emailid" name="emailid" autocomplete="off" maxlength="200" placeholder="Email Address" required>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <label>Mobile No.</label>
+                                                            <input type="text" ng-model="mobileno" name="mobileno" autocomplete="off" maxlength="10" placeholder="Mobile No." onkeypress="return checkNumber(this.value, event);" xtype="tel" required>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <label>Referral Code</label>
+                                                            <input type="text" ng-model="refrelcode" name="refrelcode" autocomplete="off" maxlength="100" placeholder="Referral Code">
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <label>Password</label>
+                                                            <input type="password" ng-model="password" name="password" autocomplete="off" maxlength="100" placeholder="Password" required>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <label>Confirm Password</label>
+                                                            <input type="password" ng-model="confirmpassword" name="confirmpassword" autocomplete="off" maxlength="100" placeholder="Confirm Password" required>
+                                                        </div>
+                                                    </div>
+                                                    <div style="text-align:center;">
+                                                        <input class="next action-button mt-10" ng-disabled="regform.$invalid" type="button" ng-model="btnregister" ng-click="SubmitContests('Register')" value="Submit" />
+                                                    </div>
+                                                </div>
+                                                <!--<input type="button" name="previous" ng-click="Step1=false;Step2=false;Step3=true;Step4=false" class="next action-button mt-10" value="Previous" />-->
+                                                <!--<input type="button" name="next" class="next action-button mt-10" value="SIGN UP" />-->
+
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="pkgdtlIncExcl">
+                                        <strong class="colorfull-font">Login</strong>
+                                        <form role="form" id="loginform" name="loginform" novalidate>
+                                            <fieldset>
+                                                <div class="col-md-12 text-left contest_form ">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <label>Email Address</label>
+                                                            <input type="email" class="input--style-3" ng-model="emailid" name="emailid" autocomplete="off" maxlength="200" placeholder="Email id" required>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <label>Password</label>
+                                                            <input type="password" class="input--style-3" ng-model="password" name="password" autocomplete="off" maxlength="100" placeholder="Password" required>
+                                                        </div>
+                                                    </div>
+                                                    <div style="text-align:center;">
+                                                        <input class="next action-button mt-10" ng-disabled="loginform.$invalid" type="button" ng-model="btnlogin" ng-click="SubmitContests('Login')" value="Submit" />
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="f14 font-open-snas bg-gray">
+                        <div class="container">
+                            <div class="msform">
+                                <fieldset>
+                                    <div class="col-md-12 f14 font-open-snas">
+                                        <strong class="colorfull-font">Share The Contest</strong>
+                                        <ul class="social-media-icon">
+                                            <li><a href="#" target="_blank"><img src="images/facebook-logo.png" /></a></li>
+                                            <li><a href="#" target="_blank"><img src="images/twitter-logo.png" /></a></li>
+                                            <li><a href="#" target="_blank"><img src="images/insta-logo.png" /></a></li>
+                                            <li><a href="#" target="_blank"><img src="images/whatsapp-logo.png" /></a></li>
+                                        </ul>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--<script src="js/jquery.steps.js"></script>
+
+<script src="js/main.js"></script>-->
+
+<script type="text/javascript">
+
+    function getTimeRemaining(endtime) {
+
+        var dt = new Date();
+        dt.setHours(dt.getHours() + 2);
+        if (localStorage.getItem("dt") == null || localStorage.getItem("dt") == undefined || localStorage.getItem("dt") == "")
+            localStorage.setItem("dt", dt);
+        //alert(dt);
+
+        //debugger;
+        //var t = Date.parse(endtime) - Date.parse(new Date());
+        var t = Date.parse(localStorage.getItem("dt")) - Date.parse(new Date());
+        var seconds = Math.floor((t / 1000) % 60);
+        var minutes = Math.floor((t / 1000 / 60) % 60);
+        var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+        var days = Math.floor(t / (1000 * 60 * 60 * 24));
+        if (hours > 20) {
+            $("#sectimer").hide();
+        }
+        else {
+            return {
+                'total': t,
+                'days': days,
+                'hours': hours,
+                'minutes': minutes,
+                'seconds': seconds
+            };
+        }
+    }
+
+    function initializeClock(id, endtime) {
+        var clock = document.getElementById(id);
+        var daysSpan = clock.querySelector('.days');
+        var hoursSpan = clock.querySelector('.hours');
+        var minutesSpan = clock.querySelector('.minutes');
+        var secondsSpan = clock.querySelector('.seconds');
+
+        function updateClock() {
+            var t = getTimeRemaining(endtime);
+
+            /* daysSpan.innerHTML = t.days; */
+
+            hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+            minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+            secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+            //alert(t.total);
+            if (t.total <= 0) {
+                clearInterval(timeinterval);
+            }
+
+        }
+        updateClock();
+        var timeinterval = setInterval(updateClock, 1000);
+    }
+
+</script>
+<style type="text/css">
+    .countdown {
+        width: 220px;
+        height: 80px;
+        text-align: center;
+        /*background: #222;
+        background-image: -webkit-linear-gradient(top, #222, #333, #333, #222);
+        background-image: -moz-linear-gradient(top, #222, #333, #333, #222);
+        background-image: -ms-linear-gradient(top, #222, #333, #333, #222);
+        background-image: -o-linear-gradient(top, #222, #333, #333, #222);*/
+        /*border: 1px solid #111;
+        border-radius: 5px;
+        box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.6);*/
+        margin: auto;
+        padding: 0px 0;
+        /*position: absolute;*/
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        /*position: relative;*/
+        top: -155px;
+        left: 54px;
+    }
+
+        /*.countdown:before {
+            content: "";
+            width: 8px;
+            height: 65px;
+            background: #444;
+            background-image: -webkit-linear-gradient(top, #555, #444, #444, #555);
+            background-image: -moz-linear-gradient(top, #555, #444, #444, #555);
+            background-image: -ms-linear-gradient(top, #555, #444, #444, #555);
+            background-image: -o-linear-gradient(top, #555, #444, #444, #555);
+            border: 1px solid #111;
+            border-top-left-radius: 6px;
+            border-bottom-left-radius: 6px;
+            display: block;
+            position: absolute;
+            top: 48px;
+            left: -10px;
+        }
+
+        .countdown:after {
+            content: "";
+            width: 8px;
+            height: 65px;
+            background: #444;
+            background-image: -webkit-linear-gradient(top, #555, #444, #444, #555);
+            background-image: -moz-linear-gradient(top, #555, #444, #444, #555);
+            background-image: -ms-linear-gradient(top, #555, #444, #444, #555);
+            background-image: -o-linear-gradient(top, #555, #444, #444, #555);
+            border: 1px solid #111;
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px;
+            display: block;
+            position: absolute;
+            top: 48px;
+            right: -10px;
+        }*/
+
+        .countdown .tiles {
+            position: relative;
+            z-index: 1;
+        }
+
+            .countdown .tiles > span {
+                width: 53px;
+                font-size: 14px;
+                max-width: 92px;
+                font: bold 48px 'Droid Sans', Arial, sans-serif;
+                text-align: center;
+                color: #fff;
+                background-image: -webkit-linear-gradient(top, #131A2C, #131A2C);
+                /*color: #111;
+                background-color: #ddd;
+                background-image: -webkit-linear-gradient(top, #bbb, #eee);
+                background-image: -moz-linear-gradient(top, #bbb, #eee);
+                background-image: -ms-linear-gradient(top, #bbb, #eee);
+                background-image: -o-linear-gradient(top, #bbb, #eee);*/
+                border-top: 1px solid #fff;
+                border-radius: 3px;
+                box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.7);
+                margin: 0 7px;
+                /*padding: 18px 0;*/
+                display: inline-block;
+                position: relative;
+            }
+
+                .countdown .tiles > span:before {
+                    content: "";
+                    width: 100%;
+                    height: 13px;
+                    background: #111;
+                    display: block;
+                    padding: 0 3px;
+                    position: absolute;
+                    top: 41%;
+                    left: -3px;
+                    z-index: -1;
+                }
+
+                .countdown .tiles > span:after {
+                    content: "";
+                    width: 100%;
+                    height: 1px;
+                    background: #eee;
+                    border-top: 1px solid #333;
+                    display: block;
+                    position: absolute;
+                    top: 48%;
+                    left: 0;
+                }
+
+        .countdown .labels {
+            width: 100%;
+            height: 25px;
+            text-align: center;
+            position: absolute;
+            bottom: 8px;
+        }
+
+            .countdown .labels li {
+                width: 102px;
+                font: bold 15px 'Droid Sans', Arial, sans-serif;
+                color: #f47321;
+                text-shadow: 1px 1px 0px #000;
+                text-align: center;
+                text-transform: uppercase;
+                display: inline-block;
+            }
+</style>
+
+<script type="text/javascript">
+
+    var target_date = new Date().getTime() + (1000 * 3600 * 48); // set the countdown date
+    var days, hours, minutes, seconds; // variables for time units
+
+    var countdown = document.getElementById("tiles"); // get tag element
+
+    //getCountdown();
+
+    function SetSeconds(totalsecondsremaining, contestid) {
+        localStorage.setItem("totalsecondsremaining", totalsecondsremaining);
+        getCountdown(totalsecondsremaining);
+        setInterval(function () { getCountdown(totalsecondsremaining, contestid); }, 1000);
+    }
+
+    function getCountdown(totalsecondsremaining, contestid) {
+        // find the amount of "seconds" between now and target
+        //var current_date = new Date().getTime();
+        //var seconds_left = (target_date - current_date) / 1000;
+        var seconds_left = localStorage.getItem("totalsecondsremaining");
+
+        if (seconds_left >= 0) {
+
+            days = pad(parseInt(seconds_left / 86400));
+            seconds_left = seconds_left % 86400;
+
+            hours = pad(parseInt(seconds_left / 3600));
+            seconds_left = seconds_left % 3600;
+
+            minutes = pad(parseInt(seconds_left / 60));
+            seconds = pad(parseInt(seconds_left % 60));
+
+            // format countdown string + set tag value
+            //countdown.innerHTML = "<span>" + days + "</span><span>" + hours + "</span><span>" + minutes + "</span><span>" + seconds + "</span>";
+
+            countdown.innerHTML = "<span>" + hours + "</span><span>" + minutes + "</span><span>" + seconds + "</span>";
+            document.getElementById("tiles1").innerHTML = "<span>" + hours + "</span><span>" + minutes + "</span><span>" + seconds + "</span>";
+            localStorage.setItem("totalsecondsremaining", (seconds_left - 1));
+
+        }
+        else {
+            $("#contest" + contestid).attr("disabled", true);
+        }
+    }
+
+    function pad(n) {
+        return (n < 10 ? '0' : '') + n;
+    }
+
+</script>

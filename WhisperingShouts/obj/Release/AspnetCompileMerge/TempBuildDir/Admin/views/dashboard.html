@@ -1,0 +1,188 @@
+﻿<div class="wrapper">
+    <div class="navbar-minimize-fixed">
+        <button class="minimize-sidebar btn btn-link btn-just-icon">
+            <i class="tim-icons icon-align-center visible-on-sidebar-regular text-muted"></i>
+            <i class="tim-icons icon-bullet-list-67 visible-on-sidebar-mini text-muted"></i>
+        </button>
+    </div>
+
+    <div ng-include="'views/_sidebar.html'">
+    </div>
+
+    <div class="main-panel">
+        <!-- Navbar -->
+        <div ng-include="'views/_navbar.html'">
+        </div>
+        <!-- End Navbar -->
+        <div class="content">
+            <div class="row">
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="card card-stats">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="info-icon text-center icon-success">
+                                        <i class="tim-icons icon-single-02"></i>
+                                    </div>
+                                </div>
+                                <div class="col-7">
+                                    <div class="numbers">
+                                        <p class="card-category">New Players Added this month</p>
+                                        <h3 class="card-title">{{NewPlayersAddedThismonth}}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="card-footer">
+                            <hr>
+                            <div class="stats">
+                                <i class="tim-icons icon-refresh-01"></i> Update Now
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card card-stats">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="info-icon text-center icon-success">
+                                        <i class="tim-icons icon-single-02"></i>
+                                    </div>
+                                </div>
+                                <div class="col-7">
+                                    <div class="numbers">
+                                        <p class="card-category">Total Players</p>
+                                        <h3 class="card-title"><a href="/users">{{TotalPlayers}}</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="card-footer">
+                            <hr>
+                            <div class="stats">
+                                <i class="tim-icons icon-sound-wave"></i> Last Research
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card card-stats">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="info-icon text-center icon-success">
+                                        <i class="tim-icons icon-single-02"></i>
+                                    </div>
+                                </div>
+                                <div class="col-7">
+                                    <div class="numbers">
+                                        <p class="card-category">Active Players</p>
+                                        <h3 class="card-title">{{ActivePlayers}}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="card-footer">
+                            <hr>
+                            <div class="stats">
+                                <i class="tim-icons icon-trophy"></i> Customers feedback
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+                
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="card card-stats">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="info-icon text-center icon-success">
+                                        <i class="tim-icons icon-single-02"></i>
+                                    </div>
+                                </div>
+                                <div class="col-7">
+                                    <div class="numbers">
+                                        <p class="card-category">Inactive Players</p>
+                                        <h3 class="card-title">{{InactivePlayers}}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="card-footer">
+                <hr>
+                <div class="stats">
+                    <i class="tim-icons icon-watch-time"></i> In the last hours
+                </div>
+            </div>-->
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="card card-stats">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="info-icon text-center icon-success">
+                                        <i class="tim-icons icon-single-02"></i>
+                                    </div>
+                                </div>
+                                <div class="col-7">
+                                    <div class="numbers">
+                                        <p class="card-category">Total Locked Commission in User Accounts</p>
+                                        <h3 class="card-title">{{TotalLockedCommissionInUserAccounts}}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="card-footer">
+                <hr>
+                <div class="stats">
+                    <i class="tim-icons icon-refresh-01"></i> Update Now
+                </div>
+            </div>-->
+                    </div>
+                </div>
+
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="card card-stats">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="info-icon text-center icon-success">
+                                        <i class="tim-icons icon-single-02"></i>
+                                    </div>
+                                </div>
+                                <div class="col-7">
+                                    <div class="numbers">
+                                        <p class="card-category">Total Withdrawable Commissions in User Accounts</p>
+                                        <h3 class="card-title">{{TotalWithdrawableCommissionsInUserAccounts}}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="card-footer">
+                <hr>
+                <div class="stats">
+                    <i class="tim-icons icon-refresh-01"></i> Update Now
+                </div>
+            </div>-->
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div ng-include="'views/_footer.html'">
+        </div>
+    </div>
+</div>
+

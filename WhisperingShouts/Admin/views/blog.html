@@ -1,0 +1,190 @@
+﻿
+<div class="wrapper">
+    <div class="navbar-minimize-fixed">
+        <button class="minimize-sidebar btn btn-link btn-just-icon">
+            <i class="tim-icons icon-align-center visible-on-sidebar-regular text-muted"></i>
+            <i class="tim-icons icon-bullet-list-67 visible-on-sidebar-mini text-muted"></i>
+        </button>
+    </div>
+    <div ng-include="'views/_sidebar.html'" ng-show="IsLoggedInByAdmin">
+    </div>
+    <div class="main-panel">
+        <!-- Navbar -->
+        <div ng-include="'views/_navbar.html'">
+        </div>
+        <!-- End Navbar -->
+        <div class="content">
+
+            <!--<div class="col-md-8 ml-auto mr-auto">
+                <h2 class="text-center">Rewards</h2>
+
+            </div>-->
+            <div class="row mt-5">
+                <div class="col-md-12" ng-if="!EditForm">
+                    <div class="card">
+                        <div class="card-header">
+                            <!--<h5 class="card-category">Top Players</h5>-->
+                            <h3 class="card-title"> Blogs</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="toolbar">
+                                <!--        Here you can write extra buttons/actions for the toolbar              -->
+                            </div>
+                            <div class="table-responsive ps">
+                                <table id="dtblog" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Description</th>
+                                            <th>Short Description</th>
+                                            <th>Social Tag Description</th>
+                                            <th>Status</th>
+                                            <th class="sorting_desc_disabled sorting_asc_disabled text-right">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in BlogList">
+                                            <td>{{item.title}}</td>
+                                            <td>
+                                                <!--{{item.description}}-->
+                                                {{ item.description | limitTo: 50 }}{{item.description.length > 50 ? '...' : ''}}
+                                            </td>
+                                            <td>
+                                                {{ item.short_description | limitTo: 50 }}{{item.short_description.length > 50 ? '...' : ''}}
+                                            </td>
+                                            <td>
+                                                {{ item.social_tag_description | limitTo: 50 }}{{item.social_tag_description.length > 50 ? '...' : ''}}
+                                            </td>
+                                            <td>{{item.active=='1'?'Active':'Inactive'}}</td>
+                                            <td class="text-right">
+                                                <a class="btn btn-link btn-warning btn-icon btn-sm edit" ng-click="ShowHideForm(true, item.id)"><i class="tim-icons icon-pencil"></i></a>
+                                                <!--<a href="javascript:void(0)" class="btn btn-link btn-danger btn-icon btn-sm remove"><i class="tim-icons icon-simple-remove"></i></a>-->
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary" ng-click="ShowHideForm(true)">Add</button>
+                            </div>
+                        </div>
+
+                        <!-- end content-->
+                    </div>
+                    <!--  end card  -->
+                </div>
+                <!-- end col-md-12 -->
+
+
+
+                <div class="col-md-12" ng-if="EditForm">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">
+                                Blog
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <form class="form-horizontal" id="blogform" name="blogform" novalidate>
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Title</label>
+                                    <div class="col-sm-10">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" autocomplete="off" ng-model="title" required>
+                                            <span class="form-text error-message" ng-show="blogform.title.$dirty && blogform.title.$invalid">Please enter title</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Description</label>
+                                    <div class="col-sm-10">
+                                        <div class="form-group">
+                                            <textarea class="form-control" placeholder="Description" id="description" name="description" autocomplete="off" ng-model="description" required></textarea>
+                                            <script>
+                                                CKEDITOR.replace('description');
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Short Description</label>
+                                    <div class="col-sm-10">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" autocomplete="off" ng-model="short_description">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Image</label>
+                                    <div class="col-sm-10">
+                                        <div class="form-group">
+                                            <input type="file" class="form-control" ng-change="angular.element(this).scope().UploadImage()" ng-model="fldblogimage" name="fldblogimage" id="fldblogimage" style="display:block;" />
+                                            <input type="text" ng-model="filename" style="display:none;" />
+                                            <span style="color:{{textcolor}};">{{fileuploadmsg}}</span>
+
+                                            <img class="w-100" ng-src="{{previewimage}}" ng-model="previewimage" />
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Social Tag Description</label>
+                                    <div class="col-sm-10">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" autocomplete="off" ng-model="social_tag_description">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Published</label>
+                                    <div class="col-sm-10">
+                                        <div class="form-group">
+                                            <input type="checkbox" class="form-control" ng-model="published" checked>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="card-footer">
+                                        <button type="submit" ng-if="!IsAddForm" class="btn btn-primary" ng-disabled="blogform.$invalid" ng-click="UpdateBlog(id, title, description, social_tag_description, short_description)">Update</button>
+
+                                        <button type="submit" ng-if="IsAddForm" class="btn btn-primary" ng-disabled="blogform.$invalid" ng-click="AddBlog(title, description, social_tag_description, short_description)">Add</button>
+
+                                        <button type="submit" class="btn btn-primary" ng-click="ShowHideForm(false)">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+        <footer class="footer">
+            <div class="container-fluid">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" class="nav-link">
+                            About Us
+                        </a>
+                    </li>
+                </ul>
+                <div class="copyright">
+                    ©2019
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+

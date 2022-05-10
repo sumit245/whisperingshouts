@@ -1,0 +1,409 @@
+﻿ <!-- header top begin -->
+<div ng-include="'views/_header.html'">
+</div>
+<style type="text/css">
+    @charset "UTF-8";
+
+    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide:not(.ng-hide-animate) {
+        display: none !important;
+    }
+
+    ng\:form {
+        display: block;
+    }
+
+    .ng-animate-shim {
+        visibility: hidden;
+    }
+
+    .ng-anchor {
+        position: absolute;
+    }
+</style>
+<style id="stndz-style">
+    div[class*="item-container-obpd"], a[data-redirect*="paid.outbrain.com"], a[onmousedown*="paid.outbrain.com"] {
+        display: none !important;
+    }
+
+    a div[class*="item-container-ad"] {
+        height: 0px !important;
+        overflow: hidden !important;
+        position: absolute !important;
+    }
+
+    div[data-item-syndicated="true"] {
+        display: none !important;
+    }
+
+    .grv_is_sponsored {
+        display: none !important;
+    }
+
+    .zergnet-widget-related {
+        display: none !important;
+    }
+</style>
+<style>
+    ::-webkit-scrollbar {
+        width: 3px;
+    }
+
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 3px grey;
+        border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #BB001B !important;
+        border-radius: 3px;
+    }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #BB001B !important;
+        }
+</style>
+<style type="text/css">
+    .page-dashboard .container {
+        max-width: 1100px;
+    }
+
+    .headerMenu {
+        margin-top: 55px;
+    }
+
+    .grab-deal {
+        background: linear-gradient(to right, #26292d, #111214);
+        /*box-shadow: 0 0.625rem 0.938rem 0 rgba(59, 55, 188, 0.5);*/
+        color: #2ecdf3;
+        border-radius: 1.563rem;
+        text-align: center;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        margin: 0 0.6rem;
+        /*border:none;*/
+    }
+
+    .carousel-indicators {
+        bottom: -40px;
+    }
+</style>
+<script type="text/javascript">
+    function redirectOnDeal(_id) {
+        window.location.href = 'rummy-deal/' + _id;
+    }
+</script>
+<section id="layout-content" class="container pt-0" data-ng-init="setPortal_V1('rummy')">
+    <div class="flash-message">
+    </div>
+    <ul class="site-selection">
+        <li>
+            <a href="javascript:void(0);" ng-click="setPortal('/poker')" class="site-link" style="color:#2ed8f3 !important;">Poker</a>
+            <a href="javascript:void(0);" ng-click="setPortal('/rummy')" class="site-link active" style="color:#BB001B;">Rummy</a>
+        </li>
+    </ul>
+    <br>
+    <section id="headerMenu" data-ng-init="getBanner()">
+        <div class="home-main-banner">
+
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-ng-repeat="item in BannerList | filter:{pageId:2}:true" data-ng-click="setBannerIndex($index)" data-target="#carouselExampleIndicators" data-slide-to="{{$index}}" class="{{$index==bannerIndex?'active':''}}"></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    <div data-ng-repeat="item in BannerList | filter:{pageId:2}:true" class="carousel-item {{$index==bannerIndex?'active':''}} custom-carousel-item" style="        background-image: url({{item.bannerImage1}})">
+                        <div class="carousel-caption d-none d-md-block">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <style>
+        .custom-carousel-item {
+            height: 437px;
+            max-height: 437px;
+            background: no-repeat center center scroll;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
+
+    <section>
+        <!--<div class="home-main-banner">
+            <img src="/assets/images/rummy-banner.png" alt="" class="banner-img img-fluid">
+
+        </div>-->
+        <br>
+        <div class="text-center">Excusive promotions delivered first to you!</div>
+        <br>
+        <div class="container">
+            <form id="frmRummySignup" name="frmRummySignup" novalidate>
+                <div class="row listing">
+                    <div class="col-md-4 text-center">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="text" id="rummyName" name="rummyName" ng-pattern="/^[a-zA-Z\s]{3,50}$/" maxlength="100" data-ng-model="rummyName" required class="form-control"  autocomplete="off" oncopy="return false;" onpaste="return false;" placeholder="Name" style="background-image: url(/assets/images/button-active.png); background-color: #000; color: #fff; padding: 0rem 1rem; background-size: 100% 100%; display: inline-block; border-radius: 20px 20px; border: 0;">
+                                <span style="color:red" ng-show="frmRummySignup.rummyName.$dirty">
+                                    <span ng-show="frmRummySignup.rummyName.$error.required">Name is required.</span>
+                                </span>
+                                <span style="color:red" ng-show="frmRummySignup.rummyName.$error.pattern">Please enter name(3 to 50 character)!</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="email" id="rummyEmail" name="rummyEmail" data-ng-model="rummyEmail" ng-pattern="/^[^\s&#64;]+&#64;[^\s&#64;]+\.[^\s&#64;]{2,}$/" maxlength="150" autocomplete="off" oncopy="return false;" onpaste="return false;" required class="form-control" placeholder="E-Mail" style="background-image: url(/assets/images/button-active.png); background-color: #000; color: #fff; padding: 0rem 1rem; background-size: 100% 100%; display: inline-block; border-radius: 20px 20px; border: 0;">
+                                <span style="color:red" ng-show="frmRummySignup.rummyEmail.$dirty && frmContact.contactEmail.$invalid">
+                                    <span ng-show="frmRummySignup.rummyEmail.$error.required">Email is required.</span>
+                                </span>
+                                <span style="color:red" ng-show="frmRummySignup.rummyEmail.$error.pattern">Please enter valid email id!</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="tel" x id="rummyMobile" name="rummyMobile" data-ng-model="rummyMobile" maxlength="10" required class="form-control" autocomplete="off" ng-pattern="/^[6-9][0-9]{9}$/" oncopy="return false;" onpaste="return false;" xtype="tel" onkeypress="return checkNumber(this.value, event);" placeholder="Phone" style="background-image: url(/assets/images/button-active.png); background-color: #000; color: #fff; padding: 0rem 1rem; background-size: 100% 100%; display: inline-block; border-radius: 20px 20px; border: 0;">
+                                <span style="color:red" ng-show="frmRummySignup.rummyMobile.$dirty">
+                                    <span ng-show="frmRummySignup.rummyMobile.$error.required">Mobile no is required.</span>
+                                </span>
+                                <span style="color:red" ng-show="frmRummySignup.rummyMobile.$error.pattern">Please enter valid mobile number!</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        &nbsp;
+
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <input type="button" data-ng-disabled="frmRummySignup.$invalid" data-ng-click="rummySignUp(frmRummySignup)" class="btn btn-primary btn--primary" style="background-color: #c50725; border-color: #c50725; box-shadow: 0px 8px #000;" value="Subscribe Now">
+                    </div>
+                    <div class="col-md-4 text-center">
+                        &nbsp;
+
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!--rudal code start 01/01-->
+
+        <style>
+            .clr {
+                clear: both;
+            }
+        </style>
+
+        <br />
+        <br />
+        <div class="container" style="background-image: url('/assets/images/card-bg.png');">
+
+            <div class="row">
+                <br />
+                <div class="col-md-12">
+                    <div class="col-md-10 pt-4">
+                        <h2 style="color: #ddd3d3; font-weight: bold;">ONLINE RUMMY DEALS !</h2>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="rummy-card" style="margin: 2em; padding: 1em; box-shadow: inset -15px -15px 19px 2px #000; background: #202327; border: 4px solid #25252500; border-radius: 4px;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span style="color: #ddd3d3; font-size: 2.5em; float: left;">8.9</span>
+                                <span style="float: right;">
+                                    <img src="assets/images/star.png" />
+                                    <br />
+                                    <a style="color: #dda3a6; text-decoration: underline; font-size: 12px;">Review</a>
+                                </span>
+
+                                <div class="clr"></div>
+                                <img src="assets/images/RummyBaazi_Logo.png" style="border-radius: 7px;" />
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="color: #ddd3d3;">Rummy Baazi</h5>
+                                <p style="font-size: 12px; color: #dda3a6;">Fastest growing in India Daily promotions and bonus Stunning table and user interface</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p style="color: #ddd3d3; margin-top: 1em;">Signup and get</p>
+                                <h2 style="color: #ddd3d3;">1500* Bonus</h2>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="button" onclick="redirectOnDeal('1');" class="btn btn-primary btn--primary" style="background-color: #c50725; border-color: #c50725; box-shadow: 4px 2px 7px 2px #ffffff54; width: 150px;" value="Deal">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="rummy-card" style="margin: 2em; padding: 1em; box-shadow: inset -15px -15px 19px 2px #000; background: #202327; border: 4px solid #25252500; border-radius: 4px;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span style="color: #ddd3d3; font-size: 2.5em; float: left;">8.9</span>
+                                <span style="float: right;">
+                                    <img src="assets/images/star.png" />
+                                    <br />
+                                    <a style="color: #dda3a6; text-decoration: underline; font-size: 12px;">Review</a>
+                                </span>
+
+                                <div class="clr"></div>
+                                <img src="assets/images/Taj-Rummy-Logo.png" style="border-radius: 7px;" />
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="color: #ddd3d3;">Taj Rummy</h5>
+                                <p style="font-size: 12px; color: #dda3a6;">Fastest growing in India Daily promotions and bonus Stunning table and user interface</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p style="color: #ddd3d3; margin-top: 1em;">Signup and get</p>
+                                <h2 style="color: #ddd3d3;">1500* Bonus</h2>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="button" onclick="redirectOnDeal('2');" class="btn btn-primary btn--primary" style="background-color: #c50725; border-color: #c50725; box-shadow: 4px 2px 7px 2px #ffffff54; width: 150px;" value="Deal">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="rummy-card" style="margin: 2em; padding: 1em; box-shadow: inset -15px -15px 19px 2px #000; background: #202327; border: 4px solid #25252500; border-radius: 4px;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span style="color: #ddd3d3; font-size: 2.5em; float: left;">8.9</span>
+                                <span style="float: right;">
+                                    <img src="assets/images/star.png" />
+                                    <br />
+                                    <a style="color: #dda3a6; text-decoration: underline; font-size: 12px;">Review</a>
+                                </span>
+
+                                <div class="clr"></div>
+                                <img src="assets/images/Khelplay-Rummy-Logo.gif" style="border-radius: 7px;" />
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="color: #ddd3d3;">Khelplay Rummy</h5>
+                                <p style="font-size: 12px; color: #dda3a6;">Fastest growing in India Daily promotions and bonus Stunning table and user interface</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p style="color: #ddd3d3; margin-top: 1em; margin-bottom: 0;">Signup and get</p>
+                                <h2 style="color: #ddd3d3;">1500* Bonus</h2>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="button" onclick="redirectOnDeal('3');" class="btn btn-primary btn--primary" style="background-color: #c50725; border-color: #c50725; box-shadow: 4px 2px 7px 2px #ffffff54; width: 150px;" value="Deal">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="rummy-card" style="margin: 2em; padding: 1em; box-shadow: inset -15px -15px 19px 2px #000; background: #202327; border: 4px solid #25252500; border-radius: 4px;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span style="color: #ddd3d3; font-size: 2.5em; float: left;">8.9</span>
+                                <span style="float: right;">
+                                    <img src="assets/images/star.png" />
+                                    <br />
+                                    <a style="color: #dda3a6; text-decoration: underline; font-size: 12px;">Review</a>
+                                </span>
+
+                                <div class="clr"></div>
+                                <img src="assets/images/rummy-passion-logo.png" style="border-radius: 7px;width: 100%;" />
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="color: #ddd3d3;">Rummy Passion</h5>
+                                <p style="font-size: 12px; color: #dda3a6;">Fastest growing in India Daily promotions and bonus Stunning table and user interface</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p style="color: #ddd3d3; margin-top: 1em; margin-bottom: 0;">Signup and get</p>
+                                <h2 style="color: #ddd3d3;">1500* Bonus</h2>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="button" onclick="redirectOnDeal('4');" class="btn btn-primary btn--primary" style="background-color: #c50725; border-color: #c50725; box-shadow: 4px 2px 7px 2px #ffffff54; width: 150px;" value="Deal">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="background-image: url('assets/images/card-bg.png');">
+        </div>
+        <div class="container mt-4 pt-4">
+            <div class="row">
+                <br />
+
+
+                <div class="col-md-12 mt-4 ">
+                    <h2 style="color: #ddd3d3; font-weight: bold;">LATEST RUMMY UPDATE</h2>
+                    <br />
+                </div>
+
+                <div class="row">
+
+                    <div class="col-sm-8 col-sm-pull-4 pt-4">
+
+                        <p>
+                            <strong>Best Rummy Site – Review of Top Online Rummy Sites in India</strong>
+                            <br />
+                            WhisperingShouts.com/rummy gives you a comparative investigation of the top rummy online locales in India. We audit the best online rummy playing locales like, RummyPassion, RummyBaazi, TajRummy, KhelplayRummy and so forth by the rewards offered, programming, illustrations, highlights, challenges, advancements, competitions and convenience. As Rummy games are on an ascent particularly with regards to playing on the web, players should check the wellbeing and security of every site they are eager to play on prior to joining. In our rummy blog, we audit the best Indian sites to play rummy as per the highlights they offer like Rummy Baazi offers Rs50 free that you can profit on the signup.
+
+                            <br />
+                            Investing with WhisperingShouts will be profitable in the event that you are hoping to play Indian Rummy and gain a benefit on targets you go through playing genuine cash games. You can claim a portion of your rake back with by signing up through us, which in the long run becomes huge sums.
+
+                            <br />
+                            <br />
+                            <strong>Most recent News on Rummy Online Sites in India </strong><br />
+                            Indian rummy or 13 cards rummy is one of the well known variations of rummy which is broadly played in the southern pieces of India. In the event that you need to get familiar with the game and everything new that is coming in the Indian gaming industry, it is difficult to know as there are exceptionally less or no sites are expounding on it. Whispering Shouts gathers best rummy deals from top trustable rummy online destinations in India like RummyPassion, RummyBaazi, TajRummy, KhelplayRummy and so forth and acquires it front of you with the goal that you can take advantage of it. Advancements, extra offers and rummy leaderboard competitions run distinctly, and on the off chance that you pass up these, you can make certain of putting away your cash in vain.
+
+                            <br />
+                            On the off chance that you are another player and need to think about a specific rummy game online site prior to going along with, you can check the rankings of every site from the online rummy locales list on our website. This will ensure you are playing on a believed site before you invest your significant cash and energy. We not just cover the best news for money players yet in addition for freeroll major parts in India.
+
+
+                            <br />
+                            <br />
+                            <strong>Audit of Online Rummy Websites in India </strong><br />
+                            It can get riotous and confounding when you attempt to join rummy sites in India particularly when you search on Google and other web crawlers. WhisperingShouts.com/rummy experiences every one of the top online rummy aggregators in India and presents to you the great and terrible piece of every one of these sites. This makes it extremely simple in any event, for a beginner player to join a rummy site without a very remarkable reasoning cycle.
+
+
+                        </p>
+                    </div>
+                    <div class="col-sm-4 col-sm-push-8 mt-2">
+                        <div class="mt-3 mb-4" style="min-height: 300px; border-radius: 1em; padding: 10px; background: #cccccc;">
+                            <h4 style="text-align: center; border-bottom: 2px solid #a1a1a1; padding-top: 10px; padding-bottom: 10px; color: #000;">Most recent</h4>
+                        </div>
+                        <div class="mt-4" style="min-height: 300px; border-radius: 1em; padding: 10px; background: #cccccc;">
+                            <h4 style="text-align: center; border-bottom: 2px solid #a1a1a1; padding-top: 10px; padding-bottom: 10px; color: #000;">Most recent</h4>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!--rudal code end 01/01-->
+
+    </section>
+</section>
+
+<br />
+<br />
+<br />
+<div ng-include="'views/_footer.html'">
+</div>

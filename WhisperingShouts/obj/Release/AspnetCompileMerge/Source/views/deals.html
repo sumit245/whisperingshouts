@@ -1,0 +1,385 @@
+﻿<div ng-include="'views/_header.html'">
+</div>
+<style type="text/css">
+    .grab-deal {
+        background: linear-gradient(to right, #26292d, #111214);
+        /*box-shadow: 0 0.625rem 0.938rem 0 rgba(59, 55, 188, 0.5);*/
+        color: #2ecdf3;
+        border-radius: 1.563rem;
+        text-align: center;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        margin: 0 0.6rem;
+        /*border:none;*/
+    }
+
+    .carousel-indicators {
+        bottom: -40px;
+    }
+</style>
+<!--<script type="text/javascript">
+    $(document).ready(function () {
+        var _portal = localStorage.getItem("portal");
+        if (_portal == 'rummy') {
+            replaceColor('#2ecdf3', '#BB001B');
+            replaceColor('#2ECDF3', '#BB001B');
+            replaceColor('#2cc7f8', '#BB001B');
+            replaceColor('#2db2d3', '#BB001B');
+            replaceColor('rgb(46, 205, 243)', '#BB001B');
+        }
+    });
+</script>-->
+<script type="text/javascript">
+    function redirectOnDeal(_id) {
+        window.location.href = 'rummy-deal/' + _id;
+    }
+</script>
+<section id="layout-content" class="container">
+    <div class="flash-message">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2" ng-include="'views/_sideMenu.html'">
+            </div>
+            <div class="col-md-6" data-ng-show="Portal=='Poker'">
+                <section class="section section-top-border section-rakeback-deals text-center show-mobile-only">
+                    <div class="container">
+                        <div id="myCarouse3" class="carousel slide" data-ride="carousel">
+                            <!-- Carousel indicators -->
+                            <!-- Wrapper for carousel items -->
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="row row-eq-height">
+                                        <div class="col-md-12">
+                                            <div class="content card--shadow">
+                                                <img src="/assets/images/RummyBaazi_Logo.png" alt="" class="icon img-fluid">
+                                                <h4 class="brand-name text-uppercase">Rummy <br> Baazi</h4>
+                                                <h3 class="heading">
+                                                    <span>1500*</span>
+                                                    Bonus
+                                                </h3>
+                                                <a class="btn btn-primary btn--primary grab-deal" href="javascript::" onclick="redirectOnDeal('1');">Grab Deal</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="carousel-item">
+                                    <div class="row row-eq-height">
+
+                                        <div class="col-md-12">
+                                            <div class="content card--shadow">
+                                                <img src="/assets/images/Taj-Rummy-Logo.png" alt="" class="icon img-fluid">
+                                                <h4 class="brand-name text-uppercase">Taj <br> Rummy</h4>
+                                                <h3 class="heading">
+                                                    <span>1500*</span>
+                                                    Bonus
+                                                </h3>
+                                                <a class="btn btn-primary btn--primary grab-deal" href="javascript::" onclick="redirectOnDeal('2');">Grab Deal</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="carousel-item">
+                                    <div class="row row-eq-height">
+
+                                        <div class="col-md-12">
+                                            <div class="content card--shadow">
+                                                <img src="/assets/images/Khelplay-Rummy-Logo.gif" alt="" class="icon img-fluid">
+                                                <h4 class="brand-name text-uppercase">Khelplay <br> Rummy</h4>
+                                                <h3 class="heading">
+                                                    <span>1500*</span>
+                                                    Bonus
+                                                </h3>
+                                                <a class="btn btn-primary btn--primary grab-deal" href="javascript:void(0)" onclick="redirectOnDeal('3');">Grab Deal</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="carousel-item">
+                                    <div class="row row-eq-height">
+                                        <div class="col-md-12">
+                                            <div class="content card--shadow">
+                                                <img src="/assets/images/rummy-passion-logo.png" alt="" class="icon img-fluid">
+                                                <h4 class="brand-name text-uppercase">Rummy<br />Passion</h4>
+                                                <h3 class="heading">
+                                                    <span>1500*</span>
+                                                    Bonus
+                                                </h3>
+                                                <a class="btn btn-primary btn--primary grab-deal" href="javascript::" onclick="redirectOnDeal('4');">Grab Deal</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="section section-top-border section-rakeback-deals text-center show-desktop-only">
+                    <div class="container">
+
+                        <div id="myCarouse2" class="carousel slide" data-ride="carousel">
+                            <!-- Carousel indicators -->
+                            <ol class="carousel-indicators">
+                                <li data-target="#myCarouse2" data-slide-to="0" class="active"></li>
+                                <li data-target="#myCarouse2" data-slide-to="1" class="active"></li>
+                            </ol>
+                            <!-- Wrapper for carousel items -->
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="row row-eq-height">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="content card--shadow">
+                                                <img src="/assets/images/RummyBaazi_Logo.png" alt="" class="icon img-fluid">
+                                                <h4 class="brand-name text-uppercase">Rummy <br> Baazi</h4>
+                                                <h3 class="heading">
+                                                    <span>1500*</span>
+                                                    Bonus
+                                                </h3>
+                                                <a class="btn btn-primary btn--primary grab-deal" href="javascript::" onclick="redirectOnDeal('1');">Grab Deal</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="content card--shadow">
+                                                <img src="/assets/images/Taj-Rummy-Logo.png" alt="" class="icon img-fluid">
+                                                <h4 class="brand-name text-uppercase">Taj <br> Rummy</h4>
+                                                <h3 class="heading">
+                                                    <span>1500*</span>
+                                                    Bonus
+                                                </h3>
+                                                <a class="btn btn-primary btn--primary grab-deal" href="javascript::" onclick="redirectOnDeal('2');">Grab Deal</a>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                                <div class="carousel-item">
+                                    <div class="row row-eq-height">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="content card--shadow">
+                                                <img src="/assets/images/Khelplay-Rummy-Logo.gif" alt="" class="icon img-fluid">
+                                                <h4 class="brand-name text-uppercase">Khelplay <br> Rummy</h4>
+                                                <h3 class="heading">
+                                                    <span>1500*</span>
+                                                    Bonus
+                                                </h3>
+                                                <a class="btn btn-primary btn--primary grab-deal" href="javascript:void(0)" onclick="redirectOnDeal('3');">Grab Deal</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="content card--shadow">
+                                                <img src="/assets/images/rummy-passion-logo.png" alt="" class="icon img-fluid">
+                                                <h4 class="brand-name text-uppercase">Rummy<br />Passion</h4>
+                                                <h3 class="heading">
+                                                    <span>1500*</span>
+                                                    Bonus
+                                                </h3>
+                                                <a class="btn btn-primary btn--primary grab-deal" href="javascript::" onclick="redirectOnDeal('4');">Grab Deal</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="col-md-6" data-ng-show="Portal=='Rummy'">
+                <section class="section section-top-border section-rakeback-deals text-center show-mobile-only">
+                    <div class="container">
+                        <div id="myCarouse3" class="carousel slide" data-ride="carousel">
+                            <!-- Carousel indicators -->
+                            <!-- Wrapper for carousel items -->
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="row row-eq-height">
+                                        <div class="col-md-12">
+                                            <div class="content card--shadow">
+                                                <img src="/assets/images/partner/pokerdangal-logo.png" alt="" class="icon img-fluid">
+                                                <h4 class="brand-name text-uppercase">Poker <br> Dangal</h4>
+                                                <h3 class="heading">
+                                                    <span>20%</span>
+                                                    RAKEBACK
+                                                </h3>
+                                                <p>
+                                                    130% First <br>
+                                                    Deposit Bonus<br />&nbsp;
+                                                </p>
+                                                <a class="btn btn-primary btn--primary grab-deal" href="javascript::" ng-click="RedirectToPartnerPage(4)">Grab Deal</a>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+
+                                <div class="carousel-item">
+                                    <div class="row row-eq-height">
+
+                                        <div class="col-md-12">
+                                            <div class="content card--shadow">
+                                                <img src="/assets/images/partner/pokerbaazi-logo.png" alt="" class="icon img-fluid">
+                                                <h4 class="brand-name text-uppercase">Poker <br> Baazi</h4>
+                                                <h3 class="heading">
+                                                    <span>25%</span>
+                                                    RAKEBACK
+                                                </h3>
+                                                <p>
+                                                    100% First <br>
+                                                    Deposit Bonus <br>
+                                                    upto ₹2500/-
+                                                </p>
+                                                <a class="btn btn-primary btn--primary grab-deal" href="javascript::" ng-click="RedirectToPartnerPage(2)">Grab Deal</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="carousel-item">
+                                    <div class="row row-eq-height">
+
+                                        <div class="col-md-12">
+                                            <div class="content card--shadow">
+                                                <img src="/assets/images/partner/poket52-logo.png" alt="" class="icon img-fluid">
+                                                <h4 class="brand-name text-uppercase">Pocket <br> 52</h4>
+                                                <h3 class="heading">
+                                                    <span>₹ 100</span>
+                                                    SIGNUP BONUS
+                                                </h3>
+                                                <p>
+                                                    130% First <br>
+                                                    Deposit Bonus<br />&nbsp;
+                                                </p>
+                                                <a class="btn btn-primary btn--primary grab-deal" href="http://bit.ly/WSNAP52" target="_blank">Grab Deal</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="carousel-item">
+                                    <div class="row row-eq-height">
+                                        <div class="col-md-12">
+                                            <div class="content card--shadow">
+                                                <img src="/assets/images/partner/9stacks-logo.png" alt="" class="icon img-fluid">
+                                                <h4 class="brand-name text-uppercase">9Stacks<br />&nbsp;</h4>
+                                                <h3 class="heading">
+                                                    <span>₹ 150</span>
+                                                    SIGNUP BONUS
+                                                </h3>
+                                                <p>
+                                                    10% <br>
+                                                    Rakeback<br />&nbsp;
+                                                </p>
+                                                <a class="btn btn-primary btn--primary grab-deal" href="javascript::" ng-click="RedirectToPartnerPage(17)">Grab Deal</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="section section-top-border section-rakeback-deals text-center show-desktop-only">
+                    <div class="container">
+
+                        <div id="myCarouse2" class="carousel slide" data-ride="carousel">
+                            <!-- Carousel indicators -->
+                            <ol class="carousel-indicators">
+                                <li data-target="#myCarouse2" data-slide-to="0" class="active"></li>
+                                <li data-target="#myCarouse2" data-slide-to="1" class="active"></li>
+                            </ol>
+                            <!-- Wrapper for carousel items -->
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="row row-eq-height">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="content card--shadow">
+                                                <img src="/assets/images/partner/pokerdangal-logo.png" alt="" class="icon img-fluid">
+                                                <h4 class="brand-name text-uppercase">Poker <br> Dangal</h4>
+                                                <h3 class="heading">
+                                                    <span>20%</span>
+                                                    RAKEBACK
+                                                </h3>
+                                                <p>
+                                                    130% First <br>
+                                                    Deposit Bonus<br />&nbsp;
+                                                </p>
+                                                <a class="btn btn-primary btn--primary grab-deal" href="javascript::" ng-click="RedirectToPartnerPage(4)">Grab Deal</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="content card--shadow">
+                                                <img src="/assets/images/partner/pokerbaazi-logo.png" alt="" class="icon img-fluid">
+                                                <h4 class="brand-name text-uppercase">Poker <br> Baazi</h4>
+                                                <h3 class="heading">
+                                                    <span>25%</span>
+                                                    RAKEBACK
+                                                </h3>
+                                                <p>
+                                                    100% First <br>
+                                                    Deposit Bonus <br>
+                                                    upto ₹2500/-
+                                                </p>
+                                                <a class="btn btn-primary btn--primary grab-deal" href="javascript::" ng-click="RedirectToPartnerPage(2)">Grab Deal</a>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                                <div class="carousel-item">
+                                    <div class="row row-eq-height">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="content card--shadow">
+                                                <img src="/assets/images/partner/poket52-logo.png" alt="" class="icon img-fluid">
+                                                <h4 class="brand-name text-uppercase">Pocket <br> 52</h4>
+                                                <h3 class="heading">
+                                                    <span>₹ 100</span>
+                                                    SIGNUP BONUS
+                                                </h3>
+                                                <p>
+                                                    130% First <br>
+                                                    Deposit Bonus
+                                                </p>
+                                                <a class="btn btn-primary btn--primary grab-deal" href="http://bit.ly/WSNAP52" target="_blank">Grab Deal</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="content card--shadow">
+                                                <img src="/assets/images/partner/9stacks-logo.png" alt="" class="icon img-fluid">
+                                                <h4 class="brand-name text-uppercase">9Stacks<br />&nbsp;</h4>
+                                                <h3 class="heading">
+                                                    <span>₹ 150</span>
+                                                    SIGNUP BONUS
+                                                </h3>
+                                                <p>
+                                                    10% <br>
+                                                    Rakeback
+                                                </p>
+                                                <a class="btn btn-primary btn--primary grab-deal" href="javascript::" ng-click="RedirectToPartnerPage(17)">Grab Deal</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="col-md-4 show-desktop-only" ng-include="'views/_activity.html'">
+            </div>
+        </div>
+    </div>
+</section>

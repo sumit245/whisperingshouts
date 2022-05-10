@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        function Test() {
+            try {
+                //debugger;
+                //var _obj = {
+                //    cust_name: "Girish Kumar",
+                //    cust_email: "girishkumar486@gmail.com",
+                //    cust_mobile: "8287640487",
+                //    demonation_value: "1000",
+                //    demonation_qunatity: "1",
+                //    total_value: "1000",
+                //    Final_value: "1000",
+                //    coupon_code_flag: "0",
+                //    coupon_code: "",
+                //    brand_name: "flipkart",
+                //    csrf_test_name: "5dc2271fdc2b1c56d4f9735798aea11e"
+                //};
+
+                $.ajax({
+                    type: "POST",
+                    url: "https://orpay.in/microsite_controller/generateOrder",
+                    dataType: 'json',
+                    data: {
+                        'cust_name': "Girish Kumar",
+                        'cust_email': "girishkumar486@gmail.com",
+                        'cust_mobile': "8287640487",
+                        'demonation_value': "1000",
+                        'demonation_qunatity': "1",
+                        'total_value': "1000",
+                        'Final_value': "1000",
+                        'coupon_code_flag': "0",
+                        'coupon_code': "",
+                        'brand_name': 'flipkart',
+                        'csrf_test_name': "5dc2271fdc2b1c56d4f9735798aea11e"
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        //ajaxindicatorstop();
+                        //var _data = $.parseJSON(data.d);
+                        //if (_data !== null && _data.length > 0) {
+                        //    var details = _data[0];
+                        //    if (details.IsSuccess === 1) {
+                        //        FB.logout(function () {
+                        //            window.location.href = '/dashboard';
+                        //        });
+                        //    }
+                        //    else {
+                        //        FB.logout(function () {
+                        //            GetAlert(details.ResponseMSG, 'error');
+                        //        });
+                        //    }
+                        //}
+
+                    },
+                    error: function (result) {
+                        //ajaxindicatorstop();
+                        console.log(result.responseText);
+                    }
+
+                });
+
+            }
+            catch (ex) {
+                //ajaxindicatorstop();
+            }
+        }
+    </script>
+</head>
+<body onload="Test();">
+
+</body>
+</html>

@@ -1,0 +1,501 @@
+﻿<html lang="en" ng-app="WhisperingShoutsAppAdmin">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <title>
+        Admin
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!-- Nucleo Icons -->
+    <link href="assets/css/nucleo-icons.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="assets/demo/demo.css" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+    <script src="angular/controller/UsersController.js"></script>
+    <script src="angular/services/service.js"></script>
+
+    <link href="/angular/css/sweetalert.css" rel="stylesheet" />
+    <script src="/angular/js/sweetalert.min.js"></script>
+    <script src="/angular/loader/loader.js"></script>
+
+    <script type="text/javascript" language="javascript">
+        function checkKey(o, e) {
+            var unicode = e.charCode ? e.charCode : e.keyCode
+            if (!(e.which)) e.which = unicode;
+            if (e.which == 0 || e.which == 13 || e.which == 116 || e.which == 100 || e.which == 8)
+                return true;
+            if (String.fromCharCode(e.which).match(/[a-zA-Z ]*/) == "")
+                return false;
+            else
+                return true;
+        }
+        function checkNumber(o, e) {
+            var unicode = e.charCode ? e.charCode : e.keyCode
+            if (!(e.which)) e.which = unicode;
+            if (String.fromCharCode(e.which) == "d") return false;
+            //        if (e.which == 0 || e.which == 13 || e.which == 116 || e.which == 100 || e.which == 8) return true; ;
+            if (e.which == 0 || e.which == 13 || e.which == 100 || e.which == 8) return true;;
+            //if(String.fromCharCode(e.which).match(/[1234567890]*/)=="")
+            if (e.which >= 48 && e.which <= 57 && String.fromCharCode(e.which) != "d")
+                return true;
+            else
+                return false;
+        }
+        var setNewType;
+        if (!setNewType) {
+            setNewType = window.onload = function () {
+                var a = document.getElementsByTagName('input');
+                for (var i = 0; i < a.length; i++) {
+                    if (a[i].getAttribute('xtype') != null) {
+                        a[i].setAttribute('type', a[i].getAttribute('xtype'));
+                        a[i].removeAttribute('xtype');
+                    }
+                };
+            }
+        }
+
+        function GetAlert(message, type, redirecturl, reloadpage) {
+
+            swal("", message, type);
+            if (redirecturl !== undefined && reloadpage === undefined) {
+                $(".swal2-confirm").click(function () {
+                    window.location.href = redirecturl;
+                });
+            }
+            if (reloadpage !== undefined) {
+                $(".swal2-confirm").click(function () {
+                    window.location.reload();
+                });
+            }
+        }
+
+    </script>
+
+</head>
+<body class="sidebar-mini" ng-controller="UsersController">
+    <div class="wrapper">
+        <div class="navbar-minimize-fixed">
+            <button class="minimize-sidebar btn btn-link btn-just-icon">
+                <i class="tim-icons icon-align-center visible-on-sidebar-regular text-muted"></i>
+                <i class="tim-icons icon-bullet-list-67 visible-on-sidebar-mini text-muted"></i>
+            </button>
+        </div>
+        <div class="sidebar">
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="javascript:void(0)" class="simple-text logo-mini">
+                        A
+                    </a>
+                    <a href="javascript:void(0)" class="simple-text logo-normal">
+                        Admin
+                    </a>
+                </div>
+                <ul class="nav">
+                    <li>
+                        <a href="dashboard.html">
+                            <i class="tim-icons icon-chart-pie-36"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="partner-username.html">
+                            <i class="tim-icons icon-chart-pie-36"></i>
+                            <p>Partner User Name Request</p>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="withdraw-request.html">
+                            <i class="tim-icons icon-settings"></i>
+                            <p>Withdraw Request</p>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="rewards.html">
+                            <i class="tim-icons icon-settings"></i>
+                            <p>Rewards</p>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="leaderboard.html">
+                            <i class="tim-icons icon-settings"></i>
+                            <p>Leaderboard</p>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="users.html">
+                            <i class="tim-icons icon-settings"></i>
+                            <p>Users</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="main-panel">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
+                <div class="container-fluid">
+                    <div class="navbar-wrapper">
+                        <div class="navbar-minimize d-inline">
+                            <button class="minimize-sidebar btn btn-link btn-just-icon" rel="tooltip" data-original-title="Sidebar toggle" data-placement="right">
+                                <i class="tim-icons icon-align-center visible-on-sidebar-regular"></i>
+                                <i class="tim-icons icon-bullet-list-67 visible-on-sidebar-mini"></i>
+                            </button>
+                        </div>
+                        <div class="navbar-toggle d-inline">
+                            <button type="button" class="navbar-toggler">
+                                <span class="navbar-toggler-bar bar1"></span>
+                                <span class="navbar-toggler-bar bar2"></span>
+                                <span class="navbar-toggler-bar bar3"></span>
+                            </button>
+                        </div>
+                        <a class="navbar-brand" href="javascript:void(0)">Users</a>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navigation">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="dropdown nav-item">
+                                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                    <div class="photo">
+                                        <img src="assets/img/mike.jpg" alt="Profile Photo">
+                                    </div>
+                                    <b class="caret d-none d-lg-block d-xl-block"></b>
+                                    <p class="d-lg-none">
+                                        Log out
+                                    </p>
+                                </a>
+                                <ul class="dropdown-menu dropdown-navbar">
+                                    <li class="nav-link">
+                                        <a href="logout.html" class="nav-item dropdown-item">Log out</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="separator d-lg-none"></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- End Navbar -->
+            <div class="content">
+                <div class="row mt-5">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title"> Users</h3>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="toolbar">
+                                    <!--        Here you can write extra buttons/actions for the toolbar              -->
+                                </div>
+                                <table id="dtusers" class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Email ID</th>
+                                            <th>Name</th>
+                                            <th>Mobile</th>
+                                            <th>Registered On</th>
+                                            <th>Status</th>
+                                            <th class="sorting_desc_disabled sorting_asc_disabled text-right">Actions</th>
+                                        </tr>
+                                    </thead>
+
+
+                                    <tbody>
+                                        <tr ng-repeat="item in UsersList">
+                                            <td>{{item.email_id}}</td>
+                                            <td>{{item.name}}</td>
+                                            <td>{{item.mobile}}</td>
+                                            <td>{{item.RegisteredOn}}</td>
+                                            <td>{{item.account_status}}</td>
+                                            <td class="text-right">
+                                                <label class="switch">
+                                                    <input type="checkbox" ng-model="chkstatus" name="chkstatus" ng-checked="{{item.is_active == '1'}}" ng-change="ActiveDeactive(chkstatus, item.id)">
+                                                    <span class="slider round"></span>
+                                                </label>                                               
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <!--<tfoot>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Office</th>
+                                            <th>Age</th>
+                                            <th class="disabled-sorting text-right">Actions</th>
+                                        </tr>
+                                    </tfoot>-->
+                                </table>
+                            </div>
+                            <!-- end content-->
+                        </div>
+                        <!--  end card  -->
+                    </div>
+                    <!-- end col-md-12 -->
+                </div>
+                <!-- end row -->
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a href="javascript:void(0)" class="nav-link">
+                                About Us
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="copyright">
+                        ©2019
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <style>
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 26px;
+                width: 26px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
+    </style>
+
+    <!--   Core JS Files   -->
+    <script src="assets/js/core/jquery.min.js"></script>
+    <script src="assets/js/core/popper.min.js"></script>
+    <script src="assets/js/core/bootstrap.min.js"></script>
+    <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <script src="assets/js/plugins/moment.min.js"></script>
+    <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+    <script src="assets/js/plugins/bootstrap-switch.js"></script>
+    <!--  Plugin for Sweet Alert -->
+    <script src="assets/js/plugins/sweetalert2.min.js"></script>
+    <!--  Plugin for Sorting Tables -->
+    <script src="assets/js/plugins/jquery.tablesorter.js"></script>
+    <!-- Forms Validations Plugin -->
+    <script src="assets/js/plugins/jquery.validate.min.js"></script>
+    <!--  Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+    <script src="assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+    <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+    <script src="assets/js/plugins/bootstrap-selectpicker.js"></script>
+    <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+    <script src="assets/js/plugins/bootstrap-datetimepicker.js"></script>
+    <!--  DataTables.net Plugin, full documentation here: https://datatables.net/    -->
+    <script src="assets/js/plugins/jquery.dataTables.min.js"></script>
+    <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+    <script src="assets/js/plugins/bootstrap-tagsinput.js"></script>
+    <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+    <script src="assets/js/plugins/jasny-bootstrap.min.js"></script>
+    <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+    <script src="assets/js/plugins/fullcalendar.min.js"></script>
+    <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+    <script src="assets/js/plugins/jquery-jvectormap.js"></script>
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="assets/js/plugins/nouislider.min.js"></script>
+    <!--  Google Maps Plugin    -->
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>-->
+    <!-- Chart JS -->
+    <script src="assets/js/plugins/chartjs.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="assets/js/plugins/bootstrap-notify.js"></script>
+    <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="assets/js/black-dashboard.min.js?v=1.0.0"></script>
+    <!-- Black Dashboard DEMO methods, don't include it in your project! -->
+    <script src="assets/demo/demo.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('body').removeClass('sidebar-mini');
+            sidebar_mini_active = true;
+            $('.sidebar').attr('data', 'blue');
+            if ($('.slider').length != 0) {
+                demo.initSliders();
+            }
+        });
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $().ready(function () {
+                $sidebar = $('.sidebar');
+                $navbar = $('.navbar');
+                $main_panel = $('.main-panel');
+
+                $full_page = $('.full-page');
+
+                $sidebar_responsive = $('body > .navbar-collapse');
+                sidebar_mini_active = true;
+                white_color = false;
+
+                window_width = $(window).width();
+
+                fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+
+
+
+                $('.fixed-plugin a').click(function (event) {
+                    if ($(this).hasClass('switch-trigger')) {
+                        if (event.stopPropagation) {
+                            event.stopPropagation();
+                        } else if (window.event) {
+                            window.event.cancelBubble = true;
+                        }
+                    }
+                });
+
+                $('.fixed-plugin .background-color span').click(function () {
+                    $(this).siblings().removeClass('active');
+                    $(this).addClass('active');
+
+                    var new_color = $(this).data('color');
+
+                    if ($sidebar.length != 0) {
+                        $sidebar.attr('data', new_color);
+                    }
+
+                    if ($main_panel.length != 0) {
+                        $main_panel.attr('data', new_color);
+                    }
+
+                    if ($full_page.length != 0) {
+                        $full_page.attr('filter-color', new_color);
+                    }
+
+                    if ($sidebar_responsive.length != 0) {
+                        $sidebar_responsive.attr('data', new_color);
+                    }
+                });
+
+                $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function () {
+                    var $btn = $(this);
+
+                    if (sidebar_mini_active == true) {
+                        $('body').removeClass('sidebar-mini');
+                        sidebar_mini_active = false;
+                        blackDashboard.showSidebarMessage('Sidebar mini deactivated...');
+                    } else {
+                        $('body').addClass('sidebar-mini');
+                        sidebar_mini_active = true;
+                        blackDashboard.showSidebarMessage('Sidebar mini activated...');
+                    }
+
+                    // we simulate the window Resize so the charts will get updated in realtime.
+                    var simulateWindowResize = setInterval(function () {
+                        window.dispatchEvent(new Event('resize'));
+                    }, 180);
+
+                    // we stop the simulation of Window Resize after the animations are completed
+                    setTimeout(function () {
+                        clearInterval(simulateWindowResize);
+                    }, 1000);
+                });
+
+                $('.switch-change-color input').on("switchChange.bootstrapSwitch", function () {
+                    var $btn = $(this);
+
+                    if (white_color == true) {
+
+                        $('body').addClass('change-background');
+                        setTimeout(function () {
+                            $('body').removeClass('change-background');
+                            $('body').removeClass('white-content');
+                        }, 900);
+                        white_color = false;
+                    } else {
+
+                        $('body').addClass('change-background');
+                        setTimeout(function () {
+                            $('body').removeClass('change-background');
+                            $('body').addClass('white-content');
+                        }, 900);
+
+                        white_color = true;
+                    }
+
+
+                });
+
+                $('.light-badge').click(function () {
+                    $('body').addClass('white-content');
+                });
+
+                $('.dark-badge').click(function () {
+                    $('body').removeClass('white-content');
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

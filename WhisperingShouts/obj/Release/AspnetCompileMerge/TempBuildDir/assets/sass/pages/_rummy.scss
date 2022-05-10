@@ -1,0 +1,269 @@
+.rummy-page-wrapper{
+
+	.masthead-slider-wrapper{
+		padding: 0 4%;
+		position: relative;
+
+		.slick-slide img{
+			margin: 0 auto;
+
+			@media only screen and (max-width: 500px){
+				width: 100%;
+				min-height: 25vh;
+			}
+		}
+
+		.arrow{
+			position: absolute;
+			top: 28%;
+			width: 4rem;
+
+			@media only screen and (max-width: 1024px){
+				z-index: 2;
+			}
+
+			@media only screen and (max-width: 500px){
+				top: 15%;
+				width: 2rem;
+			}
+
+			&.arrow-rt{
+				right: 0;
+				right: 7%
+			}
+
+			&.arrow-lt{
+				left: 7%;
+				transform: rotate(180deg);
+			}
+		}
+	}
+
+	.rummy-form{
+		margin-top: 2rem;
+		.form-heading{
+			color: #fff;
+			text-align: center;
+		}
+		.form-row{
+			display: flex;
+			justify-content: space-between;
+
+			input{
+				background-color: #2e3237 !important;
+				height: 3rem;
+				border-radius: 28px;
+				padding: 10px 14px;
+				color: #fff;
+
+				@media only screen and (max-width: 500px){
+					width: 100%;
+					margin-bottom: 1rem;
+				}
+			}
+			
+		}
+		button{
+			background: #C50625;
+			color: #fff;
+			border: 1px solid #C50625;
+			border-radius: 25px;
+			padding: 7px 5rem;
+			margin: 0 auto;
+			display: block;
+			margin-top: 3rem;
+
+		}
+	}
+
+	.deals-section{
+		margin: 4rem 0;
+
+		.deals-section-wrapper{
+			padding: 0 6%;
+
+			@media only screen and (max-width: 1024px){
+				padding: 0 3%;
+			}
+		}
+
+		.sec-title{
+			font-size: 2.3rem;
+			color: #ecd6d4;
+			font-weight: 700;
+			text-shadow: 4px 3px #000;
+			margin-bottom: 3rem;
+		}
+		.deals-wrapper{
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+
+			.deal-single{
+				flex-basis: 32rem;
+				padding: 2.4rem 2rem;
+
+				margin-bottom: 3.4rem;
+
+
+
+				@media only screen and (max-width: 1024px){
+					padding: 1.4rem 1rem;
+					flex-basis: 47%;
+				}
+
+				@media only screen and (max-width: 768px){
+					flex-basis: 40%;
+				}
+
+				@media only screen and (max-width: 768px){
+					flex-basis: 100%;
+				}
+
+				.top-row{
+					display: flex;
+
+					@media only screen and (max-width: 768px){
+						flex-direction: column;
+					}
+				
+
+					.rating-section{
+						@media only screen and (max-width: 500px){
+							img{
+								width: 100%;
+								
+							}
+						}	
+						.stars{
+							margin-left: 1rem;
+							img{
+								width: 12px !important;
+							}
+							a{
+								color: #eac5c5;
+								text-decoration: underline;
+							}
+						}
+
+						.num{
+							font-size: 3rem;
+							font-weight: 500;
+							color: #fff;
+						}
+
+						.ratings{
+							display: flex;
+							align-items: flex-end;
+							
+						}
+					}
+
+					.deal-details{
+						margin-left: 30px;
+						@media only screen and (max-width: 768px){
+							margin-left: 0;
+						}
+						.name {
+							color: #fff;
+							font-size: 1.6rem;
+						}
+
+						p{
+							margin: 0;
+							color: #eac5c5;
+						}
+					}
+				}
+
+				.bottom-row{
+					display: flex;
+					align-items: center;
+					margin-top: 1.5rem;
+					.details{
+						width: 16rem;
+
+						@media only screen and (max-width: 768px){
+							width: 13rem;
+						}
+
+						@media only screen and(max-width:500px){
+							align-items: flex-start;
+							flex-direction: column;
+							flex-direction: column;
+						}
+						p{
+							color: #fff;
+							margin: 0;
+
+							&:nth-of-type(2){
+								font-size: 1.7rem;
+							}
+						}
+
+						
+					}
+
+					.deal-btn{
+						background: #C50625;
+						color: #fff;
+						border: 1px solid #C50625;
+						border-radius: 25px;
+						padding: 5px 2.1rem;
+						font-size: 14px;
+					}
+				}
+			}
+		}
+	}
+
+	.rummy-update{
+
+		.content-row-single{
+			margin-bottom: 2rem;
+			.subtitle{
+				color: #fff;
+				font-weight: 600;
+				font-size: 1.2rem;
+				margin: 0;
+			}
+		}
+
+		.most-recent, .most-popuplar{
+			background-color: #CCCCCC;
+			min-height: 400px;
+			border-radius: 25px;
+			width: 100%;
+			margin-bottom: 2rem;
+			position: relative;
+			padding: 1rem;
+
+			.title{
+				color: #333333;
+				font-size: 1.2rem;
+				font-weight: 600;
+				text-align: center;
+			}
+
+			&::after{
+				content: "";
+				width: 92%;
+				top: 3.5rem;
+				height: 4px;
+				background: #a1a1a1;
+				position: absolute;
+			}
+
+			&::before{
+				content: "";
+				width: 92%;
+				bottom: 3.5rem;
+				height: 4px;
+				background: #a1a1a1;
+				position: absolute;
+			}
+
+		}
+
+	}
+}

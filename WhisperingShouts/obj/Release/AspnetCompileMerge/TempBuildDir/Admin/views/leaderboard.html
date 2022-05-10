@@ -1,0 +1,145 @@
+﻿
+<style>
+    .table-responsive {
+        overflow: hidden;
+    }
+</style>
+<div class="wrapper">
+    <div class="navbar-minimize-fixed">
+        <button class="minimize-sidebar btn btn-link btn-just-icon">
+            <i class="tim-icons icon-align-center visible-on-sidebar-regular text-muted"></i>
+            <i class="tim-icons icon-bullet-list-67 visible-on-sidebar-mini text-muted"></i>
+        </button>
+    </div>
+    <div ng-include="'views/_sidebar.html'">
+    </div>
+
+
+
+    <div class="main-panel" data="blue">
+
+        <div ng-include="'views/_navbar.html'">
+        </div>
+        <div class="content">
+            <div class="card">
+                <div class="card-header">
+                    <!--<h5 class="card-category">Top Players</h5>-->
+                    <h3 class="card-title"> Leaderboard</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <ul class="nav nav-pills nav-pills-info nav-pills-icons flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link active show" data-toggle="tab">
+                                        <i class="tim-icons icon-istanbul"></i> Leaderboard 1
+                                    </a>
+                                </li>
+                                <!--<li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#link11">
+                                        <i class="tim-icons icon-settings"></i> Leaderboard 2
+                                    </a>
+                                </li>-->
+                            </ul>
+                        </div>
+                        <div class="col-md-6 offset-md-1">
+                            <div class="tab-content">
+                                <div class="tab-pane active show" id="link10" ng-show="!_IsEdit">
+                                    <ul class="nav nav-pills nav-pills-info">
+                                        <li class="nav-item">
+                                            <a class="nav-link active show" data-toggle="tab" ng-click="weeklyleaderboard=true; monthlyleaderboard=false; yearlyleaderboard = false;">
+                                                Week
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" ng-click="monthlyleaderboard=true; weeklyleaderboard=false; yearlyleaderboard = false;">
+                                                Month
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" ng-click="yearlyleaderboard=true; weeklyleaderboard=false; monthlyleaderboard = false;">
+                                                Year
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content tab-space" style="width:700px;">
+                                        <div class="tab-pane active show" ng-show="weeklyleaderboard">
+                                            <div class="table-full-width table-responsive">
+
+                                                <table id="dtpartnerusername" class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Full name</th>
+                                                            <th>Rank</th>
+                                                            <!--<th class="sorting_desc_disabled sorting_asc_disabled text-right">Actions</th>-->
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="l in leaderboardList | filter:{ type: 'weekly' }">
+                                                            <td>{{l.name}}</td>
+                                                            <td>{{l.rank}}</td>
+                                                            <!--<td class="text-right">
+                                                                <a ng-href="/leaderboard/{{l.id}}" style="text-decoration:none;">
+                                                                    <button type="button" rel="tooltip" class="btn btn-success btn-link btn-icon btn-sm btn-neutral" data-original-title="Refresh" title="" aria-describedby="tooltip410904">
+                                                                        <i class="tim-icons icon-pencil"></i>
+                                                                    </button>
+                                                                </a>
+                                                            </td>-->
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane active show" ng-show="monthlyleaderboard">
+                                            Efficiently unleash cross-media information without cross-media value. Quickly maximize
+                                            timely
+                                            deliverables for real-time schemas.
+                                            <br>
+                                            <br>Dramatically maintain clicks-and-mortar solutions without functional solutions.
+                                        </div>
+                                        <div class="tab-pane active show" ng-show="yearlyleaderboard">
+                                            Completely synergize resource taxing relationships via premier niche markets.
+                                            Professionally cultivate
+                                            one-to-one customer service with robust ideas.
+                                            <br>
+                                            <br>Dynamically innovate resource-leveling customer service for state of the art
+                                            customer service.
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div ng-show="_IsEdit" class="col-md-12">
+
+                                    {{leaderboardList[0].name}}
+                                    <textarea name="content" ng-model="content" cols="5" rows="5" style="width:100%;"></textarea>
+
+                                    <input type="button" value="Update" class="btn btn-primary" ng-click="UpdateLeaderboard()" />
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a href="javascript:void(0)" class="nav-link">
+                                About Us
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="copyright">
+                        ©2019
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+</div>

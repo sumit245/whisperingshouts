@@ -1,0 +1,135 @@
+﻿<div class="sidebar">
+    <div class="sidebar-wrapper">
+        <div class="logo">
+            <a href="javascript:void(0)" class="simple-text logo-mini">
+                A
+            </a>
+            <a href="javascript:void(0)" class="simple-text logo-normal">
+                Admin
+            </a>
+        </div>
+        <ul class="nav">
+            <li class="">
+                <a href="/dashboard">
+                    <i class="tim-icons icon-chart-pie-36"></i>
+                    <p>Dashboard</p>
+                </a>
+            </li>
+            <li class="">
+                <a href="/rakeback-stats">
+                    <i class="tim-icons icon-chart-pie-36"></i>
+                    <p>Rakeback Stats</p>
+                </a>
+            </li>
+            <li class="">
+                <a href="/blog">
+                    <i class="tim-icons icon-chart-pie-36"></i>
+                    <p>Blogs</p>
+                </a>
+            </li>
+
+            <li class="">
+                <a href="/identities">
+                    <i class="tim-icons icon-chart-pie-36"></i>
+                    <p>User Identities</p>
+                </a>
+            </li>
+
+            <li class="">
+                <a href="/passbooks">
+                    <i class="tim-icons icon-chart-pie-36"></i>
+                    <p>Passbooks</p>
+                </a>
+            </li>
+
+
+
+
+            <li class="">
+                <a href="/rewards">
+                    <i class="tim-icons icon-chart-pie-36"></i>
+                    <p>Rewards</p>
+                </a>
+            </li>
+
+            <li class="">
+                <a href="/withdraw-request">
+                    <i class="tim-icons icon-chart-pie-36"></i>
+                    <p>Withdraw Request</p>
+                </a>
+            </li>
+            <li class="">
+                <a href="/kyc-request">
+                    <i class="tim-icons icon-chart-pie-36"></i>
+                    <p>KYC Request</p>
+                </a>
+            </li>
+            <li>
+                <a data-toggle="collapse" ng-click="Marketing=true">
+                    <i class="tim-icons icon-molecule-40"></i>
+                    <p>
+                        Marketing
+                        <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse" ng-show="Marketing" style="display:block;">
+                    <ul class="nav">
+                        <li>
+                            <a href="/announcements">
+                                <span class="sidebar-mini-icon">A</span>
+                                <span class="sidebar-normal"> Announcements </span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </li>
+
+            <li class="">
+                <a href="/leaderboard">
+                    <i class="tim-icons icon-chart-pie-36"></i>
+                    <p>Leaderboard</p>
+                </a>
+            </li>
+
+            <!--<li class="">
+        <a href="/withdraw-request">
+            <i class="tim-icons icon-settings"></i>
+            <p>Withdraw Request</p>
+        </a>
+    </li>
+    <li class="">
+        <a href="/rewards">
+            <i class="tim-icons icon-settings"></i>
+            <p>Rewards</p>
+        </a>
+    </li>
+
+
+
+    <li class="">
+        <a href="/leaderboard">
+            <i class="tim-icons icon-settings"></i>
+            <p>Leaderboard</p>
+        </a>
+    </li>
+    <li class="">
+        <a href="/users">
+            <i class="tim-icons icon-settings"></i>
+            <p>Users</p>
+        </a>
+    </li>-->
+        </ul>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('body').removeClass('sidebar-mini');
+            sidebar_mini_active = true;
+            $('.sidebar').attr('data', 'blue');
+        });
+
+</script>

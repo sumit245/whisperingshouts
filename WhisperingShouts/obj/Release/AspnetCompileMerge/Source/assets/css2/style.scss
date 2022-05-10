@@ -1,0 +1,91 @@
+
+@media only screen and (max-width: 768px){
+    .dashboard-nav{
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        background: #2e3237;
+        z-index: 3;
+        left: 0;
+        margin: 0;
+        width: 100vw;
+        justify-content: space-between;
+        padding: 1rem 3vw;
+
+        li{
+            margin: 0;
+            a{
+                p{
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+    .auth-page .left-column{
+        height: auto;
+        padding: 7rem 0;
+        justify-content: center;
+    }
+}
+
+
+@media only screen and (max-width: 600px){
+
+    .page-dashboard #layout-content{
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    .dashboard-nav{
+        padding: 1rem 1vw;
+        padding-bottom: 0.3rem;
+
+        li{
+            flex-basis: 16%;
+        }
+
+        .icon{
+            height: 1.4rem;
+        }
+
+        p{
+            font-size: 9px;
+        }
+    }
+
+    .passbook-table-wrapper{
+        overflow-x: scroll;
+    }
+
+    .sidebar-promotion{
+        margin-bottom: 6rem;    
+    }
+
+    .page-dashboard .passbook-table-wrapper .table thead th {
+        min-width: 7rem;
+
+        &:last-of-type{
+            min-width: 10rem;
+        }
+    }
+
+    .auth-page .left-column{
+        padding: 2rem 10px;
+
+        .content{
+            p{
+                margin: 0;
+            }
+
+            .page-heading{
+                font-size: 1.4rem;
+            }
+        }
+    }
+
+    .auth-page .right-column{
+        padding: 2rem 15px;
+    }
+
+
+}

@@ -1,0 +1,104 @@
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\WhisperingShouts.dll.config
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\WhisperingShouts.dll
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\WhisperingShouts.pdb
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\csc.exe
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\csc.exe.config
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\csc.rsp
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\csi.exe
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\csi.rsp
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\System.AppContext.dll
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\System.Collections.Immutable.dll
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\System.IO.FileSystem.dll
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\System.Reflection.Metadata.dll
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\vbc.exe
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\vbc.exe.config
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\vbc.rsp
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\VBCSCompiler.exe
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\VBCSCompiler.exe.config
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\obj\Debug\WhisperingShouts.csproj.CoreCompileInputs.cache
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\obj\Debug\WhisperingShouts.csproj.CopyComplete
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\obj\Debug\WhisperingShouts.dll
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\obj\Debug\WhisperingShouts.pdb
+D:\New folder\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\obj\Debug\WhisperingShouts.csprojAssemblyReference.cache
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\WhisperingShouts.dll
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\WhisperingShouts.pdb
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\csc.exe
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\csc.exe.config
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\csc.rsp
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\csi.exe
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\csi.rsp
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\System.AppContext.dll
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\vbc.exe
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\vbc.exe.config
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\vbc.rsp
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\VBCSCompiler.exe
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\obj\Debug\WhisperingShouts.csprojAssemblyReference.cache
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\obj\Debug\WhisperingShouts.csproj.CoreCompileInputs.cache
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\obj\Debug\WhisperingShouts.csproj.CopyComplete
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\obj\Debug\WhisperingShouts.dll
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\obj\Debug\WhisperingShouts.pdb
+C:\Users\Admin\OneDrive\Documents\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\WhisperingShouts.dll.config
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\WhisperingShouts.dll.config
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\WhisperingShouts.dll
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\WhisperingShouts.pdb
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\csc.exe
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\csc.exe.config
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\csc.rsp
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\csi.exe
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\csi.rsp
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\System.AppContext.dll
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\System.Collections.Immutable.dll
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\System.IO.FileSystem.dll
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\System.Reflection.Metadata.dll
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\vbc.exe
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\vbc.exe.config
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\vbc.rsp
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\VBCSCompiler.exe
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\bin\roslyn\VBCSCompiler.exe.config
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\obj\Debug\WhisperingShouts.csprojAssemblyReference.cache
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\obj\Debug\WhisperingShouts.csproj.CoreCompileInputs.cache
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\obj\Debug\WhisperingShouts.csproj.CopyComplete
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\obj\Debug\WhisperingShouts.dll
+D:\OneDriveBkp\Projects\WhisperingShouts\WhisperingShouts\WhisperingShouts\obj\Debug\WhisperingShouts.pdb

@@ -1,0 +1,578 @@
+﻿ <!-- header top begin -->
+<div ng-include="'views/rummy/_rummyHeader.html'">
+</div>
+<style type="text/css">
+    @charset "UTF-8";
+
+    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide:not(.ng-hide-animate) {
+        display: none !important;
+    }
+
+    ng\:form {
+        display: block;
+    }
+
+    .ng-animate-shim {
+        visibility: hidden;
+    }
+
+    .ng-anchor {
+        position: absolute;
+    }
+</style>
+<style id="stndz-style">
+    div[class*="item-container-obpd"], a[data-redirect*="paid.outbrain.com"], a[onmousedown*="paid.outbrain.com"] {
+        display: none !important;
+    }
+
+    a div[class*="item-container-ad"] {
+        height: 0px !important;
+        overflow: hidden !important;
+        position: absolute !important;
+    }
+
+    div[data-item-syndicated="true"] {
+        display: none !important;
+    }
+
+    .grv_is_sponsored {
+        display: none !important;
+    }
+
+    .zergnet-widget-related {
+        display: none !important;
+    }
+</style>
+<style type="text/css">
+    .page-dashboard .container {
+        max-width: 1100px;
+    }
+
+    .headerMenu {
+        margin-top: 55px;
+    }
+
+    .grab-deal {
+        background: linear-gradient(to right, #26292d, #111214);
+        /*box-shadow: 0 0.625rem 0.938rem 0 rgba(59, 55, 188, 0.5);*/
+        color: #2ecdf3;
+        border-radius: 1.563rem;
+        text-align: center;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        margin: 0 0.6rem;
+        /*border:none;*/
+    }
+
+    .carousel-indicators {
+        bottom: -40px;
+    }
+</style>
+<style>
+    ::-webkit-scrollbar {
+        width: 3px;
+    }
+
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 3px grey;
+        border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #BB001B !important;
+        border-radius: 3px;
+    }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #BB001B !important;
+        }
+</style>
+<section id="layout-content" class="container pt-0" data-ng-init="getDealId()">
+    <div class="flash-message">
+    </div>
+    <ul class="site-selection">
+        <li>
+            <a href="/poker" class="site-link">Poker</a>
+            <a href="/rummy" class="site-link active" style="color: #BB001B;">Rummy</a>
+        </li>
+    </ul>
+    <br>
+    <section id="headerMenu">
+        <div class="home-main-banner">
+
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    <!-- Slide One - Set the background image for this slide in the line below -->
+                    <div class="carousel-item active custom-carousel-item" style="background-image: url('/assets/images/rummy-banner.png')">
+                        <div class="carousel-caption d-none d-md-block">
+                        </div>
+                    </div>
+                    <!-- Slide Two - Set the background image for this slide in the line below -->
+                    <div class="carousel-item custom-carousel-item" style="background-image: url('/assets/images/rummy-banner.png')">
+                        <div class="carousel-caption d-none d-md-block">
+                        </div>
+                    </div>
+                    <!-- Slide Three - Set the background image for this slide in the line below -->
+                    <div class="carousel-item custom-carousel-item" style="background-image: url('/assets/images/rummy-banner.png')">
+                        <div class="carousel-caption d-none d-md-block">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row" ng-if="dealId=='1'">
+            <div class="col-md-6">
+                <div style="margin: 6em; padding: 1em; color:#fff;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>RUMMY BAAZI<br /> REVIEW</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="rummy-card" style="margin: 2em; padding: 1em; box-shadow: inset -15px -15px 19px 2px #000; background: #202327; border: 4px solid #25252500; border-radius: 4px;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <span style="color: #ddd3d3; font-size: 2.5em; float: left;">8.9</span>
+                            <span style="float: right;">
+                                <img src="assets/images/star.png" />
+                                <br />
+                                <a style="color: #dda3a6; text-decoration: underline; font-size: 12px;">Review</a>
+                            </span>
+
+                            <div class="clr"></div>
+                            <img src="assets/images/RummyBaazi_Logo.png" style="border-radius: 7px;" />
+                        </div>
+                        <div class="col-md-6">
+                            <h5 style="color: #ddd3d3;">Rummy Baazi</h5>
+                            <p style="font-size: 12px; color: #dda3a6;">Fastest growing in India Daily promotions and bonus Stunning table and user interface</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p style="color: #ddd3d3; margin-top: 1em;">Signup and get</p>
+                            <h2 style="color: #ddd3d3;">1500* Bonus</h2>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="button" class="btn btn-primary btn--primary" style="background-color: #c50725; border-color: #c50725; box-shadow: 4px 2px 7px 2px #ffffff54; width: 150px;" value="Sign Up">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" ng-if="dealId=='2'">
+            <div class="col-md-6">
+                <div style="margin: 6em; padding: 1em; color:#fff;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>TAJ RUMMY<br /> REVIEW</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="rummy-card" style="margin: 2em; padding: 1em; box-shadow: inset -15px -15px 19px 2px #000; background: #202327; border: 4px solid #25252500; border-radius: 4px;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <span style="color: #ddd3d3; font-size: 2.5em; float: left;">8.9</span>
+                            <span style="float: right;">
+                                <img src="assets/images/star.png" />
+                                <br />
+                                <a style="color: #dda3a6; text-decoration: underline; font-size: 12px;">Review</a>
+                            </span>
+
+                            <div class="clr"></div>
+                            <img src="assets/images/Taj-Rummy-Logo.png" style="border-radius: 7px;" />
+                        </div>
+                        <div class="col-md-6">
+                            <h5 style="color: #ddd3d3;">Taj Rummy</h5>
+                            <p style="font-size: 12px; color: #dda3a6;">Fastest growing in India Daily promotions and bonus Stunning table and user interface</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p style="color: #ddd3d3; margin-top: 1em;">Signup and get</p>
+                            <h2 style="color: #ddd3d3;">1500* Bonus</h2>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="button" class="btn btn-primary btn--primary" style="background-color: #c50725; border-color: #c50725; box-shadow: 4px 2px 7px 2px #ffffff54; width: 150px;" value="Sign Up">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" ng-if="dealId=='3'">
+            <div class="col-md-6">
+                <div style="margin: 6em; padding: 1em; color:#fff;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>KHELPLAY<br />RUMMY<br /> REVIEW</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="rummy-card" style="margin: 2em; padding: 1em; box-shadow: inset -15px -15px 19px 2px #000; background: #202327; border: 4px solid #25252500; border-radius: 4px;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <span style="color: #ddd3d3; font-size: 2.5em; float: left;">8.9</span>
+                            <span style="float: right;">
+                                <img src="assets/images/star.png" />
+                                <br />
+                                <a style="color: #dda3a6; text-decoration: underline; font-size: 12px;">Review</a>
+                            </span>
+
+                            <div class="clr"></div>
+                            <img src="assets/images/Khelplay-Rummy-Logo.gif" style="border-radius: 7px;" />
+                        </div>
+                        <div class="col-md-6">
+                            <h5 style="color: #ddd3d3;">Khelplay Baazi</h5>
+                            <p style="font-size: 12px; color: #dda3a6;">Fastest growing in India Daily promotions and bonus Stunning table and user interface</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p style="color: #ddd3d3; margin-top: 1em;">Signup and get</p>
+                            <h2 style="color: #ddd3d3;">1500* Bonus</h2>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="button" class="btn btn-primary btn--primary" style="background-color: #c50725; border-color: #c50725; box-shadow: 4px 2px 7px 2px #ffffff54; width: 150px;" value="Sign Up">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" ng-if="dealId=='4'">
+            <div class="col-md-6">
+                <div style="margin: 6em; padding: 1em; color:#fff;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>RUMMY<br />PASSION<br /> REVIEW</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="rummy-card" style="margin: 2em; padding: 1em; box-shadow: inset -15px -15px 19px 2px #000; background: #202327; border: 4px solid #25252500; border-radius: 4px;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <span style="color: #ddd3d3; font-size: 2.5em; float: left;">8.9</span>
+                            <span style="float: right;">
+                                <img src="assets/images/star.png" />
+                                <br />
+                                <a style="color: #dda3a6; text-decoration: underline; font-size: 12px;">Review</a>
+                            </span>
+
+                            <div class="clr"></div>
+                            <img src="assets/images/rummy-passion-logo.png" style="border-radius: 7px;width: 100%;" />
+                        </div>
+                        <div class="col-md-6">
+                            <h5 style="color: #ddd3d3;">Rummy Passion</h5>
+                            <p style="font-size: 12px; color: #dda3a6;">Fastest growing in India Daily promotions and bonus Stunning table and user interface</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p style="color: #ddd3d3; margin-top: 1em;">Signup and get</p>
+                            <h2 style="color: #ddd3d3;">1500* Bonus</h2>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="button" class="btn btn-primary btn--primary" style="background-color: #c50725; border-color: #c50725; box-shadow: 4px 2px 7px 2px #ffffff54; width: 150px;" value="Sign Up">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <style>
+        .custom-carousel-item {
+            height: 437px;
+            max-height: 437px;
+            background: no-repeat center center scroll;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
+
+    <section>
+        <!--<div class="home-main-banner">
+            <img src="/assets/images/rummy-banner.png" alt="" class="banner-img img-fluid">
+
+        </div>-->
+        <br>
+        <div class="container mt-4 pt-4">
+            <div class="row">
+                <br />
+
+
+                <!--<div class="col-md-12 mt-4 ">
+                    <h2 style="color: #ddd3d3; font-weight: bold;">LATEST RUMMY UPDATE</h2>
+                    <br />
+                </div>-->
+
+                <div class="row">
+
+                    <div class="col-sm-8 col-sm-pull-4 pt-4" ng-if="dealId=='1'">
+
+                        <p><span><strong><span><span>RummyBaazi Overview</span></span></strong></span></p>
+                        <p><span><span><span>Powered by Baazi Games, RummyBaazi, founded in 2019, is India&rsquo;s most rewarding online Rummy website with a wide variety of Free Entry Tournaments and Cash Games to offer. With over 5 Lakh users playing on the portal from all across the country, the platform is well on its way to become one of the fastest growing online gaming portals in India. We&rsquo;re proud to have Champion Boxer, Vijender Singh, as our brand ambassador.&nbsp;</span></span></span></p>
+                        <p>&nbsp;</p>
+                        <p><span><strong><span><span>Game Software &amp; Graphics at RummyBaazi</span></span></strong></span></p>
+                        <p><span><span><span>The app&rsquo;s user-friendly interface and smooth gameplay makes it easy for anyone and everyone to sign up, play and WIN. RummyBaazi is 100% safe &amp; legal, and is RNG (Random Number Generator) certified by international software labs. All our games are conducted in a secure environment and we promote Responsible Gaming. &nbsp;</span></span></span></p>
+                        <p>&nbsp;</p>
+                        <p><span><strong><span><span>What&apos;s Different?</span></span></strong></span></p>
+                        <p><span><span><span>RummyBaazi&rsquo;s guarantee of low buy-ins and big winnings is unmatched in the industry. Our industry-first loyalty rewards system, Baazi Rewards, further reifies why we are India&rsquo;s most rewarding Rummy website. By playing regularly on RummyBaazi, users can accumulate Reward Points, which can be further redeemed to claim prizes like latest smartphones &amp; gadgets, along with a grand cash prize of up to&nbsp;</span></span></span><span><span><span>₹2,00,000 and an all-expenses paid trip to Goa, at different levels.&nbsp;</span></span></span></p>
+                        <p><br></p>
+                        <p><span><strong><span><span>Sign Up Bonus</span></span></strong></span></p>
+                        <p><span><span><span>To help users kickstart their journey on RummyBaazi, we give a Sign Up bonus of&nbsp;</span></span></span><span><span><span>₹25 and a 100% Welcome Bonus on first deposit up to ₹3000. Use code: WELCOMERB while depositing.&nbsp;</span></span></span></p>
+                        <p>&nbsp;</p>
+                        <p><span><strong><span><span>Emojis</span></span></strong></span></p>
+                        <p><span><span><span>Playing on RummyBaazi is as fun as it is rewarding. Experience the new way to interact with opponents and challenge them with our exclusive and highly engaging in-app Emojis.</span></span></span></p>
+                        <p>&nbsp;</p>
+                        <p><span><strong><span><span>RummyBaazi Promotions</span></span></strong></span></p>
+                        <p><span><span><span>From Sunday Special Big Ticket Tournaments to Daily/Weekly/Monthly Leaderboards and then onto Micro/Low Buy-in and Free Entry Tournaments, we are renowned in the industry for our multifaceted promotions. Every month, we launch special deposit codes to offer maximum value to our users and credit the bonus amount instantly, which players can use to play, win and withdraw.&nbsp;</span></span></span></p>
+                        <p><br></p>
+                        <p><span><strong><span><span>Latest RummyBaazi Promotions</span></span></strong></span></p>
+                        <p><a href="https://www.rummybaazi.com/rummy-promotions/monthly-promotion" style="text-decoration: none;" target="_blank"><span><span><span style="font-size: 11pt;"><u style="vertical-align: baseline; white-space: pre-wrap;">https://www.rummybaazi.com/<wbr>rummy-promotions/monthly-<wbr>promotion</u></span></span></span></a></p>
+                        <p><span><span><span>It&rsquo;s Zabardast August on RummyBaazi. Play &amp; WIN up to 15 Lacs+!</span></span></span></p>
+                        <ul style="margin-top: 0px; margin-bottom: 0px;">
+                            <li>
+                                <p><span><span>August Cash Fest:&nbsp;</span></span><span><span>A unique cash game promotion in which users can win up to 7 Lacs+. They need to play more Points Rummy hands, in order to win more cash. The stakes are between&nbsp;</span></span><span><span>₹1 to ₹40. Users need to meet their target hands in order to claim the cash prize.</span></span></p>
+                            </li>
+                            <li>
+                                <p><span>Independence Day 1 Lac Special:&nbsp;</span><span>To celebrate the 74th Independence Day, we&rsquo;ve planned a special 1 Lac GTD tournament on 15th August at 8 PM with a buy-in of only ₹500.&nbsp;</span></p>
+                            </li>
+                            <li>
+                                <p><span>Sunday Special:&nbsp;</span><span>Our signature Sunday Special 1L GTD Tournament has been going strong for quite a long time now. It&rsquo;s a primetime 8PM tourney with a buy-in of ₹1000.&nbsp;</span></p>
+                            </li>
+                            <li>
+                                <p><span>Rewards Points (RP) tournaments:&nbsp;</span><span>We have two industry-first tourneys running in August. First, it&rsquo;s the 1K RP Tourney played with just 1 RP, all week at 5 PM and second is the 10K RP Tournament, hosted between Mon-Sat at 8 PM, with a buy-in of 10 RPs. Users can re-buy their way into the 1K RP tourney with ₹20 and 10K RP tourney with ₹100.</span></p>
+                            </li>
+                        </ul>
+                        <p><span><strong><span><span>Rummy Tournaments</span></span></strong></span></p>
+                        <p><span><span><span>We have multiple Cash and Free Entry tournaments across different variants of Rummy like Points, 101 Pool and 201 Pool.&nbsp;</span></span></span></p>
+                        <p><span><strong><span><span>Customer Support</span></span></strong></span></p>
+                        <p><span><span><span>We take pride in having 24x7 customer support in place to assist our players with withdrawals, deposits and any other issue that they may have, promptly.&nbsp;</span></span></span></p>
+                        <p><span><strong><span><span>Payment Options</span></span></strong></span></p>
+                        <p><span><span><span>RummyBaazi is approved by all major payment gateways in India like Cashfree and PayU.</span></span></span></p>
+                        <p><span><strong><span><span>Deposits and Withdrawals</span></span></strong></span></p>
+                        <p><span><span><span>Depositing is always rewarding on RummyBaazi, since we have several deposit codes and best promotional offers at all times for our users. Currently, we are offering 20% Instant Bonus on a minimum deposit of&nbsp;</span></span></span><span><span><span>₹1000 with a maximum bonus amount of ₹20000.&nbsp;</span></span></span></p>
+                        <ul style="margin-top: 0px; margin-bottom: 0px;">
+                            <li>
+                                <p><span>Code: AUGISHERE, valid till 10th of August, 2020</span></p>
+                            </li>
+                            <li>
+                                <p><span>Code: MIDAUG, valid between 11th-20th August, 2020</span></p>
+                            </li>
+                            <li>
+                                <p><span>Code: AUGEND, valid between 21st-31st August, 2020</span></p>
+                            </li>
+                        </ul>
+                        <p><span><span><span>We have the fastest withdrawals in the industry and the amount gets credited directly to our users&rsquo; bank account within 24 hours of the request.&nbsp;</span></span></span></p>
+                    </div>
+
+                    <div class="col-sm-8 col-sm-pull-4 pt-4" ng-if="dealId=='2'">
+
+                        <p><strong>Taj Rummy overview</strong></p>
+                        <p>Taj Rummy is India&rsquo;s leading rummy website managed by Grid Logic Games Private Limited which brings the popular Indian version of the 13 card game into the player's home. Taj Rummy offers one of the most user friendly platforms while operating and excelling in single table / multi-table /multi-player rummy environments.You can play free games with &ldquo;Fun Chips&rdquo; as soon as you register and create your player account. For playing real money games and winning real cash, players need to deposit cash into their Taj Rummy account. With responsible gaming, fraud protection and 24/7 support Taj Rummy aims at delivering a user friendly and secure online gaming experience.&nbsp;</p>
+                        <p><strong>Game software &amp; Graphics at Taj Rummy</strong></p>
+                        <p>Taj Rummy provides a technically advanced rummy gaming interface with 4 unique features:&nbsp;</p>
+                        <ul>
+                            <li><strong>Artificial Intelligence:</strong>Artificial Intelligence is the capability of a computer to make decisions for you. In the case of a failed internet connection or disconnection during your game-play Taj Rummy is equipped with a state-of-the-art player protection system which helps in bringing players a seamless gaming experience. Through artificial intelligence, it ensures that even if you are temporarily missing from your seat during a game, the computer steps in and makes your decisions and plays for you in your absence so that you are not dropped from the game.</li>
+                            <li><strong>Player protection autoplay</strong>: Bad or intermittent internet connectivity is a common occurrence;Player Protection ensures that even if you have a bad internet connection once in a while during your play, you are not dropped from the game. In such a situation, it the portal activates an auto-play mode which means the computer plays for you while you are away.</li>
+                            <li><strong>Smart Correction</strong>: Smart Correction gets activated when a player has the right combination of sets and sequences but places an invalid show. In such a case, Smart Correction instantly notifies the player that an invalid show has been made and gives the player the option to remedy the mistake.</li>
+                            <li><strong>IntelliSafe: </strong>IntelliSafe is a brand new feature that is exclusive to the TajRummy platform.Designed with our wonderful customers in mind, this feature allows them to seamlessly move from one device to another while playing the game, and allows them to continue playing the same game by logging into the same account on the second device.</li>
+                        </ul>
+                        <p><strong>What's different</strong></p>
+                        <p>TajRummy a technologically advanced rummy site offers the best gaming experience to its players. With responsible gaming, fraud protection and 24/7 support, TajRummy aim at delivering a user friendly and secure online gaming experience</p>
+                        <p><strong>Whats not good</strong></p>
+                        <p>Xxxxx</p>
+                        <p><strong>Sign up Bonus</strong></p>
+                        <p>Taj Rummy offers the biggest welcome bonus you can get ever. Players need to make a deposit using the bonus code "STARTER100" to avail the Welcome bonus to get instant cash back up to Rs.3,000, in addition to the 100% Welcome Bonus equal to the amount of your first deposit up to Rs 2500.</p>
+                        <p><strong>Taj Rummy Promotions</strong></p>
+                        <ul>
+                            <li><strong>Guaranteed bonus on all purchases</strong>: Taj Rummy is giving you an incredible offer to boost your deposit! Get a bonus every time you make a deposit, player can get up to 15% bonus on all purchases.&nbsp;</li>
+                            <li><strong>Refer a friend bonus: </strong>You can get huge rewards for each of your friends onboard to Taj Rummy! All you need to do is to send your friends your referral link, and you could earn as much as Rs. 3,000 as instant cash and as bonuses when they join Tajrummy</li>
+                            <li><strong>130% Welcom Offer + Rs. 300 Super Cash</strong>: Taj Rummy would like to welcome new players with not one, but two stupendous welcome offers! Now, when you come aboard, you can get 130% as a Welcome Bonus on deposits, and also get 30%back on repeat deposits!</li>
+                        </ul>
+                        <p><strong>Latest Taj Rummy Promotions</strong></p>
+                        <p>Monsoon Special Bonus on 1st Deposit: Sign up and get 115% bonus up to Rs 5500 on Taj Rummy.</p>
+                        <p>Happy hour to get Rs. 100 bonus between 3 PM and 5 PM</p>
+                        <p><strong>Rummy Tournaments</strong></p>
+                        <p>Taj Rummy is one of India&rsquo;s top online rummy games platform offers the largest number of Rummy variants to explore at your own time. Our wide range of promotions, bonuses and tournaments not only offer you a unique player experience but also immediate cash prizes. Our tournaments are unique and several to choose from. They allow you to play with real people for real cash. Our practice cash games help you hone your skills to play better strategically and win more cash as you play.Our multi table cash rummy tournaments make you eligible to win huge cash prizes.</p>
+                        <p><strong>Customer support</strong></p>
+                        <p>Taj Rummy is proud to have a reliable and dedicated team with a Customer First Approach to assist you at all times. Our Customer Support representatives are available 24 hours a day, 7 days a week.</p>
+                        <p><strong>Payment options</strong></p>
+                        <p>Taj Rummy offers multiple payment options to add cash to the players account. One can add cash through net banking, credit card, debit card, cash card, ewallet and mobile wallet.&nbsp;</p>
+                        <p><strong>Deposits and withdrawals</strong></p>
+                        <p>At Taj Rummy player can deposit min amount Rs 100 and maximum up to Rs 20,000 in one transition. In order to shield the users from imprudent effects of online gaming, Taj Rummy follows responsible gaming practices to ensure safe gaming experience to the players. It includes limiting the purchase, age verification.Taj Rummy offers fastest withdrawal of winning, player can raise withdrawals request anytime.</p>
+                        <p><strong>Our Verdict</strong></p>
+                        <p><strong>xxx</strong></p>
+                    </div>
+
+                    <div class="col-sm-8 col-sm-pull-4 pt-4" ng-if="dealId=='3'">
+
+                        <p><strong>Khelplay Rummy review</strong></p>
+                        <p>Khelplay rummy is one of the top rummy entrances existing in the nation since quite a while now. Ideal improvement of this gaming stage has helped it to hold its situation among the top rummy destinations.&nbsp;</p>
+                        <p>There are a select arrangement of games going from 10 Card Rummy, 13 card Rummy, 21 Card Rummy and 27 Card Rummy which a player can just play at KhelplayRummy.com in various kinds, for example, Point, Deal and Pool that differ as per each game. There are numerous prizes and rewards going consistently to draw in a player.&nbsp;</p>
+                        <p>They even have KhelPlay Rummy Rewards known as KhelPlay Loyalty Points Program, which gives out genuine money. These focuses can be reclaimed into extra chips. They have a reasonable play strategy which you can experience that discussions about the site and the game inside and out.</p>
+                        <p><br /><strong>Game software &amp; Graphics at Khelplay Rummy</strong></p>
+                        <p>The Gaming Software that is utilized has been affirmed by prestigious accreditation organizations &ndash; eCOGRA and iTech Labs. Khelplay is additionally eminent for offering the top tier backing to its valued clients. In such manner, players are encouraged to observe that solicitations and questions identified with Deposit, Withdrawal, Game Play, Bonuses, Prizes, and so on are immediately prepared and settled by their master Support group accessible on a brief basis. KhelPlay Rummy holds affirmations from famous accreditation offices, iTech Labs, Australia and eCogra, UK for the gaming programming conveyed over the entirety of its foundation.</p>
+                        <p><br /><strong>What's different</strong></p>
+                        <p>Safe and secure gaming: Khelplayrummy utilizes Random Number Generator (RNG) for rearranging the cards, RNG is authorize by iTech Labs, which is an IEC/ISO 17025 guaranteed testing lab. RNG guarantees reasonable ongoing interaction to encourage continuous gaming experience subsequently giving every player an open door for a lot of winning.</p>
+                        <p>Notwithstanding RNG, Khelplay have additionally embraced estimations of mindful gaming that encourages us to keep the game a pleasant encounter for everybody. KhelPlay Rummy has utilized the best online security frameworks to guarantee that all the exchanges made by the player are sheltered and made sure about.</p>
+                        <p>It also operates VIP clubs and its has multiple benefits to offer which are mentioned below:</p>
+                        <ol>
+                            <li>VIP Relationship Managers - available at service from 10:00 AM to 8:00 PM every day (except on National Holidays)</li>
+                            <li>Priority Service</li>
+                            <li>Exclusive Cashback and Bonuses</li>
+                            <li>Higher Loyalty Points as compared to other Players</li>
+                            <li>Loyalty Bonuses and Cash Bonuses</li>
+                            <li>Special Birthday Offer</li>
+                            <li>Free Entry in VIP-Exclusive and other Big-Ticket Tournaments</li>
+                            <li>Personalised Offers</li>
+                            <li>Priority Withdrawals</li>
+                            <li>Gifts on Special Occasions</li>
+                        </ol>
+                        <p><strong>What's not good</strong></p>
+                        <p>xxxxxxxxxx</p>
+                        <p><strong>Sign up Bonus</strong></p>
+                        <ul>
+                            <li>Avail a big fat <a href="https://www.khelplayrummy.com/first-deposit-bonus?src=welcome-package">Welcome Bonus</a> up to Rs. 1,500 or even more depending on the various Offers are run from time to time.</li>
+                            <li>Play the <a href="https://www.khelplayrummy.com/entry-tournament?src=welcome-package">Entry Tournament</a> for FREE twice daily and win from a monthly Prize pool of Rs 31,000</li>
+                            <li>Player's fortune will shine in the <a href="https://www.khelplayrummy.com/welcome-fortune-tournament?src=welcome-package">Fortune Tournament</a> held twice daily, where one can win Cash from a monthly Prize pool of Rs. 62,000</li>
+                            <li><a href="https://www.khelplayrummy.com/rummy-thalaiva-tournament?src=welcome-package">Rummy Thalaiva Tournament</a> is an opportunity to become a Rummy Star and win Cash daily from a monthly Prize pool of Rs.1,55,000</li>
+                        </ul>
+                        <p><br /><strong>Avatars</strong></p>
+                        <p>Avatars are basically portraits of nicely defined caricature. You can pick an Avatar from their bank or transfer your own picture, fitting preview (no indecent) or something else. Symbols will be the way individuals will see a player on Khelplayrummy.com, in the event that one looks for watchfulness than mercifully don't transfer an image and utilize an Avatar from the bank.</p>
+                        <p><strong>Khelplay Rummy Promotions</strong></p>
+                        <p>Multiple ongoing daily tournaments namely, Freeroll 5k tournament, Fastrack tournaments, Knockout tournaments, Re.1 Entry tournament, Daily freeroll tournament, Freeroll 10k tournament, Khiladiyon ka khiladi tournament, Elite Delight tournament, Freshers 50k tournament,special cash tournament, Rummy Thalaiva tournament, Fortune tournament, Entry tournament</p>
+                        <p><strong>Latest Khelplay Rummy Promotions</strong></p>
+                        <p>Rummy Superstar program : Khelplay is giving CASH Bonus to every single new Player on Day 1 (day after your first store is made). Players play with the Free Cash and satisfy the day's test and continue getting Cash Bonuses consistently!. Every day players will get a stage to perform for which players wil be given FREE CASH legitimately credited to account the following day! Players get opportunity to win Rs. 160 in Cash which can legitimately be used to play Cash Games!</p>
+                        <p><strong>Customer support</strong></p>
+                        <p>KhelPlay Rummy, takes its players' remarks and inquiries genuinely and truly. As an organization that consistently puts player encounters first, we are extremely open to input from our player base. On the off chance that if have any inquiries or proposals, or on the off chance that you might want to get some information about improving your involvement with the Khelplay Rummy site or the Khelplay Rummy application, feel completely allowed to contact us at support@khelplayrummy.com. Or then again far superior, simply have a snappy talk meeting with their specialists utilizing the visit box. Client service officials will answer every one of your questions identified with the game's guidelines, site, application, banking, terms and conditions, and everything else identified with the game, stores, withdrawals and that's only the tip of the iceberg.</p>
+                        <p><strong>Payment options</strong></p>
+                        <p><em>Credit Card</em><strong><em>:</em></strong>All major credit cards, namely Amex, Maestro, Master, and Visa have been integrated with KhelPlay Rummy to make an easy deposit using the credit card. You just need to choose your card from a drop down menu and click on 'Add Cash' button to submit and proceed further.<br />On the next page, you will be asked to enter the details of your card. To minimize the risk of fraud, a Card Verification Value (CVV) is required. The CVV is a 3-digit number located on the back of the card, above the signature.<br />Your request will be submitted to your bank servers via payment gateway and you will receive confirmation in due course. During the process, do not click Back or Enter/Backspace key. The transaction therein will be identified on your Credit Card statement as 'SacharGaming.'<br />Kindly note KhelPlay Rummy does not charge any other fees or service charges. You are responsible to coordinate with your respective banks if any fees are charged by them for the transaction.<br /><br /></p>
+                        <p><em>Debit Card</em>: Maestro, Master and Visa debit cards of all banks in India have been integrated with KhelPlay Rummy to make an easy deposit using the debit card. You just need to choose your card from a drop down menu and click on 'Add Cash' button to submit and proceed further.<br />On the next page, you are required to enter the details of your card. To minimize the risk of fraud, a Card Verification Value (CVV) is required. The CVV is a 3-digit number located on the back of the card, above the signature. You may also be required to enter your online banking username and password to process the transaction.<br />Your request will be submitted to your bank servers via payment gateway and you will receive confirmation in due course. During the process, do not click Back or Enter/Backspace key. The transaction therein will be identified on your bank statement as 'SacharGaming.'<br />Kindly note KhelPlay Rummy does not charge any other fees, service charges. You are responsible to coordinate with your respective banks if any fees are charged by them for the transaction.<br />For any clarifications please write to us at support@khelplayrummy.com</p>
+                        <p><em>Net Banking: </em>KhelPlay Rummy has facilitated Net Banking facility with most Indian banks for making deposits in your KhelPlay Rummy account. Note: Net Banking is an Online Bank Transfer which allows you to make a real-time bank transfer from your bank account to your KhelPlay Rummy account.<br />All you need to do is choose net banking and choose your bank from a drop-down menu and click 'Add Cash' to proceed to make payment. You may need to provide your online banking login credentials to verify and authorize the payment. Payment gateway of KhelPlay Rummy will thereafter complete the transaction with your bank as per amount you have entered on your behalf. Please keep in mind that sessions are time bound, if not processed appropriately, you may need to re-process transaction. You have 10 minutes to complete the transfer.<br />Your KhelPlay Rummy account will be credited instantaneously if the transaction is successful; otherwise an error message with details will be displayed.<br />KhelPlay Rummy has a net banking facility available with all leading banks including ICICI Bank and all key State Bank of India (SBI) and its associate banks.<br />Kindly note KhelPlay Rummy does not charge any other fees for using Net Banking facility. Players are responsible to coordinate with their respective banks if any fees are charged by their bank for Net Banking transactions.<br /><br /></p>
+                        <p><em>Wire Transfer: </em>KhelPlay Rummy has the facility for you to make a deposit in your KhelPlay Rummy account via a wire Transfer. To make a deposit, click on the Wire Transfer tab on the right panel and then click on the link 'View bank detail.' Clicking this will open a pop-up which will give details of the bank like, Beneficiary Name, Account No., IFSC Code, MIRC Code, Bank Name, Branch Address, etc. which you would need to make the deposit for transfer in your bank.After making the deposit, you may click Add Cash again, click on Wire Transfer tab and enter the Reference No. you get when making the deposit in your bank. Select the bank and enter the date of deposit and submit. Wire transfer approval takes a minimum of one working day, once your transfer is approved by our bank the deposited amount would reflect in your KhelPlay Rummy account in the form of real chips.<br /><br /><br /></p>
+                        <p><strong>Deposit and withdrawal</strong></p>
+                        <p>KhelPlay Rummy has an aggregate and steady responsibility to the wellbeing and security of player reserves. Player adjusts are kept in isolated records and not utilized for operational costs. This guarantees your assets are consistently accessible for you to trade out agreement with our banking and security methods.</p>
+                        <p>The minimum withdrawal request at a given point of time is Rs.200 and the maximum is Rs.10,000. This is mandatory in order to encourage responsible play as well as to prevent unauthorized or illegal activity.</p>
+                        <p>Khelplayrummy.com parts with two free withdrawals in a month. All resulting demand for money out will be accused of pertinent handling expenses and administration charges, which will be deducted from your record. On the off chance that you don't have a sufficient add up to charge the handling expenses, your money outs won't be prepared. You may resend a solicitation in the succeeding month to benefit free cash-out.</p>
+                        <p><br /><br /></p>
+                        <p><strong>Our verdict</strong></p>
+                    </div>
+
+                    <div class="col-sm-8 col-sm-pull-4 pt-4" ng-if="dealId=='4'">
+
+                        <!--<p><strong>Rummy Passion</strong></p>
+                        <p><br /><br /></p>-->
+                        <p><strong>Rummy Passion review</strong></p>
+                        <p><span style="font-weight: 400;">Owned and operated by Passion Gaming Pvt. Ltd., it offers 13 card cash and free play games in a 100% safe and legal environment. This website has a plethora of exciting ongoing tournaments throughout the year. The games are smooth running and provide a superior user experience. It is fun and advantageous to play Rummy at this relatively new but highly intuitive site. </span><span style="font-weight: 400;">The site notches high on key parameters and aims to deliver top-notch gaming experiences to players in a secure and fair environment.</span></p>
+                        <p><br /><br /></p>
+                        <p><strong>Game software &amp; Graphics at Rummy Passion</strong></p>
+                        <p><span style="font-weight: 400;">Rummy Passion utilizes trusted third party programming to drive its game motor. The software provider is a profoundly presumed game creating company notable for offering a protected and safe gaming environment. It ensures that neither player nor the game can actually be controlled. Fair Game play is consistently a high priority for Rummy Passion. C</span><span style="font-weight: 400;">ards at Rummy Passion are dealt to the players via a complex algorithm known as the </span><strong>Random Number Generator (RNG)</strong><span style="font-weight: 400;">. </span><a href="https://www.rummypassion.com/rng-certificate"><span style="font-weight: 400;">RNG of Rummy Passion</span></a><span style="font-weight: 400;"> is tested, approved, and certified by the world-acclaimed gaming software testing agency - iTech Labs, Australia. In addition to providing excellent games, Rummy Passion highlights dynamic and fresh illustrations. The user interface is clean, neat and refreshing, thereby, making it a user friendly experience.</span></p>
+                        <p>&nbsp;</p>
+                        <p><strong>What's different</strong></p>
+                        <p><span style="font-weight: 400;">Rummy Passion offers a fair and secure gaming experience because building players' trust is critical to any gaming platform. Player's account details and gameplay will remain in complete secrecy with Rummy Passion. Rummy Passion uses state of the art SSL encryption technology to protect player's data and private information. Rummy Passion practises </span><a href="https://www.rummypassion.com/responsible-gaming"><span style="font-weight: 400;">responsible gaming</span></a><span style="font-weight: 400;"> in letter and spirit. If a player wishes to take a break from playing rummy, Rummy Passion allows its players the facility of self-exclusion. This is entirely to encourage the players to play responsibly spending only as much money as they can conveniently afford</span></p>
+                        <p><br /><br /></p>
+                        <p><strong>What's not good</strong></p>
+                        <p><span style="font-weight: 400;">Absence of a 21-card rummy game is the only aspect lacking in the gaming website. Needless to say, we might expect it in near future.</span></p>
+                        <p>&nbsp;</p>
+                        <p><strong>Sign up Bonus</strong></p>
+                        <ul>
+                            <li style="font-weight: 400;"><strong>GET RS 10,000 MATCH BONUS</strong><span style="font-weight: 400;"> - When you register and play for cash, you get a whopping Rs. 10,000 as bonus money in the first week of your deposits. It does not get bigger and better than this.</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">To start, get up to Rs 2000 as a Welcome Bonus when first deposit is made. This is the biggest welcome bonus one can get. Simply use the bonus code "WELCOME" and Rummy Passion will credit the user account with a 100% match bonus equal to the amount of first deposit up to Rs 2000. </span><span style="font-weight: 400;">50% with Second Deposit up to Rs 3,000 Bonus Code </span><strong>TOPUP and 25% match up to Rs 5000 every Sunday Bonus Code PASSION</strong></li>
+                        </ul>
+                        <p>&nbsp;</p>
+                        <p><strong>Avatars</strong></p>
+                        <p><span style="font-weight: 400;">Whether it&rsquo;s real-life or online games, avatars do leave an impression on people. In online games, creators of certain gaming websites offer avatar features, as they believe that avatars convey players&rsquo; gaming behavior. Perhaps, at Rummy Passion, players get an advantage to choose avatar as per their personality.Rummy Passion offers 20 different types of avatars which include Hero, Policemen, Captain, Fireman, Detective, Astronaut, Judge, Biker, DJ, Soldier, Doctor, Miner, Pilot, Air Hostess, Saree, Actress, Captain Cool, Rapper, Muscleman, and Surgeon.</span></p>
+                        <p><br /><br /></p>
+                        <p><strong>Rummy Passion Promotions</strong></p>
+                        <p><span style="font-weight: 400;">Multiple tournaments namely, Winter warriors, Welcome 2021, RAF Multiplier Bonus,Mega Jackpot 1 Lakh GTD, Warmest Signup Bonus Package, Permanent Sunday bonus offer, FreeRoll and Cash Rummy Tournaments and Refer a friend bonus are running on the platform.</span></p>
+                        <p>&nbsp;</p>
+                        <p><span style="font-weight: 400;">The bonus offers that Rummy Passion provides are quite attractive than what other prominent websites offer. The combined package offers a whopping amount of Rs. 10,000 in the first week of joining. This is a standard offer.&nbsp; Sundays are extra special as one can claim a 25% match bonus up to Rs 5000 on any Sunday. If a few friends are added, then the player qualifies for an attractive Refer a Friend bonus with which he/she can earn Rs. 7500 per referral. Also, the new player referred will be credited with a Rs.2500 bonus. There is no limit on how many friends a player can refer to. The withdrawals are quick and hassle free and service is top class.</span></p>
+                        <p><br /><br /></p>
+                        <p><strong>Latest Rummy Passion Promotions</strong></p>
+                        <p><span style="font-weight: 400;">Currently, promotions ongoing are as follows:</span></p>
+                        <ul>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Winter warriors</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">RAF multiplier bonus</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Mega jackpot 1 Lakh GTD</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">First and second deposit bonus</span></li>
+                            <li style="font-weight: 400;"><span style="font-weight: 400;">Multiple free roll and cash tournaments</span></li>
+                        </ul>
+                        <p><br /><br /></p>
+                        <p><strong>Customer support</strong></p>
+                        <p><span style="font-weight: 400;">The support services are available in 6 different languages, viz. Hindi, English, Punjabi, Kannada, Tamil and Telugu. Every player's query is handled with a personal touch, where executives put themselves in players' shoes to understand their perspective and resolve the issue accordingly. To ensure smooth resolution of common player queries, a </span><a href="https://www.rummypassion.com/rummygyan/rummy-passion/how-to-reach-rummy-passions-support-team-at-the-quickest#"><span style="font-weight: 400;">Dedicated FAQs Section</span></a><span style="font-weight: 400;"> has been set up answering all the commonly asked questions. But, if a player is unable to get the answers he/she is looking for, one can quickly contact the player services team.</span></p>
+                        <p><br /><br /></p>
+                        <p><strong>Payment options</strong></p>
+                        <p><span style="font-weight: 400;">Players can choose any of the payment options ranging from Net Banking, Credit Card, Debit Card, Paytm, UPI, and all the major e-wallets. Enter details and click on continue. A new window will open leading to a secured payment gateway where one can make the payment and proceed to enjoy their beloved game.</span><span style="font-weight: 400;"><br /><br /></span></p>
+                        <p><strong>Deposit and withdrawal</strong></p>
+                        <p><span style="font-weight: 400;">Any type of banking transaction at Rummy Passion is completely safe &amp; secure on this platform. Rummypassion cares about players' safety and security, and that's why the company has ensured that the latest safety measures are incorporated. The website is secured by EV SSL encryption &ndash; the highest standards of security that are available today. Other than this, Rummy Passion has a dedicated team to take care of the financial matters and player protection, and if players face any problem, </span><a href="https://www.rummypassion.com/support"><span style="font-weight: 400;">the Customer Support</span></a><span style="font-weight: 400;"> team is always there to help.</span></p>
+                        <p><br /><br /><br /></p>
+                        <p><strong>Our verdict</strong></p>
+                        <p><span style="font-weight: 400;">According to us, rummypassion is one of the leading rummy gaming websites in the country presently which scores high on multiple aspects such as safety, UI and overall experience. High customer centric approach of this gaming platform certainly ensures longevity of players engagement. Transparent deposits and withdrawals add to the trust equity of rummypassion. Overall, rummypassion is highly recommended for rummy players who wish to extract maximum entertainment out of this game. We, at whispering shouts rate this rummy platform 9.2/10.</span></p>
+                        <p><br /><span style="font-weight: 400;">Whispering Shouts offers rakeback to all players registering on rummypassion through the link </span><span style="font-weight: 400;">XXXX. </span><span style="font-weight: 400;">Rakeback is free real money that you receive straight into your registered account no matter if you win or lose.So you should be able to see straight away that it&rsquo;s a no brainer for a smart rummy player to make sure that rakeback deal is always opted.</span></p>
+
+                    </div>
+                    <div class="col-sm-4 col-sm-push-8 mt-2">
+
+                        <div class="mt-3 mb-4" style="max-height: 200px;">
+                            <img src="/assets/images/r-1.png" />
+                        </div>
+
+                        <div class="mt-3 mb-4" style="max-height: 200px;">
+                            <img src="/assets/images/r-2.png" />
+                        </div>
+
+                        <div class="mt-3 mb-4" style="min-height: 300px;">
+                            <img src="/assets/images/r-3.png" />
+                        </div>
+                        <div class="mt-3 mb-4" style="min-height: 300px;">
+                            <img src="/assets/images/r-4.png" />
+                        </div>
+
+
+
+                        <div class="mt-3 mb-4" style="min-height: 300px; border-radius: 1em; padding: 10px; background: #cccccc;">
+                            <h4 style="text-align: center; border-bottom: 2px solid #a1a1a1; padding-top: 10px; padding-bottom: 10px; color: #000;">Most recent</h4>
+                        </div>
+                        <div class="mt-4" style="min-height: 300px; border-radius: 1em; padding: 10px; background: #cccccc;">
+                            <h4 style="text-align: center; border-bottom: 2px solid #a1a1a1; padding-top: 10px; padding-bottom: 10px; color: #000;">Most recent</h4>
+                        </div>
+                        <!--<div class="mt-3 mb-4" style="min-height: 300px;">
+            <img src="/assets/images/r-5.png" />
+        </div>-->
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!--rudal code end 01/01-->
+
+    </section>
+</section>
+
+<br />
+<br />
+<br />
+<div ng-include="'views/rummy/_rummyFooter.html'">
+</div>

@@ -1,0 +1,73 @@
+﻿ <!-- header top begin -->
+<div ng-include="'views/_header.html'">
+</div>
+<section id="layout-content" class="container">
+    <div class="flash-message">
+    </div>
+    <div class="container1 auth-page">
+        <div class="row no-gutters">
+            <div class="col-xl-8 col-lg-7 left-column d-flex align-items-center">
+                <div class="content">
+                    <h2 class="page-heading">
+                        Crafted for the love of the game
+                    </h2>
+                    <p>
+                        Whispering Shouts is a tunnel to the poker games, with a
+                        motto to make every player a winner irrespective of how
+                        their game goes.
+                    </p>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-5 right-column d-flex align-items-center">
+                <div class="content" ng-show="!ThankYouPage">
+                    <h1 class="section-heading">Sign Up</h1>
+                    <h3>Register</h3>
+                    <form role="form" id="regform" name="regform" novalidate>
+                        <div class="form-group">
+                            <label for="registerName">Full Name</label>
+                            <input class="form-control" type="text" ng-model="username" name="username" autocomplete="off" maxlength="200" placeholder="Full Name" required>
+                            <span class="error-message" ng-show="regform.username.$dirty && regform.username.$invalid">Please enter your name.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerEmail">Email</label>
+                            <input class="form-control" type="text" ng-model="emailid" ng-pattern="EmailValidation" name="emailid" autocomplete="off" maxlength="200" placeholder="Email Address" required>
+                            <span class="error-message" ng-show="regform.emailid.$dirty && regform.emailid.$invalid">Please enter your valid email address.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPassword">Mobile No</label>
+                            <input type="text" class="form-control" ng-pattern="PhoneNumberValidation" ng-model="mobileno" name="mobileno" autocomplete="off" maxlength="10" placeholder="Mobile No." onkeypress="return checkNumber(this.value, event);" xtype="tel" required>
+                            <span class="error-message" ng-show="regform.mobileno.$dirty && regform.mobileno.$invalid">Please enter your mobile no.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPassword">Password</label>
+                            <input type="password" class="form-control" ng-model="password" name="password" autocomplete="off" maxlength="100" placeholder="Password" required>
+                            <span class="error-message" ng-show="regform.password.$dirty && regform.password.$invalid">Please enter password.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPassword">Confirm Password</label>
+                            <input type="password" class="form-control" ng-model="confirmpassword" name="confirmpassword" autocomplete="off" maxlength="100" placeholder="Confirm Password" required>
+                            <span class="error-message" ng-show="regform.confirmpassword.$dirty && regform.confirmpassword.$invalid">Please enter confirm password.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="referral_code">Referral Code</label>
+                            <input type="text" class="form-control" ng-model="refrelcode" ng-disabled="IsReferralCodeExists" name="refrelcode" autocomplete="off" maxlength="100" placeholder="Referral Code">
+                        </div>
+                        <button type="submit" class="btn btn-default" ng-disabled="regform.$invalid" ng-model="btnregister" ng-click="Register()">Register</button>
+                    </form>
+                    <p class="text-center mt-5">
+                        Already have account?
+                        <a class="primary-link" href="/login">
+                            Sign In
+                        </a>
+                    </p>
+                </div>
+                <div class="card-body" ng-show="ThankYouPage">
+                    <h2 class="title">Thank you</h2>
+                    <p>Thank you for signing up at Whispering Shouts.</p>
+                    <p>Kindly verify your email id by clicking the link provided in the email sent to your email account.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

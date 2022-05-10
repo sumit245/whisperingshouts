@@ -1,0 +1,159 @@
+﻿<!-- header top begin -->
+<div ng-include="'views/_header.html'">
+</div>
+<style>
+    .page-dashboard .container {
+        max-width: 1100px;
+    }
+
+    .header-section {
+        display: block !important;
+    }
+
+    .logo-section {
+        display: block !important;
+    }
+
+    .bodynew {
+        background: #fff;
+    }
+
+    .abs1 {
+        position: absolute;
+        bottom: 0px;
+        padding: 15px;
+        left: 0px;
+        font-size: 20px;
+        color: #fff;
+        background: #000000b0;
+        display: block;
+        width: 100%;
+    }
+
+    #feedcontent > img {
+        width: 318px;
+        height: 200px;
+    }
+    #feedcontent > div >img {
+        width: 318px;
+        height: 200px;
+    }
+</style>
+<link href="/assets/css/blog.css" rel="stylesheet">
+<section class="blog-block" data-ng-controller="FeedCtrl" data-ng-init="getRSSFeed()">
+    <div class="container">
+        <div class="row">
+            <div class="posts-listing col-md-12">
+                <div class="desktop-tabs">
+
+
+                </div>
+
+                <div class="container tab-content desktop-content" style="background-color:#2E3237 !important;">
+                    <div role="tabpanel" class="tab-pane active" id="all">
+
+
+                        <div class="row">
+                            <h2 style="display:block;padding:15px;width:100%; color:#fff;">Recent Listed</h2>
+                            <hr />
+                            <div class="post col-lg-4" id="divFeed" ng-repeat="blog in FeedList">
+                                <div class="post-details" style="background: linear-gradient(to right, #26292d, #111214);">
+                                    <div class="post-meta d-flex justify-content-between">
+                                        <div class="date meta-last">{{blog.PubDate | date}}</div>
+                                        <div class="category"><a href="#">Business</a></div>
+                                    </div>
+                                    <a href="javascript:void(0)">
+                                        <h3 class="h4" style="color:#fff !important;" data-ng-bind-html="blog.Title"></h3>
+                                    </a>
+                                    <p class="text-muted" id="feedcontent" style="color:#fff;" data-ng-bind-html="blog.Description"></p>
+                                    <!--<footer class="post-footer d-flex align-items-center">
+                                        <a href="#" class="author d-flex align-items-center flex-wrap">
+                                            <div class="avatar">
+                                                <img src="/assets/images/user_image1.png" style="max-width:50px;" alt="..." class="img-fluid image-css">
+                                            </div>
+                                            <div class="title"><span>John Doe</span></div>
+                                        </a>
+                                        <div class="date"><i class="icon-clock"></i> 2 months ago</div>
+                                        <div class="comments meta-last"><i class="icon-comment"></i>12</div>
+                                    </footer>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- mobile tab-content -->
+                <div class="container tab-content mobile-content" style="background-color:#2E3237 !important;">
+                    <div role="tabpanel" class="tab-pane content active" id="tab-1">
+
+
+                        <div class="row">
+                            <h3 style="display:block;padding:15px;width:100%; color:#fff;">Recent Listed</h3>
+                            <hr />
+                            <div class="post col-lg-6" ng-repeat="blog in FeedList">
+                                <div class="post-details" style="background: linear-gradient(to right, #26292d, #111214);">
+                                    <div class="post-meta d-flex justify-content-between">
+                                        <div class="date meta-last">{{blog.PubDate | date}}</div>
+                                        <div class="category"><a href="#">Business</a></div>
+                                    </div>
+                                    <a href="javascript:void(0)">
+                                        <h3 class="h4" style="color:#fff !important;" data-ng-bind-html="blog.Title"></h3>
+                                    </a>
+                                    <p class="text-muted" id="feedcontent" style="color:#fff;" data-ng-bind-html="blog.Description"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br />
+<br />
+<br />
+<div ng-include="'views/_footer.html'">
+</div>
+
+
+<!--<section class="blog-block" data-ng-controller="FeedCtrl" data-ng-init="getRSSFeed()">
+    <div class="container" data-ng-if="!DescriptionToShow">
+        <div class="row">
+            <div class="posts-listing col-md-12">
+                <div class="desktop-tabs">
+
+                </div>
+                <div class="container tab-content desktop-content" style="background-color:#2E3237 !important;">
+                    <div role="tabpanel" class="tab-pane active" id="all">
+                        <div class="row">
+                            <h2 style="display:block;padding:15px;width:100%; color:#fff;">Recent Listed</h2>
+                            <hr />
+                            <div class="post col-lg-4" ng-repeat="blog in FeedList | limitTo:5">
+
+                                <div class="post-details" style="background: linear-gradient(to right, #26292d, #111214);">
+                                    <div class="post-meta d-flex justify-content-between">
+                                        <div class="date meta-last">{{blog.PubDate | date}}</div>
+                                    </div>
+                                    <a href="javascript:void(0)" data-ng-click="ShowDescription(blog.Description)">
+                                        <h3 class="h4" style="color:#fff !important;">{{blog.Title}}</h3>
+                                    </a>
+
+                                    <p class="text-muted" style="color:#fff;">{{blog.Title}}</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+<!-- mobile tab-content -->
+<!--</div>
+        </div>
+    </div>
+
+
+    <div class="container" data-ng-if="DescriptionToShow">
+        <div class="row" data-ng-bind-html="Description">
+
+        </div>
+    </div>
+</section>-->

@@ -1,0 +1,246 @@
+﻿<div ng-include="'views/_header.html'">
+</div>
+<!-- header top end -->
+<div ng-include="'views/_topheader.html'">
+</div>
+
+<style>
+    .rank {
+        font-size: 26px;
+        font-weight: bold;
+        height: 60px;
+        padding: 16px 10px;
+        margin-bottom: 10px;
+        background: #d0d0d0;
+        border-right: 2px solid #fff;
+    }
+
+    .winner-name {
+        height: 60px;
+        font-weight: bold;
+        padding: 16px 10px;
+        margin-bottom: 10px;
+        border-right: 2px solid #fff;
+        background: #d0d0d0;
+        font-size: 14px;
+    }
+
+    .winner-rank {
+        height: 60px;
+        font-weight: bold;
+        padding: 16px 10px;
+        margin-bottom: 1px;
+        background: #4BB543;
+        font-size: 14px;
+        color: #fff
+    }
+
+    @media (max-width:768px) {
+        .rank {
+            font-size: 14px;
+            height: 40px;
+            padding: 5px 10px;
+        }
+
+        .winner-name {
+            font-size: 14px;
+            height: 40px;
+            padding: 5px 10px;
+        }
+
+        .winner-rank {
+            font-size: 14px;
+            height: 40px;
+            padding: 5px 10px;
+        }
+    }
+
+    .nav-select {
+        color: #fff;
+        background-color: #05093e;
+        font-size: 16px;
+    }
+
+    .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+        color: #fff;
+        background-color: #05093e;
+        font-size: 16px;
+    }
+</style>
+
+<style>
+    .leader li {
+        text-align: center !important;
+    }
+</style>
+
+<style type="text/css">
+    @keyframes blink {
+        to {
+            color: #B9752C;
+        }
+    }
+
+    .blinker {
+        color: #000;
+        animation: blink 1s steps(2, start) infinite;
+    }
+</style>
+
+<section class="transaction-section sectionnew">
+    <div class="container" style="padding: 0">
+        <div class="col-lg-12" style="padding: 0;">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 leftmenu">
+                    <div class="col-12 box1">
+                        <h4 style="color: #fff; text-align: center;">Profile</h4>
+                        <img src="Album/ProfilePic/{{DashboardData.image_path}}">
+                        <p>{{UserName}}</p>
+                        <p class="p1">Wallet balance</p>
+                        <p>{{AvailablePoints}}</p>
+                        <p class="p1">Account Status</p>
+                        <p>Active</p>
+                    </div>
+                    <div class="box2">
+                        <h4 style="text-align: center;">Personal Details</h4>
+                        <p class="p1">Email ID</p>
+                        <p>{{DashboardData.email_id}}</p>
+                    </div>
+
+                    <div class="box2">
+                        <h4 style="text-align: center;">KYC Details</h4>
+                        <p class="p1">Pancard</p>
+                        <p>{{DashboardData.pancard}}</p>
+
+                        <p class="p1">Aadhaar Card</p>
+                        <p>{{DashboardData.aadhaar_card}}</p>
+
+                        <p class="p1">Bank</p>
+                        <p>{{DashboardData.bank_name}}</p>
+
+                        <p class="p1">Bank Account</p>
+                        <p>{{DashboardData.account_no}}</p>
+
+                        <p class="p1">IFSC</p>
+                        <p>{{DashboardData.IFSC}}</p>
+
+                        <p class="p1">UPI</p>
+                        <p>{{DashboardData.UPI}}</p>
+
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-8 marg1 questions-section" style="margin-top: 0px !important; margin-bottom: 0px !important;">
+
+                    <div ng-include="'views/_desktopmenu.html'">
+                    </div>
+
+                    <ul class="nav nav-pills mb-3 justify-content-center questions-nav-pills" style="margin-bottom:2px !important;">
+                        <li class="nav-item questions-nav-item" style="width:48%; margin: 2px; padding: 2px;">
+                            <a class="nav-link questions-nav-link" id="leaderboard-tab" data-toggle="tab" href="/leaderboard" role="tab" aria-controls="home"
+                               aria-selected="true"><i class="ti-medall"></i><span class="hidemob" style="display: inline;">Leaderboard</span></a>
+                        </li>
+                        <li class="nav-item questions-nav-item" style="width:48%; margin: 2px; padding: 2px;">
+                            <a class="nav-link questions-nav-link active" id="contest-tab" data-toggle="tab" href="/contest-result" role="tab" aria-controls="profile"
+                               aria-selected="false"><i class="ti-cup"></i><span class="hidemob" style="display: inline;">Contest</span></a>
+                        </li>
+                    </ul>
+
+                    <!--<ul class="nav nav-tabs hideul3" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link {{leaderboardactiveclass}}" id="leaderboard-tab" data-toggle="tab" href="/leaderboard" role="tab" aria-controls="home"
+                               aria-selected="true"><i class="ti-medall"></i><span class="hidemob">Leaderboard</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{contestactiveclass}}" id="contest-tab" data-toggle="tab" href="/contest-result" role="tab" aria-controls="profile"
+                               aria-selected="false"><i class="ti-cup"></i><span class="hidemob">Contest</span></a>
+                        </li>
+                    </ul>-->
+
+                    <div ng-include="'views/_mobilemenu.html'">
+                    </div>
+
+
+
+                    <div class="tab-content">
+                        <img src="images/contest-banner-winner.jpg" style="width:100%;" />
+                        <div class="col-md-12">
+                            <!-- multistep form -->
+                            <!--<div class="row">
+                                <p>AAAAA</p>
+                            </div>-->
+                            <div class="row">
+                                <ul style="width: 100%; padding: 20px; list-style:none !important;">
+                                    <li>
+                                        <div class="row font-open-snas text-center" ng-repeat="l in ContestResultList">
+                                            <!--<div class="col-md-1 col-3 rank"><span ng-class="l.Winner=='1'?'blinker':''">{{l.rank_detail}}</span> </div>-->
+                                            <div class="col-md-1 col-3 rank"><span ng-class="l.Winner=='1'?'blinker':''">{{$index+1}}</span> </div>
+                                            <div class="col-md-9 col-5 winner-name" style="text-transform:capitalize;"><p ng-class="l.Winner=='1'?'blinker':''" ng-style="l.Winner =='1' && {'font-size':'25px'}"> {{l.name}}</p></div>
+                                            <div class="col-md-2 col-4 winner-rank" ng-show="l.Winner=='1'"><p ng-class="l.Winner=='1'?'blinker':''" ng-style="l.Winner =='1' && {'font-size':'25px'}">Winner</p></div>
+                                            <div class="col-md-2 col-4 winner-rank" ng-show="l.Winner=='0'"><p>{{l.Qualified}}</p></div>
+                                        </div>
+                                    </li>
+                                </ul>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="tab-content" id="myTabContent" style="display:none;">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <ul class="leader">
+                                    <li class="leaderfull1" ng-repeat="l in ContestResultList | filter:{ rank: '2' }">
+                                        <span>2nd</span>
+                                        <p>{{l.name}}</p>
+                                    </li>
+                                    <li class="leaderfull2" ng-repeat="l in ContestResultList | filter:{ rank: '1' }">
+                                        <span>1st</span>
+                                        <p>{{l.name}}</p>
+                                    </li>
+                                    <li class="leaderfull1" ng-repeat="l in ContestResultList | filter:{ rank: '3' }">
+                                        <span>3rd</span>
+                                        <p>{{l.name}}</p>
+                                    </li>
+
+                                </ul>
+                                <ul class="leader" ng-repeat="l in ContestResultList | filter:{ Qualified: 'Qualified' }">
+                                    <li class="leader5">{{l.rank_detail}}</li>
+                                    <li class="leader4">
+                                        {{l.name}}
+                                    </li>
+                                    <li class="leader5">{{l.Qualified}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<script src="js/app.js"></script>
+<script src="js/mdb.min.js"></script>
+
+<script>
+    $(function () {
+        $('a[data-toggle="tab"]').on('click', function (e) {
+            window.localStorage.setItem('activeTab', $(e.target).attr('href'));
+
+        });
+        var activeTab = window.localStorage.getItem('activeTab');
+        if (activeTab) {
+            $('#myTab a[href="' + activeTab + '"]').tab('show');
+            window.localStorage.removeItem("activeTab");
+        }
+    });</script>

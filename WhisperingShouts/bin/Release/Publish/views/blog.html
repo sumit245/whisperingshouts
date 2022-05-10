@@ -1,0 +1,126 @@
+﻿ <!-- header top begin -->
+<div ng-include="'views/_header.html'">
+</div>
+<style>
+    .page-dashboard .container {
+        max-width: 1100px;
+    }
+    .header-section {
+        display: block !important;
+    }
+
+    .logo-section {
+        display: block !important;
+    }
+
+    .bodynew {
+        background: #fff;
+    }
+
+    .abs1 {
+        position: absolute;
+        bottom: 0px;
+        padding: 15px;
+        left: 0px;
+        font-size: 20px;
+        color: #fff;
+        background: #000000b0;
+        display: block;
+        width: 100%;
+    }
+</style>
+<link href="/assets/css/blog.css" rel="stylesheet">
+<section class="blog-block" ng-if="portalType=='Poker'">
+    <div class="container">
+        <div class="row">
+            <div class="posts-listing col-md-12">
+                <div class="desktop-tabs">
+
+
+                </div>
+
+                <div class="container tab-content desktop-content" style="background-color:#2E3237 !important;">
+                    <div role="tabpanel" class="tab-pane active" id="all" ng-if="allblog">
+
+
+                        <div class="row">
+                            <h2 style="display:block;padding:15px;width:100%; color:#fff;">Recent Listed</h2>
+                            <hr />
+                            <div class="post col-lg-4" ng-repeat="blog in blogList">
+                                <div class="post-thumbnail img-hover-zoom">
+                                    <a href="/blog/{{blog.slug}}-{{blog.id}}">
+                                        <img ng-src="/images/blog/{{blog.image_file_name}}" alt="..." class="img-fluid image-css" style="max-height:250px;">
+                                    </a>
+                                </div>
+                                <div class="post-details" style="background: linear-gradient(to right, #26292d, #111214);">
+                                    <div class="post-meta d-flex justify-content-between">
+                                        <div class="date meta-last">{{blog.updated_at | date : "dd MMM y"}}</div>
+                                        <div class="category"><a href="#">Business</a></div>
+                                    </div>
+                                    <a href="/blog/{{blog.slug}}-{{blog.id}}">
+                                        <h3 class="h4" style="color:#fff !important;">{{blog.title}}</h3>
+                                    </a>
+                                    <p class="text-muted" style="color:#fff;">{{blog.short_description}}</p>
+                                    <footer class="post-footer d-flex align-items-center">
+                                        <a href="#" class="author d-flex align-items-center flex-wrap">
+                                            <div class="avatar">
+                                                <img src="/assets/images/user_image1.png" style="max-width:50px;" alt="..." class="img-fluid image-css">
+                                            </div>
+                                            <div class="title"><span>John Doe</span></div>
+                                        </a>
+                                        <div class="date"><i class="icon-clock"></i> 2 months ago</div>
+                                        <div class="comments meta-last"><i class="icon-comment"></i>12</div>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- mobile tab-content -->
+                <div class="container tab-content mobile-content" style="background-color:#2E3237 !important;">
+                    <div role="tabpanel" class="tab-pane content active" id="tab-1">
+
+
+                        <div class="row">
+                            <h3 style="display:block;padding:15px;width:100%; color:#fff;">Recent Listed</h3>
+                            <hr />
+                            <div class="post col-lg-6" ng-repeat="blog in blogList">
+                                <div class="post-thumbnail img-hover-zoom">
+                                    <a href="/blog/{{blog.slug}}-{{blog.id}}">
+                                        <img ng-src="/images/blog/{{blog.image_file_name}}" alt="..." class="img-fluid image-css">
+                                    </a>
+                                </div>
+                                <div class="post-details" style="background: linear-gradient(to right, #26292d, #111214);">
+                                    <div class="post-meta d-flex justify-content-between">
+                                        <div class="date meta-last">{{blog.updated_at | date : "dd MMM y"}}</div>
+                                        <div class="category">
+                                            <a href="#">Business</a>
+                                        </div>
+                                    </div>
+                                    <a href="/blog/{{blog.slug}}-{{blog.id}}">
+                                        <h3 class="h4" style="color:#fff !important;">{{blog.title}}</h3>
+                                    </a>
+                                    <p class="text-muted" style="color:#fff;">{{blog.short_description}}</p>
+                                    <footer class="post-footer d-flex align-items-center">
+                                        <a href="#" class="author d-flex align-items-center flex-wrap">
+                                            <div class="avatar"><img src="/assets/images/user_image1.png" alt="..." class="img-fluid image-css"></div>
+                                            <div class="title"><span>John Doe</span></div>
+                                        </a>
+                                        <div class="date"><i class="icon-clock"></i> 2 months ago</div>
+                                        <div class="comments meta-last"><i class="icon-comment"></i>12</div>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br />
+<br />
+<br />
+<div ng-include="'views/_footer.html'">
+</div>

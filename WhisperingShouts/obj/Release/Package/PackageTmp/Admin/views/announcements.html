@@ -1,0 +1,107 @@
+﻿<div class="wrapper">
+    <div class="navbar-minimize-fixed">
+        <button class="minimize-sidebar btn btn-link btn-just-icon">
+            <i class="tim-icons icon-align-center visible-on-sidebar-regular text-muted"></i>
+            <i class="tim-icons icon-bullet-list-67 visible-on-sidebar-mini text-muted"></i>
+        </button>
+    </div>
+    <div ng-include="'views/_sidebar.html'">
+    </div>
+    <div class="main-panel">
+        <!-- Navbar -->
+        <div ng-include="'views/_navbar.html'">
+        </div>
+        <!-- End Navbar -->
+        <div class="content">
+            <!--<div class="col-md-8 ml-auto mr-auto">
+                <h2 class="text-center">Partner User name</h2>
+            </div>-->
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <!--<h5 class="card-category">Top Players</h5>-->
+                            <h3 class="card-title"> Announcements</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="toolbar">
+                                <!--        Here you can write extra buttons/actions for the toolbar              -->
+                            </div>
+                            <div class="table-responsive ps" ng-show="!_IsEdit">
+                                <table id="dtannouncements" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Content</th>
+                                            <th>Active</th>
+                                            <th class="sorting_desc_disabled sorting_asc_disabled text-right">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in AnnouncementsList">
+                                            <td>{{ $index + 1 }}</td>
+                                            <td>{{item.content}}</td>
+                                            <td>{{item.active}}</td>
+                                            <!--<td>
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input" type="radio" name="approve" value="True" ng-model="approve">
+                                                    True
+                                                </label>
+                                                &nbsp;
+                                                <label class="form-check-label" style="margin-left:15px;">
+                                                    <input class="form-check-input" type="radio" name="approve" value="False" ng-model="approve">
+                                                    False
+                                                </label>
+                                            </td>-->
+
+                                            <td class="text-right">
+                                                <a ng-href="/announcements/{{item.id}}" style="text-decoration:none;">
+                                                    <button type="button" rel="tooltip" class="btn btn-success btn-link btn-icon btn-sm btn-neutral" data-original-title="Refresh" title="" aria-describedby="tooltip410904">
+                                                        <i class="tim-icons icon-pencil"></i>
+                                                    </button>
+                                                </a>
+                                                <!--<button type="button" rel="tooltip" class="btn btn-danger btn-link btn-icon btn-sm btn-neutral" data-original-title="Delete" title="">
+                                                    <i class="tim-icons icon-simple-remove"></i>
+                                                </button>-->
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <!--<tfoot>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Office</th>
+                                            <th>Age</th>
+                                            <th class="disabled-sorting text-right">Actions</th>
+                                        </tr>
+                                    </tfoot>-->
+                                </table>
+                            </div>
+
+
+
+                            <div ng-show="_IsEdit" class="col-md-12">
+
+                                <textarea name="content" ng-model="content" cols="5" rows="5" style="width:100%;"></textarea>
+                                <!--<script>
+                                    CKEDITOR.replace('content');
+                                </script>-->
+
+                                <input type="button" value="Update" class="btn btn-primary" ng-click="UpdateAnnouncements()" />
+
+
+                            </div>
+
+                        </div>
+                        <!-- end content-->
+                    </div>
+                    <!--  end card  -->
+                </div>
+                <!-- end col-md-12 -->
+            </div>
+            <!-- end row -->
+        </div>
+        <div ng-include="'views/_footer.html'">
+        </div>
+    </div>
+</div>

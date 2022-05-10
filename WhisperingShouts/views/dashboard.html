@@ -1,0 +1,253 @@
+﻿ <!-- header top begin -->
+<div ng-include="'views/_header.html'">
+</div>
+<!-- header top end -->
+<style type="text/css">
+    .otp-verifaction {
+        margin-top: 20px;
+    }
+
+    .code-alrt-inputs li {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .code-alrt-inputs input {
+        text-align: center;
+    }
+
+    ul.code-alrt-inputs input {
+        width: 40px;
+        border: 1px solid #efefef;
+        text-align: center;
+        padding: 0;
+        font-size: 14px;
+        font-weight: 500;
+        font-family: 'Roboto', sans-serif;
+    }
+
+        ul.code-alrt-inputs input:focus {
+            box-shadow: none;
+            border: 1px solid #f55d2c;
+        }
+
+    .chck-btn {
+        height: 33px;
+        display: inline-block;
+        background: #f55d2c;
+        color: #fff !important;
+        padding: 5px 15px;
+        font-weight: 500;
+        border-radius: 5px;
+    }
+
+    .hover-btn:hover {
+        text-decoration: none !important;
+        background: #f55d2c;
+        color: #fff !important;
+        transition: all .2s ease-in-out;
+        -webkit-transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
+        -ms-transition: all 0.2s ease-in-out;
+        -webkit-transition: all 0.2s ease-in-out;
+        background-image: -webkit-linear-gradient(left, rgba(230, 92, 91, 0.9), rgba(245, 93, 44, 0.9));
+        background-image: linear-gradient(to right, rgba(230, 92, 91, 0.9), rgba(245, 93, 44, 0.9));
+    }
+
+    .checkout-login .btn {
+        height: 42px;
+        line-height: 1.8;
+    }
+
+    .li-otp {
+        position: relative; /* necessary for positioning the :after */
+    }
+
+    li.done {
+        list-style: none; /* remove normal bullet for done items */
+    }
+
+        li.done:after {
+            content: "";
+            background-color: transparent;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            width: 10px;
+            border-bottom: 3px solid #4D7C2A;
+            height: 21px;
+            border-right: 3px solid #4D7C2A;
+            transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+        }
+</style>
+
+<section id="layout-content" class="container" style="height: 1200px;">
+    <div class="flash-message">
+    </div>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-2" ng-include="'views/_sideMenu.html'">
+            </div>
+            <div class="col-md-6">
+                <h3 class="page-title">Profile</h3>
+
+                <div class="form-group">
+                    <div class="text-center">
+                        <img ng-src="{{previewimage}}" onerror="this.src='assets/images/user-img.png'" style="max-height:120px;" class="avatar img-circle" alt="avatar">
+                        <h6>Upload a different photo...</h6>
+                        <input type="file" class="form-control" ng-change="angular.element(this).scope().UploadImage()" ng-model="fldselfie" id="fldselfie" style="display:block;" />
+                        <input type="text" ng-model="filename" style="display:none;" />
+                        <span style="color:{{textcolor}}">{{fileuploadmsg}}</span>
+                    </div>
+                </div>
+
+                <form role="form" id="editform" name="editform" class="form-horizontal" novalidate>
+                    <div class="form-group">
+                        <label for="accountName">Full Name</label>
+                        <input type="text" class="form-control" ng-model="username" name="username" autocomplete="off" maxlength="100" placeholder="Your Name" required />
+                        <span class="error-message" ng-show="editform.username.$dirty && editform.username.$invalid">Please enter your name.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="accountMobile">Mobile:</label>
+                        <input type="tel" class="form-control" ng-change="checkMobileChanged()" ng-pattern="PhoneNumberValidation" ng-model="mobileno" name="mobileno" autocomplete="off" maxlength="10" placeholder="+91-xxx-xxxxx" onkeypress="return checkNumber(this.value, event);" xtype="tel" required>
+                        <span class="error-message" ng-show="(editform.mobileno.$dirty && editform.mobileno.$invalid) || (editform.mobileno.$error.pattern)">Please enter valid mobile number</span>
+                        <a ng-hide="mobileVerified==1" class="btn btn-primary" ng-click="generateOtp()" ng-show="mobileno.length==10" style="color:#fff;">Send OTP</a>
+                        <span style="color:green;" id="spnMsg"></span>
+                    </div>
+
+                    <div class="otp-verifaction" ng-show="showOtpVerifaction">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group mb-0">
+                                    <label class="col-lg-3 control-label">Enter Code:</label>
+                                    <div class="col-lg-8">
+                                        <ul class="code-alrt-inputs">
+                                            <li class="li-otp">
+                                                <input ng-model="code1" ng-change="setFocus(2)" name="code1" id="code1" autocomplete="off" maxlength="1" onkeypress="return checkNumber(this.value, event);" type="tel" placeholder="" class="form-control input-md">
+                                            </li>
+                                            <li class="li-otp">
+                                                <input ng-model="code2" ng-change="setFocus(3)" name="code2" id="code2" autocomplete="off" maxlength="1" onkeypress="return checkNumber(this.value, event);" type="tel" placeholder="" class="form-control input-md">
+                                            </li>
+                                            <li class="li-otp">
+                                                <input ng-model="code3" ng-change="setFocus(4)" name="code3" id="code3" autocomplete="off" maxlength="1" onkeypress="return checkNumber(this.value, event);" type="tel" placeholder="" class="form-control input-md">
+                                            </li>
+                                            <li class="li-otp">
+                                                <input ng-model="code4" name="code4" id="code4" autocomplete="off" maxlength="1" onkeypress="return checkNumber(this.value, event);" type="tel" placeholder="" class="form-control input-md">
+                                            </li>
+                                            <li class="li-otp">
+                                                <a class="btn btn-primary" href="javascript:void(0)" ng-click="verifyOtp()">Verify</a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="mt-5">KYC</h4>
+
+                    <div class="kyc-details">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="accountPan">Pan Card</label>
+                                    <input type="text" data-ng-disabled="kyc_approved" class="form-control" ng-pattern="PanValidation" ng-model="pancard" name="pancard" autocomplete="off" maxlength="10" placeholder="Pan Card" required />
+                                    <span class="error-message" ng-show="(editform.pancard.$dirty && editform.pancard.$invalid) || (editform.pancard.$error.pattern)">Please enter valid Pan Card.</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="accountAadhar">Aadhar Card</label>
+                                    <input type="text" data-ng-disabled="kyc_approved" class="form-control" ng-pattern="AadhaarValidation" ng-model="aadhaarcard" name="aadhaarcard" autocomplete="off" maxlength="12" placeholder="Aadhaar Card" onkeypress="return checkNumber(this.value, event);" xtype="tel" required />
+                                    <span class="error-message" ng-show="(editform.aadhaarcard.$dirty && editform.aadhaarcard.$invalid) || (editform.aadhaarcard.$error.pattern)">Please Enter the 12 digit aadhar number</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="accountBankName">Bank Name</label>
+
+                                    <select data-ng-disabled="kyc_approved" name="bankname" id="bankname" ng-model="bankname" class="form-control" required>
+                                        <option value="">--Select --</option>
+                                        <option value="ALLAHABAD BANK">ALLAHABAD BANK </option>
+                                        <option value="ANDHRA BANK">ANDHRA BANK</option>
+                                        <option value="AXIS BANK">AXIS BANK</option>
+                                        <option value="STATE BANK OF INDIA">STATE BANK OF INDIA</option>
+                                        <option value="BANK OF BARODA">BANK OF BARODA</option>
+                                        <option value="UCO BANK">UCO BANK</option>
+                                        <option value="UNION BANK OF INDIA">UNION BANK OF INDIA</option>
+                                        <option value="BANK OF INDIA">BANK OF INDIA</option>
+                                        <option value="BANDHAN BANK LIMITED">BANDHAN BANK LIMITED</option>
+                                        <option value="CANARA BANK">CANARA BANK</option>
+                                        <option value="GRAMIN VIKASH BANK">GRAMIN VIKASH BANK</option>
+                                        <option value="CORPORATION BANK">CORPORATION BANK</option>
+                                        <option value="INDIAN BANK">INDIAN BANK</option>
+                                        <option value="INDIAN OVERSEAS BANK">INDIAN OVERSEAS BANK</option>
+                                        <option value="ORIENTAL BANK OF COMMERCE">ORIENTAL BANK OF COMMERCE</option>
+                                        <option value="PUNJAB AND SIND BANK">PUNJAB AND SIND BANK</option>
+                                        <option value="PUNJAB NATIONAL BANK">PUNJAB NATIONAL BANK</option>
+                                        <option value="RESERVE BANK OF INDIA">RESERVE BANK OF INDIA</option>
+                                        <option value="SOUTH INDIAN BANK">SOUTH INDIAN BANK</option>
+                                        <option value="UNITED BANK OF INDIA">UNITED BANK OF INDIA</option>
+                                        <option value="CENTRAL BANK OF INDIA">CENTRAL BANK OF INDIA</option>
+                                        <option value="VIJAYA BANK">VIJAYA BANK</option>
+                                        <option value="DENA BANK">DENA BANK</option>
+                                        <option value="BHARATIYA MAHILA BANK LIMITED">BHARATIYA MAHILA BANK LIMITED</option>
+                                        <option value="FEDERAL BANK LTD">FEDERAL BANK LTD </option>
+                                        <option value="HDFC BANK LTD">HDFC BANK LTD</option>
+                                        <option value="ICICI BANK LTD">ICICI BANK LTD</option>
+                                        <option value="IDBI BANK LTD">IDBI BANK LTD</option>
+                                        <option value="PAYTM BANK">PAYTM BANK</option>
+                                        <option value="FINO PAYMENT BANK">FINO PAYMENT BANK</option>
+                                        <option value="INDUSIND BANK LTD">INDUSIND BANK LTD</option>
+                                        <option value="KARNATAKA BANK LTD">KARNATAKA BANK LTD</option>
+                                        <option value="KOTAK MAHINDRA BANK">KOTAK MAHINDRA BANK</option>
+                                        <option value="YES BANK LTD">YES BANK LTD</option>
+                                        <option value="SYNDICATE BANK">SYNDICATE BANK</option>
+                                        <option value="BANK OF INDIA">BANK OF INDIA</option>
+                                        <option value="BANK OF MAHARASHTRA">BANK OF MAHARASHTRA</option>
+                                    </select>
+
+                                    <span class="error-message" ng-show="editform.bankname.$dirty && editform.bankname.$invalid">Please select bank.</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="accountBankIFSC">Bank IFSC</label>
+                                    <input type="text" data-ng-disabled="kyc_approved" class="form-control" ng-model="bankifsc" id="bankifsc" name="bankifsc" autocomplete="off" maxlength="50" placeholder="IFSC code" required />
+                                    <span class="error-message" ng-show="editform.bankifsc.$dirty && editform.bankifsc.$invalid">Please enter IFSC code.</span>
+                                </div>
+                                <span id="branchAddress" style="color:{{msgColor}}"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="accountBankAccountNumber">Bank Account Number</label>
+                                    <input type="text" data-ng-disabled="kyc_approved" class="form-control" ng-model="bankaccount" name="bankaccount" autocomplete="off" maxlength="50" placeholder="Bank Account" onkeypress="return checkNumber(this.value, event);" xtype="tel" required>
+                                    <span class="error-message" ng-show="editform.bankaccount.$dirty && editform.bankaccount.$invalid">Please enter your bank account.</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="accountBankAccountNumber">UPI/Virtual Address</label>
+                                    <input type="text" data-ng-disabled="kyc_approved" class="form-control" id="bankupi" ng-model="bankupi" name="bankupi" autocomplete="off" maxlength="50" placeholder="UPI/Virtual Address" />
+                                    <span class="error-message" ng-show="editform.bankupi.$dirty && editform.bankupi.$invalid">Please enter UPI/Virtual Address.</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" ng-disabled="editform.$invalid" class="btn btn-default btn-primary" ng-show="mobileVerified==1" ng-click="UpdateProfile()">Save</button>
+                    <span ng-show="mobileVerified!=1" style="color:red; font-size:20px;">Your mobile number is not verified yet, please verify now</span>
+                </form>
+            </div>
+            <div class="col-md-4 show-desktop-only" ng-include="'views/_activity.html'">
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,212 @@
+﻿ <!-- header top begin -->
+<div ng-include="'views/_header.html'">
+</div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
+
+<script>
+
+    // Load the SDK Asynchronously
+
+    (function (d) {
+        var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement('script'); js.id = id; js.async = true;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        ref.parentNode.insertBefore(js, ref);
+    }(document));
+
+    // Init the SDK upon load
+
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '1393744880722096', // App ID
+            channelUrl: '//' + window.location.hostname + '/channel', // Path to your Channel File
+            scope: 'id,name,email,picture', // This to get the user details back
+            status: true, // check login status
+            cookie: true, // enable cookies to allow the server to access the session
+            xfbml: true  // parse XFBML
+        });
+
+        // listen for and handle auth.statusChange events
+
+        FB.Event.subscribe('auth.statusChange', function (response) {
+            //debugger;
+            if (response.authResponse) {
+                // user has auth'd your app and is logged into Facebook
+                FB.api('/me?fields=id,name,email,picture', function (me) {
+                    if (me.name) {
+                        if (me.email == null || me.email === undefined || me.email == "") {
+                            GetAlert("Email id is not shared with your facebook account!", "error");
+                        }
+                        else {
+                            localStorage.setItem("profilePic", me.picture.data.url);
+                            Login(me.email, "FACEBOOK", 1, me.name, me.id);
+                        }
+                        //document.getElementById('auth-displayname').innerHTML = me.name;
+
+                        //document.getElementById('FBId').innerHTML = me.id;
+                        //document.getElementById('DisplayEmail').innerHTML = me.email;
+                        //document.getElementById('ProfilePic').src = me.picture.data.url;
+
+                    }
+                })
+                document.getElementById('auth-loggedout').style.display = 'none';
+                document.getElementById('auth-loggedin').style.display = 'block';
+
+            } else {
+
+                // user has not auth'd your app, or is not logged into Facebook
+                document.getElementById('auth-loggedout').style.display = 'block';
+                document.getElementById('auth-loggedin').style.display = 'none';
+
+            }
+
+        });
+
+        $("#auth-logoutlink").click(function () { FB.logout(function () { window.location.reload(); }); });
+
+    }
+
+    function Login(userid, password, IsLoginWithFaceBook, name, facebook_id) {
+        debugger;
+        try {
+            ajaxindicatorstart('please wait..');
+            var _obj = {
+                userid: userid,
+                password: password,
+                latitude: "",
+                longitude: "",
+                IsLoginWithFaceBook: IsLoginWithFaceBook,
+                name: name,
+                facebook_id: facebook_id
+            };
+
+            $.ajax({
+                method: 'POST',
+                url: 'WhisperingShoutsService.asmx/Login',
+                data: JSON.stringify(_obj),
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+
+                success: function (data) {
+                    ajaxindicatorstop();
+                    var _data = $.parseJSON(data.d);
+                    if (_data !== null && _data.length > 0) {
+                        var details = _data[0];
+                        if (details.IsSuccess === 1) {
+                            FB.logout(function () {
+                                window.location.href = '/account';
+                            });
+                        }
+                        else {
+                            FB.logout(function () {
+                                GetAlert(details.ResponseMSG, 'error');
+                            });
+                        }
+                    }
+
+                },
+                error: function (result) {
+                    ajaxindicatorstop();
+                    GetAlert("Slow network detected, please try again!", "error");
+                }
+
+            });
+
+        }
+        catch (ex) {
+            //ajaxindicatorstop();
+        }
+    }
+
+    
+</script>
+
+<section id="layout-content" class="container">
+    <div class="flash-message">
+    </div>
+    <div class="container1 auth-page">
+        <div class="row no-gutters">
+            <div class="col-xl-8 col-lg-7 left-column d-flex align-items-center">
+                <div class="content">
+                    <h2 class="page-heading">
+                        Crafted for the love of the game
+                    </h2>
+                    <p>
+                        Whispering Shouts is a tunnel to the poker games, with a
+                        motto to make every player a winner irrespective of how
+                        their game goes.
+                    </p>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-5 right-column d-flex align-items-center" data-ng-hide="_isForgotPasswordClick">
+                <div class="content">
+                    <h1 class="section-heading">Sign In</h1>
+                    <form role="form" id="loginform" name="loginform">
+                        <div class="form-group">
+                            <label for="userSigninLogin">Email</label>
+                            <input class="form-control" type="text" ng-model="emailid" name="emailid" autocomplete="off" maxlength="200" placeholder="Email id" required>
+                            <span class="error-message" ng-show="loginform.emailid.$dirty && loginform.emailid.$invalid">Please enter email-id.</span>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="userSigninPassword">Password</label>
+                            <input class="form-control" type="password" ng-model="password" name="password" autocomplete="off" maxlength="100" placeholder="Password" required>
+                            <span class="error-message" ng-show="loginform.password.$dirty && loginform.password.$invalid">Please enter password.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label><input name="rememberPassword" id="rememberPassword" ng-model="rememberPassword" ng-checked="checkedRememberPassword" type="checkbox"> Remember me</label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-default" ng-disabled="loginform.$invalid" ng-model="btnlogin" ng-click="Login(0)">Sign in</button>
+
+                        <p class="text-center mt-5">
+                           
+                            <a class="primary-link" data-ng-click="_isForgotPasswordClick=true">
+                                Forgot Password?
+                            </a>
+                        </p>
+                    </form>
+                    <div class="social-login">
+                        <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-auto-logout-link="true"></div>
+                    </div>
+                    <p class="text-center mt-5">
+                        Don't have account?
+                        <a class="primary-link" href="/registration">
+                            Sign Up
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-5 right-column d-flex align-items-center" data-ng-show="_isForgotPasswordClick">
+                <div class="content">
+                    <h1 class="section-heading">Forgot Password</h1>
+                    <form role="form" id="forgotpasswordform" name="forgotpasswordform">
+                        <div class="form-group">
+                            <label for="userSigninLogin">Email</label>
+                            <input type="email" class="form-control" ng-model="femailid" name="femailid" autocomplete="off" maxlength="200" placeholder="Email id" required>
+                            <span class="error-message" ng-show="forgotpasswordform.femailid.$dirty && forgotpasswordform.femailid.$invalid">Please enter email-id.</span>
+
+                        </div>
+                        <button type="submit" class="btn btn-default" ng-disabled="forgotpasswordform.$invalid" ng-click="ForgotPassword()">Submit</button>
+                    </form>
+                    <div class="social-login">
+                        <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-auto-logout-link="true"></div>
+                    </div>
+                    <p class="text-center mt-5">
+                        Don't have account?
+                        <a class="primary-link" href="/registration">
+                            Sign Up
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

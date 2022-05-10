@@ -1,0 +1,17 @@
+.leaderboard-list {
+  .nav-tabs {
+    border-bottom: 1px solid #7b7b7b;
+    .nav-link {
+      border-radius: 0;
+      background: transparent;
+      border: 0;
+      color: #999;
+      border-bottom: 2px solid transparent;
+      &.active {
+        color: $primary_color;
+        font-weight: 500;
+        border-bottom-color: $primary_color;
+      }
+    }
+  }
+}

@@ -1,0 +1,406 @@
+﻿ <!-- header top begin -->
+<div ng-include="'views/_header.html'">
+</div>
+<style type="text/css">
+    @charset "UTF-8";
+
+    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide:not(.ng-hide-animate) {
+        display: none !important;
+    }
+
+    ng\:form {
+        display: block;
+    }
+
+    .ng-animate-shim {
+        visibility: hidden;
+    }
+
+    .ng-anchor {
+        position: absolute;
+    }
+</style>
+<style id="stndz-style">
+    div[class*="item-container-obpd"], a[data-redirect*="paid.outbrain.com"], a[onmousedown*="paid.outbrain.com"] {
+        display: none !important;
+    }
+
+    a div[class*="item-container-ad"] {
+        height: 0px !important;
+        overflow: hidden !important;
+        position: absolute !important;
+    }
+
+    div[data-item-syndicated="true"] {
+        display: none !important;
+    }
+
+    .grv_is_sponsored {
+        display: none !important;
+    }
+
+    .zergnet-widget-related {
+        display: none !important;
+    }
+</style>
+<style>
+    ::-webkit-scrollbar {
+        width: 3px;
+    }
+
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 3px grey;
+        border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #BB001B !important;
+        border-radius: 3px;
+    }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #BB001B !important;
+        }
+</style>
+<style type="text/css">
+    .page-dashboard .container {
+        max-width: 1100px;
+    }
+
+    .headerMenu {
+        margin-top: 55px;
+    }
+
+    .grab-deal {
+        background: linear-gradient(to right, #26292d, #111214);
+        /*box-shadow: 0 0.625rem 0.938rem 0 rgba(59, 55, 188, 0.5);*/
+        color: #2ecdf3;
+        border-radius: 1.563rem;
+        text-align: center;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        margin: 0 0.6rem;
+        /*border:none;*/
+    }
+
+    .carousel-indicators {
+        bottom: -40px;
+    }
+</style>
+<script type="text/javascript">
+    function redirectOnDeal() {
+        window.location.href = 'rummy-deal';
+    }
+</script>
+<section id="layout-content" class="container pt-0" data-ng-init="setPortal_V1('poker')">
+    <div class="flash-message">
+    </div>
+    <ul class="site-selection">
+        <li>
+            <a href="javascript:void(0);" ng-click="setPortal('/poker')" class="site-link">Poker</a>
+            <a href="javascript:void(0);" ng-click="setPortal('/rummy')" class="site-link active" style="color:#BB001B;">Rummy</a>
+        </li>
+    </ul>
+    <br>
+    <section id="headerMenu">
+        <div class="home-main-banner">
+
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    <!-- Slide One - Set the background image for this slide in the line below -->
+                    <div class="carousel-item active custom-carousel-item" style="background-image: url('/assets/images/rummy-banner.png')">
+                        <div class="carousel-caption d-none d-md-block">
+                        </div>
+                    </div>
+                    <!-- Slide Two - Set the background image for this slide in the line below -->
+                    <div class="carousel-item custom-carousel-item" style="background-image: url('/assets/images/rummy-banner.png')">
+                        <div class="carousel-caption d-none d-md-block">
+                        </div>
+                    </div>
+                    <!-- Slide Three - Set the background image for this slide in the line below -->
+                    <div class="carousel-item custom-carousel-item" style="background-image: url('/assets/images/rummy-banner.png')">
+                        <div class="carousel-caption d-none d-md-block">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <style>
+        .custom-carousel-item {
+            height: 437px;
+            max-height: 437px;
+            background: no-repeat center center scroll;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
+
+    <section>
+        <!--<div class="home-main-banner">
+            <img src="/assets/images/rummy-banner.png" alt="" class="banner-img img-fluid">
+
+        </div>-->
+        <br>
+        <div class="text-center">Excusive promotions delivered first to you!</div>
+        <br>
+        <div class="container">
+            <div class="row listing">
+                <div class="col-md-4 text-center">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" autocomplete="off" placeholder="Name" style="background-image: url(/assets/images/button-active.png); background-color: #000; color: #fff; padding: 0rem 1rem; background-size: 100% 100%; display: inline-block; border-radius: 20px 20px; border: 0;">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" autocomplete="off" placeholder="E-Mail" style="background-image: url(/assets/images/button-active.png); background-color: #000; color: #fff; padding: 0rem 1rem; background-size: 100% 100%; display: inline-block; border-radius: 20px 20px; border: 0;">
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" autocomplete="off" placeholder="Phone" style="background-image: url(/assets/images/button-active.png); background-color: #000; color: #fff; padding: 0rem 1rem; background-size: 100% 100%; display: inline-block; border-radius: 20px 20px; border: 0;">
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    &nbsp;
+
+                </div>
+                <div class="col-md-4 text-center">
+                    <input type="button" class="btn btn-primary btn--primary" style="background-color: #c50725; border-color: #c50725; box-shadow: 0px 8px #000;" value="Subscribe Now">
+                </div>
+                <div class="col-md-4 text-center">
+                    &nbsp;
+
+                </div>
+            </div>
+
+        </div>
+
+        <!--rudal code start 01/01-->
+
+        <style>
+            .clr {
+                clear: both;
+            }
+        </style>
+
+        <br />
+        <br />
+        <div class="container" style="background-image: url('/assets/images/card-bg.png');">
+
+            <div class="row">
+                <br />
+                <div class="col-md-12">
+                    <div class="col-md-10 pt-4">
+                        <h2 style="color: #ddd3d3; font-weight: bold;">ONLINE RUMMY DATAILS !</h2>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="rummy-card" style="margin: 2em; padding: 1em; box-shadow: inset -15px -15px 19px 2px #000; background: #202327; border: 4px solid #25252500; border-radius: 4px;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span style="color: #ddd3d3; font-size: 2.5em; float: left;">8.9</span>
+                                <span style="float: right;">
+                                    <img src="assets/images/star.png" />
+                                    <br />
+                                    <a style="color: #dda3a6; text-decoration: underline; font-size: 12px;">Review</a>
+                                </span>
+
+                                <div class="clr"></div>
+                                <img src="assets/images/jr-logo.png" style="border-radius: 7px;" />
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="color: #ddd3d3;">Junglee Rummy</h5>
+                                <p style="font-size: 12px; color: #dda3a6;">Fastest growing in India Daily promotions and bonus Stunning table and user interface</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p style="color: #ddd3d3; margin-top: 1em;">Signup and get</p>
+                                <h2 style="color: #ddd3d3;">1500* Bonus</h2>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="button" onclick="redirectOnDeal();" class="btn btn-primary btn--primary" style="background-color: #c50725; border-color: #c50725; box-shadow: 4px 2px 7px 2px #ffffff54; width: 150px;" value="Deal">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="rummy-card" style="margin: 2em; padding: 1em; box-shadow: inset -15px -15px 19px 2px #000; background: #202327; border: 4px solid #25252500; border-radius: 4px;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span style="color: #ddd3d3; font-size: 2.5em; float: left;">8.9</span>
+                                <span style="float: right;">
+                                    <img src="assets/images/star.png" />
+                                    <br />
+                                    <a style="color: #dda3a6; text-decoration: underline; font-size: 12px;">Review</a>
+                                </span>
+
+                                <div class="clr"></div>
+                                <img src="assets/images/jr-logo.png" style="border-radius: 7px;" />
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="color: #ddd3d3;">Junglee Rummy</h5>
+                                <p style="font-size: 12px; color: #dda3a6;">Fastest growing in India Daily promotions and bonus Stunning table and user interface</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p style="color: #ddd3d3; margin-top: 1em;">Signup and get</p>
+                                <h2 style="color: #ddd3d3;">1500* Bonus</h2>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="button" onclick="redirectOnDeal();" class="btn btn-primary btn--primary" style="background-color: #c50725; border-color: #c50725; box-shadow: 4px 2px 7px 2px #ffffff54; width: 150px;" value="Deal">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="rummy-card" style="margin: 2em; padding: 1em; box-shadow: inset -15px -15px 19px 2px #000; background: #202327; border: 4px solid #25252500; border-radius: 4px;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span style="color: #ddd3d3; font-size: 2.5em; float: left;">8.9</span>
+                                <span style="float: right;">
+                                    <img src="assets/images/star.png" />
+                                    <br />
+                                    <a style="color: #dda3a6; text-decoration: underline; font-size: 12px;">Review</a>
+                                </span>
+
+                                <div class="clr"></div>
+                                <img src="assets/images/jr-logo.png" style="border-radius: 7px;" />
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="color: #ddd3d3;">Junglee Rummy</h5>
+                                <p style="font-size: 12px; color: #dda3a6;">Fastest growing in India Daily promotions and bonus Stunning table and user interface</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p style="color: #ddd3d3; margin-top: 1em; margin-bottom: 0;">Signup and get</p>
+                                <h2 style="color: #ddd3d3;">1500* Bonus</h2>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="button" onclick="redirectOnDeal();" class="btn btn-primary btn--primary" style="background-color: #c50725; border-color: #c50725; box-shadow: 4px 2px 7px 2px #ffffff54; width: 150px;" value="Deal">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="rummy-card" style="margin: 2em; padding: 1em; box-shadow: inset -15px -15px 19px 2px #000; background: #202327; border: 4px solid #25252500; border-radius: 4px;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span style="color: #ddd3d3; font-size: 2.5em; float: left;">8.9</span>
+                                <span style="float: right;">
+                                    <img src="assets/images/star.png" />
+                                    <br />
+                                    <a style="color: #dda3a6; text-decoration: underline; font-size: 12px;">Review</a>
+                                </span>
+
+                                <div class="clr"></div>
+                                <img src="assets/images/jr-logo.png" style="border-radius: 7px;" />
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="color: #ddd3d3;">Junglee Rummy</h5>
+                                <p style="font-size: 12px; color: #dda3a6;">Fastest growing in India Daily promotions and bonus Stunning table and user interface</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p style="color: #ddd3d3; margin-top: 1em; margin-bottom: 0;">Signup and get</p>
+                                <h2 style="color: #ddd3d3;">1500* Bonus</h2>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="button" onclick="redirectOnDeal();" class="btn btn-primary btn--primary" style="background-color: #c50725; border-color: #c50725; box-shadow: 4px 2px 7px 2px #ffffff54; width: 150px;" value="Deal">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="background-image: url('assets/images/card-bg.png');">
+        </div>
+        <div class="container mt-4 pt-4">
+            <div class="row">
+                <br />
+
+
+                <div class="col-md-12 mt-4 ">
+                    <h2 style="color: #ddd3d3; font-weight: bold;">LATEST RUMMY UPDATE</h2>
+                    <br />
+                </div>
+
+                <div class="row">
+
+                    <div class="col-sm-8 col-sm-pull-4 pt-4">
+
+                        <p>
+                            <strong>Best Rummy Site – Review of Top Online Rummy Sites in India</strong>
+                            <br />
+                            Bestrummysite.com gives you a comparative analysis of the top rummy online sites in India. We review the best online rummy playing sites like Junglee Rummy, RummyCircle, Classicrummy etc. by the bonuses offered, software, graphics, features, contests, promotions, tournaments and ease of use. As Rummy games are on a rise especially when it comes to playing online, players must check the safety and security of each website they are willing to play on before signing up. In our rummy blog, we review the best Indian websites to play rummy according to the features they offer like Junglee Rummy 25 rupees free that you can avail on the site.
+
+                            <br />
+                            Subscribing to our blog will be handy if you are looking to play Indian Rummy and gain a profit on the money you spend playing real money games. Some of the features you can enjoy 24×7 rummy by bookmarking Best Rummy Site are as mentioned below.
+
+
+                            <br />
+                            <br />
+                            <strong>Latest News on Rummy Online Sites in India</strong><br />
+                            Indian rummy or 13 cards rummy is one of the popular variants of rammi which is widely played in the southern parts of India. If you want to learn more about the card game and everything new that is coming in the Indian gaming industry, it is hard to know as there are very less or no blogs are writing about it. Best Rummy Site collects data from top rummy online sites in India like Classic Rummy, Ace2Three, JungleeRummy, RummyCircle etc. and brings it in front of you so that you can make the most of it. Promotions, bonus offers and rummy tournaments run only for a limited time, and if you miss out on these, you can be sure of investing your money for nothing.
+
+                            <br />
+                            If you are a new player and want to know about a certain rami card game online website before joining, you can check the rankings of each website from the online rummy sites list on our blog. This will make sure you are playing on a trusted website before you spend your valuable money and time. We not only cover the best news for cash players but also for freeroll players in India. If you just want to join the fun and adrenaline of playing classic rummy, you can check out the online rummy playing sites we have reviewed to get started.
+
+
+                            <br />
+                            <br />
+                            <strong>Review of Online Rummy Websites in India</strong><br />
+                            It can get hectic and confusing when you try to join rummy sites in India especially when you search on Google and other search engines. BestRummySite.com goes through each of the top online rummy playing sites in India and brings you the good and bad part of each of these websites. This makes it very easy even for an amateur player to join a rommy website without much of a thinking process. Also, our rating system allows you to remember and brag about the rummy website you are playing on with your friends. Next time you are planning to join a new
+
+
+                        </p>
+                    </div>
+                    <div class="col-sm-4 col-sm-push-8 mt-2">
+                        <div class="mt-3 mb-4" style="min-height: 300px; border-radius: 1em; padding: 10px; background: #cccccc;">
+                            <h4 style="text-align: center; border-bottom: 2px solid #a1a1a1; padding-top: 10px; padding-bottom: 10px; color: #000;">Most recent</h4>
+                        </div>
+                        <div class="mt-4" style="min-height: 300px; border-radius: 1em; padding: 10px; background: #cccccc;">
+                            <h4 style="text-align: center; border-bottom: 2px solid #a1a1a1; padding-top: 10px; padding-bottom: 10px; color: #000;">Most recent</h4>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!--rudal code end 01/01-->
+
+    </section>
+</section>
+
+<br />
+<br />
+<br />
+<div ng-include="'views/_footer.html'">
+</div>

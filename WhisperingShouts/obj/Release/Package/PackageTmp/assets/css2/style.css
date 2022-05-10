@@ -1,0 +1,287 @@
+@media only screen and (max-width: 768px) {
+  .dashboard-nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    background: #2e3237;
+    z-index: 3;
+    left: 0;
+    margin: 0;
+    width: 100vw;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    padding: 1rem 3vw;
+  }
+  .dashboard-nav li {
+    margin: 0 !important;
+  }
+  .dashboard-nav li a p {
+    margin: 0;
+  }
+  .auth-page .left-column {
+    height: auto;
+    padding: 7rem 0;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .page-dashboard #layout-content {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .dashboard-nav {
+    padding: 1rem 1vw;
+    padding-bottom: 0.3rem;
+  }
+  .dashboard-nav li {
+    -ms-flex-preferred-size: 16%;
+        flex-basis: 16%;
+  }
+  .dashboard-nav .icon {
+    height: 1.4rem !important;
+  }
+  .dashboard-nav p {
+    font-size: 9px;
+  }
+  .passbook-table-wrapper {
+    overflow-x: scroll;
+  }
+  .sidebar-promotion {
+    margin-bottom: 6rem;
+  }
+  .page-dashboard .passbook-table-wrapper .table thead th {
+    min-width: 7rem;
+  }
+  .page-dashboard .passbook-table-wrapper .table thead th:last-of-type {
+    min-width: 10rem;
+  }
+  .auth-page .left-column {
+    padding: 2rem 10px;
+  }
+  .auth-page .left-column .content p {
+    margin: 0;
+  }
+  .auth-page .left-column .content .page-heading {
+    font-size: 1.4rem;
+  }
+  .auth-page .right-column {
+    padding: 2rem 15px;
+  }
+}
+/*# sourceMappingURL=style.css.map */
+
+/*@media only screen and (max-width: 768px){
+    .fixed-header {
+        position: fixed;
+        top: 0;
+        background: #2e3237;
+        z-index: 3;*/ /* left: 0; */ /* margin: 0; */ /* width: 100vw; */ /* -webkit-box-pack: justify; */
+        /*-ms-flex-pack: justify;*/ /* justify-content: space-between; */
+        /*padding: 1rem 3vw;
+    }
+    .show-desktop-only {
+        display: none;
+    }
+    .show-mobile-only {
+        display: block;
+    }
+    .show-desktop-only1 {
+        display: none;
+    }
+    .margin-top-mobile{
+        margin-top:10px !important;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .dashboard-nav li {
+        margin-bottom: 1.4rem;
+    }
+
+    .dashboard-nav .icon {
+        height: 2.4rem;
+    }
+    .show-desktop-only{
+        display:block;
+    }
+    .show-desktop-only1 {
+        display: flex;
+    }
+    .show-mobile-only {
+        display: none;
+    }
+    .headerMenu {
+         margin-top: 0px !important; 
+    }
+}*/
+
+
+.withdraw-margin {
+    margin-top: 0;
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 480px) {
+    .fixed-header {
+        position: fixed;
+        top: 0;
+        background: #2e3237;
+        z-index: 3; /* left: 0; */ /* margin: 0; */ /* width: 100vw; */ /* -webkit-box-pack: justify; */
+        -ms-flex-pack: justify; /* justify-content: space-between; */
+        padding: 1rem 3vw;
+    }
+
+    .show-desktop-only {
+        display: none;
+    }
+
+    .show-mobile-only {
+        display: block;
+    }
+
+    .show-desktop-only1 {
+        display: none;
+    }
+
+    .margin-top-mobile {
+        margin-top: 10px !important;
+    }
+    .custom-carousel-item {
+        height: 150px !important;
+        max-height: 150px !important;
+    }
+    .withdraw-margin{
+        margin-top:30%;
+    }
+}
+
+/* Media Query for low resolution  Tablets, Ipads */
+@media (min-width: 481px) and (max-width: 767px) {
+    .fixed-header {
+        position: fixed;
+        top: 0;
+        background: #2e3237;
+        z-index: 3; /* left: 0; */ /* margin: 0; */ /* width: 100vw; */ /* -webkit-box-pack: justify; */
+        -ms-flex-pack: justify; /* justify-content: space-between; */
+        padding: 1rem 3vw;
+    }
+
+    .show-desktop-only {
+        display: none;
+    }
+
+    .show-mobile-only {
+        display: block;
+    }
+
+    .show-desktop-only1 {
+        display: none;
+    }
+
+    .margin-top-mobile {
+        margin-top: 10px !important;
+    }
+    .custom-carousel-item {
+        height: 150px !important;
+        max-height: 150px !important;
+    }
+    .withdraw-margin {
+        margin-top: 30%;
+    }
+
+}
+
+/* Media Query for Tablets Ipads portrait mode */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .fixed-header {
+        position: fixed;
+        top: 0;
+        background: #2e3237;
+        z-index: 3; /* left: 0; */ /* margin: 0; */ /* width: 100vw; */ /* -webkit-box-pack: justify; */
+        -ms-flex-pack: justify; /* justify-content: space-between; */
+        padding: 1rem 3vw;
+    }
+
+    .show-desktop-only {
+        display: none;
+    }
+
+    .show-mobile-only {
+        display: block;
+    }
+
+    .show-desktop-only1 {
+        display: none;
+    }
+
+    .margin-top-mobile {
+        margin-top: 10px !important;
+    }
+    .custom-carousel-item {
+        height: 150px !important;
+        max-height: 150px !important;
+    }
+    .withdraw-margin {
+        margin-top: 30%;
+    }
+}
+
+/* Media Query for Laptops and Desktops */
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .dashboard-nav li {
+        margin-bottom: 1.4rem;
+    }
+
+    .dashboard-nav .icon {
+        height: 2.4rem;
+    }
+
+    .show-desktop-only {
+        display: block;
+    }
+
+    .show-desktop-only1 {
+        display: flex;
+    }
+
+    .show-mobile-only {
+        display: none;
+    }
+
+    .headerMenu {
+        margin-top: 0px !important;
+    }
+}
+
+/* Media Query for Large screens */
+@media (min-width: 1281px) {
+    .dashboard-nav li {
+        margin-bottom: 1.4rem;
+    }
+
+    .dashboard-nav .icon {
+        height: 2.4rem;
+    }
+
+    .show-desktop-only {
+        display: block;
+    }
+
+    .show-desktop-only1 {
+        display: flex;
+    }
+
+    .show-mobile-only {
+        display: none;
+    }
+
+    .headerMenu {
+        margin-top: 0px !important;
+    }
+} 

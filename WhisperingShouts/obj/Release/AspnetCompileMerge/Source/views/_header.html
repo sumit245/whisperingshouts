@@ -1,0 +1,132 @@
+﻿
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var _portal = localStorage.getItem("portal");
+        if (_portal.toLowerCase() == 'rummy') {
+            replaceColor('#2ecdf3', '#BB001B');
+            replaceColor('#2ECDF3', '#BB001B');
+            replaceColor('#2cc7f8', '#BB001B');
+            replaceColor('#2db2d3', '#BB001B');
+            replaceColor('rgb(46, 205, 243)', '#BB001B');
+            //#2db2d3
+        }
+    });
+</script>
+<style type="text/css">
+    .img-fluid-for-marquee {
+        max-width: 50px;
+        height: auto;
+        border-radius: 50%;
+        border: 3px solid #2ecdf3;
+    }
+</style>
+<div ng-controller="MenuController">
+
+    <header id="layout-header" ng-if="!_IsUserLoggedIn">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-default">
+                <a class="navbar-brand" ng-href="{{portalURL}}">
+                    <img src="/assets/images/{{portalLogo}}" alt="" class="img-fluid websiteLogo">
+                </a>
+                <marquee data-ng-hide="Portal=='poker'" style="width:75%; color:{{portalColor}}" onMouseOver="this.stop()" onMouseOut="this.start()" class="show-desktop-only1"><span id="leaderboardUsers" ng-bind-html="leaderboardUsers"></span></marquee>
+                <ul class="navbar-nav ml-auto hidden">
+                    <li class="nav-item">
+                        <a href="/login" class="nav-link">Sign In</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <header id="layout-header" ng-if="_IsUserLoggedIn">
+        <div class="container fixed-header">
+
+            <nav class="navbar navbar-expand-lg navbar-default">
+                <a class="navbar-brand" ng-href="{{portalURL}}">
+                    <img src="/assets/images/{{portalLogo}}" alt="" class="img-fluid websiteLogo">
+                </a>
+                <ul class="navbar-nav ml-auto hidden show-mobile-only">
+                    <li class="nav-item">
+                        <!--<button class="navbar-toggler font1" type="button" style="position: absolute;color: #fff;right: 95px;top: 30px; display:block;">
+                            <a href="/passbook" style="text-decoration:none;">
+                                <span style="font-size: 14px; color: #2ECDF3;">{{AvailablePoints}}</span>  <i class="fas fa-wallet" style="height:23px; color:#2ECDF3"></i>
+                            </a>
+                        </button>-->
+                        <button ng-click="openWithdraw=!openWithdraw" class="navbar-toggler font1" type="button" style="position: absolute; color: #fff; right: 95px; top: 30px; display: block;">
+                            <a href="javascript::" style="text-decoration:none;">
+                                <span style="font-size: 14px; color: #2ECDF3;">{{AvailablePoints}}</span>  <i class="fas fa-wallet" style="height:23px; color:#2ECDF3"></i>
+                            </a>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="navbar-toggler font1" type="button" style="position: relative;color: #fff;right: 35px;top: 22px; display:block;">
+                            <a href="/notification" style="text-decoration:none;">
+                                <i class="fas fa-bell" style="height:23px; color:#2ECDF3"></i>
+                                <span class="count ng-binding" style=" position: absolute; /* left: 27%; */ width: 1rem; height: 1rem; border-radius: 100%; /* background: #FF0017; */ color: #ffffff; font-size: 11px; top: 0px; font-weight: 600; line-height: 1rem; border: none; text-align: center; border: 1px solid #2ECDF3;">{{notificationCount}}</span>
+                            </a>
+                        </button>
+                    </li>
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" style="position: relative; color: #fff; right: 5px; top: -17px; display: block;">
+                            <img class="rounded-circle" ng-src="/Album/ProfilePic/{{DashboardData.image_path}}" onerror="this.src='/assets/images/user-img.png'" alt="" style="width: 25px; height: 25px;">
+                        </a>
+
+                        <ul class="dropdown-menu" style="position: absolute; top: 0;">
+                            <li><a class="dropdown-item" href="/account"> Profile </a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0);" ng-click="setPortal()"> {{Portal}} </a></li>
+                            <li>
+                                <a class="dropdown-item" href="/logout"> Logout </a>
+                            </li>
+                        </ul>
+                </ul>
+
+                <ul class="navbar-nav ml-auto hidden show-desktop-only1">
+                    <li class="nav-item">
+                        <button ng-click="openWithdraw=!openWithdraw" class="navbar-toggler font1" type="button" style="position: relative;color: #fff;top: initial; display:block;">
+                            <a href="javascript::" style="text-decoration:none;">
+                                <span style="font-size: 14px; color: #2ECDF3;">{{AvailablePoints}}</span>  <i class="fas fa-wallet" style="height:23px; color:#2ECDF3"></i>
+                            </a>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="navbar-toggler font1" type="button" style="position: relative;color: #fff;top: initial; display:block;">
+                            <a href="javascript::" style="text-decoration:none;">
+                                <i class="fas fa-bell" style="height:23px; color:#2ECDF3"></i>
+                                <span class="count ng-binding" style=" position: absolute; /* left: 27%; */ width: 1rem; height: 1rem; border-radius: 100%; /* background: #FF0017; */ color: #ffffff; font-size: 11px; top: 0px; font-weight: 600; line-height: 1rem; border: none; text-align: center; border: 1px solid #2ECDF3;">{{notificationCount}}</span>
+                            </a>
+                        </button>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" style="position: relative;color: #fff;top: -7px; display:block;">
+                            <img class="rounded-circle" ng-src="/Album/ProfilePic/{{DashboardData.image_path}}" onerror="this.src='/assets/images/user-img.png'" alt="" style="width: 25px; height: 25px;">
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/account"> Profile </a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0);" ng-click="setPortal()"> {{Portal}} </a></li>
+                            <li>
+                                <a class="dropdown-item" href="/logout"> Logout </a>
+                            </li>
+                        </ul>
+
+
+
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+        <div ng-if="openWithdraw" ng-include="'views/_withdraw.html'">
+
+        </div>
+
+    </header>
+
+
+
+    <!-- header top end -->
+</div>
+

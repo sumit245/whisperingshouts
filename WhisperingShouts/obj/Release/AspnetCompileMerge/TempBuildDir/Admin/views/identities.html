@@ -1,0 +1,104 @@
+﻿
+<div class="wrapper">
+    <div class="navbar-minimize-fixed">
+        <button class="minimize-sidebar btn btn-link btn-just-icon">
+            <i class="tim-icons icon-align-center visible-on-sidebar-regular text-muted"></i>
+            <i class="tim-icons icon-bullet-list-67 visible-on-sidebar-mini text-muted"></i>
+        </button>
+    </div>
+    <div ng-include="'views/_sidebar.html'">
+    </div>
+    <div class="main-panel">
+        <!-- Navbar -->
+        <div ng-include="'views/_navbar.html'">
+        </div>
+        <!-- End Navbar -->
+        <div class="content">
+            <!--<div class="col-md-8 ml-auto mr-auto">
+                <h2 class="text-center">Partner User name</h2>
+            </div>-->
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <!--<h5 class="card-category">Top Players</h5>-->
+                            <h3 class="card-title"> Partner User name</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="toolbar">
+                                <!--        Here you can write extra buttons/actions for the toolbar              -->
+                            </div>
+                            <div class="table-responsive ps">
+                                <table id="dtpartnerusername" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Full name</th>
+                                            <th>Partner</th>
+                                            <th>User name</th>
+                                            <th>Approve</th>
+                                            <th>Description</th>
+                                            <th>Visit Site</th>
+                                            <th class="sorting_desc_disabled sorting_asc_disabled text-right">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in PartnerUserNameList">
+                                            <td>{{item.id}}</td>
+                                            <td>{{item.name}}</td>
+                                            <td>{{item.PartnerName}}</td>
+                                            <td>{{item.UserName}}</td>
+                                            <td>
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input" type="radio" name="approve" value="True" ng-model="approve">
+                                                    True
+                                                </label>
+                                                &nbsp;
+                                                <label class="form-check-label" style="margin-left:15px;">
+                                                    <input class="form-check-input" type="radio" name="approve" value="False" ng-model="approve">
+                                                    False
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <textarea ng-model="description" cols="5" maxlength="200" class="form-control" style="border: 1px solid #D84FD4;"></textarea>
+                                            </td>
+                                            <td>
+                                                <a href="https://whisperingshouts.com/login?email={{item.EmailID}}" target="_blank">View</a>
+                                            </td>
+                                            <td class="text-right">
+                                                <!--<a ng-if="item.admin_status=='pending'" href="javascript:void(0)" class="btn btn-link btn-warning btn-icon btn-sm edit" ng-click="ApproveReject('approved',item.id)"><i title="Approve" class="tim-icons icon-check-2"></i></a>
+                                                <a ng-if="item.admin_status=='pending'" href="javascript:void(0)" class="btn btn-link btn-danger btn-icon btn-sm remove" ng-click="ApproveReject('rejected',item.id)"><i title="Reject" class="tim-icons icon-simple-remove"></i></a>-->
+
+                                                <input type="button" value="Update" class="btn btn-primary" ng-click="ApproveReject(approve,description,item.id)" />
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <!--<tfoot>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Office</th>
+                                            <th>Age</th>
+                                            <th class="disabled-sorting text-right">Actions</th>
+                                        </tr>
+                                    </tfoot>-->
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end content-->
+                    </div>
+                    <!--  end card  -->
+                </div>
+                <!-- end col-md-12 -->
+            </div>
+            <!-- end row -->
+        </div>
+        <div ng-include="'views/_footer.html'">
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="mycon-Web.config Connection String" description="mycon Connection String used in web.config by the application to access the database." defaultValue="Data Source=148.72.232.167;Database=Rakeback;User ID=rakeback;Password=G7c#gh86;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\workspace_clean\\whisperingshouts\\AngularJs\.net\\WhisperingShouts\\obj\\Release\\Package\\PackageTmp\\web\.config$" match="/configuration/connectionStrings/add[@name='mycon']/@connectionString" />
+  </parameter>
+</parameters>

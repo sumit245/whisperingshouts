@@ -1,0 +1,73 @@
+﻿<div ng-include="'views/_header.html'">
+</div>
+<!-- header top end -->
+<style type="text/css">
+    .table-hover tbody tr:hover {
+        color: {{portalColor}};
+        background-color: rgba(0,0,0,.075);
+    }
+</style>
+
+<section id="layout-content" class="container">
+    <div class="flash-message">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2" ng-include="'views/_sideMenu.html'">
+            </div>
+            <div class="col-md-6">
+                <div class="leaderboard-list">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#monthly-leadebaord" role="tab" data-toggle="tab" aria-selected="true">Monthly</a>
+                        </li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade in active show" id="monthly-leadebaord">
+                            <table class="table table-hover table-borderless table-ggfish">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Rank</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="l in leaderboardList" ng-style="l.rank_detail=='1st' && { 'color' : portalColor } || l.rank_detail=='2nd' && { 'color' : portalColor } || l.rank_detail=='3rd' && { 'color' : portalColor }">
+                                        <td>
+                                            {{l.rank_detail}}
+                                        </td>
+                                        <td>
+                                            {{l.name}}
+                                        </td>
+                                        <td>
+                                            <i class="fas fa-rupee-sign "></i> {{l.Amount}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="weekly-leaderbaord">
+                            <table class="table table-borderless table-ggfish">
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Name</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 show-desktop-only" ng-include="'views/_activity.html'">
+            </div>
+        </div>
+    </div>
+</section>
+
