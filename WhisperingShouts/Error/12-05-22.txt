@@ -1,0 +1,10 @@
+
+Log Entry : 
+05/12/2022 18:41:34
+Error in: http://localhost:58577/WhisperingShoutsService.asmx/Register. Error Message:Mail Sent. IP:::1
+__________________________
+
+Log Entry : 
+05/12/2022 18:41:36
+Error in: http://localhost:58577/WhisperingShoutsService.asmx/Register. Error Message:Mail Sent. IP:::1
+__________________________
