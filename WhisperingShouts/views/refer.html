@@ -82,21 +82,21 @@
             </div>
             <div class="col-md-6">
                 <div class="detail-container content card--shadow" style="background:url(/assets/images/refer-a-friend-bg.png); height:93vh; background-position:center; background-repeat: no-repeat;text-align: center;">
-                    <div class="refer-a-friend text-uppercase color-primary">
-                        <span>REFER A<br>FRIEND</span>
-                    </div>
-                    <div class="refer-a-friend-rakeback color-primary">
-                        <span>
-                            Get Rakeback for a<br>
-                            Lifetime when you<br>
-                            Refer a friend.
-                        </span>
-                    </div>
+                    <!--  <div class="refer-a-friend text-uppercase color-primary">
+          <span>REFER A<br>FRIEND</span>
+      </div>
+      <div class="refer-a-friend-rakeback color-primary">
+          <span>
+              Get Rakeback for a<br>
+              Lifetime when you<br>
+              Refer a friend.
+          </span>
+      </div>-->
                     <div class="refer-a-friend-copy" style="margin-left:1.5em">
                         <img src="/assets/images/copy-link.png">
                     </div>
 
-                    <div class="refer-a-friend-copy" style="margin-top:4em;margin-left:2.5em">
+                    <div class="refer-a-friend-copy" style="margin-top:4em;margin-left:2.5em;color:#fff !important;">
                         or <br /> SHARE NOW
                     </div>
 
@@ -104,11 +104,37 @@
                     <div class="social-media">
                         <ul class="list-inline">
                             <p id="texttocopy" style="display:none;">{{ReferalCode}}</p>
-                            <li class="list-inline-item"><a href="" onclick="return shareFB('Congratulations N SRI NITHYA on winning Anmol Ratna Scholarship 2017-18','https://anmolratna.airtel.com/Downloads/ChildScholarship/DE1511719_CHILD_PHOTO_TWO_2017_08_04_12_50_13.jpeg','','Click here to know more...','')"><i class="fa fa-facebook"></i></a></li>
+                            <li class="list-inline-item">
+                                <a href="" onclick="return shareFB('Congratulations N SRI NITHYA on winning Anmol Ratna Scholarship 2017-18','https://anmolratna.airtel.com/Downloads/ChildScholarship/DE1511719_CHILD_PHOTO_TWO_2017_08_04_12_50_13.jpeg','','Click here to know more...','')">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                            </li>
 
 
-                            <li class="list-inline-item whatsapp" ng-show="ReferalCode!=''"><a onclick="shareOnWhatsapp('#texttocopy')" href="" target="_blank"><i class="fa fa-whatsapp"></i></a></li>
-                            <li class="list-inline-item"><a onclick="openModal()" href="havascript::" style="color:#676a6b;">Explore More</a></li>
+                            <li class="list-inline-item whatsapp" ng-show="ReferalCode!=''">
+                                <a onclick="shareOnWhatsapp('#texttocopy')" href="" target="_blank">
+                                    <i class="fa fa-linkedin"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item whatsapp" ng-show="ReferalCode!=''">
+                                <a onclick="shareOnWhatsapp('#texttocopy')" href="" target="_blank">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item whatsapp" ng-show="ReferalCode!=''">
+                                <a onclick="shareOnWhatsapp('#texttocopy')" href="" target="_blank">
+                                    <i class="fa fa-whatsapp"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item whatsapp" ng-show="ReferalCode!=''">
+                                <a onclick="shareOnWhatsapp('#texttocopy')" href="" target="_blank">
+                                    <i class="fa fa-instagram"></i>
+                                </a>
+                            </li>
+
+                            <li class="list-inline-item">
+                                <a onclick="openModal()" href="havascript::" style="color:#676a6b;">Explore More</a>
+                            </li>
                         </ul>
 
                     </div>

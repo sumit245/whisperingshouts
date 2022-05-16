@@ -766,3 +766,10 @@ body.fb_hidden {
     .fb_iframe_widget_fluid span {
         width: 100%
     }
+
+@media(min-width:768px) and (max-width: 1024px) {
+    .social-media {
+        bottom: 160px;
+        left: 15%;
+    }
+}

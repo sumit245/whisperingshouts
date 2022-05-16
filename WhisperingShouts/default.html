@@ -41,75 +41,75 @@
 
     <link href="/assets/css/theme.css" rel="stylesheet">
     <link href="/assets/css2/style.css" rel="stylesheet">
+    <!--  <link href="/assets/css/aos.css" rel="stylesheet"> -->
+      <style type="text/css">
+          .error-message {
+              color: red;
+              font-size: 13px;
+          }
 
-    <style type="text/css">
-        .error-message {
-            color: red;
-            font-size: 13px;
-        }
+          input.ng-dirty.ng-invalid {
+              border-color: red;
+          }
 
-        input.ng-dirty.ng-invalid {
-            border-color: red;
-        }
+          textarea {
+              resize: none;
+          }
 
-        textarea {
-            resize: none;
-        }
+          .activeclass {
+              color: #4370DB !important;
+          }
+          /*input:disabled {
+              background: #ccc;
+          }*/
 
-        .activeclass {
-            color: #4370DB !important;
-        }
-        /*input:disabled {
-            background: #ccc;
-        }*/
+          .about-block {
+              margin-top: 5rem;
+          }
+          /* .page-dashboard .container {
+              max-width: 950px;
+          }*/
+      </style>
+      <style>
+          ::-webkit-scrollbar {
+              width: 3px;
+          }
 
-        .about-block {
-            margin-top: 5rem;
-        }
-        /* .page-dashboard .container {
-            max-width: 950px;
-        }*/
-    </style>
-    <style>
-        ::-webkit-scrollbar {
-            width: 3px;
-        }
+          ::-webkit-scrollbar-track {
+              box-shadow: inset 0 0 3px grey;
+              border-radius: 3px;
+          }
 
-        ::-webkit-scrollbar-track {
-            box-shadow: inset 0 0 3px grey;
-            border-radius: 3px;
-        }
+          ::-webkit-scrollbar-thumb {
+              background: #2ecdf3;
+              border-radius: 3px;
+          }
 
-        ::-webkit-scrollbar-thumb {
-            background: #2ecdf3;
-            border-radius: 3px;
-        }
+              ::-webkit-scrollbar-thumb:hover {
+                  background: #2ecdf3;
+              }
+      </style>
 
-            ::-webkit-scrollbar-thumb:hover {
-                background: #2ecdf3;
-            }
-    </style>
+      <script src="/assets/vendor/jquery.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=" crossorigin="anonymous"></script>
+      <script src="/assets/vendor/slick/slick.min.js"></script>
+      <script src="/assets/javascript/app.js"></script>
 
-    <script src="/assets/vendor/jquery.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=" crossorigin="anonymous"></script>
-    <script src="/assets/vendor/slick/slick.min.js"></script>
-    <script src="/assets/javascript/app.js"></script>
+      <!--<script>
+      var scr = document.createElement('script');
+          scr.setAttribute('src', '/angular/app/app.js?v=' + Math.random());
+          document.head.appendChild(scr);
 
-    <!--<script>
-    var scr = document.createElement('script');
-        scr.setAttribute('src', '/angular/app/app.js?v=' + Math.random());
-        document.head.appendChild(scr);
+          scr.setAttribute('src', '/angular/controller/LoginController.js?v=' + Math.random());
+          document.head.appendChild(scr);
 
-        scr.setAttribute('src', '/angular/controller/LoginController.js?v=' + Math.random());
-        document.head.appendChild(scr);
-
-        var lnk = document.createElement('link');
-        lnk.setAttribute('rel', 'stylesheet');
-        lnk.setAttribute('type', 'text/css');
-        lnk.setAttribute('href', 'main.css?version=' + Math.random());
-        document.head.appendChild(lnk);
-    </script>-->
+          var lnk = document.createElement('link');
+          lnk.setAttribute('rel', 'stylesheet');
+          lnk.setAttribute('type', 'text/css');
+          lnk.setAttribute('href', 'main.css?version=' + Math.random());
+          document.head.appendChild(lnk);
+      </script>-->
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
@@ -141,6 +141,8 @@
     <link href="/angular/css/sweetalert.css" rel="stylesheet" />
     <script src="/angular/js/sweetalert.min.js"></script>
     <script src="/angular/loader/loader.js?v=3.1"></script>
+
+    <script src="/assets/vendor/aos.js"></script>
 
     <script type="text/javascript" language="javascript">
         function checkKey(o, e) {
@@ -230,7 +232,40 @@
 
         gtag('config', 'UA-109752892-2');
     </script>
+    <!--End Script-->
+    <script>
+        $(function () {
+            function count($this) {
+                var current = parseInt($this.html(), 10);
+                $this.html(++current);
+                if (current !== $this.data('count')) {
+                    setTimeout(function () { count($this) }, 5);
+                }
+            }
+            $(".register_user_count").each(function () {
+                $(this).data('count', parseInt($(this).html(), 10));
+                $(this).html('0');
+                count($(this));
+            });
+        });
+    </script>
+    <script>
+        AOS.init({
+            easing: 'ease-out-back',
+            duration: 1000
+        });
+    </script>
 
+    <script>
+        hljs.initHighlightingOnLoad();
+
+        $('.hero__scroll').on('click', function (e) {
+            $('html, body').animate({
+                scrollTop: $(window).height()
+            }, 1200);
+        });
+    </script>
+    <!--End Script-->
     <script type="text/javascript">
         function replaceColor(color1, color2) {
             var keys = Object.values(window.getComputedStyle($('html').get(0)));

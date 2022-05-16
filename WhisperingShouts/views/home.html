@@ -54,6 +54,14 @@
                     </div>
 
                 </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
         </div>
     </section>
@@ -77,28 +85,28 @@
                     <div class="row listing">
                         <div class="col-md-3 text-center">
                             <img src="/assets/images/icon/user.png" alt="" class="icon img-fluid">
-                            <h4 class="heading mb-0">{{Registereduser}} +</h4>
+                            <h4 class="heading register_user_count mb-0">{{Registereduser}} +</h4>
                             <p>Registered <br> Users</p>
                         </div>
                         <div class="col-md-3 text-center">
                             <img src="/assets/images/icon/cash.png" alt="" class="icon img-fluid">
-                            <h4 class="heading mb-0">{{RealCashBonusGiven}}</h4>
+                            <h4 class="heading register_user_count mb-0">{{RealCashBonusGiven}}</h4>
                             <p>Real Cash <br> Bonus Given</p>
                         </div>
                         <div class="col-md-3 text-center">
                             <img src="/assets/images/icon/rakeback.png" alt="" class="icon img-fluid">
-                            <h4 class="heading mb-0">{{RakebackGiven}}</h4>
+                            <h4 class="heading register_user_count mb-0">{{RakebackGiven}}</h4>
                             <p>Rakeback<br> Given</p>
                         </div>
                         <div class="col-md-3 text-center">
                             <img src="/assets/images/icon/ticket.png" alt="" class="icon img-fluid">
-                            <h4 class="heading mb-0">{{TournamentTicketsGiven}}</h4>
+                            <h4 class="heading register_user_count mb-0">{{TournamentTicketsGiven}}</h4>
                             <p>Tournament <br> Tickets Given</p>
                         </div>
 
                     </div>
                     <div class="row row-eq-height about-section mt-5">
-                        <div class="col-md-7">
+                        <div class="col-md-7" data-aos="fade-right">
                             <h1 class="heading text-uppercase">What is rakeback ?</h1>
                             <h3 class="subheading text-uppercase">How it is calculated</h3>
                             <p>
@@ -110,7 +118,7 @@
                                 with a rakeback deal!
                             </p>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-5 " data-aos="fade-right">
                             <a href="#" class="play-video">
                                 <img src="/assets/images/icon/play.png" alt="" class="img-fluid icon">
                             </a>
@@ -123,19 +131,19 @@
                 <div class="container">
                     <h2 class="heading text-uppercase mb-3">Promotions</h2>
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-3" data-aos="fade-up-right">
                             <img src="/assets/images/icon/whisp-logo.png" alt="" class="icon img-fluid">
                             <h4 class="text-uppercase mt-2">Rakeback Deals</h4>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3" data-aos="flip-right">
                             <img src="/assets/images/icon/leaderboard.png" alt="" class="icon img-fluid">
                             <h4 class="text-uppercase mt-2">Leaderboards</h4>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3" data-aos="flip-left">
                             <img src="/assets/images/icon/rewards.png" alt="" class="icon img-fluid">
                             <h4 class="text-uppercase mt-2">Rewards</h4>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3" data-aos="fade-down-left">
                             <img src="/assets/images/icon/refer-a-friend.png" alt="" class="icon img-fluid">
                             <h4 class="text-uppercase mt-2">Refer A Friend</h4>
                         </div>
@@ -283,7 +291,7 @@
 
             <section class="section section-top-border section-rakeback-deals text-center show-mobile-only">
                 <div class="container">
-                    <h2 class="heading section-heading text-uppercase mb-3 ">Rakeback Deals</h2>
+                    <h2 class="heading section-heading text-uppercase mb-3 " data-aos="flip-up">Rakeback Deals</h2>
 
 
 
@@ -389,12 +397,12 @@
             <section class="section section-leaderboard section-top-border">
                 <div class="container">
                     <div class="section-header" style="background-image: url('/assets/images/icon/whisp-leaderboard.png'); background-repeat: no-repeat; height:150px; max-width: 55rem;">
-                        <h2 class="heading section-heading text-uppercase mb-3 ">leaderboard</h2>
-                        <p class="intro-content" style=" margin-left: 15%;">
+                        <h2 class="heading section-heading text-uppercase mb-3 " data-aos="fade-down-left">leaderboard</h2>
+                        <p class="intro-content" style=" margin-left: 15%;" data-aos="fade-down-right">
                             Our goal is to give as much money possible back to the player and on top of the rakeback we also have a leaderboard where top scorers are awarded with cash prizes.
                         </p>
                     </div>
-                    <table class="table table-borderless table-ggfish">
+                    <table class="table table-borderless table-ggfish" data-aos="fade-up">
                         <thead>
                             <tr>
                                 <th>Rank</th>
@@ -415,28 +423,38 @@
 
             <section class="section section-top-border section-rewards">
                 <div class="container">
-                    <div class="text-center intro-content">
+                    <div class="text-center intro-content" data-aos="flip-left"
+     data-aos-easing="ease-out-cubic"
+     data-aos-duration="2000">
                         <img src="/assets/images/rewards.jpg" alt="" class="main-image img-fluid">
-                        <p>
+                        <p data-aos="fade-up"
+     data-aos-anchor-placement="bottom-center">
                             Playing online poker was never so rewarding
                             Keep generating Reward Points as you to unlock variety of Rewards
                         </p>
                     </div>
                     <div class="prizes text-center ">
                         <div class="row row-eq-height">
-                            <div class="col-md-3 align-self-end">
+                            <div class="col-md-3 align-self-end" data-aos="fade-left"
+     data-aos-anchor="#example-anchor"
+     data-aos-offset="500"
+     data-aos-duration="500">
                                 <img src="/assets/images/layout/prizes/gaming-table.png" alt="" class="icon img-fluid">
                                 <h5 class="text-uppercase mt-2">Gaming <br> Table</h5>
                             </div>
-                            <div class="col-md-3 align-self-end">
+                            <div class="col-md-3 align-self-end" data-aos="fade-up"
+     data-aos-anchor-placement="bottom-bottom">
                                 <img src="/assets/images/layout/prizes/poker-chipset.png" alt="" class="icon img-fluid">
                                 <h5 class="text-uppercase mt-2">Poker <br> Chips Set</h5>
                             </div>
-                            <div class="col-md-3 align-self-end">
+                            <div class="col-md-3 align-self-end" data-aos="fade-up"
+     data-aos-anchor-placement="top-center">
                                 <img src="/assets/images/layout/prizes/real-cash.png" alt="" class="icon img-fluid">
                                 <h5 class="text-uppercase mt-2">Real Cash <br> Prize</h5>
                             </div>
-                            <div class="col-md-3 align-self-end">
+                            <div class="col-md-3 align-self-end" data-aos="fade-right"
+     data-aos-offset="300"
+     data-aos-easing="ease-in-sine">
                                 <img src="/assets/images/layout/prizes/ticket.png" alt="" class="icon img-fluid">
                                 <h5 class="text-uppercase mt-2">Tournament <br> Tickets</h5>
                             </div>
@@ -447,17 +465,17 @@
 
             <section class="section section-top-border section-refer-a-friend">
                 <div class="container">
-                    <h2 class="heading section-heading text-uppercase mb-3 text-center">Refer A Friend</h2>
+                    <h2 class="heading section-heading text-uppercase mb-3 text-center" data-aos="fade-up-right">Refer A Friend</h2>
                     <img class="img-fluid floating-image" src="/assets/images/icon/refer.png" alt="" style="right:8px;">
-                    <p class="mb-3 text-uppercase">
+                    <p class="mb-3 text-uppercase" data-aos="fade-up-right">
                         <b>What You’ll Get By REFERRING A FRIEND?</b>
                     </p>
-                    <p>
+                    <p data-aos="fade-up-right">
                         We give you the opportunity to earn money by recommending our website to others. You can start earning money even
                         if you do not know how to play. By referring a friend you will earn 10% of the total rakeback your friend
                         generates.
                     </p>
-                    <p>
+                    <p data-aos="fade-up-right">
                         Promote our website wherever you are. Create posts on online forums and social networks. Remember to use the
                         referral link. Build your structure and receive a commission from three levels whenever someone makes a deposit.
                         Earnings from the referral program are immediately credited to your Whispering Shouts account. You can withdraw your funds at any
@@ -470,18 +488,18 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div>
-                                <div>
+                                <div data-aos="fade-up">
                                     <p class="my-4 text-center"><strong>More Smartly</strong></p>
                                 </div>
-                                <div>
+                                <div data-aos="fade-right">
                                     <h2 class="heading section-heading text-uppercase mb-3 text-center">CHOOSE TO  PLAY </h2>
                                 </div>
-                                <div class="text-center mb-4">
+                                <div data-aos="fade-left" class="text-center mb-4">
                                     Where skill is rewarded. Join millions of players worldwide!
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-4" data-aos="fade-right">
                             <div class="">
                                 <div>
                                     <img src="assets/images/social/sign.png" class="mx-auto d-block img-fluid" alt="whisperingshouts">
@@ -493,7 +511,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-4" data-aos="fade-down-right">
                             <div class="">
                                 <div>
                                     <img src="assets/images/social/complete.png" class="mx-auto d-block img-fluid" alt="whisperings houts">
@@ -506,7 +524,7 @@
 
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-4" data-aos="fade-left">
                             <div class="">
                                 <div>
                                     <img src="assets/images/social/get-bonus.png" class="mx-auto d-block img-fluid" alt="whisperingshouts">
@@ -523,7 +541,7 @@
 
             </section>
             <section class="section section-testimonial pt-0 show-mobile-only">
-                <div class="container">
+                <div class="container" data-aos="zoom-out-down">
                     <h2 class="heading section-heading text-uppercase mb-4 text-center">Testimonial</h2>
                     <div id="myCarousel3" class="carousel slide" data-ride="carousel">
                         <!-- Carousel indicators -->
@@ -768,7 +786,7 @@
             </section>
 
             <section class="section section-testimonial pt-0 show-desktop-only">
-                <div class="container">
+                <div class="container" data-aos="zoom-out-down">
                     <h2 class="heading section-heading text-uppercase mb-4 text-center">Testimonial</h2>
                     <div id="myCarousel1" class="carousel slide" data-ride="carousel">
                         <!-- Carousel indicators -->
@@ -982,7 +1000,8 @@
                 }
             </style>
             <section class="section section-faq">
-                <div class="container">
+                <div class="container"  data-aos="fade-up"
+     data-aos-duration="3000">
                     <h2 class="heading section-heading text-uppercase mb-4 text-center"> We've Got Answers </h2>
                     <nav>
                         <div class="nav nav-tabs nav-fill" role="tablist">
@@ -1257,35 +1276,35 @@
                         </div>
 
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="my-4">
-                                <img src="assets/images/social/game.gif" class="mx-auto d-block img-fluid" alt="Game" />
-                            </div>
+                    <!-- <div class="row">
+        <div class="col-sm-12">
+            <div class="my-4">
+                <img src="assets/images/social/game.gif" class="mx-auto d-block img-fluid" alt="Game" />
+            </div>
 
-                        </div>
-                    </div>
-            </section>
-            <!-- Game Play Section -->
-            </section>
+        </div>
+    </div> -->
+</section>
+    <!-- Game Play Section -->
+</section>
         <section id="wins">
             <div class="container">
                 <div class="row">
                     <div class="offset-sm-4 col-sm-8 ">
-                        <div class="h4">
+                        <div class="h4"  data-aos="fade-up-right">
                             Every day lots of wins
                         </div>
-                        <div>
+                        <div data-aos="fade-up-left">
                             <h2 class="heading section-heading text-uppercase my-3"> BE ONE OF THEM </h2>
                         </div>
-                        <div>
+                        <div data-aos="fade-down-right">
                             <p>
                                 In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or
                                 a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.
                             </p>
                            
                         </div>
-                        <div>
+                        <div data-aos="fade-down-left">
                             <a href="/login" class="btn-join-us">Joins Us</a>
                         </div>
                     </div>
@@ -1297,12 +1316,15 @@
                 <section>
                     <div class="">
                         <div class="row">
+
                             <div class="col-sm-12">
-                                <h2 class="heading section-heading text-uppercase mb-5 text-center">
+                                <h2 class="heading section-heading text-uppercase mb-5 text-center" data-aos="fade-up">
                                     WHISPERING SHOUTS ON SOCIAL MEDIA
                                 </h2>
                             </div>
-                            <div class="col-sm-4 mb-4">
+                            <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+                            <div class="elfsight-app-41d07795-90da-4afb-9cd7-44e64e56fce3"></div>
+                            <div class="col-sm-4 mb-4" data-aos="fade-right">
                                 <div class="social-wrapper h-100">
                                     <a href="#">
                                         <div class="social-image">
@@ -1327,7 +1349,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-sm-4 mb-4">
+                            <div class="col-sm-4 mb-4" data-aos="zoom-in">
                                 <div class="social-wrapper h-100">
                                     <a href="#">
                                         <div class="social-image">
@@ -1352,7 +1374,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-sm-4 mb-4">
+                            <div class="col-sm-4 mb-4" data-aos="fade-left">
                                 <div class="social-wrapper h-100">
                                     <a href="#">
                                         <div class="social-image">
@@ -1376,6 +1398,65 @@
                                         </div>
                                     </div>
 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h2 class="heading section-heading text-uppercase mt-5 mb-5 text-center" data-aos="fade-up">
+                                    WHY PLAY FROM US
+                                </h2>
+                            </div>
+                            <div class="col-sm-3">
+                                <div>
+                                    <div>
+                                        <img src="assets/images/social/visa.png" class="mx-auto d-block img-fluid" alt="Why Play From Us" />
+                                    </div>
+                                    <div class="text-center my-2">
+                                        <strong> Payment </strong>
+                                    </div>
+                                    <div class="text-center">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div>
+                                    <div>
+                                        <img src="assets/images/social/games.png" class="mx-auto d-block img-fluid" alt="Why Play From Us" />
+                                    </div>
+                                    <div class="text-center my-2">
+                                        <strong> Games </strong>
+                                    </div>
+                                    <div class="text-center">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div>
+                                    <div>
+                                        <img src="assets/images/social/cheap.png" class="mx-auto d-block img-fluid" alt="Why Play From Us" />
+                                    </div>
+                                    <div class="text-center my-2">
+                                        <strong> Cheap </strong>
+                                    </div>
+                                    <div class="text-center">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div>
+                                    <div>
+                                        <img src="assets/images/social/community.png" class="mx-auto d-block img-fluid" alt="Why Play From Us" />
+                                    </div>
+                                    <div class="text-center my-2">
+                                        <strong> Community </strong>
+                                    </div>
+                                    <div class="text-center">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit
+                                    </div>
                                 </div>
                             </div>
                         </div>

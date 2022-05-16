@@ -247,6 +247,7 @@
     <Content Include="angular\loader\loader.js" />
     <Content Include="angular\services\service.js" />
     <Content Include="assets\css2\style.css" />
+    <Content Include="assets\css\aos.css" />
     <Content Include="assets\css\blog.css" />
     <Content Include="assets\css\pages\index.css" />
     <Content Include="assets\css\refer - Copy.css" />
