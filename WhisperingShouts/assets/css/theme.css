@@ -538,7 +538,7 @@ header .profile-picture img {
   border-right: 1px solid #2ecdf3;
 }
 .sidebar-promotion .content {
-  height: 70vh;
+  height: 100vh;
 }
 
 .leaderboard-list .nav-tabs {
